@@ -16,9 +16,10 @@ namespace myDb
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CreateButton_Click(object sender, EventArgs e)
         {
             endState = (int)WinType.WCreateNew;
+            this.Close();
         }
 
         private void Load_Click(object sender, EventArgs e)
