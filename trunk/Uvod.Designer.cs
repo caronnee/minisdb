@@ -41,7 +41,7 @@
             this.CreateButton.TabIndex = 0;
             this.CreateButton.Text = "Create new database";
             this.CreateButton.UseVisualStyleBackColor = true;
-            this.CreateButton.Click += new System.EventHandler(this.button1_Click);
+            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
             // LoadButton
             // 
