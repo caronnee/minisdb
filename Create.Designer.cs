@@ -30,15 +30,13 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.AttName = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.addTextAttribute = new System.Windows.Forms.Button();
+            this.definitionPanel = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.LoadFromFile = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.createEnum = new System.Windows.Forms.Button();
+            this.test = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -59,50 +57,23 @@
             this.button3.Text = "add integer";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // addTextAttribute
             // 
-            this.button4.Location = new System.Drawing.Point(694, 22);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(77, 23);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "add Text";
-            this.button4.UseVisualStyleBackColor = true;
+            this.addTextAttribute.Location = new System.Drawing.Point(694, 22);
+            this.addTextAttribute.Name = "addTextAttribute";
+            this.addTextAttribute.Size = new System.Drawing.Size(77, 23);
+            this.addTextAttribute.TabIndex = 5;
+            this.addTextAttribute.Text = "add Text";
+            this.addTextAttribute.UseVisualStyleBackColor = true;
+            this.addTextAttribute.Click += new System.EventHandler(this.addTextAttribute_Click);
             // 
-            // panel1
+            // definitionPanel
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.AttName);
-            this.panel1.Controls.Add(this.button6);
-            this.panel1.Controls.Add(this.checkBox1);
-            this.panel1.Location = new System.Drawing.Point(18, 14);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(665, 223);
-            this.panel1.TabIndex = 6;
-            // 
-            // AttName
-            // 
-            this.AttName.Location = new System.Drawing.Point(104, 53);
-            this.AttName.Name = "AttName";
-            this.AttName.Size = new System.Drawing.Size(89, 20);
-            this.AttName.TabIndex = 2;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(577, 8);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "remove";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(15, 8);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.definitionPanel.AutoScroll = true;
+            this.definitionPanel.Location = new System.Drawing.Point(18, 14);
+            this.definitionPanel.Name = "definitionPanel";
+            this.definitionPanel.Size = new System.Drawing.Size(665, 223);
+            this.definitionPanel.TabIndex = 6;
             // 
             // button2
             // 
@@ -132,22 +103,40 @@
             this.LoadFromFile.UseVisualStyleBackColor = true;
             this.LoadFromFile.Click += new System.EventHandler(this.LoadFromFile_Click);
             // 
+            // createEnum
+            // 
+            this.createEnum.Location = new System.Drawing.Point(696, 162);
+            this.createEnum.Name = "createEnum";
+            this.createEnum.Size = new System.Drawing.Size(75, 23);
+            this.createEnum.TabIndex = 10;
+            this.createEnum.Text = "Create enum";
+            this.createEnum.UseVisualStyleBackColor = true;
+            // 
+            // test
+            // 
+            this.test.Location = new System.Drawing.Point(711, 211);
+            this.test.Name = "test";
+            this.test.Size = new System.Drawing.Size(44, 25);
+            this.test.TabIndex = 11;
+            this.test.Text = "test";
+            this.test.UseVisualStyleBackColor = true;
+            // 
             // Create
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(781, 322);
+            this.Controls.Add(this.test);
+            this.Controls.Add(this.createEnum);
             this.Controls.Add(this.LoadFromFile);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.definitionPanel);
+            this.Controls.Add(this.addTextAttribute);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
             this.Name = "Create";
             this.Text = "Create";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -156,13 +145,12 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button addTextAttribute;
+        private System.Windows.Forms.Panel definitionPanel;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox AttName;
         private System.Windows.Forms.Button LoadFromFile;
+        private System.Windows.Forms.Button createEnum;
+        private System.Windows.Forms.Button test;
     }
 }
