@@ -16,7 +16,7 @@ namespace myDb
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MyForm activeForm = new Uvod();
+            MyForm activeForm = new Create();
             while (activeForm != null)
             {
                 Application.Run(activeForm);
