@@ -28,34 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.addInteger = new System.Windows.Forms.Button();
             this.addTextAttribute = new System.Windows.Forms.Button();
             this.definitionPanel = new System.Windows.Forms.Panel();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.button2 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.LoadFromFile = new System.Windows.Forms.Button();
             this.createEnum = new System.Windows.Forms.Button();
-            this.test = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.createButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // addInteger
             // 
-            this.button1.Location = new System.Drawing.Point(694, 79);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 21);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "add real";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(694, 51);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(77, 22);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "add integer";
-            this.button3.UseVisualStyleBackColor = true;
+            this.addInteger.Location = new System.Drawing.Point(694, 51);
+            this.addInteger.Name = "addInteger";
+            this.addInteger.Size = new System.Drawing.Size(77, 22);
+            this.addInteger.TabIndex = 4;
+            this.addInteger.Text = "add integer";
+            this.addInteger.UseVisualStyleBackColor = true;
+            this.addInteger.Click += new System.EventHandler(this.addInteger_Click);
             // 
             // addTextAttribute
             // 
@@ -63,7 +56,7 @@
             this.addTextAttribute.Name = "addTextAttribute";
             this.addTextAttribute.Size = new System.Drawing.Size(77, 23);
             this.addTextAttribute.TabIndex = 5;
-            this.addTextAttribute.Text = "add Text";
+            this.addTextAttribute.Text = "add text";
             this.addTextAttribute.UseVisualStyleBackColor = true;
             this.addTextAttribute.Click += new System.EventHandler(this.addTextAttribute_Click);
             // 
@@ -75,9 +68,16 @@
             this.definitionPanel.Size = new System.Drawing.Size(665, 223);
             this.definitionPanel.TabIndex = 6;
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(431, 256);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(99, 20);
+            this.dateTimePicker1.TabIndex = 0;
+            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(694, 106);
+            this.button2.Location = new System.Drawing.Point(694, 79);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(77, 23);
             this.button2.TabIndex = 7;
@@ -86,7 +86,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(694, 135);
+            this.button5.Location = new System.Drawing.Point(694, 108);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(77, 21);
             this.button5.TabIndex = 8;
@@ -105,36 +105,46 @@
             // 
             // createEnum
             // 
-            this.createEnum.Location = new System.Drawing.Point(696, 162);
+            this.createEnum.Location = new System.Drawing.Point(694, 164);
             this.createEnum.Name = "createEnum";
             this.createEnum.Size = new System.Drawing.Size(75, 23);
             this.createEnum.TabIndex = 10;
             this.createEnum.Text = "Create enum";
             this.createEnum.UseVisualStyleBackColor = true;
             // 
-            // test
+            // button4
             // 
-            this.test.Location = new System.Drawing.Point(711, 211);
-            this.test.Name = "test";
-            this.test.Size = new System.Drawing.Size(44, 25);
-            this.test.TabIndex = 11;
-            this.test.Text = "test";
-            this.test.UseVisualStyleBackColor = true;
+            this.button4.Location = new System.Drawing.Point(694, 135);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "add time";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // createButton
+            // 
+            this.createButton.Location = new System.Drawing.Point(621, 273);
+            this.createButton.Name = "createButton";
+            this.createButton.Size = new System.Drawing.Size(75, 23);
+            this.createButton.TabIndex = 12;
+            this.createButton.Text = "Create";
+            this.createButton.UseVisualStyleBackColor = true;
             // 
             // Create
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(781, 322);
-            this.Controls.Add(this.test);
+            this.Controls.Add(this.createButton);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.createEnum);
             this.Controls.Add(this.LoadFromFile);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.definitionPanel);
             this.Controls.Add(this.addTextAttribute);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.addInteger);
             this.Name = "Create";
             this.Text = "Create";
             this.ResumeLayout(false);
@@ -143,14 +153,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button addInteger;
         private System.Windows.Forms.Button addTextAttribute;
         private System.Windows.Forms.Panel definitionPanel;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button LoadFromFile;
         private System.Windows.Forms.Button createEnum;
-        private System.Windows.Forms.Button test;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button createButton;
     }
 }
