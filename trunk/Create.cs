@@ -10,8 +10,9 @@ namespace myDb
 {
     public partial class Create : MyForm
     {
+        private System.Collections.Generic.List<System.Windows.Forms.ComboBox> enums;
         //== attribute text
-        private class Attribute : System.Windows.Forms.Panel
+       private class Attribute : System.Windows.Forms.Panel
         {
             protected System.Windows.Forms.Label typeLabel;
             protected System.Windows.Forms.Label type;
@@ -42,7 +43,7 @@ namespace myDb
                 this.Controls.Add(typeLabel);
                 this.Controls.Add(type);
 
-                /* label defining */
+                // label defining /
                 fill = new CheckBox();
                 fill.AutoSize = true;
                 fill.Name = "mustBeCheck";
@@ -62,7 +63,7 @@ namespace myDb
                 this.Controls.Add(fillLabel);
                 this.Controls.Add(fill);
 
-                /* adding name */
+                // adding name 
                 name = new TextBox();
                 name.Name = "setAttributeName";
                 name.Size = new System.Drawing.Size(100, 20);
@@ -76,7 +77,7 @@ namespace myDb
                 this.Controls.Add(nameLabel);
                 this.Controls.Add(name);
 
-                /* setting default value, not adding */
+                // setting default value, not adding 
                 defLabel = new Label();
                 defLabel.AutoSize = true;
                 defLabel.Size = new System.Drawing.Size(35, 20);
@@ -87,7 +88,7 @@ namespace myDb
                 def.Size = new System.Drawing.Size(100, 20);
                 def.TabIndex = 3;
 
-                /* close row button */
+                // close row button 
                 closeButton = new Button();
                 closeButton.Name = "Close";
                 closeButton.AutoSize = true;
@@ -234,9 +235,10 @@ namespace myDb
         public Create()
         {
             InitializeComponent();
+            enums = new List<ComboBox>();
         }
 
-        private void LoadFromFile_Click(object sender, EventArgs e)
+       private void LoadFromFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog b = new OpenFileDialog();
             b.InitialDirectory = Environment.SpecialFolder.Recent.ToString();
@@ -274,9 +276,17 @@ namespace myDb
 
         private void createEnum_Click(object sender, EventArgs e)
         {
-            using (Form f = new CreateEnum())
+            using (CreateEnum en = new CreateEnum())
             {
-                f.ShowDialog();
+                en.ShowDialog();
+                if (en.endCode() == 0)
+                    return;
+                this.definedEnums.Items.Add(en.getName());
+                ComboBox b = new ComboBox();
+                b.Items.AddRange(en.getValues());
+                enums.Add(b);
+                if (definedEnums.Items.Count > 0)
+                    definedEnums.SelectedIndex = 0;
             }
         }
     }
