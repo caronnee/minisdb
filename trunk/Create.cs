@@ -289,5 +289,24 @@ namespace myDb
                     definedEnums.SelectedIndex = 0;
             }
         }
+
+        private void removeEnum_Click(object sender, EventArgs e)
+        {
+            if (definedEnums.Items.Count == 0)
+                return;
+            int index = definedEnums.SelectedIndex;
+            definedEnums.Items.RemoveAt(index);
+            enums.RemoveAt(index);
+            if (definedEnums.Items.Count > 0)
+                definedEnums.SelectedIndex = 1;
+        }
+
+        private void addEnum_Click(object sender, EventArgs e)
+        {
+            if (definedEnums.Items.Count == 0)
+                return;
+            AttributeEnum en = new AttributeEnum(enums[definedEnums.SelectedIndex];
+            
+        }
     }
 }
