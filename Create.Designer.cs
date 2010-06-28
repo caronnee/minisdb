@@ -1,4 +1,6 @@
-﻿namespace myDb
+﻿using System.Collections.Generic;
+
+namespace myDb
 {
     partial class Create
     {
@@ -38,6 +40,7 @@
             this.createEnum = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.createButton = new System.Windows.Forms.Button();
+            this.definedEnums = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // addInteger
@@ -77,7 +80,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(694, 79);
+            this.button2.Location = new System.Drawing.Point(694, 164);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(77, 23);
             this.button2.TabIndex = 7;
@@ -86,7 +89,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(694, 108);
+            this.button5.Location = new System.Drawing.Point(694, 79);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(77, 21);
             this.button5.TabIndex = 8;
@@ -105,7 +108,7 @@
             // 
             // createEnum
             // 
-            this.createEnum.Location = new System.Drawing.Point(694, 164);
+            this.createEnum.Location = new System.Drawing.Point(694, 135);
             this.createEnum.Name = "createEnum";
             this.createEnum.Size = new System.Drawing.Size(75, 23);
             this.createEnum.TabIndex = 10;
@@ -115,7 +118,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(694, 135);
+            this.button4.Location = new System.Drawing.Point(694, 106);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 11;
@@ -131,11 +134,21 @@
             this.createButton.Text = "Create";
             this.createButton.UseVisualStyleBackColor = true;
             // 
+            // definedEnums
+            // 
+            this.definedEnums.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.definedEnums.FormattingEnabled = true;
+            this.definedEnums.Location = new System.Drawing.Point(694, 197);
+            this.definedEnums.Name = "definedEnums";
+            this.definedEnums.Size = new System.Drawing.Size(74, 21);
+            this.definedEnums.TabIndex = 13;
+            // 
             // Create
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(781, 322);
+            this.Controls.Add(this.definedEnums);
             this.Controls.Add(this.createButton);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button4);
@@ -164,5 +177,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button createButton;
+        private System.Windows.Forms.ComboBox definedEnums;
     }
 }

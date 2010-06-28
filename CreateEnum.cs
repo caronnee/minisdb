@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace myDb
 {
-    public partial class CreateEnum : Form
+    public partial class CreateEnum : MyForm
     {
         public CreateEnum()
         {
@@ -37,7 +37,20 @@ namespace myDb
         {
             if (this.defined.Items.Count == 0)
                 return;
+            if (this.name.Text.Length == 0)
+                return;
+            this.endState = 1;
             this.Close();
+        }
+        public string getName()
+        {
+            return this.name.Text;
+        }
+        public object[] getValues()
+        {
+            object[] o = new object[this.defined.Items.Count];
+            this.defined.Items.CopyTo(o,0);
+            return o;
         }
     }
 }

@@ -28,18 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.add = new System.Windows.Forms.Button();
             this.remove = new System.Windows.Forms.Button();
             this.toDefine = new System.Windows.Forms.TextBox();
             this.defined = new System.Windows.Forms.ListBox();
             this.ok = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.name = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // add
             // 
             this.add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.add.Location = new System.Drawing.Point(221, 38);
+            this.add.Location = new System.Drawing.Point(221, 25);
             this.add.Name = "add";
             this.add.Size = new System.Drawing.Size(67, 28);
             this.add.TabIndex = 1;
@@ -60,7 +62,7 @@
             // 
             // toDefine
             // 
-            this.toDefine.Location = new System.Drawing.Point(36, 46);
+            this.toDefine.Location = new System.Drawing.Point(36, 25);
             this.toDefine.Name = "toDefine";
             this.toDefine.Size = new System.Drawing.Size(115, 20);
             this.toDefine.TabIndex = 0;
@@ -84,17 +86,46 @@
             this.ok.UseVisualStyleBackColor = true;
             this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(33, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Value to add";
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(37, 55);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(63, 13);
+            this.nameLabel.TabIndex = 6;
+            this.nameLabel.Text = "Enum name";
+            // 
+            // name
+            // 
+            this.name.Location = new System.Drawing.Point(36, 71);
+            this.name.Name = "name";
+            this.name.Size = new System.Drawing.Size(112, 20);
+            this.name.TabIndex = 7;
+            // 
             // CreateEnum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(300, 215);
+            this.Controls.Add(this.name);
+            this.Controls.Add(this.nameLabel);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.defined);
             this.Controls.Add(this.toDefine);
             this.Controls.Add(this.remove);
             this.Controls.Add(this.add);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CreateEnum";
             this.Text = "CreateEnum";
             this.ResumeLayout(false);
@@ -109,5 +140,8 @@
         private System.Windows.Forms.TextBox toDefine;
         private System.Windows.Forms.ListBox defined;
         private System.Windows.Forms.Button ok;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.TextBox name;
     }
 }
