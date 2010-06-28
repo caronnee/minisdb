@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace myDb
@@ -28,6 +27,7 @@ namespace myDb
                             break;
                         case 2: activeForm = new Formular();
                             break;
+
                         default: throw new Exception("No such type in zero level switch handled");
                     }
                 }

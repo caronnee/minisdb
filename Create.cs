@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -204,12 +203,7 @@ namespace myDb
                 this.Controls.Add(maxLabel);
                 this.Controls.Add(max);
                 max_ValueChanged(null, null);
-                min_ValueChanged(null, null);
-                using (Form f = new CreateEnum())
-                {
-                    f.ShowDialog();
-                }
-                
+                min_ValueChanged(null, null);                
             }
 
             void max_ValueChanged(object sender, EventArgs e)
@@ -276,6 +270,14 @@ namespace myDb
         {
             AttributeInteger att = new AttributeInteger();
             addAtrribute(att);
+        }
+
+        private void createEnum_Click(object sender, EventArgs e)
+        {
+            using (Form f = new CreateEnum())
+            {
+                f.ShowDialog();
+            }
         }
     }
 }

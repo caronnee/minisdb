@@ -111,6 +111,7 @@
             this.createEnum.TabIndex = 10;
             this.createEnum.Text = "Create enum";
             this.createEnum.UseVisualStyleBackColor = true;
+            this.createEnum.Click += new System.EventHandler(this.createEnum_Click);
             // 
             // button4
             // 
