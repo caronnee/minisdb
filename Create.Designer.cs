@@ -34,13 +34,14 @@ namespace myDb
             this.addTextAttribute = new System.Windows.Forms.Button();
             this.definitionPanel = new System.Windows.Forms.Panel();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.button2 = new System.Windows.Forms.Button();
+            this.addEnum = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.LoadFromFile = new System.Windows.Forms.Button();
             this.createEnum = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.createButton = new System.Windows.Forms.Button();
             this.definedEnums = new System.Windows.Forms.ComboBox();
+            this.removeEnum = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addInteger
@@ -73,19 +74,20 @@ namespace myDb
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(431, 256);
+            this.dateTimePicker1.Location = new System.Drawing.Point(465, 277);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(99, 20);
             this.dateTimePicker1.TabIndex = 0;
             // 
-            // button2
+            // addEnum
             // 
-            this.button2.Location = new System.Drawing.Point(694, 164);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(77, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "add enum";
-            this.button2.UseVisualStyleBackColor = true;
+            this.addEnum.Location = new System.Drawing.Point(694, 164);
+            this.addEnum.Name = "addEnum";
+            this.addEnum.Size = new System.Drawing.Size(77, 23);
+            this.addEnum.TabIndex = 7;
+            this.addEnum.Text = "add enum";
+            this.addEnum.UseVisualStyleBackColor = true;
+            this.addEnum.Click += new System.EventHandler(this.addEnum_Click);
             // 
             // button5
             // 
@@ -143,11 +145,22 @@ namespace myDb
             this.definedEnums.Size = new System.Drawing.Size(74, 21);
             this.definedEnums.TabIndex = 13;
             // 
+            // removeEnum
+            // 
+            this.removeEnum.Location = new System.Drawing.Point(694, 228);
+            this.removeEnum.Name = "removeEnum";
+            this.removeEnum.Size = new System.Drawing.Size(77, 23);
+            this.removeEnum.TabIndex = 14;
+            this.removeEnum.Text = "remove enum";
+            this.removeEnum.UseVisualStyleBackColor = true;
+            this.removeEnum.Click += new System.EventHandler(this.removeEnum_Click);
+            // 
             // Create
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(781, 322);
+            this.Controls.Add(this.removeEnum);
             this.Controls.Add(this.definedEnums);
             this.Controls.Add(this.createButton);
             this.Controls.Add(this.dateTimePicker1);
@@ -155,7 +168,7 @@ namespace myDb
             this.Controls.Add(this.createEnum);
             this.Controls.Add(this.LoadFromFile);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.addEnum);
             this.Controls.Add(this.definitionPanel);
             this.Controls.Add(this.addTextAttribute);
             this.Controls.Add(this.addInteger);
@@ -170,7 +183,7 @@ namespace myDb
         private System.Windows.Forms.Button addInteger;
         private System.Windows.Forms.Button addTextAttribute;
         private System.Windows.Forms.Panel definitionPanel;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button addEnum;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button LoadFromFile;
         private System.Windows.Forms.Button createEnum;
@@ -178,5 +191,6 @@ namespace myDb
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.ComboBox definedEnums;
+        private System.Windows.Forms.Button removeEnum;
     }
 }
