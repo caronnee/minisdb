@@ -1,4 +1,4 @@
-﻿namespace MyDb
+﻿namespace myDb
 {
     partial class CreateEnum
     {
@@ -28,54 +28,73 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.add = new System.Windows.Forms.Button();
+            this.remove = new System.Windows.Forms.Button();
+            this.toDefine = new System.Windows.Forms.TextBox();
+            this.defined = new System.Windows.Forms.ListBox();
+            this.ok = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // add
             // 
-            this.button1.Location = new System.Drawing.Point(203, 45);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 28);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
+            this.add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.add.Location = new System.Drawing.Point(221, 38);
+            this.add.Name = "add";
+            this.add.Size = new System.Drawing.Size(67, 28);
+            this.add.TabIndex = 1;
+            this.add.Text = "Add";
+            this.add.UseVisualStyleBackColor = true;
+            this.add.Click += new System.EventHandler(this.add_Click);
             // 
-            // button2
+            // remove
             // 
-            this.button2.Location = new System.Drawing.Point(203, 97);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(63, 31);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Remove";
-            this.button2.UseVisualStyleBackColor = true;
+            this.remove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.remove.Location = new System.Drawing.Point(221, 107);
+            this.remove.Name = "remove";
+            this.remove.Size = new System.Drawing.Size(63, 31);
+            this.remove.TabIndex = 3;
+            this.remove.Text = "Remove";
+            this.remove.UseVisualStyleBackColor = true;
+            this.remove.Click += new System.EventHandler(this.remove_Click);
             // 
-            // textBox1
+            // toDefine
             // 
-            this.textBox1.Location = new System.Drawing.Point(36, 46);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(115, 20);
-            this.textBox1.TabIndex = 3;
+            this.toDefine.Location = new System.Drawing.Point(36, 46);
+            this.toDefine.Name = "toDefine";
+            this.toDefine.Size = new System.Drawing.Size(115, 20);
+            this.toDefine.TabIndex = 0;
             // 
-            // listBox1
+            // defined
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(36, 107);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(114, 17);
-            this.listBox1.TabIndex = 4;
+            this.defined.FormattingEnabled = true;
+            this.defined.Location = new System.Drawing.Point(36, 107);
+            this.defined.Name = "defined";
+            this.defined.Size = new System.Drawing.Size(100, 95);
+            this.defined.TabIndex = 2;
+            // 
+            // ok
+            // 
+            this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ok.Location = new System.Drawing.Point(199, 169);
+            this.ok.Name = "ok";
+            this.ok.Size = new System.Drawing.Size(89, 34);
+            this.ok.TabIndex = 4;
+            this.ok.Text = "Ok";
+            this.ok.UseVisualStyleBackColor = true;
+            this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
             // CreateEnum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 176);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(300, 215);
+            this.Controls.Add(this.ok);
+            this.Controls.Add(this.defined);
+            this.Controls.Add(this.toDefine);
+            this.Controls.Add(this.remove);
+            this.Controls.Add(this.add);
             this.Name = "CreateEnum";
             this.Text = "CreateEnum";
             this.ResumeLayout(false);
@@ -85,9 +104,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button add;
+        private System.Windows.Forms.Button remove;
+        private System.Windows.Forms.TextBox toDefine;
+        private System.Windows.Forms.ListBox defined;
+        private System.Windows.Forms.Button ok;
     }
 }
