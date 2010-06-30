@@ -35,10 +35,10 @@ namespace myDb
             this.definitionPanel = new System.Windows.Forms.Panel();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.addEnum = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.addImage = new System.Windows.Forms.Button();
             this.LoadFromFile = new System.Windows.Forms.Button();
             this.createEnum = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.addTime = new System.Windows.Forms.Button();
             this.createButton = new System.Windows.Forms.Button();
             this.definedEnums = new System.Windows.Forms.ComboBox();
             this.removeEnum = new System.Windows.Forms.Button();
@@ -46,6 +46,7 @@ namespace myDb
             // 
             // addInteger
             // 
+            this.addInteger.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addInteger.Location = new System.Drawing.Point(694, 51);
             this.addInteger.Name = "addInteger";
             this.addInteger.Size = new System.Drawing.Size(77, 22);
@@ -56,6 +57,7 @@ namespace myDb
             // 
             // addTextAttribute
             // 
+            this.addTextAttribute.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addTextAttribute.Location = new System.Drawing.Point(694, 22);
             this.addTextAttribute.Name = "addTextAttribute";
             this.addTextAttribute.Size = new System.Drawing.Size(77, 23);
@@ -66,6 +68,7 @@ namespace myDb
             // 
             // definitionPanel
             // 
+            this.definitionPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.definitionPanel.AutoScroll = true;
             this.definitionPanel.Location = new System.Drawing.Point(18, 14);
             this.definitionPanel.Name = "definitionPanel";
@@ -81,6 +84,7 @@ namespace myDb
             // 
             // addEnum
             // 
+            this.addEnum.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.addEnum.Location = new System.Drawing.Point(694, 164);
             this.addEnum.Name = "addEnum";
             this.addEnum.Size = new System.Drawing.Size(77, 23);
@@ -89,17 +93,20 @@ namespace myDb
             this.addEnum.UseVisualStyleBackColor = true;
             this.addEnum.Click += new System.EventHandler(this.addEnum_Click);
             // 
-            // button5
+            // addImage
             // 
-            this.button5.Location = new System.Drawing.Point(694, 79);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(77, 21);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "add image";
-            this.button5.UseVisualStyleBackColor = true;
+            this.addImage.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addImage.Location = new System.Drawing.Point(694, 79);
+            this.addImage.Name = "addImage";
+            this.addImage.Size = new System.Drawing.Size(77, 21);
+            this.addImage.TabIndex = 8;
+            this.addImage.Text = "add image";
+            this.addImage.UseVisualStyleBackColor = true;
+            this.addImage.Click += new System.EventHandler(this.addImage_Click);
             // 
             // LoadFromFile
             // 
+            this.LoadFromFile.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LoadFromFile.Location = new System.Drawing.Point(31, 269);
             this.LoadFromFile.Name = "LoadFromFile";
             this.LoadFromFile.Size = new System.Drawing.Size(91, 28);
@@ -110,6 +117,7 @@ namespace myDb
             // 
             // createEnum
             // 
+            this.createEnum.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.createEnum.Location = new System.Drawing.Point(694, 135);
             this.createEnum.Name = "createEnum";
             this.createEnum.Size = new System.Drawing.Size(75, 23);
@@ -118,26 +126,31 @@ namespace myDb
             this.createEnum.UseVisualStyleBackColor = true;
             this.createEnum.Click += new System.EventHandler(this.createEnum_Click);
             // 
-            // button4
+            // addTime
             // 
-            this.button4.Location = new System.Drawing.Point(694, 106);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 11;
-            this.button4.Text = "add time";
-            this.button4.UseVisualStyleBackColor = true;
+            this.addTime.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addTime.Location = new System.Drawing.Point(694, 106);
+            this.addTime.Name = "addTime";
+            this.addTime.Size = new System.Drawing.Size(75, 23);
+            this.addTime.TabIndex = 11;
+            this.addTime.Text = "add time";
+            this.addTime.UseVisualStyleBackColor = true;
+            this.addTime.Click += new System.EventHandler(this.addTime_Click);
             // 
             // createButton
             // 
-            this.createButton.Location = new System.Drawing.Point(621, 273);
+            this.createButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.createButton.Location = new System.Drawing.Point(696, 272);
             this.createButton.Name = "createButton";
             this.createButton.Size = new System.Drawing.Size(75, 23);
             this.createButton.TabIndex = 12;
             this.createButton.Text = "Create";
             this.createButton.UseVisualStyleBackColor = true;
+            this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
             // definedEnums
             // 
+            this.definedEnums.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.definedEnums.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.definedEnums.FormattingEnabled = true;
             this.definedEnums.Location = new System.Drawing.Point(694, 197);
@@ -147,6 +160,7 @@ namespace myDb
             // 
             // removeEnum
             // 
+            this.removeEnum.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.removeEnum.Location = new System.Drawing.Point(694, 228);
             this.removeEnum.Name = "removeEnum";
             this.removeEnum.Size = new System.Drawing.Size(77, 23);
@@ -164,10 +178,10 @@ namespace myDb
             this.Controls.Add(this.definedEnums);
             this.Controls.Add(this.createButton);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.addTime);
             this.Controls.Add(this.createEnum);
             this.Controls.Add(this.LoadFromFile);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.addImage);
             this.Controls.Add(this.addEnum);
             this.Controls.Add(this.definitionPanel);
             this.Controls.Add(this.addTextAttribute);
@@ -184,10 +198,10 @@ namespace myDb
         private System.Windows.Forms.Button addTextAttribute;
         private System.Windows.Forms.Panel definitionPanel;
         private System.Windows.Forms.Button addEnum;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button addImage;
         private System.Windows.Forms.Button LoadFromFile;
         private System.Windows.Forms.Button createEnum;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button addTime;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.ComboBox definedEnums;
