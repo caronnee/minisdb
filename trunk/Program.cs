@@ -15,7 +15,7 @@ namespace myDb
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MyForm activeForm = new Create();
+            MyForm activeForm = new Formular();
             while (activeForm != null)
             {
                 Application.Run(activeForm);
