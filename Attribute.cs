@@ -19,6 +19,16 @@ namespace myDb
         protected System.Windows.Forms.Label defLabel;
         protected System.Windows.Forms.Button closeButton;
 
+
+        public virtual Control valueControl()
+        {
+            return new TextBox();
+        }
+        public void visit(Visitor v) 
+        {
+            v.visited(this);
+        }
+
         public Attribute()
         {
             this.BorderStyle = BorderStyle.FixedSingle;
