@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace myDb
 {
@@ -99,6 +100,7 @@ namespace myDb
             if (definedEnums.Items.Count == 0)
                 return;
             AttributeEnum en = new AttributeEnum(enums[definedEnums.SelectedIndex]);
+            en.Name = (string) definedEnums.Items[definedEnums.SelectedIndex];
             addAtrribute(en);
         }
 
@@ -128,7 +130,7 @@ namespace myDb
                 {
                     if (((Attribute)this.definitionPanel.Controls[j]).getName().Equals(s))
                     {
-                        MessageBox.Show("Twe attributes with same name! <"+ s +">");
+                        MessageBox.Show("Two attributes with same name! <"+ s +">");
                         return;
                     }
                 }
@@ -148,8 +150,23 @@ namespace myDb
             }
             if (!ok)
                 return;
-            this.Close();
+            string name = dbName.Text + ".mydb";
+            if (dbName.Equals("") || File.Exists(name))
+            {
+                MessageBox.Show("File already exists!");
+                return;
+            }
 
+            StreamWriter stream = new StreamWriter(name);
+            foreach (Attribute att in this.definitionPanel.Controls)
+            {
+                att.save(stream);
+            }
+            stream.Close();
+            TextWriter tw = new StreamWriter(this.dbName.Text+".mydb");
+            foreach (Attribute a in this.definitionPanel.Controls)
+                a.save(tw);
+            this.Close();
         }
     }
 }

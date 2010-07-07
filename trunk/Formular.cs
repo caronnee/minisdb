@@ -14,5 +14,6 @@ namespace myDb
         {
             InitializeComponent();
         }
+        private List<Attribute> attributes;
     }
 }

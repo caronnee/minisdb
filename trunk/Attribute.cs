@@ -3,9 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Text;
+using System.IO;
 
 namespace myDb
 {
+    public enum AttributeType
+    {
+        AText,
+        AInteger,
+        APicture,
+        ATime,
+        AEnum
+    }
    //== attribute text
    class Attribute : System.Windows.Forms.Panel
     {
@@ -18,7 +27,6 @@ namespace myDb
         protected System.Windows.Forms.Control def;
         protected System.Windows.Forms.Label defLabel;
         protected System.Windows.Forms.Button closeButton;
-
 
         public virtual Control valueControl()
         {
@@ -170,7 +178,16 @@ namespace myDb
         {
             return this.fill.Checked;
         }
-    }
+        virtual public void save(TextWriter stream)
+        {
+            stream.Write(0);
+            stream.WriteLine(def.Text);
+        }
+       virtual public void setValue(String s)
+       {
+           ((TextBox)(def)).Text = s;
+       }
+   }
 
     class AttributeInteger : Attribute
     {
@@ -212,6 +229,13 @@ namespace myDb
             min_ValueChanged(null, null);
         }
 
+        public override Control valueControl()
+        {
+            NumericUpDown u = new NumericUpDown();
+            u.Minimum = min.Value;
+            u.Maximum = max.Value;
+            return u;
+        }
         void max_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown n = (NumericUpDown)def;
@@ -223,10 +247,19 @@ namespace myDb
             NumericUpDown n = (NumericUpDown)def;
             n.Minimum = min.Value;
         }
+        public override void setValue(string s)
+        {
+            String[] strs = s.Split(new char[]{' '}, StringSplitOptions.RemoveEmptyEntries);
+            min.Value = System.Convert.ToInt32(strs[0]);
+            max.Value = System.Convert.ToInt32(strs[1]);
+            if (strs.Length == 3)
+                ((NumericUpDown)(def)).Value = System.Convert.ToInt32(strs[2]);
+        }
     }
 
     class AttributeEnum : Attribute
     {
+
         public AttributeEnum(ComboBox b)
         {
             defLabel.Text = "Choose enum";
@@ -234,24 +267,81 @@ namespace myDb
             b.SelectedIndex = 0;
             def = b;
         }
+        public override void setValue(string id)
+        {
+            //najdi to z zozname enumov
+            TextReader read = new StreamReader("./enums.data");
+            //sprav geline az pokial nenajdes s
+            String str;
+            while ( (str = read.ReadLine())!= null  )
+            {
+                if (str.StartsWith(id))
+                {
+                   ((ComboBox)(def)).Items.AddRange(str.Split(new char[]{'\t'}));
+                   read.Close();
+                   return;
+                }
+            }
+            read.Close();
+            throw new Exception("No such enum defined");
+        }
+        public override void save(TextWriter stream)
+        {
+            //najskor hladane, ci to je v enumoch, ak nie, priradime ID
+            TextReader read = new StreamReader("./enums.data");
+
+            string str;
+            bool found = false;
+            while ((str = read.ReadLine()) != null)
+            {
+                if (str.StartsWith(this.Name))
+                {
+                    found = true;
+                    break;
+                }
+            }
+            read.Close();
+            if (!found)
+            {
+                //zapis do enumu
+                TextWriter txt= new StreamWriter("./enums.data");
+                ComboBox c = (ComboBox)def;
+                txt.Write(this.Name + "\t");
+                foreach (string s in c.Items)
+                    txt.Write(s + "\t");
+                txt.WriteLine("");//ukonci lajnu
+            }
+        }
     }
     class AttributeTime : Attribute
     {
         private DateTimePicker dateTimeTick;
+
         public AttributeTime()
         {
             dateTimeTick = new DateTimePicker();
             this.def = dateTimeTick;
+        }
+        public override Control valueControl()
+        {
+            return new DateTimePicker();
+        }
+        public override void save(TextWriter stream)
+        {
+            stream.Write(AttributeType.ATime);
+            stream.WriteLine(dateTimeTick.Value.ToBinary()); //kontrola
+        }
+        public override void setValue(string s)
+        {
+            dateTimeTick.Value = System.Convert.ToDateTime(s);
         }
     }
     class AttributeImage : Attribute
     {
         private TextBox t;
 
-        public AttributeImage()
+        private Control createChoosePicture()
         {
-            this.defLabel.Text = "Default path";
-
             t = new TextBox();
             t.Size = new System.Drawing.Size(100, 20);
             t.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -262,13 +352,30 @@ namespace myDb
             Button b = new Button();
             b.Text = "...";
             b.Size = new System.Drawing.Size(10, 20);
-            b.Location = new System.Drawing.Point(t.Size.Width - 1,0);
+            b.Location = new System.Drawing.Point(t.Size.Width - 1, 0);
             b.Click += new EventHandler(b_Click);
             Panel p = new Panel();
             p.Size = new System.Drawing.Size(t.Size.Width + b.Size.Width, 20);
             p.Controls.Add(t);
             p.Controls.Add(b);
-            def = p;
+            return p;
+        }
+
+        public AttributeImage()
+        {
+            this.defLabel.Text = "Default path";
+            def = createChoosePicture();
+        }
+
+        public override void save(TextWriter stream)
+        {
+            stream.Write(AttributeType.APicture);
+            stream.WriteLine(t.Text);
+        }
+
+        public override void setValue(string s)
+        {
+            t.Text = s;
         }
 
         void b_Click(object sender, EventArgs e)
