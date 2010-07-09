@@ -39,7 +39,7 @@ namespace myDb
                 return;
             if (this.name.Text.Length == 0)
                 return;
-            this.endState = 1;
+            this.endState = Forms.FormCreateBd;
             this.Close();
         }
         public string getName()

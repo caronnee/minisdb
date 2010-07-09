@@ -11,7 +11,6 @@ namespace myDb
 {
     public partial class Create : MyForm
     {
-        private System.Collections.Generic.List<System.Windows.Forms.ComboBox> enums;
 
         //bolo by pekne..vyzistit!
         private System.Windows.Forms.Label warn;
@@ -30,6 +29,9 @@ namespace myDb
 
             warn.ForeColor = Color.Red;
             warn.Size = new Size(10, 20);
+
+            //inicializuj enumy
+            loadEnums();
         }
 
        private void LoadFromFile_Click(object sender, EventArgs e)
@@ -62,6 +64,64 @@ namespace myDb
             this.definitionPanel.Controls.Add(att);
             this.definitionPanel.ResumeLayout();
         }
+
+        private void loadEnums()
+        {
+            TextReader read = new StreamReader(Files.enumFile);
+            //sprav geline az pokial nenajdes s
+            String line;
+            while ((line = read.ReadLine()) != null)
+            {
+                string [] strs = line.Split(new char[]{'\t'},StringSplitOptions.RemoveEmptyEntries);
+                ComboBox c = new ComboBox();
+                c.Items.AddRange(strs);
+                c.Items.RemoveAt(0);
+                enums.Add(c);
+                this.definedEnums.Items.Add(strs[0]);
+            }
+            read.Close();
+            if (this.definedEnums.Items.Count != 0)
+                this.definedEnums.SelectedIndex = 0;
+        }
+        private void saveEnums()
+        {
+            //najskor hladane, ci to je v enumoch, ak nie, priradime ID
+            TextReader read = null;
+            if (!File.Exists(Files.enumFile))
+                File.Create(Files.enumFile).Close(); //FUJ - TODO spravit krajsie
+
+            read = new StreamReader(Files.enumFile);
+
+            string str;
+            bool found = false;
+            while ((str = read.ReadLine()) != null)
+            {
+                foreach (string nm in this.definedEnums.Items)
+                {
+                    if (str.StartsWith(nm + "\t"))
+                    {
+                        this.definedEnums.Items.Remove(nm);
+                        break;
+                    }
+                }
+            }
+            read.Close();
+
+            TextWriter txt = new StreamWriter(Files.enumFile);
+            // pre vsetky, co zostali, zapis
+            for ( int i =0; i < enums.Count; i++)
+            {
+                string nm = (string)definedEnums.Items[i] + "\t";
+
+                //zapis do enumu
+                txt.Write(this.Name + "\t");
+                foreach (string s in enums[i].Items)
+                    txt.Write(s + "\t");
+                txt.WriteLine("");//ukonci lajnu
+            }
+            txt.Close(); ;
+        }
+
         private void addInteger_Click(object sender, EventArgs e)
         {
             AttributeInteger att = new AttributeInteger();
@@ -73,7 +133,7 @@ namespace myDb
             using (CreateEnum en = new CreateEnum())
             {
                 en.ShowDialog();
-                if (en.endCode() == 0)
+                if (en.endCode() == Forms.FormEnd)
                     return;
                 this.definedEnums.Items.Add(en.getName());
                 ComboBox b = new ComboBox();
@@ -136,9 +196,8 @@ namespace myDb
                 }
             }
             bool ok = true;
-            for (int i = 0; i < this.definitionPanel.Controls.Count; i++)
+            foreach (Attribute a in this.definitionPanel.Controls)
             {
-                Attribute a = (Attribute) this.definitionPanel.Controls[i];
                 //a.Controls.Remove(warnLabel);
                 //a.Controls.Remove(warn);
                 a.ForeColor = Color.Empty;
@@ -162,11 +221,15 @@ namespace myDb
             {
                 att.save(stream);
             }
+            stream.WriteLine();
+            stream.WriteLine(); //prazdna lajna oddeluje data
             stream.Close();
-            TextWriter tw = new StreamWriter(this.dbName.Text+".mydb");
-            foreach (Attribute a in this.definitionPanel.Controls)
-                a.save(tw);
+            this.saveEnums();
+            this.endState = Forms.FormFormular;
+            this.finalWord = this.dbName.Text;
             this.Close();
         }
+
+        private System.Collections.Generic.List<System.Windows.Forms.ComboBox> enums;
     }
 }

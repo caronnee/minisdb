@@ -259,7 +259,6 @@ namespace myDb
 
     class AttributeEnum : Attribute
     {
-
         public AttributeEnum(ComboBox b)
         {
             defLabel.Text = "Choose enum";
@@ -269,48 +268,13 @@ namespace myDb
         }
         public override void setValue(string id)
         {
-            //najdi to z zozname enumov
-            TextReader read = new StreamReader("./enums.data");
-            //sprav geline az pokial nenajdes s
-            String str;
-            while ( (str = read.ReadLine())!= null  )
-            {
-                if (str.StartsWith(id))
-                {
-                   ((ComboBox)(def)).Items.AddRange(str.Split(new char[]{'\t'}));
-                   read.Close();
-                   return;
-                }
-            }
-            read.Close();
-            throw new Exception("No such enum defined");
+            ((ComboBox)(def)).SelectedIndex = System.Convert.ToInt32(id);
         }
         public override void save(TextWriter stream)
         {
-            //najskor hladane, ci to je v enumoch, ak nie, priradime ID
-            TextReader read = new StreamReader("./enums.data");
-
-            string str;
-            bool found = false;
-            while ((str = read.ReadLine()) != null)
-            {
-                if (str.StartsWith(this.Name))
-                {
-                    found = true;
-                    break;
-                }
-            }
-            read.Close();
-            if (!found)
-            {
-                //zapis do enumu
-                TextWriter txt= new StreamWriter("./enums.data");
-                ComboBox c = (ComboBox)def;
-                txt.Write(this.Name + "\t");
-                foreach (string s in c.Items)
-                    txt.Write(s + "\t");
-                txt.WriteLine("");//ukonci lajnu
-            }
+            stream.Write(AttributeType.AEnum);
+            stream.Write(((string)((ComboBox)(def)).SelectedItem));
+            stream.WriteLine(0);
         }
     }
     class AttributeTime : Attribute

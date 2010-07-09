@@ -5,22 +5,23 @@ using System.Windows.Forms;
 
 namespace myDb
 {
-    public enum WinType
-    {
-        WCreateNew =1,
-        WLoad = 2
-    };
-
     public class MyForm : Form
     {
-        protected int endState;
         public MyForm()
         {
             endState = 0;
+            finalWord = "";
         }
-        public int endCode()
+        public Forms endCode()
         {
             return endState;
         }
+        public string getFinalWord()
+        {
+            return finalWord;
+        }
+
+        protected Forms endState;
+        protected string finalWord;
     }
 }

@@ -30,7 +30,7 @@
         {
             this.CreateButton = new System.Windows.Forms.Button();
             this.LoadButton = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.chooseDb = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // CreateButton
@@ -53,20 +53,20 @@
             this.LoadButton.UseVisualStyleBackColor = true;
             this.LoadButton.Click += new System.EventHandler(this.Load_Click);
             // 
-            // comboBox1
+            // chooseDb
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 35);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(134, 21);
-            this.comboBox1.TabIndex = 2;
+            this.chooseDb.FormattingEnabled = true;
+            this.chooseDb.Location = new System.Drawing.Point(12, 35);
+            this.chooseDb.Name = "chooseDb";
+            this.chooseDb.Size = new System.Drawing.Size(134, 21);
+            this.chooseDb.TabIndex = 2;
             // 
             // Uvod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(295, 127);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.chooseDb);
             this.Controls.Add(this.LoadButton);
             this.Controls.Add(this.CreateButton);
             this.Name = "Uvod";
@@ -79,6 +79,6 @@
 
         private System.Windows.Forms.Button CreateButton;
         private System.Windows.Forms.Button LoadButton;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox chooseDb;
     }
 }

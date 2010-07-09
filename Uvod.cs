@@ -17,13 +17,14 @@ namespace myDb
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            endState = (int)WinType.WCreateNew;
+            endState = Forms.FormCreateBd;
             this.Close();
         }
 
         private void Load_Click(object sender, EventArgs e)
         {
-            endState = (int)WinType.WLoad;
+            endState = Forms.FormFormular;
+            this.finalWord = (string)this.chooseDb.SelectedItem;
             this.Close();
         }
     }
