@@ -4,18 +4,25 @@ using System.Windows.Forms;
 
 namespace myDb
 {
+
+    public enum Forms
+    {
+        FormEnd,
+        FormFormular,
+        FormCreateBd
+    }
+
     static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MyForm activeForm = new Formular();
+            MyForm activeForm = new Create();
             while (activeForm != null)
             {
                 Application.Run(activeForm);
@@ -23,11 +30,10 @@ namespace myDb
                 {
                     switch (activeForm.endCode())
                     {
-                        case 1: activeForm = new Create();
+                        case Forms.FormCreateBd: activeForm = new Create();
                             break;
-                        case 2: activeForm = new Formular();
+                        case Forms.FormFormular: activeForm = new Formular(activeForm.getFinalWord());
                             break;
-
                         default: throw new Exception("No such type in zero level switch handled");
                     }
                 }

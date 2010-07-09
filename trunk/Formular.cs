@@ -10,9 +10,10 @@ namespace myDb
 {
     public partial class Formular : MyForm
     {
-        public Formular()
+        public Formular(string dbName)
         {
             InitializeComponent();
+            //nacitaj atributy zo suboru A vsetky e;ementy..pohadka na inu noc:)
         }
         private List<Attribute> attributes;
     }
