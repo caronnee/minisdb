@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace myDb
 {
@@ -13,7 +15,38 @@ namespace myDb
         public Formular(string dbName)
         {
             InitializeComponent();
-            //nacitaj atributy zo suboru A vsetky e;ementy..pohadka na inu noc:)
+
+            attributes = new List<Attribute>();
+            //nacitaj atributy zo suboru dbname vsetky sttributy
+            TextReader read = new StreamReader(dbName);
+            string line = "";
+            while ((line = read.ReadLine()) != null)
+            {
+                Match m =new Regex("^[0-9]*").Match(line);
+                int def = int.Parse(m.Value);
+                Attribute att = null;
+                switch (def)
+                {
+                    case AttributeType.AText :
+                        att = new Attribute();
+                        break;
+                    case AttributeType.AEnum :
+                        att = new AttributeEnum(new ComboBox()); //najskor s prazdnym
+                        break;
+                    case AttributeType.AInteger :
+                        att = new AttributeInteger();
+                        break;
+                    case AttributeType.APicture :
+                        att = new AttributeImage();
+                        break;
+                    case AttributeType.ATime :
+                        att = new AttributeTime();
+                        break;
+                    default :
+                        throw new Exception("No such type can be loaded");
+                }
+                att.setValue(line.Substring(m.Value.Length));
+            }
         }
         private List<Attribute> attributes;
     }

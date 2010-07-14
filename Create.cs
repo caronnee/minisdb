@@ -67,21 +67,16 @@ namespace myDb
 
         private void loadEnums()
         {
-            TextReader read = new StreamReader(Files.enumFile);
-            //sprav geline az pokial nenajdes s
-            String line;
-            while ((line = read.ReadLine()) != null)
+            List<string> l = Files.readEnum();
+            foreach (string s in l)
             {
-                string [] strs = line.Split(new char[]{'\t'},StringSplitOptions.RemoveEmptyEntries);
-                ComboBox c = new ComboBox();
-                c.Items.AddRange(strs);
-                c.Items.RemoveAt(0);
-                enums.Add(c);
+                string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
                 this.definedEnums.Items.Add(strs[0]);
+                ComboBox b = new ComboBox();
+                b.Items.AddRange(strs);
+                b.Items.Remove(strs[0]);
+                this.enums.Add(b);
             }
-            read.Close();
-            if (this.definedEnums.Items.Count != 0)
-                this.definedEnums.SelectedIndex = 0;
         }
         private void saveEnums()
         {
@@ -93,28 +88,30 @@ namespace myDb
             read = new StreamReader(Files.enumFile);
 
             string str;
-            bool found = false;
             while ((str = read.ReadLine()) != null)
             {
-                foreach (string nm in this.definedEnums.Items)
+                //using!
+                int i =0;
+                while (i < this.definedEnums.Items.Count)
                 {
-                    if (str.StartsWith(nm + "\t"))
+                    if (str.StartsWith((string)(this.definedEnums.Items[i] + "\t")))
                     {
-                        this.definedEnums.Items.Remove(nm);
+                        this.definedEnums.Items.RemoveAt(i);
+                        this.enums.RemoveAt(i);
                         break;
                     }
                 }
             }
             read.Close();
 
-            TextWriter txt = new StreamWriter(Files.enumFile);
+            TextWriter txt = new StreamWriter(Files.enumFile,true);
             // pre vsetky, co zostali, zapis
             for ( int i =0; i < enums.Count; i++)
             {
                 string nm = (string)definedEnums.Items[i] + "\t";
 
                 //zapis do enumu
-                txt.Write(this.Name + "\t");
+                txt.Write(nm + "\t");
                 foreach (string s in enums[i].Items)
                     txt.Write(s + "\t");
                 txt.WriteLine("");//ukonci lajnu
@@ -226,7 +223,7 @@ namespace myDb
             stream.Close();
             this.saveEnums();
             this.endState = Forms.FormFormular;
-            this.finalWord = this.dbName.Text;
+            this.finalWord = name;
             this.Close();
         }
 

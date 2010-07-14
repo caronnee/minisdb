@@ -7,13 +7,13 @@ using System.IO;
 
 namespace myDb
 {
-    public enum AttributeType
+    public static class AttributeType
     {
-        AText,
-        AInteger,
-        APicture,
-        ATime,
-        AEnum
+        public const int AText = 0;
+        public const int AInteger = 1;
+        public const int APicture = 2;
+        public const int ATime = 3;
+        public const int AEnum = 4;
     }
    //== attribute text
    class Attribute : System.Windows.Forms.Panel
@@ -180,12 +180,16 @@ namespace myDb
         }
         virtual public void save(TextWriter stream)
         {
-            stream.Write(0);
+            stream.Write(AttributeType.AText);  //typ
+            stream.Write(name.Text + "\t");     // meno
             stream.WriteLine(def.Text);
         }
-       virtual public void setValue(String s)
+       virtual public void setValue(String s) //fixme prepisat na reconstruct
        {
-           ((TextBox)(def)).Text = s;
+           string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
+           this.name.Text = strs[0];
+           if (strs.Length >1)
+               ((TextBox)(def)).Text = strs[1];
        }
    }
 
@@ -247,11 +251,20 @@ namespace myDb
             NumericUpDown n = (NumericUpDown)def;
             n.Minimum = min.Value;
         }
+
+        public override void save(TextWriter stream)
+        {
+            stream.Write(AttributeType.AInteger);
+            stream.Write(name.Text + "\t");
+            stream.Write(min.Value.ToString() + "\t" + max.Value + "\t" + def.Text);
+        }
         public override void setValue(string s)
         {
-            String[] strs = s.Split(new char[]{' '}, StringSplitOptions.RemoveEmptyEntries);
-            min.Value = System.Convert.ToInt32(strs[0]);
-            max.Value = System.Convert.ToInt32(strs[1]);
+            //nemali by byt ziadne breberky
+            String[] strs = s.Split(new char[]{'\t'}, StringSplitOptions.RemoveEmptyEntries);
+            this.name.Text = strs[0];
+            min.Value = System.Convert.ToInt32(strs[1]);
+            max.Value = System.Convert.ToInt32(strs[2]);
             if (strs.Length == 3)
                 ((NumericUpDown)(def)).Value = System.Convert.ToInt32(strs[2]);
         }
@@ -259,22 +272,51 @@ namespace myDb
 
     class AttributeEnum : Attribute
     {
+        private static List<string> enums = null;
+
+        public static void clear()
+        {
+            enums = null;
+        }
+        public static ComboBox findEnum(string toFind)
+        {
+            ComboBox b = new ComboBox();
+            if (enums == null)
+                enums = Files.readEnum();
+
+            foreach ( string s in enums )
+                if ( s.StartsWith(toFind + '\t'))
+                {
+                    b.Items.AddRange(s.Split(new char[]{ '\t'},StringSplitOptions.RemoveEmptyEntries));
+                    b.Items.Remove(toFind);
+                    return b;
+                }
+            throw new Exception ( "No such type defined");
+        }
         public AttributeEnum(ComboBox b)
         {
+            this.typeLabel.Text = "Enum";
             defLabel.Text = "Choose enum";
             b.DropDownStyle = ComboBoxStyle.DropDownList;
-            b.SelectedIndex = 0;
+            if (b.Items.Count!=0) 
+                b.SelectedIndex = 0;
             def = b;
         }
         public override void setValue(string id)
         {
-            ((ComboBox)(def)).SelectedIndex = System.Convert.ToInt32(id);
+            string[] s = id.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
+            //jaky enum z nasej kolekcie
+            this.name.Text = s[0];
+            this.def = findEnum(s[1]);
+            //default value
+            ((ComboBox)(def)).SelectedIndex = System.Convert.ToInt32(int.Parse(s[2]));
         }
         public override void save(TextWriter stream)
         {
             stream.Write(AttributeType.AEnum);
-            stream.Write(((string)((ComboBox)(def)).SelectedItem));
-            stream.WriteLine(0);
+            stream.Write(name.Text + '\t' + this.Name + '\t');
+            if (this.isMandatory())
+                stream.WriteLine(((ComboBox)(def)).SelectedIndex);
         }
     }
     class AttributeTime : Attribute
@@ -283,6 +325,7 @@ namespace myDb
 
         public AttributeTime()
         {
+            this.typeLabel.Text = "Time";
             dateTimeTick = new DateTimePicker();
             this.def = dateTimeTick;
         }
@@ -293,11 +336,13 @@ namespace myDb
         public override void save(TextWriter stream)
         {
             stream.Write(AttributeType.ATime);
-            stream.WriteLine(dateTimeTick.Value.ToBinary()); //kontrola
+            stream.WriteLine(this.name.Text + '\t' + dateTimeTick.Value.ToBinary()); //kontrola
         }
         public override void setValue(string s)
         {
-            dateTimeTick.Value = System.Convert.ToDateTime(s);
+            string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
+            this.name.Text = strs[0];
+            dateTimeTick.Value = System.Convert.ToDateTime(strs[1]);
         }
     }
     class AttributeImage : Attribute
@@ -327,6 +372,7 @@ namespace myDb
 
         public AttributeImage()
         {
+            this.typeLabel.Text = "Image";
             this.defLabel.Text = "Default path";
             def = createChoosePicture();
         }
