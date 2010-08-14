@@ -15,29 +15,23 @@ namespace myDb
         public const int ATime = 3;
         public const int AEnum = 4;
     }
-   //== attribute text
-   class Attribute : System.Windows.Forms.Panel
+
+    abstract class AbstractAttribute : System.Windows.Forms.Panel 
     {
+        protected int aType;
         protected System.Windows.Forms.Label typeLabel;
         protected System.Windows.Forms.Label type;
         protected System.Windows.Forms.CheckBox fill;
         protected System.Windows.Forms.Label fillLabel;
         protected System.Windows.Forms.TextBox name;
         protected System.Windows.Forms.Label nameLabel;
-        protected System.Windows.Forms.Control def;
+        protected System.Windows.Forms.Control def; //to be overrden;)
         protected System.Windows.Forms.Label defLabel;
         protected System.Windows.Forms.Button closeButton;
 
-        public virtual Control valueControl()
-        {
-            return new TextBox();
-        }
-        public void visit(Visitor v) 
-        {
-            v.visited(this);
-        }
+        /* methods that are common */
 
-        public Attribute()
+        public AbstractAttribute()
         {
             this.BorderStyle = BorderStyle.FixedSingle;
             this.AutoSize = true;
@@ -56,7 +50,7 @@ namespace myDb
             this.Controls.Add(typeLabel);
             this.Controls.Add(type);
 
-            // label defining /
+            // label defining
             fill = new CheckBox();
             fill.AutoSize = true;
             fill.Name = "mustBeCheck";
@@ -95,12 +89,6 @@ namespace myDb
             defLabel.AutoSize = true;
             defLabel.Size = new System.Drawing.Size(35, 20);
             defLabel.Text = "Default text value"; //not mandatory;)
-
-            def = new TextBox();
-            def.Name = "Default";
-            def.Size = new System.Drawing.Size(100, 20);
-            def.TabIndex = 3;
-
             // close row button 
             closeButton = new Button();
             closeButton.Name = "Close";
@@ -109,7 +97,6 @@ namespace myDb
             closeButton.Text = "X";
             closeButton.Click += new EventHandler(closeButton_Click);
         }
-
         void fill_CheckedChanged(object sender, EventArgs e)
         {
             this.Controls.Remove(defLabel);
@@ -121,7 +108,6 @@ namespace myDb
             }
             this.ResumeLayout();
         }
-
         void closeButton_Click(object sender, EventArgs e)
         {
             Control parent = this.Parent;
@@ -159,32 +145,78 @@ namespace myDb
             for (int i = 0; i < this.Controls.Count; i += 2) //label + component
             {
                 this.Controls[i].Location = new System.Drawing.Point(actualX, actualY);
-                this.Controls[i + 1].Location = new  System.Drawing.Point(actualX, actualY + 10 + this.Controls[i].Size.Height);
+                this.Controls[i + 1].Location = new System.Drawing.Point(actualX, actualY + 10 + this.Controls[i].Size.Height);
                 space = Math.Max(this.Controls[i].Size.Width, this.Controls[i + 1].Size.Width);
                 actualX += space + 20;
             }
-            closeButton.Location = new  System.Drawing.Point(actualX, 10);
+            closeButton.Location = new System.Drawing.Point(actualX, 10);
             this.Controls.Add(closeButton);
         }
-        public string getName()
+        /* returns name of the attribute */
+        public string getAttributeName()
         {
             return name.Text;
-        }
-        virtual public string getDefault()
-        {
-            return def.Text;
         }
         public bool isMandatory()
         {
             return this.fill.Checked;
         }
-        virtual public void save(TextWriter stream)
+        protected void saveName(TextWriter stream)
         {
-            stream.Write(AttributeType.AText);  //typ
-            stream.Write(name.Text + "\t");     // meno
+            stream.Write(aType);
+            stream.Write("\t" + name.Text + "\t");
+        }
+        
+        /* virtual methods */
+
+        /* returns copy of control that should handle value */
+        public abstract AbstractControl getControl();
+
+        /* how an attribute should be saved */
+        public abstract void save(TextWriter stream);
+        public abstract void setValue(String s);
+    }
+   //== attribute text
+    interface AbstractControl 
+    {
+        Value getValue();
+    }
+
+    class MTextBox : TextBox, AbstractControl
+    {
+        public Value getValue()
+        {
+            return new ValueText(this.Text);
+        }
+    }
+    
+    class Attribute : AbstractAttribute
+    {
+       private MTextBox defVal;
+       public Attribute()
+       {
+           aType = AttributeType.AText;
+           defVal = new MTextBox();
+
+           defVal.Name = "Default";
+           defVal.Size = new System.Drawing.Size(100, 20);
+           defVal.TabIndex = 3;
+
+           def = defVal;
+       }
+       public override AbstractControl getControl()
+       {
+           MTextBox mbox = new MTextBox();
+           mbox.Text = defVal.Text;
+           return mbox; 
+       }     
+       public override void save(TextWriter stream)
+        {
+            saveName(stream);
             stream.WriteLine(def.Text);
         }
-       virtual public void setValue(String s) //fixme prepisat na reconstruct
+       
+       public override void setValue(String s) //fixme prepisat na reconstruct
        {
            string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
            this.name.Text = strs[0];
@@ -192,16 +224,25 @@ namespace myDb
                ((TextBox)(def)).Text = strs[1];
        }
    }
-
-    class AttributeInteger : Attribute
+    class MNumeric : NumericUpDown, AbstractControl
+    {
+        public Value getValue()
+        {
+            return new ValueInteger((int)this.Value);
+        }
+    }
+    class AttributeInteger : AbstractAttribute
     {
         protected System.Windows.Forms.Label minLabel, maxLabel;
-        protected System.Windows.Forms.NumericUpDown min, max;
+        protected System.Windows.Forms.NumericUpDown min, max, defValue;
+       
         public AttributeInteger()
         {
+            aType = AttributeType.AInteger;
             defLabel.Text = "Default integer value";
             type.Text = "Integer";
-            def = new NumericUpDown();
+            defValue = new NumericUpDown();
+            def = defValue;
 
             minLabel = new Label();
             minLabel.AutoSize = true;
@@ -231,48 +272,50 @@ namespace myDb
             this.Controls.Add(max);
             max_ValueChanged(null, null);
             min_ValueChanged(null, null);
-        }
-
-        public override Control valueControl()
-        {
-            NumericUpDown u = new NumericUpDown();
-            u.Minimum = min.Value;
-            u.Maximum = max.Value;
-            return u;
-        }
+        } 
         void max_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown n = (NumericUpDown)def;
             n.Maximum = max.Value;
+            min.Maximum = max.Value;
         }
-
         void min_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown n = (NumericUpDown)def;
             n.Minimum = min.Value;
+            max.Minimum = min.Value;
+            n.Value = System.Math.Max(min.Value, n.Value);
         }
 
         public override void save(TextWriter stream)
         {
-            stream.Write(AttributeType.AInteger);
-            stream.Write(name.Text + "\t");
-            stream.Write(min.Value.ToString() + "\t" + max.Value + "\t" + def.Text);
+            saveName(stream);
+            stream.Write(min.Value.ToString() + "\t" + max.Value );
+            if (isMandatory())
+                stream.Write('\t' + defValue.Value.ToString());
+
+        }
+        public override AbstractControl getControl()
+        {
+            MNumeric m = new MNumeric();
+            m.Minimum = min.Value;
+            m.Maximum = max.Value;
+            return m;
         }
         public override void setValue(string s)
         {
-            //nemali by byt ziadne breberky
-            String[] strs = s.Split(new char[]{'\t'}, StringSplitOptions.RemoveEmptyEntries);
-            this.name.Text = strs[0];
-            min.Value = System.Convert.ToInt32(strs[1]);
-            max.Value = System.Convert.ToInt32(strs[2]);
-            if (strs.Length == 3)
-                ((NumericUpDown)(def)).Value = System.Convert.ToInt32(strs[2]);
+            string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
+            min.Value = System.Convert.ToInt32(strs[0]);
+            max.Value = System.Convert.ToInt32(strs[1]);
+            defValue.Minimum = min.Value;
+            defValue.Maximum = max.Value;
         }
     }
 
     class AttributeEnum : Attribute
     {
         private static List<string> enums = null;
+        private string enumName;
 
         public static void clear()
         {
@@ -288,13 +331,15 @@ namespace myDb
                 if ( s.StartsWith(toFind + '\t'))
                 {
                     b.Items.AddRange(s.Split(new char[]{ '\t'},StringSplitOptions.RemoveEmptyEntries));
-                    b.Items.Remove(toFind);
+                    b.Items.Remove(toFind); //nemovneme meno ten jeci ( malo by byt prve, ale kto sa na to moze spolahnut, ze...
                     return b;
                 }
             throw new Exception ( "No such type defined");
         }
-        public AttributeEnum(ComboBox b)
+        public AttributeEnum(string name_, ComboBox b)
         {
+            this.enumName = name_;
+            this.aType = AttributeType.AEnum;
             this.typeLabel.Text = "Enum";
             defLabel.Text = "Choose enum";
             b.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -307,16 +352,18 @@ namespace myDb
             string[] s = id.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
             //jaky enum z nasej kolekcie
             this.name.Text = s[0];
+            enumName = s[1];
             this.def = findEnum(s[1]);
             //default value
-            ((ComboBox)(def)).SelectedIndex = System.Convert.ToInt32(int.Parse(s[2]));
+            if (s.Length > 2)
+                ((ComboBox)(def)).SelectedIndex = System.Convert.ToInt32(int.Parse(s[2]));
         }
         public override void save(TextWriter stream)
         {
-            stream.Write(AttributeType.AEnum);
-            stream.Write(name.Text + '\t' + this.Name + '\t');
+            saveName(stream);
+            stream.Write(this.Name + "\t");
             if (this.isMandatory())
-                stream.WriteLine(((ComboBox)(def)).SelectedIndex);
+                stream.WriteLine(((ComboBox)(def)).SelectedItem.ToString());
         }
     }
     class AttributeTime : Attribute
@@ -325,24 +372,23 @@ namespace myDb
 
         public AttributeTime()
         {
+            this.aType = AttributeType.ATime;
             this.typeLabel.Text = "Time";
             dateTimeTick = new DateTimePicker();
             this.def = dateTimeTick;
         }
-        public override Control valueControl()
-        {
-            return new DateTimePicker();
-        }
+        
         public override void save(TextWriter stream)
         {
-            stream.Write(AttributeType.ATime);
-            stream.WriteLine(this.name.Text + '\t' + dateTimeTick.Value.ToBinary()); //kontrola
+            saveName(stream);
+            stream.WriteLine( dateTimeTick.Value.ToString()); //kontrola, tot je nebezpecne..radsej int
         }
         public override void setValue(string s)
         {
             string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
             this.name.Text = strs[0];
-            dateTimeTick.Value = System.Convert.ToDateTime(strs[1]);
+            if (s.Length >1)
+                dateTimeTick.Value = System.Convert.ToDateTime(strs[1]);
         }
     }
     class AttributeImage : Attribute
