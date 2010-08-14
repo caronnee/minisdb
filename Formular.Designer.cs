@@ -27,7 +27,6 @@
         /// the contents of this method with the code editor.
         /// </summary>
 
-
         public static System.Windows.Forms.TabPage createTab(string name)
         {
             System.Windows.Forms.TabPage tabPage = new System.Windows.Forms.TabPage();
@@ -62,7 +61,6 @@
             {
                 return tabpage;
             }
-
         }
         private void InitializeComponent()
         {
@@ -143,6 +141,9 @@
             this.Controls.Add(this.selectTab);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip1);
+
+            System.Windows.Forms.Button b = new System.Windows.Forms.Button();
+
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Formular";
             this.Text = "Formular";
@@ -162,5 +163,6 @@
         private MyToolStrip insertToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private MyToolStrip selectToolStripMenuItem;
+        private Records records; 
     }
 }

@@ -21,8 +21,8 @@ namespace myDb
         static void Main()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            MyForm activeForm = new Create();
+            Application.SetCompatibleTextRenderingDefault(false); //IF sa spravi tu
+            MyForm activeForm = new Uvod();
             while (activeForm != null)
             {
                 Application.Run(activeForm);

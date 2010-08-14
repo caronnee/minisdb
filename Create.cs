@@ -51,7 +51,7 @@ namespace myDb
             addAtrribute(attribute);
         }
 
-        void addAtrribute(Attribute att)
+        void addAtrribute(AbstractAttribute att)
         {
             int x = 10, y = 10;
             if (this.definitionPanel.Controls.Count >0)
@@ -77,6 +77,8 @@ namespace myDb
                 b.Items.Remove(strs[0]);
                 this.enums.Add(b);
             }
+            if (definedEnums.Items.Count > 0)
+                definedEnums.SelectedIndex = 0;
         }
         private void saveEnums()
         {
@@ -155,8 +157,8 @@ namespace myDb
         private void addEnum_Click(object sender, EventArgs e)
         {
             if (definedEnums.Items.Count == 0)
-                return;
-            AttributeEnum en = new AttributeEnum(enums[definedEnums.SelectedIndex]);
+                return; //TODO warning
+            AttributeEnum en = new AttributeEnum(definedEnums.SelectedText, enums[definedEnums.SelectedIndex]);
             en.Name = (string) definedEnums.Items[definedEnums.SelectedIndex];
             addAtrribute(en);
         }
@@ -182,10 +184,10 @@ namespace myDb
             for (int i = 0; i < this.definitionPanel.Controls.Count; i++)
             {
                 Attribute a = (Attribute)this.definitionPanel.Controls[i];
-                string s = a.getName();
+                string s = a.getAttributeName();
                 for (int j = i + 1; j < this.definitionPanel.Controls.Count; j++)
                 {
-                    if (((Attribute)this.definitionPanel.Controls[j]).getName().Equals(s))
+                    if (((Attribute)this.definitionPanel.Controls[j]).getAttributeName().Equals(s))
                     {
                         MessageBox.Show("Two attributes with same name! <"+ s +">");
                         return;
@@ -198,7 +200,7 @@ namespace myDb
                 //a.Controls.Remove(warnLabel);
                 //a.Controls.Remove(warn);
                 a.ForeColor = Color.Empty;
-                if (a.isMandatory() && a.getDefault().Equals(""))
+                if (a.isMandatory() && (a.getControl().getValue() != null))
                 {
                     ok = false;
                     a.ForeColor = Color.Firebrick;

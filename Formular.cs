@@ -18,20 +18,22 @@ namespace myDb
 
             attributes = new List<Attribute>();
             //nacitaj atributy zo suboru dbname vsetky sttributy
-            TextReader read = new StreamReader(dbName);
+             TextReader read = new StreamReader(dbName);
             string line = "";
             while ((line = read.ReadLine()) != null)
             {
+                if (line == "")
+                    continue;
                 Match m =new Regex("^[0-9]*").Match(line);
                 int def = int.Parse(m.Value);
-                Attribute att = null;
+                AbstractAttribute att = null;
                 switch (def)
                 {
                     case AttributeType.AText :
                         att = new Attribute();
                         break;
                     case AttributeType.AEnum :
-                        att = new AttributeEnum(new ComboBox()); //najskor s prazdnym
+                        att = new AttributeEnum("unknown",new ComboBox()); //najskor s prazdnym
                         break;
                     case AttributeType.AInteger :
                         att = new AttributeInteger();
