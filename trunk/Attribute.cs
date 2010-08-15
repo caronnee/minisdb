@@ -293,13 +293,14 @@ namespace myDb
             stream.Write(min.Value.ToString() + "\t" + max.Value );
             if (isMandatory())
                 stream.Write('\t' + defValue.Value.ToString());
-
         }
         public override AbstractControl getControl()
         {
             MNumeric m = new MNumeric();
             m.Minimum = min.Value;
             m.Maximum = max.Value;
+            if (isMandatory())
+                m.Value = defValue.Value;
             return m;
         }
         public override void setValue(string s)
@@ -312,17 +313,14 @@ namespace myDb
         }
     }
 
-    class AttributeEnum : Attribute
+    class AttributeEnum : AbstractAttribute
     {
-        private static List<string> enums = null;
         private string enumName;
+        private ComboBox defVal;
 
-        public static void clear()
+        public static ComboBox findEnum(string toFind) //pouzivame len pri loadovani
         {
-            enums = null;
-        }
-        public static ComboBox findEnum(string toFind)
-        {
+            List<string> enums = null;
             ComboBox b = new ComboBox();
             if (enums == null)
                 enums = Files.readEnum();
@@ -345,7 +343,8 @@ namespace myDb
             b.DropDownStyle = ComboBoxStyle.DropDownList;
             if (b.Items.Count!=0) 
                 b.SelectedIndex = 0;
-            def = b;
+            defVal = b ; //mozno add rande?
+            def = defVal; //inak sa to bude menit stale subezne
         }
         public override void setValue(string id)
         {
@@ -363,7 +362,14 @@ namespace myDb
             saveName(stream);
             stream.Write(this.Name + "\t");
             if (this.isMandatory())
-                stream.WriteLine(((ComboBox)(def)).SelectedItem.ToString());
+                stream.WriteLine(defVal.SelectedItem.ToString());
+        }
+        public override AbstractControl getControl()
+        {
+            MTextBox m = new MTextBox();
+            if (isMandatory())
+                m.Text = defVal.SelectedItem.ToString();
+            return m;
         }
     }
     class AttributeTime : Attribute
