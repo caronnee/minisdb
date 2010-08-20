@@ -7,17 +7,16 @@ using System.IO;
 
 namespace myDb
 {
-    public static class AttributeType
+    public abstract class AbstractAttribute : System.Windows.Forms.Panel 
     {
-        public const int AText = 0;
-        public const int AInteger = 1;
-        public const int APicture = 2;
-        public const int ATime = 3;
-        public const int AEnum = 4;
-    }
-
-    abstract class AbstractAttribute : System.Windows.Forms.Panel 
-    {
+        public static class AttributeType
+        {
+            public const int AText = 0;
+            public const int AInteger = 1;
+            public const int APicture = 2;
+            public const int ATime = 3;
+            public const int AEnum = 4;
+        }
         protected int aType;
         protected System.Windows.Forms.Label typeLabel;
         protected System.Windows.Forms.Label type;
@@ -168,18 +167,20 @@ namespace myDb
         }
         
         /* virtual methods */
-
         /* returns copy of control that should handle value */
         public abstract AbstractControl getControl();
 
         /* how an attribute should be saved */
         public abstract void save(TextWriter stream);
-        public abstract void setValue(String s);
+
+        /* sets atrribute with defined values, how it should look like */
+        public abstract void reconstruct(String s);
     }
    //== attribute text
-    interface AbstractControl 
+    public interface AbstractControl 
     {
         Value getValue();
+        Value getValue(string value);
     }
 
     class MTextBox : TextBox, AbstractControl
@@ -187,10 +188,13 @@ namespace myDb
         public Value getValue()
         {
             return new ValueText(this.Text);
+        } 
+        public Value getValue(string text)
+        {
+            return new ValueText(text);
         }
     }
-    
-    class Attribute : AbstractAttribute
+    public class Attribute : AbstractAttribute
     {
        private MTextBox defVal;
        public Attribute()
@@ -214,14 +218,13 @@ namespace myDb
         {
             saveName(stream);
             stream.WriteLine(def.Text);
-        }
-       
-       public override void setValue(String s) //fixme prepisat na reconstruct
+        }       
+       public override void reconstruct(String s) //fixme prepisat na reconstruct
        {
            string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
            this.name.Text = strs[0];
            if (strs.Length >1)
-               ((TextBox)(def)).Text = strs[1];
+               defVal.Text = strs[1];
        }
    }
     class MNumeric : NumericUpDown, AbstractControl
@@ -230,8 +233,12 @@ namespace myDb
         {
             return new ValueInteger((int)this.Value);
         }
+        public Value getValue(string text)
+        {
+            return new ValueInteger(System.Convert.ToInt32(text));
+        }
     }
-    class AttributeInteger : AbstractAttribute
+    public class AttributeInteger : AbstractAttribute
     {
         protected System.Windows.Forms.Label minLabel, maxLabel;
         protected System.Windows.Forms.NumericUpDown min, max, defValue;
@@ -303,7 +310,7 @@ namespace myDb
                 m.Value = defValue.Value;
             return m;
         }
-        public override void setValue(string s)
+        public override void reconstruct(string s)
         {
             string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
             min.Value = System.Convert.ToInt32(strs[0]);
@@ -313,7 +320,7 @@ namespace myDb
         }
     }
 
-    class AttributeEnum : AbstractAttribute
+    public class AttributeEnum : AbstractAttribute
     {
         private string enumName;
         private ComboBox defVal;
@@ -346,7 +353,7 @@ namespace myDb
             defVal = b ; //mozno add rande?
             def = defVal; //inak sa to bude menit stale subezne
         }
-        public override void setValue(string id)
+        public override void reconstruct(string id)
         {
             string[] s = id.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
             //jaky enum z nasej kolekcie
@@ -372,15 +379,30 @@ namespace myDb
             return m;
         }
     }
-    class AttributeTime : Attribute
+
+    public class MDate : DateTimePicker, AbstractControl
     {
-        private DateTimePicker dateTimeTick;
+        public Value getValue()
+        {
+            return new ValueDate(this.Value);
+        }
+        public Value getValue(string text)
+        {
+            return new ValueDate(System.Convert.ToDateTime(text));
+        }
+    }
+
+    public class AttributeTime : Attribute
+    {
+        private MDate dateTimeTick;
+        bool today;
 
         public AttributeTime()
         {
             this.aType = AttributeType.ATime;
+            today = false;
             this.typeLabel.Text = "Time";
-            dateTimeTick = new DateTimePicker();
+            dateTimeTick = new MDate();
             this.def = dateTimeTick;
         }
         
@@ -389,7 +411,7 @@ namespace myDb
             saveName(stream);
             stream.WriteLine( dateTimeTick.Value.ToString()); //kontrola, tot je nebezpecne..radsej int
         }
-        public override void setValue(string s)
+        public override void reconstruct(string s)
         {
             string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
             this.name.Text = strs[0];
@@ -397,7 +419,7 @@ namespace myDb
                 dateTimeTick.Value = System.Convert.ToDateTime(strs[1]);
         }
     }
-    class AttributeImage : Attribute
+    public class AttributeImage : Attribute
     {
         private TextBox t;
 
@@ -435,7 +457,7 @@ namespace myDb
             stream.WriteLine(t.Text);
         }
 
-        public override void setValue(string s)
+        public override void reconstruct(string s)
         {
             t.Text = s;
         }
