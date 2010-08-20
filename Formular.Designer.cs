@@ -1,5 +1,15 @@
 ﻿namespace myDb
 {
+      /*System.Windows.Forms.Button button = new System.Windows.Forms.Button();
+            button.Text = "add new";
+            button.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom;
+            button.AutoSize = true;
+            button.Location = new System.Drawing.Point(ins.getTab().Width - button.Width - 10,
+                ins.getTab().Height - button.Height - 10);
+            ins.getTab().Controls.Add(button);
+            button.Click+=new System.EventHandler();
+       * */
+
     partial class Formular
     {
         /// <summary>
@@ -62,13 +72,48 @@
                 return tabpage;
             }
         }
+        private class InsertStrip : MyToolStrip
+        {
+            public delegate void addRecordsHandler(object sender, RecordEventArgs rea);
+            public event addRecordsHandler addRecord;
+
+            protected virtual void onAddRecord(RecordEventArgs args)
+            {
+                if (addRecord == null)
+                    return;
+                addRecord(this, args);
+            }
+
+            public InsertStrip() : base("Insert")
+            {
+                
+                //add Button
+                System.Windows.Forms.Button addButton = new System.Windows.Forms.Button();
+                addButton.Text = "add records";
+                addButton.AutoSize = true;
+                addButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | 
+                    System.Windows.Forms.AnchorStyles.Right;
+                System.Drawing.Size s = getTab().Size;
+                addButton.Location = new System.Drawing.Point(s.Width - addButton.Width - 10,
+                    s.Height - addButton.Height - 10);
+                getTab().Controls.Add(addButton);
+                addButton.Click += new System.EventHandler(addButton_Click);
+                //raise event
+            }
+
+            void addButton_Click(object sender, System.EventArgs e)
+            {
+                //zistime vsetky recordy, ktore na uzibvatel zadal..ZAJTRA/VECER
+            }
+        }
         private void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.selectTab = new System.Windows.Forms.TabControl();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.insertToolStripMenuItem = new MyToolStrip("insert");
+            MyToolStrip ins = new MyToolStrip("insert");
+            this.insertToolStripMenuItem = ins;
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectToolStripMenuItem = new MyToolStrip("select");
             this.selectTab.SuspendLayout();

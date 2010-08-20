@@ -5,7 +5,7 @@ using System.Text;
 
 namespace myDb
 {
-    abstract class Value //ma dedit po icomparable?
+    public abstract class Value //ma dedit po icomparable?
     {
         public void contains()
         { }

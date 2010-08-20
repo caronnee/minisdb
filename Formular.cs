@@ -16,40 +16,8 @@ namespace myDb
         {
             InitializeComponent();
 
-            attributes = new List<Attribute>();
+            records = new Records(dbName);
             //nacitaj atributy zo suboru dbname vsetky sttributy
-             TextReader read = new StreamReader(dbName);
-            string line = "";
-            while ((line = read.ReadLine()) != null)
-            {
-                if (line == "")
-                    continue;
-                Match m =new Regex("^[0-9]*").Match(line);
-                int def = int.Parse(m.Value);
-                AbstractAttribute att = null;
-                switch (def)
-                {
-                    case AttributeType.AText :
-                        att = new Attribute();
-                        break;
-                    case AttributeType.AEnum :
-                        att = new AttributeEnum("unknown",new ComboBox()); //najskor s prazdnym
-                        break;
-                    case AttributeType.AInteger :
-                        att = new AttributeInteger();
-                        break;
-                    case AttributeType.APicture :
-                        att = new AttributeImage();
-                        break;
-                    case AttributeType.ATime :
-                        att = new AttributeTime();
-                        break;
-                    default :
-                        throw new Exception("No such type can be loaded");
-                }
-                att.setValue(line.Substring(m.Value.Length));
-            }
         }
-        private List<Attribute> attributes;
     }
 }
