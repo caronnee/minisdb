@@ -395,15 +395,42 @@ namespace myDb
     public class AttributeTime : Attribute
     {
         private MDate dateTimeTick;
-        bool today;
+        private Label todayText;
+        private bool today;
 
         public AttributeTime()
         {
+            this.today = false;
             this.aType = AttributeType.ATime;
-            today = false;
+            this.today = false;
             this.typeLabel.Text = "Time";
             dateTimeTick = new MDate();
             this.def = dateTimeTick;
+            this.todayText = new Label();
+            this.todayText.Text = "Today";
+            MenuItem m = new MenuItem("today");
+            m.Checked = false;
+            m.Click +=new EventHandler(m_Click);
+            this.ContextMenu.MenuItems.Add(m);
+            this.MouseDown += new MouseEventHandler(AttributeTime_MouseDown);
+        }
+
+        void m_Click(object sender, EventArgs e)
+        {
+            this.today = !this.today;
+            todayText.Location = def.Location;
+            ((MenuItem)sender).Checked = this.today;
+            def.Hide();
+            if (this.today)
+                def = todayText;
+            else
+                def = dateTimeTick;
+            def.Show();
+        }
+
+        void AttributeTime_MouseDown(object sender, MouseEventArgs e)
+        {
+            
         }
         
         public override void save(TextWriter stream)
