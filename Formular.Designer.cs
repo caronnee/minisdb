@@ -1,4 +1,6 @@
-﻿namespace myDb
+﻿using System.Collections.Generic;
+
+namespace myDb
 {
       /*System.Windows.Forms.Button button = new System.Windows.Forms.Button();
             button.Text = "add new";
@@ -36,86 +38,30 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-
-        public static System.Windows.Forms.TabPage createTab(string name)
+        private void MyToolStrip_Click(object sender, System.EventArgs e)
         {
-            System.Windows.Forms.TabPage tabPage = new System.Windows.Forms.TabPage();
-            tabPage.Location = new System.Drawing.Point(4, 22);
-            tabPage.Name = name;
-            tabPage.Padding = new System.Windows.Forms.Padding(3);
-            tabPage.Size = new System.Drawing.Size(490, 197);
-            tabPage.TabIndex = 0;
-            tabPage.Text = name;
-            tabPage.UseVisualStyleBackColor = true;
-            return tabPage;
+            if (!this.selectTab.Contains(((MyToolStrip) sender).getTab()))
+                this.selectTab.Controls.Add(((MyToolStrip) sender).getTab());
+            this.selectTab.SelectedIndex =
+                this.selectTab.Controls.GetChildIndex(((MyToolStrip) sender).getTab());
         }
 
-        private class MyToolStrip : System.Windows.Forms.ToolStripMenuItem
-        {
-            private System.Windows.Forms.TabPage tabpage;
-            public MyToolStrip(string name)
-            {
-                tabpage = createTab(name);
-                this.Click += new System.EventHandler(MyToolStrip_Click);
-            }
-
-            void MyToolStrip_Click(object sender, System.EventArgs e)
-            {
-                Formular f = (Formular)(this.Parent.FindForm());
-                if (!f.selectTab.Contains(this.getTab()))
-                    f.selectTab.Controls.Add(this.getTab());
-                f.selectTab.SelectedIndex = 
-                    f.selectTab.Controls.GetChildIndex(this.getTab());
-            }
-            public System.Windows.Forms.TabPage getTab()
-            {
-                return tabpage;
-            }
-        }
-        private class InsertStrip : MyToolStrip
-        {
-            public delegate void addRecordsHandler(object sender, RecordEventArgs rea);
-            public event addRecordsHandler addRecord;
-
-            protected virtual void onAddRecord(RecordEventArgs args)
-            {
-                if (addRecord == null)
-                    return;
-                addRecord(this, args);
-            }
-
-            public InsertStrip() : base("Insert")
-            {
-                
-                //add Button
-                System.Windows.Forms.Button addButton = new System.Windows.Forms.Button();
-                addButton.Text = "add records";
-                addButton.AutoSize = true;
-                addButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | 
-                    System.Windows.Forms.AnchorStyles.Right;
-                System.Drawing.Size s = getTab().Size;
-                addButton.Location = new System.Drawing.Point(s.Width - addButton.Width - 10,
-                    s.Height - addButton.Height - 10);
-                getTab().Controls.Add(addButton);
-                addButton.Click += new System.EventHandler(addButton_Click);
-                //raise event
-            }
-
-            void addButton_Click(object sender, System.EventArgs e)
-            {
-                //zistime vsetky recordy, ktore na uzibvatel zadal..ZAJTRA/VECER
-            }
-        }
         private void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.selectTab = new System.Windows.Forms.TabControl();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            MyToolStrip ins = new MyToolStrip("insert");
+            InsertStrip ins = new InsertStrip();
+            ins.addRecord += new InsertStrip.addRecordsHandler(records.addRecord);
             this.insertToolStripMenuItem = ins;
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectToolStripMenuItem = new MyToolStrip("select");
+
+            //osobitne pridat click..FUJ. Nastastie ziadne dalsie 
+            this.selectToolStripMenuItem.Click += new System.EventHandler(this.MyToolStrip_Click);
+            this.insertToolStripMenuItem.Click += new System.EventHandler(this.MyToolStrip_Click);
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.MyToolStrip_Click);
             this.selectTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();

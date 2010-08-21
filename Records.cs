@@ -52,9 +52,15 @@ namespace myDb
                 }
                 att.reconstruct(line.Substring(m.Value.Length));
             }
-            //nacitavane hodnoty
+            //nacitavane hodnoty - TODO
         }
-
+        public void addRow()
+        {
+        }
+        public void addRecord(object sender, RecordEventArgs e)
+        {
+            this.records.AddRange(e.records);
+        }
         public List<Record> find()
         {
             List<Record> result = new List<Record>();
