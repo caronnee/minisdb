@@ -9,8 +9,23 @@ namespace myDb
 {
     public class Record
     {
-        ulong id;
-        List<Value> values; 
+        List<Value> values;
+        public Record()
+        {
+            values = new List<Value>();
+        }
+        public void clear()
+        {
+            values.Clear();
+        }
+        public void add(Value v) // can be null as not inicialized
+        {
+            values.Add(v);
+        }
+        public List<Value> getValues()
+        {
+            return values;
+        }
     }
     public class Records //singleton, FUJ
     {
@@ -54,8 +69,14 @@ namespace myDb
             }
             //nacitavane hodnoty - TODO
         }
-        public void addRow()
+        public void addRow(InsertStrip sender)
         {
+            List<AbstractControl> ctrls = new List<AbstractControl>();
+            for ( int i =0; i< pattern.Count; i++)
+            {
+                ctrls.Add(pattern[i].getControl());
+            }
+            sender.add(ctrls);
         }
         public void addRecord(object sender, RecordEventArgs e)
         {
