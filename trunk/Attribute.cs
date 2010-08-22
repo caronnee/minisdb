@@ -183,11 +183,51 @@ namespace myDb
         Value getValue(string value);
     }
 
+    public class AttributeState
+    {
+        public readonly bool mandatory;
+        public readonly ContextMenu context; //co ma ukazovat na to controle...jaj tu sa da vyhrat!;)
+        public AttributeState(bool mandatory_)
+        {
+            mandatory = mandatory_;
+            context = null;
+            if (mandatory)
+                return;
+            context = new ContextMenu();
+            MenuItem m = new MenuItem("Disable");
+            this.context.MenuItems.Add(m);
+            m.Checked = false;
+            m.Click += new EventHandler(m_Click);
+        }
+
+        void m_Click(object sender, EventArgs e)
+        {
+            Control snd = (Control) sender;
+            snd.Enabled = false;
+        }
+    }
+
     class MTextBox : TextBox, AbstractControl
     {
+        AttributeState state;
+
+        public MTextBox(bool mandatory_)
+        {
+            state = new AttributeState(mandatory_);
+            if (!mandatory_)
+            {
+                this.Click += new EventHandler(MTextBox_Click); //mozno new delegate?
+                this.ContextMenu.MergeMenu(state.context);
+            }
+            
+        }
+        void MTextBox_Click(object sender, EventArgs e)
+        {
+            this.Enabled = true;
+        }
         public Value getValue()
         {
-            return new ValueText(this.Text);
+            return new ValueText(this.Text); //coz bude nuloce, ked neni mandatory;)
         } 
         public Value getValue(string text)
         {
@@ -200,7 +240,7 @@ namespace myDb
        public Attribute()
        {
            aType = AttributeType.AText;
-           defVal = new MTextBox();
+           defVal = new MTextBox(true);
 
            defVal.Name = "Default";
            defVal.Size = new System.Drawing.Size(100, 20);
@@ -210,25 +250,38 @@ namespace myDb
        }
        public override AbstractControl getControl()
        {
-           MTextBox mbox = new MTextBox();
+           MTextBox mbox = new MTextBox(isMandatory());
            mbox.Text = defVal.Text;
            return mbox; 
        }     
        public override void save(TextWriter stream)
         {
             saveName(stream);
-            stream.WriteLine(def.Text);
+           if (isMandatory())
+               stream.Write(def.Text);
+           stream.WriteLine();
         }       
        public override void reconstruct(String s) //fixme prepisat na reconstruct
        {
            string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
            this.name.Text = strs[0];
-           if (strs.Length >1)
-               defVal.Text = strs[1];
+           if (strs.Length == 1)
+               return;
+           defVal.Text = strs[1];
+           this.fill.Checked = true;
        }
    }
     class MNumeric : NumericUpDown, AbstractControl
     {
+        public MNumeric() //kontext menu na disable
+        {
+            this.Click += new EventHandler(MNumeric_Click);
+        }
+
+        void MNumeric_Click(object sender, EventArgs e)
+        {
+            this.Enabled = true;
+        }
         public Value getValue()
         {
             return new ValueInteger((int)this.Value);
@@ -300,6 +353,7 @@ namespace myDb
             stream.Write(min.Value.ToString() + "\t" + max.Value );
             if (isMandatory())
                 stream.Write('\t' + defValue.Value.ToString());
+            stream.WriteLine();
         }
         public override AbstractControl getControl()
         {
@@ -313,13 +367,17 @@ namespace myDb
         public override void reconstruct(string s)
         {
             string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
-            min.Value = System.Convert.ToInt32(strs[0]);
-            max.Value = System.Convert.ToInt32(strs[1]);
+            this.name.Text = strs[0];
+            min.Value = System.Convert.ToInt32(strs[1]);
+            max.Value = System.Convert.ToInt32(strs[2]);
             defValue.Minimum = min.Value;
             defValue.Maximum = max.Value;
+            if (strs.Length < 4)
+                return;
+            defValue.Value = System.Convert.ToInt32(strs[3]);
+            this.fill.Checked = true; //mandatory
         }
     }
-
     public class AttributeEnum : AbstractAttribute
     {
         private string enumName;
@@ -369,17 +427,17 @@ namespace myDb
             saveName(stream);
             stream.Write(this.Name + "\t");
             if (this.isMandatory())
-                stream.WriteLine(defVal.SelectedItem.ToString());
+                stream.Write(defVal.SelectedItem.ToString());
+            stream.WriteLine();
         }
         public override AbstractControl getControl()
         {
-            MTextBox m = new MTextBox();
+            MTextBox m = new MTextBox(isMandatory());
             if (isMandatory())
                 m.Text = defVal.SelectedItem.ToString();
             return m;
         }
     }
-
     public class MDate : DateTimePicker, AbstractControl
     {
         public Value getValue()
@@ -391,7 +449,6 @@ namespace myDb
             return new ValueDate(System.Convert.ToDateTime(text));
         }
     }
-
     public class AttributeTime : Attribute
     {
         private MDate dateTimeTick;
@@ -414,7 +471,6 @@ namespace myDb
             this.ContextMenu = new ContextMenu();
             this.ContextMenu.MenuItems.Add(m);
             this.def = dateTimeTick;
-            this.MouseDown += new MouseEventHandler(AttributeTime_MouseDown);
         }
 
         void m_Click(object sender, EventArgs e)
@@ -432,12 +488,6 @@ namespace myDb
             this.Controls.Add(def);
             this.Controls.SetChildIndex(def, index);
             def.Show();
-      //      setPositions();
-        }
-
-        void AttributeTime_MouseDown(object sender, MouseEventArgs e)
-        {
-            
         }
         
         public override void save(TextWriter stream)
@@ -453,47 +503,32 @@ namespace myDb
                 dateTimeTick.Value = System.Convert.ToDateTime(strs[1]);
         }
     }
-    public class AttributeImage : Attribute
+    public class MPanelFile : Panel, AbstractControl
     {
-        private TextBox t;
-
-        private Control createChoosePicture()
+        AttributeState state;
+        TextBox path;
+        Button chooseButton;
+        public MPanelFile(bool state_)
         {
-            t = new TextBox();
-            t.Size = new System.Drawing.Size(100, 20);
-            t.AutoCompleteMode = AutoCompleteMode.Suggest;
-            t.AutoCompleteSource = AutoCompleteSource.FileSystemDirectories;
-            t.Location = new System.Drawing.Point(0, 0);
-            t.Size = new System.Drawing.Size(100, 20);
+            state = new AttributeState(state_);
 
-            Button b = new Button();
-            b.Text = "...";
-            b.Size = new System.Drawing.Size(10, 20);
-            b.Location = new System.Drawing.Point(t.Size.Width - 1, 0);
-            b.Click += new EventHandler(b_Click);
-            Panel p = new Panel();
-            p.Size = new System.Drawing.Size(t.Size.Width + b.Size.Width, 20);
-            p.Controls.Add(t);
-            p.Controls.Add(b);
-            return p;
-        }
+            path = new TextBox();
+            path.Size = new System.Drawing.Size(100, 20);
+            path.AutoCompleteMode = AutoCompleteMode.Suggest;
+            path.AutoCompleteSource = AutoCompleteSource.FileSystem;
+            path.Location = new System.Drawing.Point(0, 0);
 
-        public AttributeImage()
-        {
-            this.typeLabel.Text = "Image";
-            this.defLabel.Text = "Default path";
-            def = createChoosePicture();
-        }
+            chooseButton = new Button();
+            chooseButton.Text = "...";
+            chooseButton.AutoSize = true; ;
+            chooseButton.Size = new System.Drawing.Size(10, 10);
+            chooseButton.Location = new System.Drawing.Point(path.Size.Width - 1, 0);
+            chooseButton.Click += new EventHandler(b_Click);
 
-        public override void save(TextWriter stream)
-        {
-            stream.Write(AttributeType.APicture);
-            stream.WriteLine(t.Text);
-        }
-
-        public override void reconstruct(string s)
-        {
-            t.Text = s;
+            this.AutoSize = true;
+            this.Size = new System.Drawing.Size(10, 10);
+            this.Controls.Add(path);
+            this.Controls.Add(chooseButton);
         }
 
         void b_Click(object sender, EventArgs e)
@@ -505,7 +540,47 @@ namespace myDb
             DialogResult res = f.ShowDialog();
             if (res != DialogResult.OK)
                 return;
-            this.t.Text = f.FileName;
+            path.Text = f.FileName;
+        }
+
+        public string getText()
+        {
+            return path.Text;
+        }
+        public Value getValue()
+        {
+             return new ValueText(path.Text);
+        }
+        public Value getValue(string text)
+        {
+            this.path.Text = text;
+            return getValue();
+        }
+    }
+    public class AttributeImage : Attribute
+    {
+        private MPanelFile defaultValue;
+
+        public AttributeImage()
+        {
+            defaultValue = new MPanelFile(true);
+            this.typeLabel.Text = "Image";
+            this.defLabel.Text = "Default path";
+            def = defaultValue;
+        }
+
+        public override void save(TextWriter stream)
+        {
+            stream.Write(AttributeType.APicture);
+            //only if mandatry
+            if (isMandatory())
+                stream.Write(defaultValue.getText());
+            stream.WriteLine();
+        }
+
+        public override void reconstruct(string s)
+        {
+            defaultValue.Text = s;
         }
     }
 }

@@ -18,7 +18,13 @@ namespace myDb
             //Load to combobox all databases
             DirectoryInfo dirInfo = new DirectoryInfo(".");
             FileInfo[] dbs = dirInfo.GetFiles("*.myDb");
+            if (dbs.Length == 0)
+            {
+                this.endState = Forms.FormCreateBd;
+                return;
+            }
             this.chooseDb.Items.AddRange(dbs);
+            this.chooseDb.SelectedIndex = 0;
         }
         private void CreateButton_Click(object sender, EventArgs e)
         {

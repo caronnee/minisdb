@@ -183,11 +183,11 @@ namespace myDb
             //check for name duplicity
             for (int i = 0; i < this.definitionPanel.Controls.Count; i++)
             {
-                Attribute a = (Attribute)this.definitionPanel.Controls[i];
+                AbstractAttribute a = (AbstractAttribute)this.definitionPanel.Controls[i];
                 string s = a.getAttributeName();
                 for (int j = i + 1; j < this.definitionPanel.Controls.Count; j++)
                 {
-                    if (((Attribute)this.definitionPanel.Controls[j]).getAttributeName().Equals(s))
+                    if (((AbstractAttribute)this.definitionPanel.Controls[j]).getAttributeName().Equals(s))
                     {
                         MessageBox.Show("Two attributes with same name! <"+ s +">");
                         return;
@@ -195,7 +195,7 @@ namespace myDb
                 }
             }
             bool ok = true;
-            foreach (Attribute a in this.definitionPanel.Controls)
+            foreach (AbstractAttribute a in this.definitionPanel.Controls)
             {
                 //a.Controls.Remove(warnLabel);
                 //a.Controls.Remove(warn);
@@ -216,7 +216,7 @@ namespace myDb
             }
 
             StreamWriter stream = new StreamWriter(name);
-            foreach (Attribute att in this.definitionPanel.Controls)
+            foreach (AbstractAttribute att in this.definitionPanel.Controls)
             {
                 att.save(stream);
             }

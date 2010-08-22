@@ -14,9 +14,8 @@ namespace myDb
     {
         public Formular(string dbName)
         {
-            InitializeComponent();
-
             records = new Records(dbName);
+            InitializeComponent();
             //nacitaj atributy zo suboru dbname vsetky sttributy
         }
     }

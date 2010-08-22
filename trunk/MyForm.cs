@@ -9,7 +9,7 @@ namespace myDb
     {
         public MyForm()
         {
-            endState = 0;
+            endState = Forms.FormEnd;
             finalWord = "";
         }
         public Forms endCode()
