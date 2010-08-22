@@ -405,13 +405,15 @@ namespace myDb
             this.today = false;
             this.typeLabel.Text = "Time";
             dateTimeTick = new MDate();
-            this.def = dateTimeTick;
             this.todayText = new Label();
             this.todayText.Text = "Today";
+            todayText.AutoSize = true;
             MenuItem m = new MenuItem("today");
             m.Checked = false;
             m.Click +=new EventHandler(m_Click);
+            this.ContextMenu = new ContextMenu();
             this.ContextMenu.MenuItems.Add(m);
+            this.def = dateTimeTick;
             this.MouseDown += new MouseEventHandler(AttributeTime_MouseDown);
         }
 
@@ -421,11 +423,16 @@ namespace myDb
             todayText.Location = def.Location;
             ((MenuItem)sender).Checked = this.today;
             def.Hide();
-            if (this.today)
+            int index = this.Controls.IndexOf(def);
+            this.Controls.Remove(def);
+            if (this.today)                
                 def = todayText;
             else
                 def = dateTimeTick;
+            this.Controls.Add(def);
+            this.Controls.SetChildIndex(def, index);
             def.Show();
+      //      setPositions();
         }
 
         void AttributeTime_MouseDown(object sender, MouseEventArgs e)
