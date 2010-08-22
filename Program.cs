@@ -23,9 +23,14 @@ namespace myDb
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false); //IF sa spravi tu
             MyForm activeForm = new Uvod();
+            if (activeForm.endCode() == Forms.FormCreateBd)
+                activeForm = new Create();
             while (activeForm != null)
             {
                 Application.Run(activeForm);
+
+                if (activeForm.endCode() == Forms.FormEnd) //bez toho, zby zmenil
+                    break;
                 if (activeForm.endCode() > 0)
                 {
                     switch (activeForm.endCode())
@@ -37,7 +42,6 @@ namespace myDb
                         default: throw new Exception("No such type in zero level switch handled");
                     }
                 }
-                else activeForm = null;
             }
         }
     }
