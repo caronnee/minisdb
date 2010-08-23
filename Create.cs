@@ -19,6 +19,8 @@ namespace myDb
         public Create()
         {
             InitializeComponent();
+            Create_Resize(null, null);
+            this.Resize += new EventHandler(Create_Resize);
             enums = new List<ComboBox>();
             warnLabel = new Label();
             warnLabel.Text = "";
@@ -32,6 +34,13 @@ namespace myDb
 
             //inicializuj enumy
             loadEnums();
+        }
+
+        void Create_Resize(object sender, EventArgs e)
+        {
+            this.definitionPanel.Size = new Size(
+                -this.definitionPanel.Location.X + this.addEnum.Location.X -10,
+                -this.definitionPanel.Location.Y + this.LoadFromFile.Location.Y -10);
         }
 
        private void LoadFromFile_Click(object sender, EventArgs e)
