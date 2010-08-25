@@ -33,7 +33,7 @@
             this.toDefine = new System.Windows.Forms.TextBox();
             this.defined = new System.Windows.Forms.ListBox();
             this.ok = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.infoLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
             this.name = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -86,14 +86,14 @@
             this.ok.UseVisualStyleBackColor = true;
             this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
-            // label1
+            // infoLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Value to add";
+            this.infoLabel.AutoSize = true;
+            this.infoLabel.Location = new System.Drawing.Point(33, 9);
+            this.infoLabel.Name = "infoLabel";
+            this.infoLabel.Size = new System.Drawing.Size(67, 13);
+            this.infoLabel.TabIndex = 5;
+            this.infoLabel.Text = "Value to add";
             // 
             // nameLabel
             // 
@@ -119,7 +119,7 @@
             this.ClientSize = new System.Drawing.Size(300, 215);
             this.Controls.Add(this.name);
             this.Controls.Add(this.nameLabel);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.defined);
             this.Controls.Add(this.toDefine);
@@ -140,7 +140,7 @@
         private System.Windows.Forms.TextBox toDefine;
         private System.Windows.Forms.ListBox defined;
         private System.Windows.Forms.Button ok;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.TextBox name;
     }

@@ -31,11 +31,12 @@ namespace myDb
     {
         private List<Record> records;
 
-        public readonly List<Attribute> pattern;
+        public readonly List<AbstractAttribute> pattern;
 
         public Records(string dbName) //name of Db
         {
-            records = new List<Record>();//+load existent
+            records = new List<Record>();
+            pattern = new List<AbstractAttribute>();
             TextReader read = new StreamReader(dbName);
             string line = "";
             while ((line = read.ReadLine()) != null)
@@ -66,6 +67,7 @@ namespace myDb
                         throw new Exception("No such type can be loaded");
                 }
                 att.reconstruct(line.Substring(m.Value.Length));
+                pattern.Add(att);
             }
             //nacitavane hodnoty - TODO
         }
@@ -86,6 +88,15 @@ namespace myDb
         {
             List<Record> result = new List<Record>();
             return result;
+        }
+        public void addNames(InsertStrip strip)
+        {
+            List<string> list = new List<string>();
+            for (int i = 0; i < pattern.Count; i++)
+            {
+                list.Add(pattern[i].getAttributeName());
+            }
+            strip.setNames(list);
         }
     }
 }

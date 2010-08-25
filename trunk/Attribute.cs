@@ -217,7 +217,7 @@ namespace myDb
             if (!mandatory_)
             {
                 this.Click += new EventHandler(MTextBox_Click); //mozno new delegate?
-                this.ContextMenu.MergeMenu(state.context);
+                this.ContextMenu = state.context;
             }
             
         }

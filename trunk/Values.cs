@@ -17,7 +17,6 @@ namespace myDb
         {
             return v.comparing(this);
         }
-
     }
     class ValueText : Value
     {
