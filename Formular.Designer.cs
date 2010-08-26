@@ -48,7 +48,7 @@ namespace myDb
 
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.infoBox = new System.Windows.Forms.TextBox();
             this.tabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.infoLabel = new System.Windows.Forms.Label();
@@ -60,23 +60,33 @@ namespace myDb
             this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // infoBox
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(563, 41);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(156, 202);
-            this.textBox1.TabIndex = 0;
+            this.infoBox.Enabled = false;
+            this.infoBox.Location = new System.Drawing.Point(563, 41);
+            this.infoBox.Multiline = true;
+            this.infoBox.Name = "infoBox";
+            this.infoBox.Size = new System.Drawing.Size(156, 202);
+            this.infoBox.TabIndex = 0;
+            this.infoBox.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top;
             // 
             // tabs
             // 
+            
+            hackPanel.Size = new System.Drawing.Size(545, 223);
+            hackPanel.Location = new System.Drawing.Point(20, 22); //dame to na panel, no
+            hackPanel.Controls.Add(this.tabs);
+            hackPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            hackPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            
             this.tabs.Controls.Add(this.tabPage1);
-            this.tabs.Location = new System.Drawing.Point(12, 22);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
-            this.tabs.Size = new System.Drawing.Size(545, 223);
-            this.tabs.TabIndex = 1;
+            this.tabs.Multiline = true;
+            this.tabs.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.tabs.Appearance = System.Windows.Forms.TabAppearance.Normal;
+            this.tabs.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+
             // 
             // selectToolStripMenuItem
             // 
@@ -104,6 +114,7 @@ namespace myDb
             this.infoLabel.Size = new System.Drawing.Size(25, 13);
             this.infoLabel.TabIndex = 2;
             this.infoLabel.Text = "Info";
+            this.infoLabel.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top;
             // 
             // menu
             // 
@@ -136,8 +147,8 @@ namespace myDb
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 266);
             this.Controls.Add(this.infoLabel);
-            this.Controls.Add(this.tabs);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(hackPanel);
+            this.Controls.Add(this.infoBox);
             this.Controls.Add(this.menu);
             this.MainMenuStrip = this.menu;
             this.Name = "Formular";
@@ -152,7 +163,7 @@ namespace myDb
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox infoBox;
         private System.Windows.Forms.TabControl tabs;
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.MenuStrip menu;
