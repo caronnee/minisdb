@@ -15,7 +15,6 @@ namespace myDb
         public Formular(string dbName)
         {
             records = new Records(dbName);
-
             InitializeComponent();
 
             this.insertToolStripMenuItem.addRecord += new InsertStrip.addRecordsHandler(records.addRecord);
