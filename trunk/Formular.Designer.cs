@@ -50,18 +50,12 @@ namespace myDb
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabs = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.infoLabel = new System.Windows.Forms.Label();
             this.menu = new System.Windows.Forms.MenuStrip();
-            InsertStrip ins = new InsertStrip();
-            ins.addRecord += new InsertStrip.addRecordsHandler(records.addRecord);
-            ins.addRow +=new InsertStrip.addRowHandler(records.addRow);
-            ins.addLabels +=new InsertStrip.AddLabels(records.addNames);
-            this.insertToolStripMenuItem = ins;
-            this.selectToolStripMenuItem = new MyToolStrip("select");
-
-            //osobitne pridat click..FUJ. Nastastie ziadne dalsie 
-            this.selectToolStripMenuItem.Click += new System.EventHandler(this.Menu_Click);
-            this.insertToolStripMenuItem.Click += new System.EventHandler(this.Menu_Click);
+            this.insertToolStripMenuItem = new myDb.InsertStrip();
+            this.selectToolStripMenuItem = new myDb.MyToolStrip("select");
+            this.b = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.menu.SuspendLayout();
             this.SuspendLayout();
@@ -77,18 +71,36 @@ namespace myDb
             // 
             // tabs
             // 
-            this.tabs.Controls.Add(selectToolStripMenuItem.getTab());
-            this.tabs.Location = new System.Drawing.Point(30, 20);
+            this.tabs.Controls.Add(this.tabPage1);
+            this.tabs.Location = new System.Drawing.Point(12, 22);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
-            this.tabs.Size = new System.Drawing.Size(498, 223);
+            this.tabs.Size = new System.Drawing.Size(545, 223);
             this.tabs.TabIndex = 1;
+            // 
+            // selectToolStripMenuItem
+            // 
+            this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
+            this.selectToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.selectToolStripMenuItem.Text = "select";
+            this.selectToolStripMenuItem.Click += new System.EventHandler(this.Menu_Click);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(537, 197);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "select";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Visible = false;
             // 
             // infoLabel
             // 
             this.infoLabel.AutoSize = true;
             this.infoLabel.Location = new System.Drawing.Point(571, 22);
-            this.infoLabel.Name = "Info";
+            this.infoLabel.Name = "infoLabel";
             this.infoLabel.Size = new System.Drawing.Size(25, 13);
             this.infoLabel.TabIndex = 2;
             this.infoLabel.Text = "Info";
@@ -109,12 +121,14 @@ namespace myDb
             this.insertToolStripMenuItem.Name = "insertToolStripMenuItem";
             this.insertToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.insertToolStripMenuItem.Text = "insert";
+            this.insertToolStripMenuItem.Click += new System.EventHandler(this.Menu_Click);
             // 
-            // selectToolStripMenuItem
+            // b
             // 
-            this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
-            this.selectToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.selectToolStripMenuItem.Text = "select";
+            this.b.Location = new System.Drawing.Point(0, 0);
+            this.b.Name = "b";
+            this.b.Size = new System.Drawing.Size(75, 23);
+            this.b.TabIndex = 0;
             // 
             // Formular
             // 
@@ -125,9 +139,6 @@ namespace myDb
             this.Controls.Add(this.tabs);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menu);
-
-            System.Windows.Forms.Button b = new System.Windows.Forms.Button();
-
             this.MainMenuStrip = this.menu;
             this.Name = "Formular";
             this.Text = "Formular";
@@ -136,6 +147,7 @@ namespace myDb
             this.menu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -144,8 +156,10 @@ namespace myDb
         private System.Windows.Forms.TabControl tabs;
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.MenuStrip menu;
-        private MyToolStrip insertToolStripMenuItem;
+        private InsertStrip insertToolStripMenuItem;
         private MyToolStrip selectToolStripMenuItem;
-        private Records records; 
+        private Records records;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button b; 
     }
 }

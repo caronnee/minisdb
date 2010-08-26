@@ -15,8 +15,12 @@ namespace myDb
         public Formular(string dbName)
         {
             records = new Records(dbName);
+
             InitializeComponent();
-            //nacitaj atributy zo suboru dbname vsetky sttributy
+
+            this.insertToolStripMenuItem.addRecord += new InsertStrip.addRecordsHandler(records.addRecord);
+            this.insertToolStripMenuItem.addRow += new InsertStrip.addRowHandler(records.addRow);
+            this.insertToolStripMenuItem.addLabels += new InsertStrip.AddLabels(records.addNames);
         }
     }
 }
