@@ -107,14 +107,14 @@ namespace myDb
             //two separate panels, one scrollable, other stacic
 
             // button for adding new rows & number of rows
-            System.Windows.Forms.Button addButton = 
+            System.Windows.Forms.Button addButton =
                 new System.Windows.Forms.Button();
 
             addButton.Text = "Add selected number of rows";
             addButton.AutoSize = true;
             addButton.Anchor = System.Windows.Forms.AnchorStyles.Top |
                 System.Windows.Forms.AnchorStyles.Left;
-            addButton.Location = new System.Drawing.Point(10,10);
+            addButton.Location = new System.Drawing.Point(10, 10);
             addButton.Click += new EventHandler(addRows_click);
 
             buttonPanel.Controls.Add(addButton);
@@ -125,15 +125,21 @@ namespace myDb
             howMany.Location = new System.Drawing.Point(addButton.Location.X + addButton.PreferredSize.Width + 10, 10);
 
             buttonPanel.Controls.Add(howMany);
-//            addButton.Click += new System.EventHandler(addButton_Click);
 
+            addButton = new Button();
+            addButton.Text = "Add selected records";
+            addButton.AutoSize = true;
+            addButton.Location = new System.Drawing.Point(howMany.Location.X + howMany.Width + 10, 0);
+            addButton.Click += new System.EventHandler(addButton_Click);
+            buttonPanel.Controls.Add(addButton);
 
             getTab().Controls.Add(buttonPanel);
             getTab().Controls.Add(recordPanel);
             getTab().Resize += new EventHandler(InsertStrip_Resize);
 
-            this.MouseUp +=new MouseEventHandler(internal_clean);
+            this.MouseUp += new MouseEventHandler(internal_clean);
             this.getTab().MouseUp += new MouseEventHandler(tabActive);
+
             InsertStrip_Resize(null, null);
         }
 
@@ -151,12 +157,12 @@ namespace myDb
             if (active)
                 return;
             active = true;
-            if ( labels.Count != recordPanel.Controls.Count)
+            if (labels.Count != recordPanel.Controls.Count)
                 throw new Exception("labels and boxes have different dimensions ");
             //a to je uplne jedno kde to tam je...
             for (int i = 0; i < labels.Count; i++)
             {
-                labels[i].Location = new System.Drawing.Point(recordPanel.Controls[i].Location.X,0);
+                labels[i].Location = new System.Drawing.Point(recordPanel.Controls[i].Location.X, 0);
                 recordPanel.Controls[i].Location = new System.Drawing.Point(recordPanel.Controls[i].Location.X, labels[i].PreferredHeight + 10);
             }
             for (int i = 0; i < labels.Count; i++)
@@ -177,13 +183,17 @@ namespace myDb
         {
             if (ctrls.Count == 0)
                 throw new Exception("Zero attributes, not legal database!");
+
             this.numberOfValues = ctrls.Count;
 
             Control c = (Control)ctrls[0];
-            System.Drawing.Point point = new System.Drawing.Point(0,toAddRecords.Count * c.Height);
-            
-            c.Location = new System.Drawing.Point(point.X,point.Y);
+            System.Drawing.Point point = new System.Drawing.Point(0, 0);
+            if (toAddRecords.Count > 0)
+                point = new System.Drawing.Point(0, (toAddRecords.Count -1)*c.PreferredSize.Height + labels[0].PreferredHeight );
+
+            c.Location = new System.Drawing.Point(point.X, point.Y);
             this.recordPanel.Controls.Add(c);
+
             for (int i = 1; i < ctrls.Count; i++)
             {
                 c = (Control)ctrls[i];
@@ -193,6 +203,7 @@ namespace myDb
             }
             this.toAddRecords.AddRange(ctrls);
         }
+
         void addRows_click(object sender, EventArgs e)
         {
             for (int i = 0; i < howMany.Value; i++)
@@ -200,6 +211,7 @@ namespace myDb
                 this.onAddRow();
             }
         }
+
         void addButton_Click(object sender, System.EventArgs args)
         {
             //zistime vsetky recordy, ktore na uzibvatel zadal..ZAJTRA/VECER
