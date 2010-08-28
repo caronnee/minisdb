@@ -31,7 +31,6 @@ namespace myDb
             endState = Forms.FormCreateBd;
             this.Close();
         }
-
         private void Load_Click(object sender, EventArgs e)
         {
             if (this.chooseDb.SelectedIndex < 0)
@@ -42,6 +41,23 @@ namespace myDb
             endState = Forms.FormFormular;
             this.finalWord = ((FileInfo)this.chooseDb.SelectedItem).Name;
             this.Close();
+        }
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            if (this.chooseDb.Items.Count == 0)
+                return; //ziadne warnig
+            DialogResult result = MessageBox.Show("You're sure to remove " + this.chooseDb.SelectedItem.ToString(),"warning!",MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
+                return;
+            File.Delete("./" + this.chooseDb.SelectedItem.ToString());
+            this.chooseDb.Items.Remove(this.chooseDb.SelectedItem);
+            if (chooseDb.Items.Count == 0)
+            {
+                endState = Forms.FormCreateBd;
+                this.Close();
+                return;
+            }
+            this.chooseDb.SelectedIndex = 0;
         }
     }
 }

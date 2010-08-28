@@ -31,11 +31,12 @@
             this.CreateButton = new System.Windows.Forms.Button();
             this.LoadButton = new System.Windows.Forms.Button();
             this.chooseDb = new System.Windows.Forms.ComboBox();
+            this.removeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CreateButton
             // 
-            this.CreateButton.Location = new System.Drawing.Point(87, 77);
+            this.CreateButton.Location = new System.Drawing.Point(12, 81);
             this.CreateButton.Name = "CreateButton";
             this.CreateButton.Size = new System.Drawing.Size(117, 34);
             this.CreateButton.TabIndex = 0;
@@ -45,9 +46,9 @@
             // 
             // LoadButton
             // 
-            this.LoadButton.Location = new System.Drawing.Point(169, 35);
+            this.LoadButton.Location = new System.Drawing.Point(169, 26);
             this.LoadButton.Name = "LoadButton";
-            this.LoadButton.Size = new System.Drawing.Size(114, 21);
+            this.LoadButton.Size = new System.Drawing.Size(114, 31);
             this.LoadButton.TabIndex = 1;
             this.LoadButton.Text = "Load database";
             this.LoadButton.UseVisualStyleBackColor = true;
@@ -56,16 +57,27 @@
             // chooseDb
             // 
             this.chooseDb.FormattingEnabled = true;
-            this.chooseDb.Location = new System.Drawing.Point(12, 35);
+            this.chooseDb.Location = new System.Drawing.Point(12, 26);
             this.chooseDb.Name = "chooseDb";
-            this.chooseDb.Size = new System.Drawing.Size(134, 21);
+            this.chooseDb.Size = new System.Drawing.Size(129, 21);
             this.chooseDb.TabIndex = 2;
+            // 
+            // removeButton
+            // 
+            this.removeButton.Location = new System.Drawing.Point(169, 81);
+            this.removeButton.Name = "removeButton";
+            this.removeButton.Size = new System.Drawing.Size(114, 34);
+            this.removeButton.TabIndex = 3;
+            this.removeButton.Text = "Remove database";
+            this.removeButton.UseVisualStyleBackColor = true;
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // Uvod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(295, 127);
+            this.Controls.Add(this.removeButton);
             this.Controls.Add(this.chooseDb);
             this.Controls.Add(this.LoadButton);
             this.Controls.Add(this.CreateButton);
@@ -80,5 +92,6 @@
         private System.Windows.Forms.Button CreateButton;
         private System.Windows.Forms.Button LoadButton;
         private System.Windows.Forms.ComboBox chooseDb;
+        private System.Windows.Forms.Button removeButton;
     }
 }

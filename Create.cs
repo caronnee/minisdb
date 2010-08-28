@@ -24,7 +24,7 @@ namespace myDb
             enums = new List<ComboBox>();
             warnLabel = new Label();
             warnLabel.Text = "";
-            warnLabel.Size = new Size(0,0); //hack!
+            warnLabel.Size = new Size(0, 0); //hack!
 
             warn = new Label();
             warn.Text = "!";
@@ -39,19 +39,19 @@ namespace myDb
         void Create_Resize(object sender, EventArgs e)
         {
             this.definitionPanel.Size = new Size(
-                -this.definitionPanel.Location.X + this.addEnum.Location.X -10,
-                -this.definitionPanel.Location.Y + this.LoadFromFile.Location.Y -10);
+                -this.definitionPanel.Location.X + this.addEnum.Location.X - 10,
+                -this.definitionPanel.Location.Y + this.LoadFromFile.Location.Y - 10);
         }
 
-       private void LoadFromFile_Click(object sender, EventArgs e)
+        private void LoadFromFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog b = new OpenFileDialog();
             b.InitialDirectory = Environment.SpecialFolder.Recent.ToString();
             b.Multiselect = true;
             b.ShowDialog();
             String s = "Subory";
-            for (int i =0; i < b.FileNames.Length; i++)
-                s+= "\n" + b.FileNames.GetValue(i);
+            for (int i = 0; i < b.FileNames.Length; i++)
+                s += "\n" + b.FileNames.GetValue(i);
             MessageBox.Show(s + "\n boli vybrane");
         }
         private void addTextAttribute_Click(object sender, EventArgs e)
@@ -59,13 +59,12 @@ namespace myDb
             Attribute attribute = new Attribute();
             addAtrribute(attribute);
         }
-
-        void addAtrribute(AbstractAttribute att)
+        private void addAtrribute(AbstractAttribute att)
         {
             int x = 10, y = 10;
-            if (this.definitionPanel.Controls.Count >0)
+            if (this.definitionPanel.Controls.Count > 0)
             {
-                y += this.definitionPanel.Controls[0].Size.Height*this.definitionPanel.Controls.Count;
+                y += this.definitionPanel.Controls[0].Size.Height * this.definitionPanel.Controls.Count;
             }
             att.Parent = this;
             att.setPositions();
@@ -73,7 +72,6 @@ namespace myDb
             this.definitionPanel.Controls.Add(att);
             this.definitionPanel.ResumeLayout();
         }
-
         private void loadEnums()
         {
             List<string> l = Files.readEnum();
@@ -102,7 +100,7 @@ namespace myDb
             while ((str = read.ReadLine()) != null)
             {
                 //using!
-                int i =0;
+                int i = 0;
                 while (i < this.definedEnums.Items.Count)
                 {
                     if (str.StartsWith((string)(this.definedEnums.Items[i] + "\t")))
@@ -115,9 +113,9 @@ namespace myDb
             }
             read.Close();
 
-            TextWriter txt = new StreamWriter(Files.enumFile,true);
+            TextWriter txt = new StreamWriter(Files.enumFile, true);
             // pre vsetky, co zostali, zapis
-            for ( int i =0; i < enums.Count; i++)
+            for (int i = 0; i < enums.Count; i++)
             {
                 string nm = (string)definedEnums.Items[i] + "\t";
 
@@ -129,13 +127,11 @@ namespace myDb
             }
             txt.Close(); ;
         }
-
         private void addInteger_Click(object sender, EventArgs e)
         {
             AttributeInteger att = new AttributeInteger();
             addAtrribute(att);
         }
-
         private void createEnum_Click(object sender, EventArgs e)
         {
             using (CreateEnum en = new CreateEnum())
@@ -151,7 +147,6 @@ namespace myDb
                     definedEnums.SelectedIndex = 0;
             }
         }
-
         private void removeEnum_Click(object sender, EventArgs e)
         {
             if (definedEnums.Items.Count == 0)
@@ -162,28 +157,24 @@ namespace myDb
             if (definedEnums.Items.Count > 0)
                 definedEnums.SelectedIndex = 1;
         }
-
         private void addEnum_Click(object sender, EventArgs e)
         {
             if (definedEnums.Items.Count == 0)
                 return; //TODO warning
             AttributeEnum en = new AttributeEnum(definedEnums.SelectedText, enums[definedEnums.SelectedIndex]);
-            en.Name = (string) definedEnums.Items[definedEnums.SelectedIndex];
+            en.Name = (string)definedEnums.Items[definedEnums.SelectedIndex];
             addAtrribute(en);
         }
-
         private void addImage_Click(object sender, EventArgs e)
         {
             AttributeImage im = new AttributeImage();
             addAtrribute(im);
         }
-
         private void addTime_Click(object sender, EventArgs e)
         {
             AttributeTime t = new AttributeTime();
             addAtrribute(t);
         }
-
         private void createButton_Click(object sender, EventArgs e)
         {
             //check for all attributed to be correct
@@ -198,25 +189,23 @@ namespace myDb
                 {
                     if (((AbstractAttribute)this.definitionPanel.Controls[j]).getAttributeName().Equals(s))
                     {
-                        MessageBox.Show("Two attributes with same name! <"+ s +">");
+                        MessageBox.Show("Two attributes with same name! <" + s + ">");
                         return;
                     }
                 }
             }
-            bool ok = true;
             foreach (AbstractAttribute a in this.definitionPanel.Controls)
             {
                 //a.Controls.Remove(warnLabel);
                 //a.Controls.Remove(warn);
                 a.ForeColor = Color.Empty;
-                if (a.isMandatory() && (a.getControl().getValue() != null))
+                if (a.isMandatory() && (a.getControl().getValue() == null))
                 {
-                    ok = false;
                     a.ForeColor = Color.Firebrick;
+                    MessageBox.Show("error on attribute " + a.getAttributeName(), "Warning", MessageBoxButtons.OK);
+                    return;
                 }
             }
-            if (!ok)
-                return;
             string name = dbName.Text + ".mydb";
             if (dbName.Equals("") || File.Exists(name))
             {

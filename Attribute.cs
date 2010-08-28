@@ -257,15 +257,13 @@ namespace myDb
 		}
 		public Value getValue()
 		{
-			if (this.Enabled)
+			if (this.Visible && (!this.Text.Equals("")) )
 				return new ValueText(this.Text); //coz bude nuloce, ked neni mandatory;)
 			return null;
 		} 
 		public Value getValue(string text)
 		{
-			if (this.Enabled)
-				return new ValueText(text);
-			return null;
+    		return new ValueText(text);
 		}
 	}
     class MNumeric : NumericUpDown, AbstractControl
@@ -278,15 +276,13 @@ namespace myDb
         }
         public Value getValue()
         {
-            if (this.Enabled)
+            if (this.Visible)
                 return new ValueInteger((int)this.Value);
             return null;
         }
         public Value getValue(string text)
         {
-            if (this.Enabled)
-                return new ValueInteger(System.Convert.ToInt32(text));
-            return null;
+            return new ValueInteger(System.Convert.ToInt32(text));
         }
     }
     class MCombobox : ComboBox, AbstractControl
@@ -303,7 +299,7 @@ namespace myDb
         }
         public Value getValue()
         {
-            if (this.Enabled)
+            if (this.Visible)
                 return new ValueText(this.SelectedItem.ToString());
             return null;
         }
@@ -325,7 +321,9 @@ namespace myDb
         }
         public Value getValue()
         {
-            return new ValueDate(this.Value);
+            if (this.Visible)
+                return new ValueDate(this.Value);
+            return null;
         }
         public Value getValue(string text)
         {
@@ -360,12 +358,10 @@ namespace myDb
             this.Controls.Add(path);
             this.Controls.Add(chooseButton);
         }
-
         void path_VisibleChanged(object sender, EventArgs e)
         {
             chooseButton.Visible = path.Visible;
         }
-
         void b_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.OpenFileDialog f = new OpenFileDialog();
@@ -387,12 +383,14 @@ namespace myDb
         }
         public Value getValue()
         {
-            return new ValueText(path.Text);
+            if (this.Visible)
+                return new ValueText(path.Text);
+            return null;
         }
         public Value getValue(string text)
         {
-            this.path.Text = text;
-            return getValue();
+            return new ValueText(text); //mozno este check, co je to vazne adresa?
+            //WHAT...EVER!
         }
     }
 
@@ -570,7 +568,7 @@ namespace myDb
 			saveName(stream);
 			stream.Write(this.Name + "\t");
 			if (this.isMandatory())
-				stream.Write(defVal.SelectedItem.ToString());
+				stream.Write(defVal.SelectedIndex);
 			stream.WriteLine();
 		}
 		public override AbstractControl getControl()
@@ -592,7 +590,6 @@ namespace myDb
         {
             this.today = !this.today;
             todayText.Location = def.Location;
-            ((MenuItem)sender).Checked = this.today;
             def.Hide();
             int index = this.Controls.IndexOf(def);
             this.Controls.Remove(def);
@@ -614,12 +611,13 @@ namespace myDb
 			dateTimeTick = new MDate(true);
 			this.todayText = new Label();
 			this.todayText.Text = "Today";
-			todayText.AutoSize = true;
+            todayText.Click +=new EventHandler(m_Click);
 			MenuItem m = new MenuItem("Today()");
 			m.Checked = false;
-			m.Click +=new EventHandler(m_Click);
-			this.ContextMenu = new ContextMenu();
-			this.ContextMenu.MenuItems.Add(m);
+			m.Click += new EventHandler(m_Click);
+			dateTimeTick.ContextMenu = new ContextMenu();
+			dateTimeTick.ContextMenu.MenuItems.Add(m);
+            this.todayText.Size = new System.Drawing.Size(dateTimeTick.Width, dateTimeTick.Height);
 			this.def = dateTimeTick;
 		}
 		public override void save(TextWriter stream)
@@ -679,8 +677,10 @@ namespace myDb
 		{
             string[] str = s.Split(new char[]{'\t'}, StringSplitOptions.RemoveEmptyEntries);
             this.name.Text = str[0]; //TIEZ NA NEJAku common funkcicnku?
-            if (str.Length > 1)
-			    defaultValue.Text = str[1];
+            if (str.Length == 1)
+                return;
+			defaultValue.setText(str[1]);
+            this.fill.Checked = true;
 		}
         public override AbstractControl getControl()
         {
