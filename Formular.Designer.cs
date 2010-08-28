@@ -2,16 +2,6 @@
 
 namespace myDb
 {
-      /*System.Windows.Forms.Button button = new System.Windows.Forms.Button();
-            button.Text = "add new";
-            button.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom;
-            button.AutoSize = true;
-            button.Location = new System.Drawing.Point(ins.getTab().Width - button.Width - 10,
-                ins.getTab().Height - button.Height - 10);
-            ins.getTab().Controls.Add(button);
-            button.Click+=new System.EventHandler();
-       * */
-
     partial class Formular
     {
         /// <summary>
@@ -45,7 +35,6 @@ namespace myDb
             this.tabs.SelectedIndex =
                 this.tabs.Controls.GetChildIndex(((MyToolStrip) sender).getTab());
         }
-
         private void InitializeComponent()
         {
             this.infoBox = new System.Windows.Forms.TextBox();
@@ -55,6 +44,7 @@ namespace myDb
             this.menu = new System.Windows.Forms.MenuStrip();
             this.insertToolStripMenuItem = new myDb.InsertStrip();
             this.selectToolStripMenuItem = new myDb.MyToolStrip("select");
+            this.backToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.b = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.menu.SuspendLayout();
@@ -63,22 +53,21 @@ namespace myDb
             // infoBox
             // 
             this.infoBox.Enabled = false;
+            infoBox.Text = "TEST";
+            this.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.infoBox.Location = new System.Drawing.Point(563, 41);
             this.infoBox.Multiline = true;
             this.infoBox.Name = "infoBox";
             this.infoBox.Size = new System.Drawing.Size(156, 202);
             this.infoBox.TabIndex = 0;
             this.infoBox.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top;
+           // this.infoBox.Dock = System.Windows.Forms.DockStyle.Fill;
             // 
             // tabs
             // 
             
-            hackPanel.Size = new System.Drawing.Size(545, 223);
-            hackPanel.Location = new System.Drawing.Point(20, 22); //dame to na panel, no
-            hackPanel.Controls.Add(this.tabs);
-            hackPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            hackPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            
+            this.tabs.Size = new System.Drawing.Size(545, 223);
+            this.tabs.Location = new System.Drawing.Point(20, 22); //dame to na panel, no        
             this.tabs.Controls.Add(this.tabPage1);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
@@ -86,7 +75,6 @@ namespace myDb
             this.tabs.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabs.Appearance = System.Windows.Forms.TabAppearance.Normal;
             this.tabs.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
-
             // 
             // selectToolStripMenuItem
             // 
@@ -94,6 +82,13 @@ namespace myDb
             this.selectToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.selectToolStripMenuItem.Text = "select";
             this.selectToolStripMenuItem.Click += new System.EventHandler(this.Menu_Click);
+            // 
+            // selectToolStripMenuItem
+            //
+            this.backToolStripMenuItem.Name = "backToolStripMenuItem.Name";
+            this.backToolStripMenuItem.AutoSize = true;
+            this.backToolStripMenuItem.Text = "choose another db";
+            this.backToolStripMenuItem.Click += new System.EventHandler(backToolStripMenuItem_Click);
             // 
             // tabPage1
             // 
@@ -120,7 +115,8 @@ namespace myDb
             // 
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.insertToolStripMenuItem,
-            this.selectToolStripMenuItem});
+            this.selectToolStripMenuItem,
+            this.backToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(732, 24);
@@ -143,16 +139,19 @@ namespace myDb
             // 
             // Formular
             // 
+            this.Resize += new System.EventHandler(Formular_Resize);
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 266);
             this.Controls.Add(this.infoLabel);
-            this.Controls.Add(hackPanel);
+            this.Controls.Add(tabs);
             this.Controls.Add(this.infoBox);
             this.Controls.Add(this.menu);
             this.MainMenuStrip = this.menu;
             this.Name = "Formular";
             this.Text = "Formular";
+            this.MinimumSize = new System.Drawing.Size(300, 300);
+            this.AutoScroll = true;
             this.tabs.ResumeLayout(false);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
@@ -160,13 +159,25 @@ namespace myDb
             this.PerformLayout();
 
         }
-
+        void backToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            this.endState = Forms.FormLoad;
+            this.Close();
+        }
+        void Formular_Resize(object sender, System.EventArgs e)
+        {
+            // FIXME vyriesit pomocou docks..FUJ  a nechodi, ale zatial to staci
+            this.tabs.Size = new System.Drawing.Size(this.infoBox.Location.X - 10 - tabs.Location.X, this.ClientRectangle.Height - 10 - this.tabs.Location.Y);
+            this.infoBox.Size = new System.Drawing.Size(this.ClientRectangle.Width - this.infoBox.Location.X - 10, this.ClientRectangle.Height - 10 - this.infoBox.Location.Y);
+        }
         #endregion
 
         private System.Windows.Forms.TextBox infoBox;
         private System.Windows.Forms.TabControl tabs;
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.MenuStrip menu;
+        private System.Windows.Forms.ToolStripMenuItem backToolStripMenuItem;
+
         private InsertStrip insertToolStripMenuItem;
         private MyToolStrip selectToolStripMenuItem;
         private Records records;

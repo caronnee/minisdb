@@ -29,7 +29,6 @@ namespace myDb
 		protected System.Windows.Forms.Button closeButton;
 
 		/* methods that are common */
-
 		public AbstractAttribute()
 		{
 			this.BorderStyle = BorderStyle.FixedSingle;
@@ -169,10 +168,8 @@ namespace myDb
 		/* virtual methods */
 		/* returns copy of control that should handle value */
 		public abstract AbstractControl getControl();
-
 		/* how an attribute should be saved */
 		public abstract void save(TextWriter stream);
-
 		/* sets atrribute with defined values, how it should look like */
 		public abstract void reconstruct(String s);
 	}
@@ -183,39 +180,56 @@ namespace myDb
 		Value getValue(string value);
 	}
 
-	public class AttributeState
+	class AttributeState
 	{
+        static public string disableMenu = "Disable";
 		public readonly bool mandatory;
 		public readonly ContextMenu context; //co ma ukazovat na to controle...jaj tu sa da vyhrat!;)
+        private Control parent; //MEGAFUJ!
+        private Label clickToEnableLabel;
 
 		public AttributeState(Control control, bool mandatory_)
 		{
 			mandatory = mandatory_;
-			control.Click += new EventHandler(this.enable);
+            clickToEnableLabel = null;
+            parent = control;
 			context = null;
 			if (mandatory)
 				return;
-			context = new ContextMenu();
-			MenuItem m = new MenuItem("Disable");
-			m.Checked = true;
-			this.context.MenuItems.Add(m);
-			m.Checked = false;
-			m.Click += new EventHandler(this.disable);
-		}
 
+            control.ParentChanged += new EventHandler(control_ParentChanged);
+            control.LocationChanged += new EventHandler(control_LocationChanged);
+            clickToEnableLabel = new Label();
+            clickToEnableLabel.Hide();
+            clickToEnableLabel.Text = "Click To enable";
+            clickToEnableLabel.Click += new EventHandler(this.enable);
+			context = new ContextMenu();
+			MenuItem m = new MenuItem(disableMenu);
+			this.context.MenuItems.Add(m);
+			m.Checked = mandatory;
+			m.Click += new EventHandler(this.disable);
+            control.Hide();
+            clickToEnableLabel.Show();
+		}
+        void control_LocationChanged(object sender, EventArgs e)
+        {
+            clickToEnableLabel.Location = new System.Drawing.Point(parent.Location.X, parent.Location.Y);
+        }
+        void control_ParentChanged(object sender, EventArgs e)
+        {
+            parent.Parent.Controls.Add(this.clickToEnableLabel);
+        }
 		void disable(object sender, EventArgs e)
 		{
-			Control snd = (Control) sender;
-			snd.Enabled = false;
+            parent.Hide();
+            clickToEnableLabel.Show();
 		}
-
 		void enable(object sender, EventArgs e)
 		{
-			Control snd = (Control) sender;
-			snd.Enabled = true;
+            parent.Show();
+            clickToEnableLabel.Hide();
 		}
 	}
-
 	class MTextBox : TextBox, AbstractControl
 	{
 		AttributeState state;
@@ -230,7 +244,7 @@ namespace myDb
 			i = new MenuItem("Paste");
 			i.Click += new EventHandler(this.PasteFromClipBoard);
 			this.ContextMenu.MenuItems.Add(i);
-            this.Enabled = state.mandatory;
+            //this.Enabled = state.mandatory;
             if (state.context == null)
                 return;
             foreach (MenuItem m in state.context.MenuItems)
@@ -261,6 +275,135 @@ namespace myDb
 			return null;
 		}
 	}
+    class MNumeric : NumericUpDown, AbstractControl
+    {
+        private AttributeState state;
+
+        public MNumeric(bool mandatory) //kontext menu na disable
+        {
+            state = new AttributeState(this, mandatory);
+            this.ContextMenu = state.context;
+        }
+        public Value getValue()
+        {
+            if (this.Enabled)
+                return new ValueInteger((int)this.Value);
+            return null;
+        }
+        public Value getValue(string text)
+        {
+            if (this.Enabled)
+                return new ValueInteger(System.Convert.ToInt32(text));
+            return null;
+        }
+    }
+    class MCombobox : ComboBox, AbstractControl
+    {
+        private AttributeState state;
+
+        public MCombobox(ComboBox items, bool mandatory)
+        {
+            this.state = new AttributeState(this, mandatory);
+            this.DropDownStyle = ComboBoxStyle.DropDownList;
+            foreach (object o in items.Items)
+                this.Items.Add(o); //BREKEKE
+            this.SelectedIndex = 0;
+        }
+        public Value getValue()
+        {
+            if (this.Enabled)
+                return new ValueText(this.SelectedItem.ToString());
+            return null;
+        }
+        public Value getValue(string name)
+        {
+            for (int i = 0; i < this.Items.Count; i++)
+                if (this.Items[i].Equals(name))
+                    return new ValueText(name);
+            return null;
+        }
+    }
+    class MDate : DateTimePicker, AbstractControl
+    {
+        AttributeState state;
+
+        public MDate(bool state_)
+        {
+            state = new AttributeState(this, state_);
+            this.ContextMenu = state.context;
+        }
+        public Value getValue()
+        {
+            return new ValueDate(this.Value);
+        }
+        public Value getValue(string text)
+        {
+            return new ValueDate(System.Convert.ToDateTime(text));
+        }
+    }
+    class MPanelFile : Panel, AbstractControl
+    {
+
+        MTextBox path;
+        Button chooseButton;
+        public MPanelFile(bool state_)
+        {
+            path = new MTextBox(state_);
+            path.Size = new System.Drawing.Size(100, 20);
+            path.AutoCompleteMode = AutoCompleteMode.Suggest;
+            path.AutoCompleteSource = AutoCompleteSource.FileSystem;
+            path.Location = new System.Drawing.Point(0, 0);
+
+            chooseButton = new Button();
+            chooseButton.Text = "...";
+            chooseButton.AutoSize = true; ;
+            chooseButton.Size = new System.Drawing.Size(10, 10);
+            chooseButton.Location = new System.Drawing.Point(path.Size.Width - 1, 0);
+            chooseButton.Click += new EventHandler(b_Click);
+
+            path.VisibleChanged += new EventHandler(path_VisibleChanged);
+            path_VisibleChanged(null, null);
+
+            this.AutoSize = true;
+            this.Size = new System.Drawing.Size(10, 10);
+            this.Controls.Add(path);
+            this.Controls.Add(chooseButton);
+        }
+
+        void path_VisibleChanged(object sender, EventArgs e)
+        {
+            chooseButton.Visible = path.Visible;
+        }
+
+        void b_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.OpenFileDialog f = new OpenFileDialog();
+            f.Title = "Choose location of picture";
+            f.Multiselect = false;
+            f.InitialDirectory = "c:\\";
+            DialogResult res = f.ShowDialog();
+            if (res != DialogResult.OK)
+                return;
+            path.Text = f.FileName;
+        }
+        public void setText(string s)
+        {
+            path.Text = s;
+        }
+        public string getText()
+        {
+            return path.Text;
+        }
+        public Value getValue()
+        {
+            return new ValueText(path.Text);
+        }
+        public Value getValue(string text)
+        {
+            this.path.Text = text;
+            return getValue();
+        }
+    }
 
 	public class Attribute : AbstractAttribute
 	{
@@ -298,75 +441,6 @@ namespace myDb
 			this.fill.Checked = true;
 		}
 	}
-
-	class MNumeric : NumericUpDown, AbstractControl
-	{
-		private AttributeState state;
-
-		public MNumeric(bool mandatory) //kontext menu na disable
-		{
-			state = new AttributeState(this, mandatory);
-			this.ContextMenu = state.context;
-			this.Enabled = mandatory;
-		}
-
-		public Value getValue()
-		{
-			if (this.Enabled)
-				return new ValueInteger((int)this.Value);
-			return null;
-		}
-
-		public Value getValue(string text)
-		{
-			if (this.Enabled)
-				return new ValueInteger(System.Convert.ToInt32(text));
-			return null;
-		}
-	}
-	public class  MCombobox : ComboBox, AbstractControl
-	{
-		private AttributeState state;
-
-		public MCombobox( ComboBox items, bool mandatory )
-		{
-			this.state = new AttributeState(this, mandatory);
-            this.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach (object o in items.Items)
-                this.Items.Add(o); //BREKEKE
-			this.SelectedIndex = 0;
-		}
-		public Value getValue()
-		{
-			if (this.Enabled)
-				return new ValueText(this.SelectedItem.ToString());
-			return null;
-		}
-		public Value getValue(string name)
-		{
-			for (int i =0;i<this.Items.Count; i++)
-				if (this.Items[i].Equals(name))
-					return new ValueText(name);
-			return null;
-		}
-	}
-
-	public class MDateTimePicker :  DateTimePicker, AbstractControl
-	{
-		public Value getValue()
-		{
-			if (this.Enabled)
-				return new ValueDate(this.Value); //slected date
-			return null;
-		}
-		public Value getValue(string name)
-		{
-			if (this.Enabled)
-				return new ValueDate(System.Convert.ToDateTime(name));
-			return null;
-		}
-	}
-
 	public class AttributeInteger : AbstractAttribute
 	{
 		protected System.Windows.Forms.Label minLabel, maxLabel;
@@ -422,7 +496,6 @@ namespace myDb
 			max.Minimum = min.Value;
 			n.Value = System.Math.Max(min.Value, n.Value);
 		}
-
 		public override void save(TextWriter stream)
 		{
 			saveName(stream);
@@ -436,8 +509,9 @@ namespace myDb
 			MNumeric m = new MNumeric(isMandatory());
 			m.Minimum = min.Value;
 			m.Maximum = max.Value;
-			if (isMandatory())
-				m.Value = defValue.Value;
+            if (!isMandatory())
+                return m;
+		    m.Value = defValue.Value;
 			return m;
 		}
 		public override void reconstruct(string s)
@@ -495,8 +569,10 @@ namespace myDb
 			enumName = s[1];
 			this.defVal = findEnum(s[1]);
 			//default value
-			if (s.Length > 2)
-				((ComboBox)(def)).SelectedIndex = System.Convert.ToInt32(int.Parse(s[2]));
+            if (s.Length < 3)
+                return;
+            defVal.SelectedIndex = System.Convert.ToInt32(int.Parse(s[2]));
+            this.fill.Checked = true;
 		}
 		public override void save(TextWriter stream)
 		{
@@ -514,149 +590,115 @@ namespace myDb
 			return m;
 		}
 	}
-	public class MDate : DateTimePicker, AbstractControl
+	public class AttributeTime : AbstractAttribute
 	{
-		public Value getValue()
-		{
-			return new ValueDate(this.Value);
-		}
-		public Value getValue(string text)
-		{
-			return new ValueDate(System.Convert.ToDateTime(text));
-		}
-	}
-	public class AttributeTime : Attribute
-	{
+        public static string todayString = "today";
 		private MDate dateTimeTick;
 		private Label todayText;
 		private bool today;
 
-		public AttributeTime()
+        void m_Click(object sender, EventArgs e)
+        {
+            this.today = !this.today;
+            todayText.Location = def.Location;
+            ((MenuItem)sender).Checked = this.today;
+            def.Hide();
+            int index = this.Controls.IndexOf(def);
+            this.Controls.Remove(def);
+            if (this.today)
+                def = todayText;
+            else
+                def = dateTimeTick;
+            this.Controls.Add(def);
+            this.Controls.SetChildIndex(def, index);
+            def.Show();
+        }
+		
+        public AttributeTime()
 		{
 			this.today = false;
 			this.aType = AttributeType.ATime;
 			this.today = false;
 			this.typeLabel.Text = "Time";
-			dateTimeTick = new MDate();
+			dateTimeTick = new MDate(true);
 			this.todayText = new Label();
 			this.todayText.Text = "Today";
 			todayText.AutoSize = true;
-			MenuItem m = new MenuItem("today");
+			MenuItem m = new MenuItem("Today()");
 			m.Checked = false;
 			m.Click +=new EventHandler(m_Click);
 			this.ContextMenu = new ContextMenu();
 			this.ContextMenu.MenuItems.Add(m);
 			this.def = dateTimeTick;
 		}
-
-		void m_Click(object sender, EventArgs e)
-		{
-			this.today = !this.today;
-			todayText.Location = def.Location;
-			((MenuItem)sender).Checked = this.today;
-			def.Hide();
-			int index = this.Controls.IndexOf(def);
-			this.Controls.Remove(def);
-			if (this.today)                
-				def = todayText;
-			else
-				def = dateTimeTick;
-			this.Controls.Add(def);
-			this.Controls.SetChildIndex(def, index);
-			def.Show();
-		}
-
 		public override void save(TextWriter stream)
 		{
 			saveName(stream);
-			stream.WriteLine( dateTimeTick.Value.ToString()); //kontrola, tot je nebezpecne..radsej int
+            if (!isMandatory())
+            {
+                stream.WriteLine();
+                return;
+            }
+            if (today)
+                stream.Write(todayString);
+            else
+                stream.Write( dateTimeTick.Value.ToString()); //kontrola, tot je nebezpecne..radsej int
+            stream.WriteLine();
 		}
 		public override void reconstruct(string s)
 		{
 			string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
 			this.name.Text = strs[0];
-			if (s.Length >1)
-				dateTimeTick.Value = System.Convert.ToDateTime(strs[1]);
+            if (strs.Length == 1)
+                return;
+            this.fill.Checked = true;
+            if (strs[1].Equals(todayString))
+                return;
+		    dateTimeTick.Value = System.Convert.ToDateTime(strs[1]);//try catch?
 		}
-	}
-	public class MPanelFile : Panel, AbstractControl
-	{
-		AttributeState state;
-		TextBox path;
-		Button chooseButton;
-		public MPanelFile(bool state_)
-		{
-			state = new AttributeState(this, state_);
+        public override AbstractControl getControl()
+        {
+            MDate dt = new MDate(isMandatory());
+            if (isMandatory())
+                dt.Value = dateTimeTick.Value;
+            return dt;
+        }
 
-			path = new TextBox();
-			path.Size = new System.Drawing.Size(100, 20);
-			path.AutoCompleteMode = AutoCompleteMode.Suggest;
-			path.AutoCompleteSource = AutoCompleteSource.FileSystem;
-			path.Location = new System.Drawing.Point(0, 0);
-
-			chooseButton = new Button();
-			chooseButton.Text = "...";
-			chooseButton.AutoSize = true; ;
-			chooseButton.Size = new System.Drawing.Size(10, 10);
-			chooseButton.Location = new System.Drawing.Point(path.Size.Width - 1, 0);
-			chooseButton.Click += new EventHandler(b_Click);
-
-			this.AutoSize = true;
-			this.Size = new System.Drawing.Size(10, 10);
-			this.Controls.Add(path);
-			this.Controls.Add(chooseButton);
-		}
-
-		void b_Click(object sender, EventArgs e)
-		{
-			System.Windows.Forms.OpenFileDialog f = new OpenFileDialog();
-			f.Title = "Choose location of picture";
-			f.Multiselect = false;
-			f.InitialDirectory = "c:\\";
-			DialogResult res = f.ShowDialog();
-			if (res != DialogResult.OK)
-				return;
-			path.Text = f.FileName;
-		}
-
-		public string getText()
-		{
-			return path.Text;
-		}
-		public Value getValue()
-		{
-			return new ValueText(path.Text);
-		}
-		public Value getValue(string text)
-		{
-			this.path.Text = text;
-			return getValue();
-		}
-	}
-	public class AttributeImage : Attribute
+	}	
+	public class AttributeImage : AbstractAttribute
 	{
 		private MPanelFile defaultValue;
 
 		public AttributeImage()
 		{
+            this.aType = AttributeType.APicture;
 			defaultValue = new MPanelFile(true);
 			this.typeLabel.Text = "Image";
 			this.defLabel.Text = "Default path";
 			def = defaultValue;
 		}
-
 		public override void save(TextWriter stream)
 		{
-			stream.Write(AttributeType.APicture);
+            saveName(stream);
 			//only if mandatry
 			if (isMandatory())
 				stream.Write(defaultValue.getText());
 			stream.WriteLine();
 		}
-
 		public override void reconstruct(string s)
 		{
-			defaultValue.Text = s;
+            string[] str = s.Split(new char[]{'\t'}, StringSplitOptions.RemoveEmptyEntries);
+            this.name.Text = str[0]; //TIEZ NA NEJAku common funkcicnku?
+            if (str.Length > 1)
+			    defaultValue.Text = str[1];
 		}
+        public override AbstractControl getControl()
+        {
+            MPanelFile mp= new MPanelFile(isMandatory());
+            if (!isMandatory())
+                return mp;
+            mp.setText(this.defaultValue.getText());
+            return mp;
+        }
 	}
 }

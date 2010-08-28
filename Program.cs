@@ -7,6 +7,7 @@ namespace myDb
 
     public enum Forms
     {
+        FormLoad,
         FormEnd,
         FormFormular,
         FormCreateBd
@@ -28,19 +29,20 @@ namespace myDb
             while (activeForm != null)
             {
                 Application.Run(activeForm);
-
                 if (activeForm.endCode() == Forms.FormEnd) //bez toho, zby zmenil
                     break;
-                if (activeForm.endCode() > 0)
+                switch (activeForm.endCode())
                 {
-                    switch (activeForm.endCode())
-                    {
-                        case Forms.FormCreateBd: activeForm = new Create();
-                            break;
-                        case Forms.FormFormular: activeForm = new Formular(activeForm.getFinalWord());
-                            break;
-                        default: throw new Exception("No such type in zero level switch handled");
-                    }
+                    case Forms.FormLoad:
+                        activeForm = new Uvod();
+                        break;
+                    case Forms.FormCreateBd:
+                        activeForm = new Create();
+                        break;
+                    case Forms.FormFormular:
+                        activeForm = new Formular(activeForm.getFinalWord());
+                        break;
+                    default: throw new Exception("No such type in zero level switch handled");
                 }
             }
         }
