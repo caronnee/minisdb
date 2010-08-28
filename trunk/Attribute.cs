@@ -184,7 +184,6 @@ namespace myDb
 	{
         static public string disableMenu = "Disable";
 		public readonly bool mandatory;
-		public readonly ContextMenu context; //co ma ukazovat na to controle...jaj tu sa da vyhrat!;)
         private Control parent; //MEGAFUJ!
         private Label clickToEnableLabel;
 
@@ -193,20 +192,20 @@ namespace myDb
 			mandatory = mandatory_;
             clickToEnableLabel = null;
             parent = control;
-			context = null;
+            control.ContextMenu = new ContextMenu();
 			if (mandatory)
 				return;
 
             control.ParentChanged += new EventHandler(control_ParentChanged);
             control.LocationChanged += new EventHandler(control_LocationChanged);
+
             clickToEnableLabel = new Label();
             clickToEnableLabel.Hide();
             clickToEnableLabel.Text = "Click To enable";
             clickToEnableLabel.Click += new EventHandler(this.enable);
-			context = new ContextMenu();
+
 			MenuItem m = new MenuItem(disableMenu);
-			this.context.MenuItems.Add(m);
-			m.Checked = mandatory;
+			control.ContextMenu.MenuItems.Add(m);
 			m.Click += new EventHandler(this.disable);
             control.Hide();
             clickToEnableLabel.Show();
@@ -237,18 +236,12 @@ namespace myDb
 		public MTextBox(bool mandatory_)
 		{
 			state = new AttributeState(this, mandatory_);
-			this.ContextMenu = new ContextMenu();
-			MenuItem i = new MenuItem("copy");
+			MenuItem i = new MenuItem("Copy");
 			i.Click += new EventHandler(this.CopyToClipboard);
 			this.ContextMenu.MenuItems.Add(i);
 			i = new MenuItem("Paste");
 			i.Click += new EventHandler(this.PasteFromClipBoard);
 			this.ContextMenu.MenuItems.Add(i);
-            //this.Enabled = state.mandatory;
-            if (state.context == null)
-                return;
-            foreach (MenuItem m in state.context.MenuItems)
-			    this.ContextMenu.MenuItems.Add(m); //MERGE, skontrolovat
 		}
 
 		public void PasteFromClipBoard(object sender, EventArgs e)
@@ -282,7 +275,6 @@ namespace myDb
         public MNumeric(bool mandatory) //kontext menu na disable
         {
             state = new AttributeState(this, mandatory);
-            this.ContextMenu = state.context;
         }
         public Value getValue()
         {
@@ -330,7 +322,6 @@ namespace myDb
         public MDate(bool state_)
         {
             state = new AttributeState(this, state_);
-            this.ContextMenu = state.context;
         }
         public Value getValue()
         {
@@ -663,7 +654,6 @@ namespace myDb
                 dt.Value = dateTimeTick.Value;
             return dt;
         }
-
 	}	
 	public class AttributeImage : AbstractAttribute
 	{
