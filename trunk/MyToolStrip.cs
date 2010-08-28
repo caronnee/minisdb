@@ -39,6 +39,7 @@ namespace myDb
         private List<AbstractControl> toAddRecords;
         private Panel recordPanel;
         private Panel buttonPanel; //jaj, tu by sa mi hodilo QT!
+        private List<AbstractControl> controls;
 
         private NumericUpDown howMany;
         private int numberOfValues; //na ukladanie do jedneho pola
@@ -70,14 +71,12 @@ namespace myDb
                 return;
             addRow(this);
         }
-
         protected virtual void onAddRecord(RecordEventArgs args)
         {
             if (addRecord == null)
                 return;
             addRecord(this, args);
         }
-
         public void setNames(List<string> names)
         {
             for (int i = 0; i < names.Count; i++)
@@ -87,13 +86,12 @@ namespace myDb
                 labels.Add(l);
             }
         }
-
-        public InsertStrip()
-            : base("Insert")
+        public InsertStrip() : base("Insert")
         {
             this.active = false;
             this.labels = new List<Label>();
             this.toAddRecords = new List<AbstractControl>();
+            this.controls = new List<AbstractControl>();
 
             recordPanel = new Panel();
             recordPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -142,14 +140,12 @@ namespace myDb
 
             InsertStrip_Resize(null, null);
         }
-
         void tabActive(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Middle)
                 active = false; //toto je FUJ, spolieha sa na to, ze pridam 
             getTab().Parent.Controls.Remove(this.getTab()); //TEST!
         }
-
         public void internal_clean(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             onAddRow();
@@ -157,18 +153,18 @@ namespace myDb
             if (active)
                 return;
             active = true;
-            if (labels.Count != recordPanel.Controls.Count)
-                throw new Exception("labels and boxes have different dimensions ");
+            if (labels.Count != this.controls.Count)
+                throw new Exception("Labels and boxes have different dimensions ");
             //a to je uplne jedno kde to tam je...
             for (int i = 0; i < labels.Count; i++)
             {
-                labels[i].Location = new System.Drawing.Point(recordPanel.Controls[i].Location.X, 0);
-                recordPanel.Controls[i].Location = new System.Drawing.Point(recordPanel.Controls[i].Location.X, labels[i].PreferredHeight + 10);
+                labels[i].Location = new System.Drawing.Point(((Control)controls[i]).Location.X, 0);
+
+                ((Control) controls[i]).Location = new System.Drawing.Point(recordPanel.Controls[i].Location.X, labels[i].PreferredHeight + 10);
             }
             for (int i = 0; i < labels.Count; i++)
                 recordPanel.Controls.Add(labels[i]);
         }
-
         void InsertStrip_Resize(object sender, EventArgs e)
         {
             recordPanel.Location = new System.Drawing.Point(0, 0);
@@ -185,11 +181,12 @@ namespace myDb
                 throw new Exception("Zero attributes, not legal database!");
 
             this.numberOfValues = ctrls.Count;
+            this.controls.AddRange(ctrls);
 
             Control c = (Control)ctrls[0];
             System.Drawing.Point point = new System.Drawing.Point(0, 0);
             if (toAddRecords.Count > 0)
-                point = new System.Drawing.Point(0, (toAddRecords.Count -1)*c.PreferredSize.Height + labels[0].PreferredHeight );
+                point = new System.Drawing.Point(0, (toAddRecords.Count)*c.PreferredSize.Height + labels[0].PreferredHeight + 10 );
 
             c.Location = new System.Drawing.Point(point.X, point.Y);
             this.recordPanel.Controls.Add(c);
@@ -211,7 +208,6 @@ namespace myDb
                 this.onAddRow();
             }
         }
-
         void addButton_Click(object sender, System.EventArgs args)
         {
             //zistime vsetky recordy, ktore na uzibvatel zadal..ZAJTRA/VECER
