@@ -7,8 +7,13 @@ namespace myDb
 {
     public abstract class Value //ma dedit po icomparable?
     {
-        public void contains()
-        { }
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+        public void contains(string s)
+        { 
+        }
         public bool comparing(Value V)
         {
             throw new Exception("not implemented");
@@ -17,6 +22,7 @@ namespace myDb
         {
             return v.comparing(this);
         }
+        public string toString();
     }
     class ValueText : Value
     {
@@ -33,6 +39,10 @@ namespace myDb
         {
             return false;
         }
+        public override string ToString()
+        {
+            return text;
+        }
     }
     class ValueInteger : Value
     {
@@ -41,13 +51,21 @@ namespace myDb
         {
             value = i;
         }
+        public override string ToString()
+        {
+            return value.ToString();
+        }
     }
     class ValueDate : Value
     {
-        DateTime dTime;
+        private DateTime dTime;
         public ValueDate(DateTime d)
         {
             dTime = d;
+        }
+        public override string ToString()
+        {
+            return dTime.ToString();
         }
     }
 }

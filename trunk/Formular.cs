@@ -20,6 +20,12 @@ namespace myDb
             this.insertToolStripMenuItem.addRecord += new InsertStrip.addRecordsHandler(records.addRecord);
             this.insertToolStripMenuItem.addRow += new InsertStrip.addRowHandler(records.addRow);
             this.insertToolStripMenuItem.addLabels += new InsertStrip.AddLabels(records.addNames);
+            this.Disposed += new EventHandler(Formular_Disposed);
+        }
+
+        void Formular_Disposed(object sender, EventArgs e)
+        {
+            records.save();
         }
     }
 }
