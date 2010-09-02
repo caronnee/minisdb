@@ -212,14 +212,12 @@ namespace myDb
                 MessageBox.Show("File already exists!");
                 return;
             }
-
+//TOTO ma ist do records! TODO
             StreamWriter stream = new StreamWriter(name);
             foreach (AbstractAttribute att in this.definitionPanel.Controls)
             {
-                att.save(stream);
+                stream.WriteLine(att.ToString());
             }
-            stream.WriteLine();
-            stream.WriteLine(); //prazdna lajna oddeluje data
             stream.Close();
             this.saveEnums();
             this.endState = Forms.FormFormular;

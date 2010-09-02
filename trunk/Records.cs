@@ -70,24 +70,23 @@ namespace myDb
         }
         public void save()
         {
-
             TextWriter write = new StreamWriter(dbName, false);
             //sprav getline az pokial nenajdes prazdnu lajnu
             foreach (AbstractAttribute a in pattern)
-                a.save(write); //TODO zmenit na toString
-            write.WriteLine();
+                write.writeLine(a.toString());
+            write.WriteLine();//empty line to detect beginning of database
 
-            //save database
+            //save database completely
             for (int i = 0; i < records.Count; i++)
             {
                 List<Value> rcs = records[i].getValues();
                 for (int j = 0; j < rcs.Count; j++)
-                {
-                    if (rcs[i] == null)
-                        write.Write('\t');
-                    else
-                        write.Write(rcs[j].toString());
-                }
+		{
+			if (rcs[i] != null)
+				write.Write(rcs[j].toString() + );
+			else
+				write.Write('\t');
+		}
                 write.WriteLine();
             }
         }
@@ -104,6 +103,11 @@ namespace myDb
              string line = "";
              while ((line = read.ReadLine()) != null)
              {
+		     string strs[] = line.split(new char[]{'\t'});
+		     Record r = new Record();
+		     for (int i =0; i<  pattern.Count, i++)
+			     r.add(pattern[i].getControl().getValue(strs[i]));
+		     records.add(r);
              }
         }
         private void loadAttributes(StreamReader read)

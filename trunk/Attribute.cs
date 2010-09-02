@@ -159,17 +159,16 @@ namespace myDb
 		{
 			return this.fill.Checked;
 		}
-		protected void saveName(TextWriter stream)
+		protected string getName()
 		{
-			stream.Write(aType);
-			stream.Write("\t" + name.Text + "\t");
+			return aType +"\t" + name.Text + "\t";
 		}
 
 		/* virtual methods */
 		/* returns copy of control that should handle value */
 		public abstract AbstractControl getControl();
-		/* how an attribute should be saved */
-		public abstract void save(TextWriter stream);
+		/* string reprezentation of attribute */
+		public abstract string toString();
 		/* sets atrribute with defined values, how it should look like */
 		public abstract void reconstruct(String s);
 	}
@@ -182,51 +181,51 @@ namespace myDb
 
 	class AttributeState
 	{
-        static public string disableMenu = "Disable";
+		static public string disableMenu = "Disable";
 		public readonly bool mandatory;
-        private Control parent; //MEGAFUJ!
-        private Label clickToEnableLabel;
+		private Control parent; //MEGAFUJ!
+		private Label clickToEnableLabel;
 
 		public AttributeState(Control control, bool mandatory_)
 		{
 			mandatory = mandatory_;
-            clickToEnableLabel = null;
-            parent = control;
-            control.ContextMenu = new ContextMenu();
+			clickToEnableLabel = null;
+			parent = control;
+			control.ContextMenu = new ContextMenu();
 			if (mandatory)
 				return;
 
-            control.ParentChanged += new EventHandler(control_ParentChanged);
-            control.LocationChanged += new EventHandler(control_LocationChanged);
+			control.ParentChanged += new EventHandler(control_ParentChanged);
+			control.LocationChanged += new EventHandler(control_LocationChanged);
 
-            clickToEnableLabel = new Label();
-            clickToEnableLabel.Hide();
-            clickToEnableLabel.Text = "Click To enable";
-            clickToEnableLabel.Click += new EventHandler(this.enable);
+			clickToEnableLabel = new Label();
+			clickToEnableLabel.Hide();
+			clickToEnableLabel.Text = "Click to enable";
+			clickToEnableLabel.Click += new EventHandler(this.enable);
 
 			MenuItem m = new MenuItem(disableMenu);
 			control.ContextMenu.MenuItems.Add(m);
 			m.Click += new EventHandler(this.disable);
-            control.Hide();
-            clickToEnableLabel.Show();
+			control.Hide();
+			clickToEnableLabel.Show();
 		}
-        void control_LocationChanged(object sender, EventArgs e)
-        {
-            clickToEnableLabel.Location = new System.Drawing.Point(parent.Location.X, parent.Location.Y);
-        }
-        void control_ParentChanged(object sender, EventArgs e)
-        {
-            parent.Parent.Controls.Add(this.clickToEnableLabel);
-        }
+		void control_LocationChanged(object sender, EventArgs e)
+		{
+			clickToEnableLabel.Location = new System.Drawing.Point(parent.Location.X, parent.Location.Y);
+		}
+		void control_ParentChanged(object sender, EventArgs e)
+		{
+			parent.Parent.Controls.Add(this.clickToEnableLabel);
+		}
 		void disable(object sender, EventArgs e)
 		{
-            parent.Hide();
-            clickToEnableLabel.Show();
+			parent.Hide();
+			clickToEnableLabel.Show();
 		}
 		void enable(object sender, EventArgs e)
 		{
-            parent.Show();
-            clickToEnableLabel.Hide();
+			parent.Show();
+			clickToEnableLabel.Hide();
 		}
 	}
 	class MTextBox : TextBox, AbstractControl
@@ -413,12 +412,12 @@ namespace myDb
 			mbox.Text = defVal.Text;
 			return mbox; 
 		}     
-		public override void save(TextWriter stream)
+		public override string toString()
 		{
-			saveName(stream);
+			string s = getName();
 			if (isMandatory())
-				stream.Write(def.Text);
-			stream.WriteLine();
+				s += def.Text;
+			return s;
 		}       
 		public override void reconstruct(String s) //fixme prepisat na reconstruct
 		{
@@ -485,13 +484,12 @@ namespace myDb
 			max.Minimum = min.Value;
 			n.Value = System.Math.Max(min.Value, n.Value);
 		}
-		public override void save(TextWriter stream)
+		public override string toString()
 		{
-			saveName(stream);
-			stream.Write(min.Value.ToString() + "\t" + max.Value );
+			string s = getName() + min.Value.ToString() + "\t" + max.Value;
 			if (isMandatory())
-				stream.Write('\t' + defValue.Value.ToString());
-			stream.WriteLine();
+				s += '\t' + defValue.Value.ToString();
+			return s;
 		}
 		public override AbstractControl getControl()
 		{
@@ -563,13 +561,11 @@ namespace myDb
             defVal.SelectedIndex = System.Convert.ToInt32(int.Parse(s[2]));
             this.fill.Checked = true;
 		}
-		public override void save(TextWriter stream)
+		public override string toString()
 		{
-			saveName(stream);
-			stream.Write(this.Name + "\t");
+			string s  = getName()+ this.Name + "\t";
 			if (this.isMandatory())
-				stream.Write(defVal.SelectedIndex);
-			stream.WriteLine();
+				s += defVal.SelectedIndex.toString();
 		}
 		public override AbstractControl getControl()
 		{
@@ -620,19 +616,16 @@ namespace myDb
             this.todayText.Size = new System.Drawing.Size(dateTimeTick.Width, dateTimeTick.Height);
 			this.def = dateTimeTick;
 		}
-		public override void save(TextWriter stream)
+		public override string toString()
 		{
-			saveName(stream);
-            if (!isMandatory())
-            {
-                stream.WriteLine();
-                return;
-            }
-            if (today)
-                stream.Write(todayString);
-            else
-                stream.Write( dateTimeTick.Value.ToString()); //kontrola, tot je nebezpecne..radsej int
-            stream.WriteLine();
+			string s = getName();
+			if (!isMandatory())
+				return s;
+			if (today)
+				s += todayString;
+			else
+				s += dateTimeTick.Value.ToString(); //kontrola, tot je nebezpecne..radsej int?
+			return s;
 		}
 		public override void reconstruct(string s)
 		{
@@ -665,13 +658,13 @@ namespace myDb
 			this.defLabel.Text = "Default path";
 			def = defaultValue;
 		}
-		public override void save(TextWriter stream)
+		public override string ToString()
 		{
-            saveName(stream);
+			string s = getName();
 			//only if mandatry
 			if (isMandatory())
-				stream.Write(defaultValue.getText());
-			stream.WriteLine();
+				s += defaultValue.getText();
+			return s;
 		}
 		public override void reconstruct(string s)
 		{
