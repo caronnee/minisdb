@@ -32,8 +32,24 @@ namespace myDb
         private string name;
         private List<Record> records;
 
-        public readonly List<AbstractAttribute> pattern;
+        public List<AbstractAttribute> pattern;
 
+	public void settingGrid( DataGridView grid )
+	{
+		grid.ColumnCount = pattern.Count;
+		for (int i =0; i< pattern.Count; i++ )
+		{
+			grid.Column[i].Name = pattern[i]->getName(); //pripisat aj typ? Ale nie, to sa preda spozna
+		}
+	}
+	public void add(Attribute t)
+	{
+		pattern.Add(t);
+	}
+	public void remove(Attribute t)
+	{
+		pattern.Remove(t);
+	}
         public Records(string dbName) //name of Db
         {
             name = dbName;
@@ -68,6 +84,7 @@ namespace myDb
             }
             strip.setNames(list);
         }
+	/* save whole database */
         public void save()
         {
             TextWriter write = new StreamWriter(dbName, false);

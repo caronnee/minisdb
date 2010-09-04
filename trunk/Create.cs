@@ -19,6 +19,7 @@ namespace myDb
         public Create()
         {
             InitializeComponent();
+	    records = new Records();
             Create_Resize(null, null);
             this.Resize += new EventHandler(Create_Resize);
             enums = new List<ComboBox>();
@@ -42,7 +43,6 @@ namespace myDb
                 -this.definitionPanel.Location.X + this.addEnum.Location.X - 10,
                 -this.definitionPanel.Location.Y + this.LoadFromFile.Location.Y - 10);
         }
-
         private void LoadFromFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog b = new OpenFileDialog();
@@ -60,18 +60,19 @@ namespace myDb
             addAtrribute(attribute);
         }
         private void addAtrribute(AbstractAttribute att)
-        {
-            int x = 10, y = 10;
-            if (this.definitionPanel.Controls.Count > 0)
-            {
-                y += this.definitionPanel.Controls[0].Size.Height * this.definitionPanel.Controls.Count;
-            }
-            att.Parent = this;
-            att.setPositions();
-            att.Location = new Point(x, y);
-            this.definitionPanel.Controls.Add(att);
-            this.definitionPanel.ResumeLayout();
-        }
+	{
+		records.add(att);
+		int x = 10, y = 10;
+		if (this.definitionPanel.Controls.Count > 0)
+		{
+			y += this.definitionPanel.Controls[0].Size.Height * this.definitionPanel.Controls.Count;
+		}
+		att.Parent = this;
+		att.setPositions();
+		att.Location = new Point(x, y);
+		this.definitionPanel.Controls.Add(att);
+		this.definitionPanel.ResumeLayout();
+	}
         private void loadEnums()
         {
             List<string> l = Files.readEnum();
@@ -147,7 +148,7 @@ namespace myDb
                     definedEnums.SelectedIndex = 0;
             }
         }
-        private void removeEnum_Click(object sender, EventArgs e)
+        private void removeEnum_Click(object sender, EventArgs e) //TODO zkontrolovat ostatnee db, ci h pouzivaju/ask db to recreate
         {
             if (definedEnums.Items.Count == 0)
                 return;
@@ -202,7 +203,7 @@ namespace myDb
                 if (a.isMandatory() && (a.getControl().getValue() == null))
                 {
                     a.ForeColor = Color.Firebrick;
-                    MessageBox.Show("error on attribute " + a.getAttributeName(), "Warning", MessageBoxButtons.OK);
+                    MessageBox.Show("Error on attribute " + a.getAttributeName(), "Warning", MessageBoxButtons.OK);
                     return;
                 }
             }
@@ -212,19 +213,14 @@ namespace myDb
                 MessageBox.Show("File already exists!");
                 return;
             }
-//TOTO ma ist do records! TODO
-            StreamWriter stream = new StreamWriter(name);
-            foreach (AbstractAttribute att in this.definitionPanel.Controls)
-            {
-                stream.WriteLine(att.ToString());
-            }
-            stream.Close();
+	    this.records.save();	
             this.saveEnums();
             this.endState = Forms.FormFormular;
             this.finalWord = name;
             this.Close();
         }
 
+	private Records records;
         private System.Collections.Generic.List<System.Windows.Forms.ComboBox> enums;
     }
 }

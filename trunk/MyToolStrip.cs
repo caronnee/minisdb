@@ -22,10 +22,16 @@ namespace myDb
             tabPage.UseVisualStyleBackColor = true;
             return tabPage;
         }
+	protected override onClick(EventArgs e)
+	{
+		base.Click(e);
+		active = true;
+	}
 
         public MyToolStrip(string name)
         {
-            tabpage = createTab(name);
+		active = false;
+		tabpage = createTab(name);
         }
 
         public System.Windows.Forms.TabPage getTab()
@@ -35,7 +41,6 @@ namespace myDb
     }
     public class InsertStrip : MyToolStrip
     {
-        private bool active;
         private List<AbstractControl> toAddRecords;
         private Panel recordPanel;
         private Panel buttonPanel; //jaj, tu by sa mi hodilo QT!
@@ -88,7 +93,6 @@ namespace myDb
         }
         public InsertStrip() : base("Insert")
         {
-            this.active = false;
             this.labels = new List<Label>();
             this.toAddRecords = new List<AbstractControl>();
             this.controls = new List<AbstractControl>();
@@ -140,13 +144,19 @@ namespace myDb
 
             InsertStrip_Resize(null, null);
         }
+	/* sets the tab to be active */
         void tabActive(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Middle)
+	    {
                 active = false; //toto je FUJ, spolieha sa na to, ze pridam 
-            getTab().Parent.Controls.Remove(this.getTab()); //TEST!
+		//naco sakra potrebujem active?
+//		getTab().Parent.Controls.Remove(this.getTab()); //TEST!
+//		toto bude platne pre vsetky taby
+	    }
         }
-        public void internal_clean(object sender, System.Windows.Forms.MouseEventArgs e)
+	/* sets labels according to labels */
+        private void internal_clean(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             onAddRow();
             onAddLabels();
@@ -173,7 +183,6 @@ namespace myDb
             buttonPanel.Location = new System.Drawing.Point(0,
                 recordPanel.Height - recordPanel.Location.X);
         }
-
         /* add row to */
         public void add(List<AbstractControl> ctrls) //row..FUJ, budem musiet pretypovavat na controly
         {
@@ -200,7 +209,7 @@ namespace myDb
             }
             this.toAddRecords.AddRange(ctrls);
         }
-
+	/* sender calls for filling boxes */
         void addRows_click(object sender, EventArgs e)
         {
             for (int i = 0; i < howMany.Value; i++)
@@ -222,4 +231,54 @@ namespace myDb
             onAddRecord(e);
         }
     }
+    public class SelectStrip : MyToolStrip
+	{
+		public delegate void SetGrid(DataGridView); //nejak osetrit, aby to bolo len jedine?
+		public event SetGrid setGrid;
+
+		private Textbox select;
+		private Button search;
+		private DataGridView results;
+
+		public SelectStrip() : base("Select")
+		{
+			search = new Button();
+			search.Text = "Search";
+			search.AutoSize = true;
+			search.Location = new Point(this.Width - search.Width - 10, 
+					this.Height - search.Height - 10);
+			search.Anchor = AnchorStyles.Top | AnchorStyle.Left;
+
+			select= new TextBox();
+			select.MultiLine = true;
+			select.AutoScroll = true;
+			select.Size = new Size(this.Width, this.Height =)
+				select.Location = new Point(0,0);
+			select.Anchor = AnchorStyles.Top | AnchorStyle.Left;
+
+			results = new DataGridView();
+			results.Anchor = AnchorStyles.Top | AnchorStyle.Left;
+			results.Location = new Size(select.Location.x, select.location.y+select.Height +10);
+			search.Click += new EventHandler(this.start);//potom to nejak premenovat
+			this.Controls.Add(select);
+			this.Controls.Add(search);
+			this.Controls.Add(grid);
+		}
+		protected void start(object sender, EventArgs e)
+		{
+			//TODO
+		}
+		protected override onLoad(EventArgs e)
+		{
+			onSetGrid();
+			base.Load(this,e);
+		}
+
+		public void onSetGrid()
+		{
+			if (setGrid == null)
+				return; //mozno throw exception
+			setGrid(this.grid);
+		}
+	}
 }
