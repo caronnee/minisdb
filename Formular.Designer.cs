@@ -43,7 +43,7 @@ namespace myDb
             this.infoLabel = new System.Windows.Forms.Label();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.insertToolStripMenuItem = new myDb.InsertStrip();
-            this.selectToolStripMenuItem = new myDb.MyToolStrip("select");
+            this.selectToolStripMenuItem = new myDb.SelectStrip();
             this.backToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.b = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
@@ -82,6 +82,8 @@ namespace myDb
             this.selectToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.selectToolStripMenuItem.Text = "select";
             this.selectToolStripMenuItem.Click += new System.EventHandler(this.Menu_Click);
+	    this.selectToolStripMenuItem.getTab().
+	    this.selectToolStripMenuItem.setGrid += new SetGrid(records.settingGrid);
             // 
             // selectToolStripMenuItem
             //
@@ -177,9 +179,8 @@ namespace myDb
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.MenuStrip menu;
         private System.Windows.Forms.ToolStripMenuItem backToolStripMenuItem;
-
         private InsertStrip insertToolStripMenuItem;
-        private MyToolStrip selectToolStripMenuItem;
+        private SelectStrip selectToolStripMenuItem;
         private Records records;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button b; 
