@@ -5,34 +5,32 @@ using System.Text;
 
 namespace myDb
 {
-    public abstract class Value //ma dedit po icomparable?
+    public abstract class Value 
     {
-        public override string ToString()
+        public virtual int compare(DateTime d)
         {
-            return base.ToString();
+            throw new Exception("No such type allowed to compare ");
         }
-        public virtual bool void compare(DateTime d) 
-	{ 
-		throw new Exception("No such type allowed to compare ");
-	}
-        public virtual bool void compare(int s) 
-	{ 
-		throw new Exception("No such type allowed to compare ");
-	}
-        public virtual bool void compare(string s) 
-	{ 
-		throw new Exception("No such type allowed to compare ");
-	}
-        public virtual bool void contains(string s) 
-	{ 
-		throw new Exception("No such type allowed to compare ");
-	}
-	public bool visit(Condition c)
-	{
-		return c.visited(this); //TEST
-	}
-        public abstract bool compare(Value v);
-        public string toString();
+        public virtual int compare(int s)
+        {
+            throw new Exception("No such type allowed to compare ");
+        }
+        public virtual int compare(string s)
+        {
+            throw new Exception("No such type allowed to compare ");
+        }
+        public virtual int compare(Value v)
+        {
+            throw new Exception("Not implemented");
+        }
+        public virtual int contains(string s)
+        {
+            throw new Exception("No such type allowed to compare ");
+        }
+        public virtual int contains(Value v)
+        {
+            throw new Exception("Not implemented yet");
+        }
     }
     class ValueText : Value
     {
@@ -41,14 +39,14 @@ namespace myDb
         {
             text = txt;
         }
-        public override bool compare(string s);
+        public override int compare(string s)
         {
-            return text.compare(s);
+            return text.CompareTo(s);
         }
-	public override bool contains(string s)
-	{
-		return text.IndexOf(s);
-	}
+        public override int contains(string s)
+        {
+            return text.IndexOf(s);
+        }
         public override string ToString()
         {
             return text;
@@ -61,14 +59,14 @@ namespace myDb
         {
             value = i;
         }
-	public override bool compare(int i)
-	{
-		return value - i;
-	}
-	public override bool contains(string s)
-	{
-		return value.ToString().IndexOf(s);
-	}
+        public override int compare(int i)
+        {
+            return value - i;
+        }
+        public override int contains(string s)
+        {
+            return value.ToString().IndexOf(s);
+        }
         public override string ToString()
         {
             return value.ToString();
@@ -81,14 +79,14 @@ namespace myDb
         {
             dTime = d;
         }
-	public override bool contains(string s)
-	{
-		return dTime.toString().IntexOf(s);
-	}
-	public override bool compare(DateTime d)
-	{
-		return dTime - d;
-	}
+        public override int contains(string s)
+        {
+            return dTime.ToString().IndexOf(s);
+        }
+        public override int compare(DateTime d)
+        {
+            return (dTime > d)?0:1;
+        }
         public override string ToString()
         {
             return dTime.ToString();

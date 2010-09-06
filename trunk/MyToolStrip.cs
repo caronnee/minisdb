@@ -22,16 +22,10 @@ namespace myDb
             tabPage.UseVisualStyleBackColor = true;
             return tabPage;
         }
-	protected override onClick(EventArgs e)
-	{
-		base.Click(e);
-		active = true;
-	}
 
         public MyToolStrip(string name)
         {
-		active = false;
-		tabpage = createTab(name);
+            tabpage = createTab(name);
         }
 
         public System.Windows.Forms.TabPage getTab()
@@ -91,7 +85,8 @@ namespace myDb
                 labels.Add(l);
             }
         }
-        public InsertStrip() : base("Insert")
+        public InsertStrip()
+            : base("Insert")
         {
             this.labels = new List<Label>();
             this.toAddRecords = new List<AbstractControl>();
@@ -144,25 +139,22 @@ namespace myDb
 
             InsertStrip_Resize(null, null);
         }
-	/* sets the tab to be active */
+        /* sets the tab to be active */
         void tabActive(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Middle)
-	    {
-                active = false; //toto je FUJ, spolieha sa na to, ze pridam 
-		//naco sakra potrebujem active?
-//		getTab().Parent.Controls.Remove(this.getTab()); //TEST!
-//		toto bude platne pre vsetky taby
-	    }
+            {
+                //		getTab().Parent.Controls.Remove(this.getTab()); //TEST!
+                //		toto bude platne pre vsetky taby
+            }
         }
-	/* sets labels according to labels */
+        /* sets labels according to labels */
         private void internal_clean(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             onAddRow();
             onAddLabels();
-            if (active)
+            if (getTab().Parent == null)
                 return;
-            active = true;
             if (labels.Count != this.controls.Count)
                 throw new Exception("Labels and boxes have different dimensions ");
             //a to je uplne jedno kde to tam je...
@@ -170,7 +162,7 @@ namespace myDb
             {
                 labels[i].Location = new System.Drawing.Point(((Control)controls[i]).Location.X, 0);
 
-                ((Control) controls[i]).Location = new System.Drawing.Point(recordPanel.Controls[i].Location.X, labels[i].PreferredHeight + 10);
+                ((Control)controls[i]).Location = new System.Drawing.Point(recordPanel.Controls[i].Location.X, labels[i].PreferredHeight + 10);
             }
             for (int i = 0; i < labels.Count; i++)
                 recordPanel.Controls.Add(labels[i]);
@@ -195,7 +187,7 @@ namespace myDb
             Control c = (Control)ctrls[0];
             System.Drawing.Point point = new System.Drawing.Point(0, 0);
             if (toAddRecords.Count > 0)
-                point = new System.Drawing.Point(0, (toAddRecords.Count)*c.PreferredSize.Height + labels[0].PreferredHeight + 10 );
+                point = new System.Drawing.Point(0, (toAddRecords.Count) * c.PreferredSize.Height + labels[0].PreferredHeight + 10);
 
             c.Location = new System.Drawing.Point(point.X, point.Y);
             this.recordPanel.Controls.Add(c);
@@ -209,7 +201,7 @@ namespace myDb
             }
             this.toAddRecords.AddRange(ctrls);
         }
-	/* sender calls for filling boxes */
+        /* sender calls for filling boxes */
         void addRows_click(object sender, EventArgs e)
         {
             for (int i = 0; i < howMany.Value; i++)
@@ -232,53 +224,53 @@ namespace myDb
         }
     }
     public class SelectStrip : MyToolStrip
-	{
-		public delegate void SetGrid(DataGridView); //nejak osetrit, aby to bolo len jedine?
-		public event SetGrid setGrid;
+    {
+        public delegate void SetGrid(DataGridView grid); //nejak osetrit, aby to bolo len jedine?
+        public event SetGrid setGrid;
 
-		private Textbox select;
-		private Button search;
-		private DataGridView results;
+        private TextBox select;
+        private Button search;
+        private DataGridView results;
 
-		public SelectStrip() : base("Select")
-		{
-			search = new Button();
-			search.Text = "Search";
-			search.AutoSize = true;
-			search.Location = new Point(this.Width - search.Width - 10, 
-					this.Height - search.Height - 10);
-			search.Anchor = AnchorStyles.Top | AnchorStyle.Left;
+        public SelectStrip()
+            : base("Select")
+        {
+            search = new Button();
+            search.Text = "Search";
+            search.AutoSize = true;
+            search.Location = new System.Drawing.Point(this.Width - search.Width - 10,
+                    this.Height - search.Height - 10);
+            search.Anchor = AnchorStyles.Top | AnchorStyles.Left;
 
-			select= new TextBox();
-			select.MultiLine = true;
-			select.AutoScroll = true;
-			select.Size = new Size(this.Width, this.Height =)
-				select.Location = new Point(0,0);
-			select.Anchor = AnchorStyles.Top | AnchorStyle.Left;
+            select = new TextBox();
+            select.Multiline = true;
+            select.Size = new System.Drawing.Size(this.Width, this.Height);
+            select.Location = new System.Drawing.Point(0, 0);
+            select.Anchor = AnchorStyles.Top | AnchorStyles.Left;
 
-			results = new DataGridView();
-			results.Anchor = AnchorStyles.Top | AnchorStyle.Left;
-			results.Location = new Size(select.Location.x, select.location.y+select.Height +10);
-			search.Click += new EventHandler(this.start);//potom to nejak premenovat
-			this.Controls.Add(select);
-			this.Controls.Add(search);
-			this.Controls.Add(grid);
-		}
-		protected void start(object sender, EventArgs e)
-		{
-			//TODO
-		}
-		protected override onLoad(EventArgs e)
-		{
-			onSetGrid();
-			base.Load(this,e);
-		}
+            results = new DataGridView();
+            results.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            results.Location = new System.Drawing.Point(select.Location.X, select.Location.Y + select.Height + 10);
+            search.Click += new EventHandler(this.start);//potom to nejak premenovat
+            getTab().GotFocus +=new EventHandler(callSetGrid);
+            this.getTab().Controls.Add(select);
+            this.getTab().Controls.Add(search);
+            this.getTab().Controls.Add(results);
+        }
+        protected void start(object sender, EventArgs e)
+        {
+            //TODO
+        }
+        protected void callSetGrid(object sender, EventArgs e)
+        {
+            onSetGrid();
+        }
 
-		public void onSetGrid()
-		{
-			if (setGrid == null)
-				return; //mozno throw exception
-			setGrid(this.grid);
-		}
-	}
+        public void onSetGrid()
+        {
+            if (setGrid == null)
+                return; //mozno throw exception
+            setGrid(this.results);
+        }
+    }
 }
