@@ -19,7 +19,7 @@ namespace myDb
         public Create()
         {
             InitializeComponent();
-	    records = new Records();
+            records = new Records();
             Create_Resize(null, null);
             this.Resize += new EventHandler(Create_Resize);
             enums = new List<ComboBox>();
@@ -60,19 +60,19 @@ namespace myDb
             addAtrribute(attribute);
         }
         private void addAtrribute(AbstractAttribute att)
-	{
-		records.add(att);
-		int x = 10, y = 10;
-		if (this.definitionPanel.Controls.Count > 0)
-		{
-			y += this.definitionPanel.Controls[0].Size.Height * this.definitionPanel.Controls.Count;
-		}
-		att.Parent = this;
-		att.setPositions();
-		att.Location = new Point(x, y);
-		this.definitionPanel.Controls.Add(att);
-		this.definitionPanel.ResumeLayout();
-	}
+        {
+            records.add(att);
+            int x = 10, y = 10;
+            if (this.definitionPanel.Controls.Count > 0)
+            {
+                y += this.definitionPanel.Controls[0].Size.Height * this.definitionPanel.Controls.Count;
+            }
+            att.Parent = this;
+            att.setPositions();
+            att.Location = new Point(x, y);
+            this.definitionPanel.Controls.Add(att);
+            this.definitionPanel.ResumeLayout();
+        }
         private void loadEnums()
         {
             List<string> l = Files.readEnum();
@@ -163,7 +163,7 @@ namespace myDb
             if (definedEnums.Items.Count == 0)
                 return; //TODO warning
             AttributeEnum en = new AttributeEnum(definedEnums.SelectedText, enums[definedEnums.SelectedIndex]);
-            en.Name = (string)definedEnums.Items[definedEnums.SelectedIndex];
+            en.changeName(definedEnums.Items[definedEnums.SelectedIndex].ToString());
             addAtrribute(en);
         }
         private void addImage_Click(object sender, EventArgs e)
@@ -203,24 +203,26 @@ namespace myDb
                 if (a.isMandatory() && (a.getControl().getValue() == null))
                 {
                     a.ForeColor = Color.Firebrick;
-                    MessageBox.Show("Error on attribute " + a.getAttributeName(), "Warning", MessageBoxButtons.OK);
+                    MessageBox.Show("Error on attribute " + a.getAttributeName(),
+                        "Warning", MessageBoxButtons.OK);
                     return;
                 }
             }
-            string name = dbName.Text + ".mydb";
+            string name = dbName.Text + Files.fileType;
             if (dbName.Equals("") || File.Exists(name))
             {
                 MessageBox.Show("File already exists!");
                 return;
             }
-	    this.records.save();	
+            this.records.changeName(this.dbName.Text);
+            this.records.save();
             this.saveEnums();
             this.endState = Forms.FormFormular;
             this.finalWord = name;
             this.Close();
         }
 
-	private Records records;
+        private Records records;
         private System.Collections.Generic.List<System.Windows.Forms.ComboBox> enums;
     }
 }

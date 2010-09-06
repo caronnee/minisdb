@@ -17,7 +17,7 @@ namespace myDb
           
             //Load to combobox all databases
             DirectoryInfo dirInfo = new DirectoryInfo(".");
-            FileInfo[] dbs = dirInfo.GetFiles("*.myDb");
+            FileInfo[] dbs = dirInfo.GetFiles("*" + Files.fileType);
             if (dbs.Length == 0)
             {
                 this.endState = Forms.FormCreateBd;

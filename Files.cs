@@ -10,6 +10,7 @@ namespace myDb
     static class Files
     {
         public const string enumFile = "./enums.data";
+        public const string fileType = ".myDb";
         public static List<string> readEnum()
         {
             List<string> l = new List<string>();

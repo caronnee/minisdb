@@ -82,8 +82,8 @@ namespace myDb
             this.selectToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.selectToolStripMenuItem.Text = "select";
             this.selectToolStripMenuItem.Click += new System.EventHandler(this.Menu_Click);
-	    this.selectToolStripMenuItem.getTab().
-	    this.selectToolStripMenuItem.setGrid += new SetGrid(records.settingGrid);
+
+	    this.selectToolStripMenuItem.setGrid += new SelectStrip.SetGrid(records.settingGrid);
             // 
             // selectToolStripMenuItem
             //

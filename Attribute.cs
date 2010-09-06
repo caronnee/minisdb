@@ -167,8 +167,6 @@ namespace myDb
 		/* virtual methods */
 		/* returns copy of control that should handle value */
 		public abstract AbstractControl getControl();
-		/* string reprezentation of attribute */
-		public abstract string toString();
 		/* sets atrribute with defined values, how it should look like */
 		public abstract void reconstruct(String s);
 	}
@@ -412,7 +410,7 @@ namespace myDb
 			mbox.Text = defVal.Text;
 			return mbox; 
 		}     
-		public override string toString()
+		public override string ToString()
 		{
 			string s = getName();
 			if (isMandatory())
@@ -484,7 +482,7 @@ namespace myDb
 			max.Minimum = min.Value;
 			n.Value = System.Math.Max(min.Value, n.Value);
 		}
-		public override string toString()
+		public override string ToString()
 		{
 			string s = getName() + min.Value.ToString() + "\t" + max.Value;
 			if (isMandatory())
@@ -520,6 +518,10 @@ namespace myDb
 		private string enumName;
 		private ComboBox defVal;
 
+        public void changeName(string name)
+        {
+            enumName = name;
+        }
 		public static ComboBox findEnum(string toFind) //pouzivame len pri loadovani
 		{
 			List<string> enums = null;
@@ -561,11 +563,12 @@ namespace myDb
             defVal.SelectedIndex = System.Convert.ToInt32(int.Parse(s[2]));
             this.fill.Checked = true;
 		}
-		public override string toString()
+		public override string ToString()
 		{
-			string s  = getName()+ this.Name + "\t";
+			string s  = getName()+ this.enumName + "\t";
 			if (this.isMandatory())
-				s += defVal.SelectedIndex.toString();
+				s += defVal.SelectedIndex.ToString();
+            return s;
 		}
 		public override AbstractControl getControl()
 		{
@@ -616,7 +619,7 @@ namespace myDb
             this.todayText.Size = new System.Drawing.Size(dateTimeTick.Width, dateTimeTick.Height);
 			this.def = dateTimeTick;
 		}
-		public override string toString()
+		public override string ToString()
 		{
 			string s = getName();
 			if (!isMandatory())

@@ -29,38 +29,45 @@ namespace myDb
     }
     public class Records //singleton, FUJ
     {
-        private string name;
+        private string dbName_;
         private List<Record> records;
-
         public List<AbstractAttribute> pattern;
 
-	public void settingGrid( DataGridView grid )
-	{
-		grid.ColumnCount = pattern.Count;
-		for (int i =0; i< pattern.Count; i++ )
-		{
-			grid.Column[i].Name = pattern[i]->getName(); //pripisat aj typ? Ale nie, to sa preda spozna
-		}
-	}
-	public void add(Attribute t)
-	{
-		pattern.Add(t);
-	}
-	public void remove(Attribute t)
-	{
-		pattern.Remove(t);
-	}
-        public Records(string dbName) //name of Db
+        /* methods */
+        public Records()
         {
-            name = dbName;
-            records = new List<Record>();
-            pattern = new List<AbstractAttribute>();
+             records = new List<Record>();
+             pattern = new List<AbstractAttribute>();
+        }
+        public Records(string dbName) : this() //name of Db
+        {
+            dbName_ = dbName;
             load();
+        }
+        public void changeName(string s) //jednoduche kopirovanie;)
+        {
+            dbName_ = s + Files.fileType;
+        }
+        public void settingGrid(DataGridView grid)
+        {
+            grid.ColumnCount = pattern.Count;
+            for (int i = 0; i < pattern.Count; i++)
+            {
+                grid.Columns[i].Name = pattern[i].getAttributeName(); //pripisat aj typ? Ale nie, to sa preda spozna
+            }
+        }
+        public void add(AbstractAttribute t)
+        {
+            pattern.Add(t);
+        }
+        public void remove(Attribute t)
+        {
+            pattern.Remove(t);
         }
         public void addRow(InsertStrip sender)
         {
             List<AbstractControl> ctrls = new List<AbstractControl>();
-            for ( int i =0; i< pattern.Count; i++)
+            for (int i = 0; i < pattern.Count; i++)
             {
                 ctrls.Add(pattern[i].getControl());
             }
@@ -84,13 +91,13 @@ namespace myDb
             }
             strip.setNames(list);
         }
-	/* save whole database */
+        /* save whole database */
         public void save()
         {
-            TextWriter write = new StreamWriter(dbName, false);
+            TextWriter write = new StreamWriter(dbName_, false);
             //sprav getline az pokial nenajdes prazdnu lajnu
             foreach (AbstractAttribute a in pattern)
-                write.writeLine(a.toString());
+                write.WriteLine(a.ToString());
             write.WriteLine();//empty line to detect beginning of database
 
             //save database completely
@@ -98,33 +105,36 @@ namespace myDb
             {
                 List<Value> rcs = records[i].getValues();
                 for (int j = 0; j < rcs.Count; j++)
-		{
-			if (rcs[i] != null)
-				write.Write(rcs[j].toString() + );
-			else
-				write.Write('\t');
-		}
+                {
+                    if (rcs[i] != null)
+                        write.Write(rcs[j].ToString());
+                    else
+                        write.Write('\t');
+                }
                 write.WriteLine();
             }
+            write.Close();
         }
+
+        /* private methods */
         /* load attributes and records */
         private void load()
         {
-            TextReader stream = new StreamReader(dbName);
+            StreamReader stream = new StreamReader(dbName_);
             loadAttributes(stream);
-            loadValues(read);
+            loadValues(stream);
             stream.Close();
         }
         private void loadValues(StreamReader reader)
         {
              string line = "";
-             while ((line = read.ReadLine()) != null)
+             while ((line = reader.ReadLine()) != null)
              {
-		     string strs[] = line.split(new char[]{'\t'});
+		     string[] strs = line.Split(new char[]{'\t'});
 		     Record r = new Record();
-		     for (int i =0; i<  pattern.Count, i++)
-			     r.add(pattern[i].getControl().getValue(strs[i]));
-		     records.add(r);
+             for (int i = 0; i < pattern.Count; i++)
+                 r.add(pattern[i].getControl().getValue(strs[i]));
+		     records.Add(r);
              }
         }
         private void loadAttributes(StreamReader read)
