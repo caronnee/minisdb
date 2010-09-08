@@ -215,6 +215,8 @@ namespace myDb
 		}
 		void control_ParentChanged(object sender, EventArgs e)
 		{
+            if (parent.Parent == null)
+                return; //zistit, naco to tu vlastne je
 			parent.Parent.Controls.Add(this.clickToEnableLabel);
 		}
 		void disable(object sender, EventArgs e)
@@ -282,6 +284,8 @@ namespace myDb
         }
         public Value getValue(string text)
         {
+            if (text.Equals(""))
+                return null;
             return new ValueInteger(System.Convert.ToInt32(text));
         }
     }
@@ -305,6 +309,8 @@ namespace myDb
         }
         public Value getValue(string name)
         {
+            if (name.Equals(""))
+                return null;
             for (int i = 0; i < this.Items.Count; i++)
                 if (this.Items[i].Equals(name))
                     return new ValueText(name);
@@ -327,6 +333,8 @@ namespace myDb
         }
         public Value getValue(string text)
         {
+            if (text.Equals(""))
+                return null;
             return new ValueDate(System.Convert.ToDateTime(text));
         }
     }
@@ -387,6 +395,8 @@ namespace myDb
         }
         public Value getValue(string text)
         {
+            if (text.Equals(""))
+                return null;
             return new ValueText(text); //mozno este check, co je to vazne adresa?
             //WHAT...EVER!
         }
