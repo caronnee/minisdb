@@ -9,7 +9,6 @@ namespace myDb
     public class MyToolStrip : System.Windows.Forms.ToolStripMenuItem
     {
         private System.Windows.Forms.TabPage tabpage;
-
         public static System.Windows.Forms.TabPage createTab(string name)
         {
             System.Windows.Forms.TabPage tabPage = new System.Windows.Forms.TabPage();
@@ -35,16 +34,17 @@ namespace myDb
     }
     public class InsertStrip : MyToolStrip
     {
-        private List<AbstractControl> toAddRecords;
+        private int heigthToAdd;
+        private int numberOfValues; //na ukladanie do jedneho pola
         private Panel recordPanel;
         private Panel buttonPanel; //jaj, tu by sa mi hodilo QT!
-        private List<AbstractControl> controls;
-
         private NumericUpDown howMany;
-        private int numberOfValues; //na ukladanie do jedneho pola
+        private List<Label> labels;
+        private List<AbstractControl> controls;
+        private List<AbstractControl> toAddRecords;
 
         /* events */
-        /* event no adding rows */
+        /* event no adding values */
         public delegate void addRecordsHandler(object sender, RecordEventArgs rea);
         public event addRecordsHandler addRecord;
 
@@ -55,8 +55,6 @@ namespace myDb
         /* event on setting labels */
         public delegate void AddLabels(InsertStrip sender);
         public event AddLabels addLabels;
-
-        private List<Label> labels;
 
         protected virtual void onAddLabels()
         {
@@ -91,6 +89,7 @@ namespace myDb
             this.labels = new List<Label>();
             this.toAddRecords = new List<AbstractControl>();
             this.controls = new List<AbstractControl>();
+            this.heigthToAdd = 0;
 
             recordPanel = new Panel();
             recordPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -162,10 +161,11 @@ namespace myDb
             {
                 labels[i].Location = new System.Drawing.Point(((Control)controls[i]).Location.X, 0);
 
-                ((Control)controls[i]).Location = new System.Drawing.Point(recordPanel.Controls[i].Location.X, labels[i].PreferredHeight + 10);
+                ((Control)controls[i]).Location = new System.Drawing.Point(labels[i].Location.X, labels[i].PreferredHeight + 10);
             }
             for (int i = 0; i < labels.Count; i++)
                 recordPanel.Controls.Add(labels[i]);
+            this.heigthToAdd += labels[0].PreferredHeight +10;
         }
         void InsertStrip_Resize(object sender, EventArgs e)
         {
@@ -176,7 +176,7 @@ namespace myDb
                 recordPanel.Height - recordPanel.Location.X);
         }
         /* add row to */
-        public void add(List<AbstractControl> ctrls) //row..FUJ, budem musiet pretypovavat na controly
+        public void add(List<AbstractControl> ctrls) 
         {
             if (ctrls.Count == 0)
                 throw new Exception("Zero attributes, not legal database!");
@@ -185,21 +185,19 @@ namespace myDb
             this.controls.AddRange(ctrls);
 
             Control c = (Control)ctrls[0];
-            System.Drawing.Point point = new System.Drawing.Point(0, 0);
-            if (toAddRecords.Count > 0)
-                point = new System.Drawing.Point(0, (toAddRecords.Count) * c.PreferredSize.Height + labels[0].PreferredHeight + 10);
-
-            c.Location = new System.Drawing.Point(point.X, point.Y);
+            System.Drawing.Point point = new System.Drawing.Point(0, this.heigthToAdd);
+            c.Location = new System.Drawing.Point(0, this.heigthToAdd);
             this.recordPanel.Controls.Add(c);
 
             for (int i = 1; i < ctrls.Count; i++)
             {
                 c = (Control)ctrls[i];
-                point = new System.Drawing.Point(point.X + ((Control)ctrls[i - 1]).Width + 10, point.Y);
+                point = new System.Drawing.Point(point.X + ((Control)ctrls[i - 1]).Width + 10, point.Y);// FIXME UPRAVIT
                 c.Location = point;
                 this.recordPanel.Controls.Add(c);
             }
             this.toAddRecords.AddRange(ctrls);
+            this.heigthToAdd += c.Height + 10;
         }
         /* sender calls for filling boxes */
         void addRows_click(object sender, EventArgs e)
@@ -218,6 +216,7 @@ namespace myDb
                 Record record = new Record();
                 for (int j = 0; j < this.numberOfValues; j++)
                     record.add(toAddRecords[i + j].getValue());
+                r.Add(record);
             }
             RecordEventArgs e = new RecordEventArgs(r);
             onAddRecord(e);
@@ -265,7 +264,6 @@ namespace myDb
         {
             onSetGrid();
         }
-
         public void onSetGrid()
         {
             if (setGrid == null)

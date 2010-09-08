@@ -44,10 +44,23 @@ namespace myDb
             dbName_ = dbName;
             load();
         }
+
+        /* changes name of the database that enables saving to another name */
         public void changeName(string s) //jednoduche kopirovanie;)
         {
             dbName_ = s + Files.fileType;
         }
+        public void add(AbstractAttribute t)
+        {
+            pattern.Add(t);
+            t.close +=new AbstractAttribute.Handler(this.remove);
+        }
+        /* removes attribute from database */
+        public void remove(AbstractAttribute a)
+        {
+            this.pattern.Remove(a);
+        }
+
         public void settingGrid(DataGridView grid)
         {
             grid.ColumnCount = pattern.Count;
@@ -56,10 +69,7 @@ namespace myDb
                 grid.Columns[i].Name = pattern[i].getAttributeName(); //pripisat aj typ? Ale nie, to sa preda spozna
             }
         }
-        public void add(AbstractAttribute t)
-        {
-            pattern.Add(t);
-        }
+        
         public void remove(Attribute t)
         {
             pattern.Remove(t);
@@ -106,7 +116,7 @@ namespace myDb
                 List<Value> rcs = records[i].getValues();
                 for (int j = 0; j < rcs.Count; j++)
                 {
-                    if (rcs[i] != null)
+                    if (rcs[j] != null)
                         write.Write(rcs[j].ToString());
                     else
                         write.Write('\t');

@@ -38,7 +38,7 @@ namespace myDb
 			this.typeLabel = new Label();
 			this.typeLabel.AutoSize = true;
 			this.typeLabel.Text = "Type";
-			this.typeLabel.Name = "Type"; ;
+			this.typeLabel.Name = "Type";
 
 			this.type = new Label();
 			this.type.AutoSize = true;
@@ -106,19 +106,20 @@ namespace myDb
 			}
 			this.ResumeLayout();
 		}
+
+        public delegate void Handler(AbstractAttribute a);
+        public event Handler close;
+
+        protected void onClose()
+        {
+            if (close == null)
+                return;
+            close(this);
+        }
 		void closeButton_Click(object sender, EventArgs e)
 		{
-			Control parent = this.Parent;
-			this.Parent.Controls.Remove(this);
-			//zase TAK moc tam tych atributov nebude
-			int actualX = 10;
-			int actualY = 10;
-			for (int i = 0; i < parent.Controls.Count; i++)
-			{
-				parent.Controls[i].Location = new System.Drawing.Point(actualX, actualY);
-				actualY += parent.Controls[i].Height;
-			}
-			parent.ResumeLayout();
+            //on CLOSE, nech si to kazdy vymaze sam;)
+            onClose();
 		}
 		void fill_CheckStateChanged(object sender, EventArgs e)
 		{
@@ -198,6 +199,7 @@ namespace myDb
 
 			clickToEnableLabel = new Label();
 			clickToEnableLabel.Hide();
+            clickToEnableLabel.Size = new System.Drawing.Size(control.Width, control.Height);
 			clickToEnableLabel.Text = "Click to enable";
 			clickToEnableLabel.Click += new EventHandler(this.enable);
 
@@ -226,6 +228,7 @@ namespace myDb
 			clickToEnableLabel.Hide();
 		}
 	}
+
 	class MTextBox : TextBox, AbstractControl
 	{
 		AttributeState state;
@@ -329,7 +332,6 @@ namespace myDb
     }
     class MPanelFile : Panel, AbstractControl
     {
-
         MTextBox path;
         Button chooseButton;
         public MPanelFile(bool state_)
@@ -342,18 +344,17 @@ namespace myDb
 
             chooseButton = new Button();
             chooseButton.Text = "...";
-            chooseButton.AutoSize = true; ;
-            chooseButton.Size = new System.Drawing.Size(10, 10);
+            chooseButton.Size = new System.Drawing.Size(30, path.Size.Height);
             chooseButton.Location = new System.Drawing.Point(path.Size.Width - 1, 0);
             chooseButton.Click += new EventHandler(b_Click);
 
             path.VisibleChanged += new EventHandler(path_VisibleChanged);
             path_VisibleChanged(null, null);
 
-            this.AutoSize = true;
-            this.Size = new System.Drawing.Size(10, 10);
             this.Controls.Add(path);
             this.Controls.Add(chooseButton);
+
+            this.Size = new System.Drawing.Size(10 + path.Size.Width + chooseButton.PreferredSize.Width, this.PreferredSize.Height+2);
         }
         void path_VisibleChanged(object sender, EventArgs e)
         {

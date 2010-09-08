@@ -39,7 +39,6 @@ namespace myDb
         {
             this.infoBox = new System.Windows.Forms.TextBox();
             this.tabs = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.infoLabel = new System.Windows.Forms.Label();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.insertToolStripMenuItem = new myDb.InsertStrip();
@@ -68,7 +67,6 @@ namespace myDb
             
             this.tabs.Size = new System.Drawing.Size(545, 223);
             this.tabs.Location = new System.Drawing.Point(20, 22); //dame to na panel, no        
-            this.tabs.Controls.Add(this.tabPage1);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
             this.tabs.Multiline = true;
@@ -91,17 +89,6 @@ namespace myDb
             this.backToolStripMenuItem.AutoSize = true;
             this.backToolStripMenuItem.Text = "choose another db";
             this.backToolStripMenuItem.Click += new System.EventHandler(backToolStripMenuItem_Click);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(537, 197);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "select";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Visible = false;
             // 
             // infoLabel
             // 
@@ -182,7 +169,6 @@ namespace myDb
         private InsertStrip insertToolStripMenuItem;
         private SelectStrip selectToolStripMenuItem;
         private Records records;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button b; 
     }
 }
