@@ -73,6 +73,7 @@ namespace myDb
             if (addRecord == null)
                 return;
             addRecord(this, args);
+            internal_clean(null, null); //no neni toto fuj?
         }
         public void setNames(List<string> names)
         {
@@ -150,6 +151,10 @@ namespace myDb
         /* sets labels according to labels */
         private void internal_clean(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            recordPanel.Controls.Clear();
+            controls.Clear();
+            labels.Clear();
+            heigthToAdd = 0;
             onAddRow();
             onAddLabels();
             if (getTab().Parent == null)

@@ -125,7 +125,6 @@ namespace myDb
             }
             write.Close();
         }
-
         /* private methods */
         /* load attributes and records */
         private void load()
@@ -137,15 +136,15 @@ namespace myDb
         }
         private void loadValues(StreamReader reader)
         {
-             string line = "";
-             while ((line = reader.ReadLine()) != null)
-             {
-		     string[] strs = line.Split(new char[]{'\t'});
-		     Record r = new Record();
-             for (int i = 0; i < pattern.Count; i++)
-                 r.add(pattern[i].getControl().getValue(strs[i]));
-		     records.Add(r);
-             }
+            string line = "";
+            while ((line = reader.ReadLine()) != null)
+            {
+                string[] strs = line.Split(new char[] { '\t' });
+                Record r = new Record();
+                for (int i = 0; i < pattern.Count; i++)
+                    r.add(pattern[i].getControl().getValue(strs[i]));
+                records.Add(r);
+            }
         }
         private void loadAttributes(StreamReader read)
         {
