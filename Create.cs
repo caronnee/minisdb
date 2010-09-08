@@ -59,9 +59,24 @@ namespace myDb
             Attribute attribute = new Attribute();
             addAtrribute(attribute);
         }
+        public void remove(AbstractAttribute a)
+        {
+            this.definitionPanel.Controls.Remove((Control) a);
+
+            //zase TAK moc tam tych atributov nebude
+            int actualX = 10;
+            int actualY = 10;
+            for (int i = 0; i < this.definitionPanel.Controls.Count; i++)
+            {
+                this.definitionPanel.Controls[i].Location = new System.Drawing.Point(actualX, actualY);
+                actualY += this.definitionPanel.Controls[i].Height;
+            }
+            this.ResumeLayout();
+        }
         private void addAtrribute(AbstractAttribute att)
         {
             records.add(att);
+            att.close +=new AbstractAttribute.Handler(this.remove);
             int x = 10, y = 10;
             if (this.definitionPanel.Controls.Count > 0)
             {
