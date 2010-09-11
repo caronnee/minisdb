@@ -67,7 +67,91 @@ namespace myDb
                   grid.Columns[i].Name = pattern[i].getAttributeName(); //pripisat aj typ? Ano, bo to budeme zoradovat..a lexikograficke cisla nie su zoradene spravne..nehovoriac o datumoch
                   grid.Columns[i].ValueType = pattern[i].getControl().getType(); 
               }
-        }     
+        }
+        private AbstractAttribute find(string nm)
+        {
+            string cmp = nm.ToLower();
+            foreach (AbstractAttribute a in pattern) //case sensitive?
+            {
+                if (a.getAttributeName().ToLower().Equals(cmp))
+                    return a;
+            }
+            return null;
+        }
+        private Condition getCondition(string s)
+        {
+            Condition c = null;
+            try
+            {
+                string[] strs = s.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (strs.Length != 3)
+                    throw new Exception("Syntax error: '" + s + "', syntax is: \n " +
+                     " attribute_name {containts, misses, >=, >, <=, <, =, !=} value \n");
+                AbstractAttribute a;
+                a = find(strs[0]);
+                if (a == null)
+                    throw new Exception("Name " + strs[0] + " is not recognized.");
+                Value v = a.getControl().getValue(strs[2]);
+                switch (strs[1])
+                {
+                    case "contains": //check name!
+                        {
+                            c = new ConditionContains(strs[0], v);
+                            break;
+                        }
+                    case "misses":
+                        {
+                            c = new ConditionNot(new ConditionContains(strs[0],v));
+                            break;
+                        }
+                    case "=":
+                        {
+                            c = new ConditionEqual(strs[0], v);
+                            break;
+                        }
+                    case "<=":
+                        {
+                            c = new ConditionLessEqual(strs[0], v);
+                            break;
+                        }
+                    case "<":
+                        {
+                            c = new ConditionLess(strs[0], v);
+                            break;
+                        }
+                    case ">=":
+                        {
+                            c = new ConditionNot(new ConditionLess(strs[0], v));
+                            break;
+                        }
+                    case ">":
+                        {
+                            c = new ConditionNot(new ConditionLessEqual(strs[0],v));
+                            break;
+                        }
+                    default:
+                        throw new Exception("Syntax error at condition '" + strs[1] + "'- no such condition implemented"); //+ nejaky help?
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error found!", MessageBoxButtons.OK);
+            }
+            return c;
+        }
+        private List<Condition> parseQuery(string s)
+        {
+            List<Condition> result = new List<Condition>();
+            string[] lines = s.Split(new char[]{'\n','\r'},StringSplitOptions.RemoveEmptyEntries);
+            foreach( string line in lines)
+            {
+                Condition c = getCondition(line);
+                if (c ==null)
+                    return null;
+                 result.Add(c);
+            }
+            return result;
+        }
         public void remove(Attribute t)
         {
             pattern.Remove(t);
@@ -99,18 +183,35 @@ namespace myDb
             }
             strip.setNames(list);
         }
-        public void filter(DataGridView data, string filter)
+        public void filter(DataGridView data, string query)
         {
-            //TODO - teraz vyplnim vsetky zaznamy, co tam mam
+            List<Condition> conditions = this.parseQuery(query);
+            //regexp = '*'
+            if (conditions == null)
+                return; //+ nejake warning? Myslim, ze netreba
+
+            data.Rows.Clear();
             for (int i = 0; i < records.Count; i++)
             {
-                int index = data.Rows.Add();
-                //mozem sa spolahnut na poeradie?..vlastne musim;)
+                int index;
+                foreach (Condition c in conditions)
+                {
+                    index = pattern.IndexOf(this.find(c.getName()));
+                    Value v1 = records[i].getValues()[index];
+                    if (v1 == null)
+                        goto Next;
+                    if (!c.compareTo(v1))
+                        goto Next; //goTO!!..ale brekeke!..FUUUUUUUJ
+                }
+                index = data.Rows.Add();
+                //mozem sa spolahnut na poeradie?..vlastne musim;)..vlastne nie:D TODO dat do columns
                 for (int j = 0; j < pattern.Count; j++)
                 {
                     data.Rows[index].Cells[j].Value = records[i].getValues()[j];
-                    data.Rows[index].HeaderCell.Value = (index+1).ToString();
+                    data.Rows[index].HeaderCell.Value = (index + 1).ToString();
                 }
+            Next:
+                ;
             }
         }
         /* save whole database */
@@ -130,8 +231,7 @@ namespace myDb
                 {
                     if (rcs[j] != null)
                         write.Write(rcs[j].ToString());
-                    else
-                        write.Write('\t');
+                    write.Write('\t'); //v loadovani budeme mat vzdy o nedna viac, ale ignorujeme
                 }
                 write.WriteLine();
             }
@@ -151,6 +251,8 @@ namespace myDb
             string line = "";
             while ((line = reader.ReadLine()) != null)
             {
+                if (line.Equals(""))
+                    continue;
                 string[] strs = line.Split(new char[] { '\t' });
                 Record r = new Record();
                 for (int i = 0; i < pattern.Count; i++)

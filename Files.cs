@@ -9,6 +9,7 @@ namespace myDb
 {
     static class Files
     {
+        public const string dateFormat = "dd.MMMM,yyyy";
         public const string enumFile = "./enums.data";
         public const string fileType = ".myDb";
         public static List<string> readEnum()
