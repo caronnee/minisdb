@@ -6,7 +6,7 @@ using System.Text;
 
 namespace myDb
 {
-    public class MyToolStrip : System.Windows.Forms.ToolStripMenuItem
+    public class MyToolStrip : ToolStripMenuItem
     {
         private System.Windows.Forms.TabPage tabpage;
         public static System.Windows.Forms.TabPage createTab(string name)
@@ -26,7 +26,6 @@ namespace myDb
         {
             tabpage = createTab(name);
         }
-
         public System.Windows.Forms.TabPage getTab()
         {
             return tabpage;
@@ -229,8 +228,11 @@ namespace myDb
     }
     public class SelectStrip : MyToolStrip
     {
-        public delegate void SetGrid(DataGridView grid); //nejak osetrit, aby to bolo len jedine?
+        public delegate void SetGrid(DataGridView grid); //nejak osetrit, aby to bolo len jedine? Inak je to nebezpecne..alebo delegate ide sekvencne?
         public event SetGrid setGrid;
+
+        public delegate void DataToGrid(DataGridView gr, string Conditions );
+        public event DataToGrid fillGrid;
 
         private TextBox select;
         private Button search;
@@ -239,31 +241,67 @@ namespace myDb
         public SelectStrip()
             : base("Select")
         {
-            search = new Button();
-            search.Text = "Search";
-            search.AutoSize = true;
-            search.Location = new System.Drawing.Point(this.Width - search.Width - 10,
-                    this.Height - search.Height - 10);
-            search.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-
             select = new TextBox();
             select.Multiline = true;
-            select.Size = new System.Drawing.Size(this.Width, this.Height);
+            select.Size = new System.Drawing.Size(getTab().Width, 50);
             select.Location = new System.Drawing.Point(0, 0);
             select.Anchor = AnchorStyles.Top | AnchorStyles.Left;
 
+            search = new Button();
+            search.Text = "Search";
+            search.AutoSize = true;
+            search.Location = new System.Drawing.Point(getTab().Width - search.Width - 10,
+                    getTab().Height - search.Height - 10);
+            search.Anchor = AnchorStyles.Bottom| AnchorStyles.Right;
+            search.Click += new EventHandler(search_Click);
+        
             results = new DataGridView();
             results.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             results.Location = new System.Drawing.Point(select.Location.X, select.Location.Y + select.Height + 10);
-            search.Click += new EventHandler(this.start);//potom to nejak premenovat
+            results.AllowUserToAddRows = false;
+            results.SortCompare += new DataGridViewSortCompareEventHandler(results_SortCompare);
+
+            select.Dock = DockStyle.Top;
+            results.Dock = DockStyle.Top| DockStyle.Fill;
+            search.Dock = DockStyle.Top;
+
             getTab().GotFocus +=new EventHandler(callSetGrid);
-            this.getTab().Controls.Add(select);
-            this.getTab().Controls.Add(search);
+           // results.ReadOnly = true;
+            this.getTab().ParentChanged += new EventHandler(SelectStrip_ParentChanged);
+          
             this.getTab().Controls.Add(results);
+            this.getTab().Controls.Add(search);
+            this.getTab().Controls.Add(select);
         }
-        protected void start(object sender, EventArgs e)
+        void results_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
-            //TODO
+            if (e.CellValue1 == null)
+            {
+                e.SortResult = 0;
+                return;
+            }
+            if (e.CellValue2 == null)
+            {
+                e.SortResult = 1; //kontrola!
+                return;
+            }
+            e.SortResult = (e.CellValue1 as Value).compare(e.CellValue2 as Value);
+        }
+        void search_Click(object sender, EventArgs e)
+        {
+            onFillGrid();
+        }
+        void SelectStrip_ParentChanged(object sender, EventArgs e)
+        {
+            if (getTab().Parent == null)
+                return; //skontrolovat
+            onSetGrid();
+        }
+        protected void onFillGrid()
+        {
+            if (fillGrid == null)
+                throw new Exception("No connection set");
+            fillGrid(this.results, this.select.Text);
         }
         protected void callSetGrid(object sender, EventArgs e)
         {

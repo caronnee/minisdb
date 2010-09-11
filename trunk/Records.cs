@@ -44,7 +44,6 @@ namespace myDb
             dbName_ = dbName;
             load();
         }
-
         /* changes name of the database that enables saving to another name */
         public void changeName(string s) //jednoduche kopirovanie;)
         {
@@ -60,16 +59,15 @@ namespace myDb
         {
             this.pattern.Remove(a);
         }
-
         public void settingGrid(DataGridView grid)
         {
             grid.ColumnCount = pattern.Count;
             for (int i = 0; i < pattern.Count; i++)
-            {
-                grid.Columns[i].Name = pattern[i].getAttributeName(); //pripisat aj typ? Ale nie, to sa preda spozna
-            }
-        }
-        
+              {
+                  grid.Columns[i].Name = pattern[i].getAttributeName(); //pripisat aj typ? Ano, bo to budeme zoradovat..a lexikograficke cisla nie su zoradene spravne..nehovoriac o datumoch
+                  grid.Columns[i].ValueType = pattern[i].getControl().getType(); 
+              }
+        }     
         public void remove(Attribute t)
         {
             pattern.Remove(t);
@@ -100,6 +98,20 @@ namespace myDb
                 list.Add(pattern[i].getAttributeName());
             }
             strip.setNames(list);
+        }
+        public void filter(DataGridView data, string filter)
+        {
+            //TODO - teraz vyplnim vsetky zaznamy, co tam mam
+            for (int i = 0; i < records.Count; i++)
+            {
+                int index = data.Rows.Add();
+                //mozem sa spolahnut na poeradie?..vlastne musim;)
+                for (int j = 0; j < pattern.Count; j++)
+                {
+                    data.Rows[index].Cells[j].Value = records[i].getValues()[j];
+                    data.Rows[index].HeaderCell.Value = (index+1).ToString();
+                }
+            }
         }
         /* save whole database */
         public void save()

@@ -60,17 +60,16 @@ namespace myDb
             this.infoBox.Size = new System.Drawing.Size(156, 202);
             this.infoBox.TabIndex = 0;
             this.infoBox.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top;
-           // this.infoBox.Dock = System.Windows.Forms.DockStyle.Fill;
             // 
             // tabs
             // 
-            
             this.tabs.Size = new System.Drawing.Size(545, 223);
             this.tabs.Location = new System.Drawing.Point(20, 22); //dame to na panel, no        
-            this.tabs.Name = "tabs";
+            this.tabs.Name = "Tabs";
             this.tabs.SelectedIndex = 0;
             this.tabs.Multiline = true;
-            this.tabs.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+          //  this.tabs.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.tabs.Size = new System.Drawing.Size(40, 100);
             this.tabs.Appearance = System.Windows.Forms.TabAppearance.Normal;
             this.tabs.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
             // 
@@ -80,14 +79,14 @@ namespace myDb
             this.selectToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.selectToolStripMenuItem.Text = "select";
             this.selectToolStripMenuItem.Click += new System.EventHandler(this.Menu_Click);
-
-	    this.selectToolStripMenuItem.setGrid += new SelectStrip.SetGrid(records.settingGrid);
+            this.selectToolStripMenuItem.fillGrid += new SelectStrip.DataToGrid(this.records.filter);
+    	    this.selectToolStripMenuItem.setGrid += new SelectStrip.SetGrid(records.settingGrid);
             // 
             // selectToolStripMenuItem
             //
             this.backToolStripMenuItem.Name = "backToolStripMenuItem.Name";
             this.backToolStripMenuItem.AutoSize = true;
-            this.backToolStripMenuItem.Text = "choose another db";
+            this.backToolStripMenuItem.Text = "Choose another db";
             this.backToolStripMenuItem.Click += new System.EventHandler(backToolStripMenuItem_Click);
             // 
             // infoLabel
@@ -128,7 +127,12 @@ namespace myDb
             // 
             // Formular
             // 
-            this.Resize += new System.EventHandler(Formular_Resize);
+
+            //layout
+            this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.infoBox.Dock = System.Windows.Forms.DockStyle.Right;
+                                                         
+         // this.Resize += new System.EventHandler(Formular_Resize);
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 266);
@@ -140,7 +144,6 @@ namespace myDb
             this.Name = "Formular";
             this.Text = "Formular";
             this.MinimumSize = new System.Drawing.Size(300, 300);
-            this.AutoScroll = true;
             this.tabs.ResumeLayout(false);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
@@ -153,12 +156,7 @@ namespace myDb
             this.endState = Forms.FormLoad;
             this.Close();
         }
-        void Formular_Resize(object sender, System.EventArgs e)
-        {
-            // FIXME vyriesit pomocou docks..FUJ  a nechodi, ale zatial to staci
-            this.tabs.Size = new System.Drawing.Size(this.infoBox.Location.X - 10 - tabs.Location.X, this.ClientRectangle.Height - 10 - this.tabs.Location.Y);
-            this.infoBox.Size = new System.Drawing.Size(this.ClientRectangle.Width - this.infoBox.Location.X - 10, this.ClientRectangle.Height - 10 - this.infoBox.Location.Y);
-        }
+     
         #endregion
 
         private System.Windows.Forms.TextBox infoBox;

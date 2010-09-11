@@ -136,6 +136,7 @@ namespace myDb
 			}
 			setPositions();
 		}
+
 		public void setPositions()
 		{
 			this.Controls.Remove(closeButton);
@@ -170,65 +171,13 @@ namespace myDb
 		public abstract AbstractControl getControl();
 		/* sets atrribute with defined values, how it should look like */
 		public abstract void reconstruct(String s);
+        
 	}
-	//== attribute text
 	public interface AbstractControl 
 	{
 		Value getValue();
 		Value getValue(string value);
-	}
-
-	class AttributeState
-	{
-		static public string disableMenu = "Disable";
-		public readonly bool mandatory;
-		private Control parent; //MEGAFUJ!
-		private Label clickToEnableLabel;
-
-		public AttributeState(Control control, bool mandatory_)
-		{
-			mandatory = mandatory_;
-			clickToEnableLabel = null;
-			parent = control;
-			control.ContextMenu = new ContextMenu();
-			if (mandatory)
-				return;
-
-			control.ParentChanged += new EventHandler(control_ParentChanged);
-			control.LocationChanged += new EventHandler(control_LocationChanged);
-
-			clickToEnableLabel = new Label();
-			clickToEnableLabel.Hide();
-            clickToEnableLabel.Size = new System.Drawing.Size(control.Width, control.Height);
-			clickToEnableLabel.Text = "Click to enable";
-			clickToEnableLabel.Click += new EventHandler(this.enable);
-
-			MenuItem m = new MenuItem(disableMenu);
-			control.ContextMenu.MenuItems.Add(m);
-			m.Click += new EventHandler(this.disable);
-			control.Hide();
-			clickToEnableLabel.Show();
-		}
-		void control_LocationChanged(object sender, EventArgs e)
-		{
-			clickToEnableLabel.Location = new System.Drawing.Point(parent.Location.X, parent.Location.Y);
-		}
-		void control_ParentChanged(object sender, EventArgs e)
-		{
-            if (parent.Parent == null)
-                return; //zistit, naco to tu vlastne je
-			parent.Parent.Controls.Add(this.clickToEnableLabel);
-		}
-		void disable(object sender, EventArgs e)
-		{
-			parent.Hide();
-			clickToEnableLabel.Show();
-		}
-		void enable(object sender, EventArgs e)
-		{
-			parent.Show();
-			clickToEnableLabel.Hide();
-		}
+        Type getType();
 	}
 
 	class MTextBox : TextBox, AbstractControl
@@ -257,6 +206,11 @@ namespace myDb
 				return;
 			Clipboard.SetText(this.Text);
 		}
+
+        public Type getType()
+        {
+            return typeof(string);
+        }
 		public Value getValue()
 		{
 			if (this.Visible && (!this.Text.Equals("")) )
@@ -275,6 +229,11 @@ namespace myDb
         public MNumeric(bool mandatory) //kontext menu na disable
         {
             state = new AttributeState(this, mandatory);
+        }
+
+        public Type getType()
+        {
+            return typeof(int);
         }
         public Value getValue()
         {
@@ -301,6 +260,11 @@ namespace myDb
                 this.Items.Add(o); //BREKEKE
             this.SelectedIndex = 0;
         }
+
+        public Type getType()
+        {
+            return typeof(string);
+        }
         public Value getValue()
         {
             if (this.Visible)
@@ -324,6 +288,11 @@ namespace myDb
         public MDate(bool state_)
         {
             state = new AttributeState(this, state_);
+        }
+
+        public Type getType()
+        {
+            return typeof(DateTime);
         }
         public Value getValue()
         {
@@ -387,6 +356,10 @@ namespace myDb
         {
             return path.Text;
         }
+        public Type getType()
+        {
+            return typeof(string);
+        }
         public Value getValue()
         {
             if (this.Visible)
@@ -402,6 +375,58 @@ namespace myDb
         }
     }
 
+    class AttributeState
+    {
+        static public string disableMenu = "Disable";
+        public readonly bool mandatory;
+        private Control parent; //MEGAFUJ!
+        private Label clickToEnableLabel;
+
+        public AttributeState(Control control, bool mandatory_)
+        {
+            mandatory = mandatory_;
+            clickToEnableLabel = null;
+            parent = control;
+            control.ContextMenu = new ContextMenu();
+            if (mandatory)
+                return;
+
+            control.ParentChanged += new EventHandler(control_ParentChanged);
+            control.LocationChanged += new EventHandler(control_LocationChanged);
+
+            clickToEnableLabel = new Label();
+            clickToEnableLabel.Hide();
+            clickToEnableLabel.Size = new System.Drawing.Size(control.Width, control.Height);
+            clickToEnableLabel.Text = "Click to enable";
+            clickToEnableLabel.Click += new EventHandler(this.enable);
+
+            MenuItem m = new MenuItem(disableMenu);
+            control.ContextMenu.MenuItems.Add(m);
+            m.Click += new EventHandler(this.disable);
+            control.Hide();
+            clickToEnableLabel.Show();
+        }
+        void control_LocationChanged(object sender, EventArgs e)
+        {
+            clickToEnableLabel.Location = new System.Drawing.Point(parent.Location.X, parent.Location.Y);
+        }
+        void control_ParentChanged(object sender, EventArgs e)
+        {
+            if (parent.Parent == null)
+                return; //zistit, naco to tu vlastne je
+            parent.Parent.Controls.Add(this.clickToEnableLabel);
+        }
+        void disable(object sender, EventArgs e)
+        {
+            parent.Hide();
+            clickToEnableLabel.Show();
+        }
+        void enable(object sender, EventArgs e)
+        {
+            parent.Show();
+            clickToEnableLabel.Hide();
+        }
+    }
 	public class Attribute : AbstractAttribute
 	{
 		private MTextBox defVal;

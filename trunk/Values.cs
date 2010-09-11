@@ -43,6 +43,10 @@ namespace myDb
         {
             return text.CompareTo(s);
         }
+        public override int compare(Value v)
+        {
+            return compare(text);
+        }
         public override int contains(string s)
         {
             return text.IndexOf(s);
@@ -62,6 +66,10 @@ namespace myDb
         public override int compare(int i)
         {
             return value - i;
+        }
+        public override int compare(Value v)
+        {
+            return v.compare(value);
         }
         public override int contains(string s)
         {
@@ -86,6 +94,10 @@ namespace myDb
         public override int compare(DateTime d)
         {
             return (dTime > d)?0:1;
+        }
+        public override int compare(Value v)
+        {
+            return v.compare(dTime);
         }
         public override string ToString()
         {
