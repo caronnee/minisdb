@@ -8,17 +8,23 @@ namespace myDb
     //for all select that can be writable
     abstract public class Condition //co tak radsej interface?
     {
+        private string name_;
         protected Value toCompare;
-        public Condition(Value tc)
+        public Condition(string name, Value tc)
         {
-            toCompare = tc;
+            this.toCompare = tc;
+            this.name_ = name;
+        }
+        public string getName()
+        {
+            return name_;
         }
         abstract public bool compareTo(Value v);
     }
     public class ConditionContains : Condition
     {
-        public ConditionContains(Value v)
-            : base(v)
+        public ConditionContains(string name, Value v)
+            : base(name, v)
         { 
             //nothing there so far, just initialization
         }
@@ -29,8 +35,8 @@ namespace myDb
     }
     public class ConditionLess : Condition
     {
-        public ConditionLess(Value v)
-            : base(v)
+        public ConditionLess(string name, Value v)
+            : base(name, v)
         { }
         public override bool compareTo(Value v)
         {
@@ -39,24 +45,24 @@ namespace myDb
     }
     public class ConditionEqual : Condition
     {
-        public ConditionEqual(Value v) : base(v) { }
+        public ConditionEqual(string name, Value v) : base(name, v) { }
         public override bool compareTo(Value v)
         {
             return toCompare.compare(v) == 0;
         }
     }
-    public class ConditionMore : Condition
+    public class ConditionLessEqual : Condition
     {
-        public ConditionMore(Value v) : base(v) { }
+        public ConditionLessEqual(string name, Value v) : base(name, v) { }
         public override bool compareTo(Value v)
         {
-            return toCompare.compare(v) > 0;
+            return toCompare.compare(v) <= 0;
         }
     }
     public class ConditionNot : Condition //value bude Null/..co uz
     {
         private Condition toNegate;
-        public ConditionNot(Condition c) : base(null) 
+        public ConditionNot(Condition c) : base(null, null) 
         {
             toNegate = c;
         }

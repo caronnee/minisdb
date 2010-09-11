@@ -304,7 +304,10 @@ namespace myDb
         {
             if (text.Equals(""))
                 return null;
-            return new ValueDate(System.Convert.ToDateTime(text));
+            DateTime myDt = new DateTime(1984, 5, 18);
+          
+            return new ValueDate(DateTime.ParseExact(text,new string[]
+            {Files.dateFormat,"dd.MM.yyyy","d.M.yyyy"},null, System.Globalization.DateTimeStyles.AllowWhiteSpaces));
         }
     }
     class MPanelFile : Panel, AbstractControl
@@ -663,7 +666,7 @@ namespace myDb
 			if (today)
 				s += todayString;
 			else
-				s += dateTimeTick.Value.ToString(); //kontrola, tot je nebezpecne..radsej int?
+				s += dateTimeTick.Value.ToString(Files.dateFormat); 
 			return s;
 		}
 		public override void reconstruct(string s)

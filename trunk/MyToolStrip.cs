@@ -260,6 +260,8 @@ namespace myDb
             results.Location = new System.Drawing.Point(select.Location.X, select.Location.Y + select.Height + 10);
             results.AllowUserToAddRows = false;
             results.SortCompare += new DataGridViewSortCompareEventHandler(results_SortCompare);
+            results.DefaultCellStyle.NullValue = "-";
+            results.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             select.Dock = DockStyle.Top;
             results.Dock = DockStyle.Top| DockStyle.Fill;
@@ -268,11 +270,11 @@ namespace myDb
             getTab().GotFocus +=new EventHandler(callSetGrid);
            // results.ReadOnly = true;
             this.getTab().ParentChanged += new EventHandler(SelectStrip_ParentChanged);
-          
             this.getTab().Controls.Add(results);
             this.getTab().Controls.Add(search);
             this.getTab().Controls.Add(select);
         }
+
         void results_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
             if (e.CellValue1 == null)

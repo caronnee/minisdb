@@ -93,7 +93,11 @@ namespace myDb
         }
         public override int compare(DateTime d)
         {
-            return (dTime > d)?0:1;
+            if (dTime.Date > d.Date)
+                return 1;
+            if (dTime.Date < d.Date)
+                return -1;
+            return 0;
         }
         public override int compare(Value v)
         {
@@ -101,7 +105,7 @@ namespace myDb
         }
         public override string ToString()
         {
-            return dTime.ToString();
+            return dTime.ToString(Files.dateFormat);
         }
     }
 }
