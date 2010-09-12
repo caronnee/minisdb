@@ -44,6 +44,7 @@ namespace myDb
             this.insertToolStripMenuItem = new myDb.InsertStrip();
             this.selectToolStripMenuItem = new myDb.SelectStrip();
             this.backToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeDb = new System.Windows.Forms.ToolStripMenuItem();
             this.b = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.menu.SuspendLayout();
@@ -72,6 +73,11 @@ namespace myDb
             this.tabs.Size = new System.Drawing.Size(40, 100);
             this.tabs.Appearance = System.Windows.Forms.TabAppearance.Normal;
             this.tabs.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+            //changeDb
+            this.changeDb.Name = "Edit db";
+            this.changeDb.Text = "Edit db";
+            this.changeDb.AutoSize = true;
+            this.changeDb.Click += new System.EventHandler(changeDb_Click);
             // 
             // selectToolStripMenuItem
             // 
@@ -151,6 +157,11 @@ namespace myDb
             this.PerformLayout();
 
         }
+
+        void changeDb_Click(object sender, System.EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
         void backToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             this.endState = Forms.FormLoad;
@@ -164,6 +175,7 @@ namespace myDb
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.MenuStrip menu;
         private System.Windows.Forms.ToolStripMenuItem backToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeDb;
         private InsertStrip insertToolStripMenuItem;
         private SelectStrip selectToolStripMenuItem;
         private Records records;
