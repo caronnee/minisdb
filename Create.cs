@@ -239,5 +239,11 @@ namespace myDb
 
         private Records records;
         private System.Collections.Generic.List<System.Windows.Forms.ComboBox> enums;
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.endState = Forms.FormLoad;
+            this.Close();
+        }
     }
 }

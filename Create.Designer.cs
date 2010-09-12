@@ -42,6 +42,7 @@ namespace myDb
             this.definedEnums = new System.Windows.Forms.ComboBox();
             this.removeEnum = new System.Windows.Forms.Button();
             this.dbName = new System.Windows.Forms.TextBox();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addInteger
@@ -133,7 +134,7 @@ namespace myDb
             // createButton
             // 
             this.createButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.createButton.Location = new System.Drawing.Point(704, 300);
+            this.createButton.Location = new System.Drawing.Point(534, 338);
             this.createButton.Name = "createButton";
             this.createButton.Size = new System.Drawing.Size(75, 23);
             this.createButton.TabIndex = 12;
@@ -171,12 +172,23 @@ namespace myDb
             this.dbName.TabIndex = 15;
             this.dbName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(625, 338);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 16;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
             // Create
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(796, 378);
+            this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.dbName);
             this.Controls.Add(this.removeEnum);
             this.Controls.Add(this.definedEnums);
@@ -210,5 +222,6 @@ namespace myDb
         private System.Windows.Forms.ComboBox definedEnums;
         private System.Windows.Forms.Button removeEnum;
         private System.Windows.Forms.TextBox dbName;
+        private System.Windows.Forms.Button cancelButton;
     }
 }

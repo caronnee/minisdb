@@ -237,6 +237,11 @@ namespace myDb
         private TextBox select;
         private Button search;
         private DataGridView results;
+        private Button gridColumns;
+        private Button deleteButton;
+        private Button duplicateButton;
+        private Panel buttonPanel;
+        private GridPanel controlPanel;
 
         public SelectStrip()
             : base("Select")
@@ -268,11 +273,43 @@ namespace myDb
             search.Dock = DockStyle.Top;
 
             getTab().GotFocus +=new EventHandler(callSetGrid);
+            //moje nove
+            this.buttonPanel = new Panel();
+            this.buttonPanel.Size = new System.Drawing.Size(100, 20);
+            this.buttonPanel.Dock = DockStyle.Bottom;
+
+            this.gridColumns = new Button();
+            this.gridColumns.Text = "Choose columns";
+            this.gridColumns.Dock = DockStyle.Left;
+            this.gridColumns.Click += new EventHandler(gridColumns_Click);
+
+            this.deleteButton = new Button();
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.Dock = DockStyle.Left;
+
+            this.duplicateButton = new Button();
+            this.duplicateButton.Text = "Duplicate";
+            this.duplicateButton.Dock = DockStyle.Left;
+
            // results.ReadOnly = true;
             this.getTab().ParentChanged += new EventHandler(SelectStrip_ParentChanged);
+
             this.getTab().Controls.Add(results);
             this.getTab().Controls.Add(search);
             this.getTab().Controls.Add(select);
+
+            this.buttonPanel.Controls.Add(gridColumns);
+            this.buttonPanel.Controls.Add(deleteButton);
+            this.buttonPanel.Controls.Add(duplicateButton);
+
+            this.getTab().Controls.Add(buttonPanel);
+        }
+
+        void gridColumns_Click(object sender, EventArgs e)
+        {
+            if ( (this.controlPanel == null) ||this.controlPanel.IsDisposed)
+                this.controlPanel = new GridPanel(this.results);
+            this.controlPanel.Show(); ///alebo run?
         }
 
         void results_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
