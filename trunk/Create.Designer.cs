@@ -201,6 +201,10 @@ namespace myDb
             this.Controls.Add(this.definitionPanel);
             this.Controls.Add(this.addTextAttribute);
             this.Controls.Add(this.addInteger);
+	    
+	    this.Controls.Add(this.regexp);
+	    this.Controls.Add(this.chosen); //potom zadat lokacie;
+
             this.Name = "Create";
             this.Text = "Create";
             this.ResumeLayout(false);
@@ -223,5 +227,8 @@ namespace myDb
         private System.Windows.Forms.Button removeEnum;
         private System.Windows.Forms.TextBox dbName;
         private System.Windows.Forms.Button cancelButton;
+
+	private System.Windows.Forms.Textbox regexp;
+	private System.Windows.Forms.Textbox chosen;
     }
 }

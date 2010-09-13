@@ -34,7 +34,7 @@ namespace myDb
             //initialize buttons
             buttons = new List<Button>();
             this.AutoSize = true;
-            for (int i = 0; i < grid.ColumnCount; i++)
+            for (int i = 0; i < grid.ColumnCount -1; i++) //dame bez poslednej, ktora su ID
             {
                 Button b = new MyButton(grid.Columns[i]);
                 b.Text = grid.Columns[i].Name;

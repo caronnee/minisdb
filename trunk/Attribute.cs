@@ -219,13 +219,17 @@ namespace myDb
 		} 
 		public Value getValue(string text)
 		{
-    		return new ValueText(text);
+			return new ValueText(text);
 		}
 	}
     class MNumeric : NumericUpDown, AbstractControl
     {
         private AttributeState state;
 
+	public void setValue(int i)
+	{
+		this.Value = i;
+	}
         public MNumeric(bool mandatory) //kontext menu na disable
         {
             state = new AttributeState(this, mandatory);
