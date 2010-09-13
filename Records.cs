@@ -32,10 +32,12 @@ namespace myDb
         private string dbName_;
         private List<Record> records;
         public List<AbstractAttribute> pattern;
+	private int recordId;
 
         /* methods */
         public Records()
         {
+		recordId = 0;
              records = new List<Record>();
              pattern = new List<AbstractAttribute>();
         }
@@ -59,14 +61,33 @@ namespace myDb
         {
             this.pattern.Remove(a);
         }
+	public void delete(DataGridView grid);
+	{
+		//musime tam mat este nejake ID a to mat v gride
+		foreach (DataGridViewRow row in grid.selectedRows)
+		{//najdi poslednu value
+			foreach(Record r in records)
+			{
+				List<Value> v = r.getValues();
+				if (v[v.Count-1].compare(row.Cells[row.ColumnCount -1])!=0) //last Cell, snad to zavola to intove
+					continue;
+				records.Remove(r);
+				grid.Rows.Remove(row); //snad to funguje
+				break;
+			}
+
+		}
+	}
         public void settingGrid(DataGridView grid)
         {
-            grid.ColumnCount = pattern.Count;
+            grid.ColumnCount = pattern.Count +1;
             for (int i = 0; i < pattern.Count; i++)
               {
-                  grid.Columns[i].Name = pattern[i].getAttributeName(); //pripisat aj typ? Ano, bo to budeme zoradovat..a lexikograficke cisla nie su zoradene spravne..nehovoriac o datumoch
+                  grid.Columns[i].Name = pattern[i].getAttributeName();
                   grid.Columns[i].ValueType = pattern[i].getControl().getType(); 
               }
+	    grid.Columns[pattern.Count].Name = "ID"; //pripisat aj typ? Ano, bo to budeme zoradovat..a lexikograficke cisla nie su zoradene spravne..nehovoriac o datumoch
+	    //typ tu nepotrebujeme
         }
         private AbstractAttribute find(string nm)
         {
@@ -161,12 +182,18 @@ namespace myDb
             List<AbstractControl> ctrls = new List<AbstractControl>();
             for (int i = 0; i < pattern.Count; i++)
             {
-                ctrls.Add(pattern[i].getControl());
+                ctrls.Add(pattern[i].getControl());//a poslednu Hidden?
             }
+	    MNumeric m = new MNumeric(true);
+	    m.setValue(recordId);
+	    recordId++;
+	    m.Hide();
+	    ctrls.Add(m);
             sender.add(ctrls);
         }
         public void addRecord(object sender, RecordEventArgs e)
         {
+		//skontrolovat, ci sa nam to tam uz nenachadza, ci to nie je edit
             this.records.AddRange(e.records);
         }
         public List<Record> find()
@@ -244,6 +271,7 @@ namespace myDb
             StreamReader stream = new StreamReader(dbName_);
             loadAttributes(stream);
             loadValues(stream);
+	    this.recordId = records.Count;
             stream.Close();
         }
         private void loadValues(StreamReader reader)

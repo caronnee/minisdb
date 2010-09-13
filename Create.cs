@@ -48,11 +48,15 @@ namespace myDb
             OpenFileDialog b = new OpenFileDialog();
             b.InitialDirectory = Environment.SpecialFolder.Recent.ToString();
             b.Multiselect = true;
-            b.ShowDialog();
-            String s = "Subory";
+            ResultDialog res = b.ShowDialog();
+          //  String s = "Subory";
+	  if (res.Value = ResultDialog.Cancel)
+		  return;
+	    chosen.Text = "";
             for (int i = 0; i < b.FileNames.Length; i++)
-                s += "\n" + b.FileNames.GetValue(i);
-            MessageBox.Show(s + "\n boli vybrane");
+		    chosen.Text +=";"+b.FileNames.GetValue(i);
+         //   s += "\n" + b.FileNames.GetValue(i);
+         //   MessageBox.Show(s + "\n boli vybrane");
         }
         private void addTextAttribute_Click(object sender, EventArgs e)
         {
@@ -230,8 +234,17 @@ namespace myDb
                 return;
             }
             this.records.changeName(this.dbName.Text);
-            this.records.save();
             this.saveEnums();
+
+		//vsetky regexoy
+	    List<Regex> regExp = new List<Regex>();
+	    //otvorenie suboro
+	    string[] files = regexp.Split(new char[]={';'}, StringSplitOptions.RemoveEmptyEntries);
+	    foreach(string s in files)
+	    {
+		    getRecords(s);
+	    }
+            this.records.save();
             this.endState = Forms.FormFormular;
             this.finalWord = name;
             this.Close();
