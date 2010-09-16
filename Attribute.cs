@@ -161,7 +161,7 @@ namespace myDb
 		{
 			return this.fill.Checked;
 		}
-		protected string getName()
+		public string getName()
 		{
 			return aType +"\t" + name.Text + "\t";
 		}
@@ -184,8 +184,7 @@ namespace myDb
 		/* returns copy of control that should handle value */
 		public abstract AbstractControl getControl();
 		/* sets atrribute with defined values, how it should look like */
-		public abstract void reconstruct(String s);
-        
+		public abstract void reconstruct(String s);   
 	}
 	public interface AbstractControl 
 	{
@@ -194,7 +193,6 @@ namespace myDb
         Type getType();
         void setValue(Value v);
 	}
-
 	class MTextBox : TextBox, AbstractControl
 	{
 		AttributeState state;
@@ -238,6 +236,8 @@ namespace myDb
 		}
         public void setValue(Value v)
         {
+            if (v == null)
+                return;
             this.Text = v.ToString();
         }
 	}
@@ -260,7 +260,7 @@ namespace myDb
         }
         public Value getValue()
         {
-            if (this.Visible)
+            if (state.mandatory || this.Visible)
                 return new ValueInteger((int)this.Value);
             return null;
         }
@@ -305,6 +305,8 @@ namespace myDb
         }
         public void setValue(Value v)
         {
+            if (v == null)
+                return;
             foreach (string s in this.Items)
                 if (s.Equals(v.ToString()))
                 {
@@ -344,6 +346,8 @@ namespace myDb
         }
         public void setValue(Value v)
         {
+            if (v == null)
+                return; //uvidime, + is Mandatory a today
             this.Value = DateTime.ParseExact(v.ToString(), Files.dateFormat, null);
         }
     }
@@ -418,7 +422,6 @@ namespace myDb
             this.path.Text = v.ToString();
         }
     }
-
     class AttributeState
     {
         static public string disableMenu = "Disable";

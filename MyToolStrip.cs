@@ -158,7 +158,7 @@ namespace myDb
             onAddLabels();
             if (getTab().Parent == null)
                 return;
-            if (labels.Count != this.controls.Count)
+            if (labels.Count != this.controls.Count-1)
                 throw new Exception("Labels and boxes have different dimensions ");
             //a to je uplne jedno kde to tam je...
             for (int i = 0; i < labels.Count; i++)
@@ -297,8 +297,9 @@ namespace myDb
             this.deleteButton.Click += new EventHandler(deleteButton_Click);
 
             this.editRecordsButton = new Button();
-            this.editRecordsButton.Text = "Duplicate";
+            this.editRecordsButton.Text = "Edit";
             this.editRecordsButton.Dock = DockStyle.Left;
+            this.editRecordsButton.Click += new EventHandler(editRecordsButton_Click);
 
            // results.ReadOnly = true;
             this.getTab().ParentChanged += new EventHandler(SelectStrip_ParentChanged);
@@ -314,6 +315,11 @@ namespace myDb
             this.getTab().Controls.Add(buttonPanel);
             this.results.DoubleClick += new EventHandler(results_DoubleClick);
             this.results.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
+        void editRecordsButton_Click(object sender, EventArgs e)
+        {
+            onEdit();
         }
 
         void results_DoubleClick(object sender, EventArgs e)

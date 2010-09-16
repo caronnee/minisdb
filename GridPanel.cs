@@ -43,7 +43,7 @@ namespace myDb
                 this.Controls.Add(b);
             }
             //do datagridtablu neskor
-            for (int i = 0; i < grid.ColumnCount ; i++)
+            for (int i = 0; i < grid.ColumnCount-1 ; i++)
                 buttons[i].Dock = DockStyle.Top;
 
         }

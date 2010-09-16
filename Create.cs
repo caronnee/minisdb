@@ -42,7 +42,7 @@ namespace myDb
         {
             this.definitionPanel.Size = new Size(
                 -this.definitionPanel.Location.X + this.addEnum.Location.X - 10,
-                -this.definitionPanel.Location.Y- 10);
+                -this.definitionPanel.Location.Y + this.cancelButton.Location.X - 10);
         }
         private void LoadFromFile_Click(object sender, EventArgs e)
         {
@@ -271,7 +271,12 @@ namespace myDb
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            this.endState = Forms.FormLoad;
+            //ak existuju uz databaze, tak ok
+            DirectoryInfo d = new DirectoryInfo(".");
+            if (d.GetFiles("*.myDb", SearchOption.TopDirectoryOnly).Length == 0)
+                this.endState = Forms.FormEnd;
+            else 
+                this.endState = Forms.FormLoad;
             this.Close();
         }
     }
