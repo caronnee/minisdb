@@ -30,12 +30,13 @@ namespace myDb
         /// </summary>
         private void InitializeComponent()
         {
+            this.regexp = new System.Windows.Forms.TextBox();
+            this.chosen = new System.Windows.Forms.TextBox();
             this.addInteger = new System.Windows.Forms.Button();
             this.addTextAttribute = new System.Windows.Forms.Button();
             this.definitionPanel = new System.Windows.Forms.Panel();
             this.addEnum = new System.Windows.Forms.Button();
             this.addImage = new System.Windows.Forms.Button();
-            this.LoadFromFile = new System.Windows.Forms.Button();
             this.createEnum = new System.Windows.Forms.Button();
             this.addTime = new System.Windows.Forms.Button();
             this.createButton = new System.Windows.Forms.Button();
@@ -44,6 +45,20 @@ namespace myDb
             this.dbName = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // regexp
+            // 
+            this.regexp.Location = new System.Drawing.Point(0, 0);
+            this.regexp.Name = "regexp";
+            this.regexp.Size = new System.Drawing.Size(100, 20);
+            this.regexp.TabIndex = 17;
+            // 
+            // chosen
+            // 
+            this.chosen.Location = new System.Drawing.Point(0, 0);
+            this.chosen.Name = "chosen";
+            this.chosen.Size = new System.Drawing.Size(100, 20);
+            this.chosen.TabIndex = 18;
             // 
             // addInteger
             // 
@@ -97,17 +112,6 @@ namespace myDb
             this.addImage.Text = "add image";
             this.addImage.UseVisualStyleBackColor = true;
             this.addImage.Click += new System.EventHandler(this.addImage_Click);
-            // 
-            // LoadFromFile
-            // 
-            this.LoadFromFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.LoadFromFile.Location = new System.Drawing.Point(31, 338);
-            this.LoadFromFile.Name = "LoadFromFile";
-            this.LoadFromFile.Size = new System.Drawing.Size(91, 28);
-            this.LoadFromFile.TabIndex = 9;
-            this.LoadFromFile.Text = "load from file";
-            this.LoadFromFile.UseVisualStyleBackColor = true;
-            this.LoadFromFile.Click += new System.EventHandler(this.LoadFromFile_Click);
             // 
             // createEnum
             // 
@@ -195,16 +199,13 @@ namespace myDb
             this.Controls.Add(this.createButton);
             this.Controls.Add(this.addTime);
             this.Controls.Add(this.createEnum);
-            this.Controls.Add(this.LoadFromFile);
             this.Controls.Add(this.addImage);
             this.Controls.Add(this.addEnum);
             this.Controls.Add(this.definitionPanel);
             this.Controls.Add(this.addTextAttribute);
             this.Controls.Add(this.addInteger);
-	    
-	    this.Controls.Add(this.regexp);
-	    this.Controls.Add(this.chosen); //potom zadat lokacie;
-
+            this.Controls.Add(this.regexp);
+            this.Controls.Add(this.chosen);
             this.Name = "Create";
             this.Text = "Create";
             this.ResumeLayout(false);
@@ -219,7 +220,6 @@ namespace myDb
         private System.Windows.Forms.Panel definitionPanel;
         private System.Windows.Forms.Button addEnum;
         private System.Windows.Forms.Button addImage;
-        private System.Windows.Forms.Button LoadFromFile;
         private System.Windows.Forms.Button createEnum;
         private System.Windows.Forms.Button addTime;
         private System.Windows.Forms.Button createButton;
@@ -228,7 +228,7 @@ namespace myDb
         private System.Windows.Forms.TextBox dbName;
         private System.Windows.Forms.Button cancelButton;
 
-	private System.Windows.Forms.Textbox regexp;
-	private System.Windows.Forms.Textbox chosen;
+	private System.Windows.Forms.TextBox regexp;
+	private System.Windows.Forms.TextBox chosen;
     }
 }

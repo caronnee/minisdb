@@ -65,7 +65,7 @@ namespace myDb
             // tabs
             // 
             this.tabs.Size = new System.Drawing.Size(545, 223);
-            this.tabs.Location = new System.Drawing.Point(20, 22); //dame to na panel, no        
+            this.tabs.Location = new System.Drawing.Point(20, 22); //dame to na panel, no   
             this.tabs.Name = "Tabs";
             this.tabs.SelectedIndex = 0;
             this.tabs.Multiline = true;
@@ -86,9 +86,11 @@ namespace myDb
             this.selectToolStripMenuItem.Text = "select";
             this.selectToolStripMenuItem.Click += new System.EventHandler(this.Menu_Click);
             this.selectToolStripMenuItem.fillGrid += new SelectStrip.DataToGrid(this.records.filter);
+            this.selectToolStripMenuItem.deleteData +=new SelectStrip.DeleteData(records.delete);
     	    this.selectToolStripMenuItem.setGrid += new SelectStrip.SetGrid(records.settingGrid);
+            this.selectToolStripMenuItem.edit += new SelectStrip.EditRecords(this.edit);
             // 
-            // selectToolStripMenuItem
+            // backToolStripMenuItem
             //
             this.backToolStripMenuItem.Name = "backToolStripMenuItem.Name";
             this.backToolStripMenuItem.AutoSize = true;
@@ -157,7 +159,10 @@ namespace myDb
             this.PerformLayout();
 
         }
-
+        private void edit(List<Value> values)
+        {
+            records.addRow(this.insertToolStripMenuItem,values);
+        }
         void changeDb_Click(object sender, System.EventArgs e)
         {
             throw new System.NotImplementedException();

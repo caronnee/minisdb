@@ -7,8 +7,11 @@ using System.Windows.Forms;
 
 namespace myDb
 {
-    static class Files
+    static class Files //TODO premenovat
     {
+        public const string noImagePath = "./images/noImage.jpg";
+        public const int space = 10;
+        public const string Id = "ID";
         public const string dateFormat = "dd.MMMM,yyyy";
         public const string enumFile = "./enums.data";
         public const string fileType = ".myDb";

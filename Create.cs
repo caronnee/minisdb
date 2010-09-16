@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using System.IO;
 
 namespace myDb
@@ -41,22 +42,22 @@ namespace myDb
         {
             this.definitionPanel.Size = new Size(
                 -this.definitionPanel.Location.X + this.addEnum.Location.X - 10,
-                -this.definitionPanel.Location.Y + this.LoadFromFile.Location.Y - 10);
+                -this.definitionPanel.Location.Y- 10);
         }
         private void LoadFromFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog b = new OpenFileDialog();
             b.InitialDirectory = Environment.SpecialFolder.Recent.ToString();
             b.Multiselect = true;
-            ResultDialog res = b.ShowDialog();
-          //  String s = "Subory";
-	  if (res.Value = ResultDialog.Cancel)
-		  return;
-	    chosen.Text = "";
+            DialogResult res = b.ShowDialog();
+            //  String s = "Subory";
+            if (res.Equals(DialogResult.Cancel))
+                return;
+            chosen.Text = "";
             for (int i = 0; i < b.FileNames.Length; i++)
-		    chosen.Text +=";"+b.FileNames.GetValue(i);
-         //   s += "\n" + b.FileNames.GetValue(i);
-         //   MessageBox.Show(s + "\n boli vybrane");
+                chosen.Text += ";" + b.FileNames.GetValue(i);
+            //   s += "\n" + b.FileNames.GetValue(i);
+            //   MessageBox.Show(s + "\n boli vybrane");
         }
         private void addTextAttribute_Click(object sender, EventArgs e)
         {
@@ -65,7 +66,7 @@ namespace myDb
         }
         public void remove(AbstractAttribute a)
         {
-            this.definitionPanel.Controls.Remove((Control) a);
+            this.definitionPanel.Controls.Remove((Control)a);
 
             //zase TAK moc tam tych atributov nebude
             int actualX = 10;
@@ -80,7 +81,7 @@ namespace myDb
         private void addAtrribute(AbstractAttribute att)
         {
             records.add(att);
-            att.close +=new AbstractAttribute.Handler(this.remove);
+            att.close += new AbstractAttribute.Handler(this.remove);
             int x = 10, y = 10;
             if (this.definitionPanel.Controls.Count > 0)
             {
@@ -236,18 +237,33 @@ namespace myDb
             this.records.changeName(this.dbName.Text);
             this.saveEnums();
 
-		//vsetky regexoy
-	    List<Regex> regExp = new List<Regex>();
-	    //otvorenie suboro
-	    string[] files = regexp.Split(new char[]={';'}, StringSplitOptions.RemoveEmptyEntries);
-	    foreach(string s in files)
-	    {
-		    getRecords(s);
-	    }
+            //vsetky regexoy
+            List<Regex> regExp = new List<Regex>();
+            //otvorenie suboro
+            string[] files = chosen.Text.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string file in files)
+            {
+                getRecords(file); //s je stream
+            }
             this.records.save();
             this.endState = Forms.FormFormular;
             this.finalWord = name;
             this.Close();
+        }
+        public void getRecords(string file)
+        {
+            try
+            {
+                StreamReader r = new StreamReader(file);
+                string text = r.ReadToEnd();
+
+                r.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
         }
 
         private Records records;
