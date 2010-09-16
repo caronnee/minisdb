@@ -1,7 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using System.Collections.Generic;
+
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 
 namespace myDb
 {
@@ -29,12 +34,12 @@ namespace myDb
         }
         public virtual int contains(Value v)
         {
-            throw new Exception("Not implemented yet");
+            throw new Exception("Not implemented yet..and never will!");
         }
     }
     class ValueText : Value
     {
-        private string text;
+        protected string text;
         public ValueText(string txt)
         {
             text = txt;
@@ -45,6 +50,8 @@ namespace myDb
         }
         public override int compare(Value v)
         {
+            if (v == null) //FUJ! musim stale ifovat
+                return -1;
             return compare(text);
         }
         public override int contains(string s)
@@ -55,6 +62,10 @@ namespace myDb
         {
             return text;
         }
+    }
+    class ValuePicture : ValueText
+    {
+        public ValuePicture(string txt) : base(txt) { }
     }
     class ValueInteger : Value
     {
@@ -69,6 +80,8 @@ namespace myDb
         }
         public override int compare(Value v)
         {
+            if (v == null) //FUJ! musim stale ifovat
+                return -1;
             return v.compare(value);
         }
         public override int contains(string s)
@@ -101,6 +114,8 @@ namespace myDb
         }
         public override int compare(Value v)
         {
+            if (v == null) //FUJ! musim stale ifovat
+                return -1;
             return v.compare(dTime);
         }
         public override string ToString()

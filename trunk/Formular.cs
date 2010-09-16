@@ -20,8 +20,14 @@ namespace myDb
             this.insertToolStripMenuItem.addRecord += new InsertStrip.addRecordsHandler(records.addRecord);
             this.insertToolStripMenuItem.addRow += new InsertStrip.addRowHandler(records.addRow);
             this.insertToolStripMenuItem.addLabels += new InsertStrip.AddLabels(records.addNames);
+            this.selectToolStripMenuItem.recordChosen += new SelectStrip.RecordChosen(selectToolStripMenuItem_recordChosen);
             this.tabs.MouseClick += new MouseEventHandler(tabs_MouseClick);
             this.Disposed += new EventHandler(Formular_Disposed);
+        }
+
+        void selectToolStripMenuItem_recordChosen(Value v)
+        {
+            this.tabs.Controls.Add(records.getDetail(v));
         }
         void tabs_MouseClick(object sender, MouseEventArgs e)
         {

@@ -167,6 +167,20 @@ namespace myDb
 		}
 
 		/* virtual methods */
+        public virtual Control showControl(Value v)
+        {
+            TextBox t = new TextBox();
+            t.Text = this.name.Text + "\r\n";
+            if (v != null) 
+                t.Text += v.ToString(); //alebo skor label?Label je lepsi..POTOM
+            t.ReadOnly = true; //JOOOOOO!..ale je to skarede...chce to zmenit skin
+            t.WordWrap = true;
+            t.Multiline = true;
+            t.Size = new System.Drawing.Size(100, 20);//minml size)
+            ShowBox s = new ShowBox(t); //jaj, to je zvrhleeee
+            return t; //alebo s.t
+        }
+     
 		/* returns copy of control that should handle value */
 		public abstract AbstractControl getControl();
 		/* sets atrribute with defined values, how it should look like */
@@ -178,6 +192,7 @@ namespace myDb
 		Value getValue();
 		Value getValue(string value);
         Type getType();
+        void setValue(Value v);
 	}
 
 	class MTextBox : TextBox, AbstractControl
@@ -221,15 +236,19 @@ namespace myDb
 		{
 			return new ValueText(text);
 		}
+        public void setValue(Value v)
+        {
+            this.Text = v.ToString();
+        }
 	}
     class MNumeric : NumericUpDown, AbstractControl
     {
         private AttributeState state;
 
-	public void setValue(int i)
-	{
-		this.Value = i;
-	}
+        public void setValue(Value v)
+        {
+            this.Value = System.Convert.ToInt32(v.ToString()); //Ale fuuuuuuuj! MNE to prejde, horsie to bude s nasledovatelmi, catch int?
+        }
         public MNumeric(bool mandatory) //kontext menu na disable
         {
             state = new AttributeState(this, mandatory);
@@ -284,6 +303,16 @@ namespace myDb
                     return new ValueText(name);
             return null;
         }
+        public void setValue(Value v)
+        {
+            foreach (string s in this.Items)
+                if (s.Equals(v.ToString()))
+                {
+                    this.SelectedItem = s;
+                    return;
+                }
+            throw new Exception( "Omg , nieco je spatne a nechce sa mi pisat chybova hlaska;)");
+        }
     }
     class MDate : DateTimePicker, AbstractControl
     {
@@ -312,6 +341,10 @@ namespace myDb
           
             return new ValueDate(DateTime.ParseExact(text,new string[]
             {Files.dateFormat,"dd.MM.yyyy","d.M.yyyy"},null, System.Globalization.DateTimeStyles.AllowWhiteSpaces));
+        }
+        public void setValue(Value v)
+        {
+            this.Value = DateTime.ParseExact(v.ToString(), Files.dateFormat, null);
         }
     }
     class MPanelFile : Panel, AbstractControl
@@ -370,15 +403,19 @@ namespace myDb
         public Value getValue()
         {
             if (this.Visible)
-                return new ValueText(path.Text);
+                return new ValuePicture(path.Text);
             return null;
         }
         public Value getValue(string text)
         {
             if (text.Equals(""))
                 return null;
-            return new ValueText(text); //mozno este check, co je to vazne adresa?
-            //WHAT...EVER!
+            return new ValuePicture(text); //mozno este check, co je to vazne adresa?
+            //WHAT...EVER!..Jo, to by sa dalo, takto hej
+        }
+        public void setValue(Value v)
+        {
+            this.path.Text = v.ToString();
         }
     }
 
@@ -729,5 +766,18 @@ namespace myDb
             mp.setText(this.defaultValue.getText());
             return mp;
         }
+      /*  public override Control showControl(Value v)
+        {
+            Value v2 = v;
+            if (v == null)
+                v2 = new ValuePicture(Files.noImagePath);
+            PictureBox picture = new PictureBox();
+            picture.ImageLocation = v2.ToString();
+            //name, size
+            picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            setContext(picture);
+            picture.Size = new System.Drawing.Size(100, 100); //zakladna size
+            return picture;
+        } */
 	}
 }

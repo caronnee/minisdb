@@ -164,7 +164,6 @@ namespace myDb
             for (int i = 0; i < labels.Count; i++)
             {
                 labels[i].Location = new System.Drawing.Point(((Control)controls[i]).Location.X, 0);
-
                 ((Control)controls[i]).Location = new System.Drawing.Point(labels[i].Location.X, labels[i].PreferredHeight + 10);
             }
             for (int i = 0; i < labels.Count; i++)
@@ -234,12 +233,21 @@ namespace myDb
         public delegate void DataToGrid(DataGridView gr, string Conditions );
         public event DataToGrid fillGrid;
 
+        public delegate void DeleteData(DataGridView gr);
+        public event DeleteData deleteData;
+
+        public delegate void EditRecords(List<Value> toChange);
+        public event EditRecords edit;
+
+        public delegate void RecordChosen(Value v); //preoc neprenasam cele, je mi tiez zahadou...
+        public event RecordChosen recordChosen;
+
         private TextBox select;
         private Button search;
         private DataGridView results;
         private Button gridColumns;
         private Button deleteButton;
-        private Button duplicateButton;
+        private Button editRecordsButton;
         private Panel buttonPanel;
         private GridPanel controlPanel;
 
@@ -286,10 +294,11 @@ namespace myDb
             this.deleteButton = new Button();
             this.deleteButton.Text = "Delete";
             this.deleteButton.Dock = DockStyle.Left;
+            this.deleteButton.Click += new EventHandler(deleteButton_Click);
 
-            this.duplicateButton = new Button();
-            this.duplicateButton.Text = "Duplicate";
-            this.duplicateButton.Dock = DockStyle.Left;
+            this.editRecordsButton = new Button();
+            this.editRecordsButton.Text = "Duplicate";
+            this.editRecordsButton.Dock = DockStyle.Left;
 
            // results.ReadOnly = true;
             this.getTab().ParentChanged += new EventHandler(SelectStrip_ParentChanged);
@@ -300,18 +309,68 @@ namespace myDb
 
             this.buttonPanel.Controls.Add(gridColumns);
             this.buttonPanel.Controls.Add(deleteButton);
-            this.buttonPanel.Controls.Add(duplicateButton);
+            this.buttonPanel.Controls.Add(editRecordsButton);
 
             this.getTab().Controls.Add(buttonPanel);
+            this.results.DoubleClick += new EventHandler(results_DoubleClick);
+            this.results.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
+        void results_DoubleClick(object sender, EventArgs e)
+        {
+            onRecordChosen();
+        }
+
+        protected void onRecordChosen()
+        {
+            if (recordChosen == null)
+                throw new Exception("No action on chosen record");
+            recordChosen(results.SelectedRows[0].Cells[Files.Id].Value as Value);
+        }
+        protected void onEdit()
+        {
+            if (results.SelectedRows.Count == 0)
+                return;
+            List<Value> v = new List<Value>();
+            foreach (DataGridViewRow row in results.SelectedRows)
+            {
+                v.Add(row.Cells[Files.Id].Value as Value);
+            }
+            edit(v);
+        }
+        protected void onDeleteData()
+        {
+            if (deleteData == null)
+                return;
+            deleteData(this.results);
+        }
+        protected void onSetGrid()
+        {
+            if (setGrid == null)
+                return; //mozno throw exception
+            setGrid(this.results);
+        }
+        protected void onFillGrid()
+        {
+            if (fillGrid == null)
+                throw new Exception("No connection set");
+            fillGrid(this.results, this.select.Text);
+        }
+
+        protected void callSetGrid(object sender, EventArgs e)
+        {
+            onSetGrid();
+        }
+        void deleteButton_Click(object sender, EventArgs e)
+        {
+            this.onDeleteData();
+        }
         void gridColumns_Click(object sender, EventArgs e)
         {
             if ( (this.controlPanel == null) ||this.controlPanel.IsDisposed)
                 this.controlPanel = new GridPanel(this.results);
             this.controlPanel.Show(); ///alebo run?
         }
-
         void results_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
             if (e.CellValue1 == null)
@@ -336,21 +395,6 @@ namespace myDb
                 return; //skontrolovat
             onSetGrid();
         }
-        protected void onFillGrid()
-        {
-            if (fillGrid == null)
-                throw new Exception("No connection set");
-            fillGrid(this.results, this.select.Text);
-        }
-        protected void callSetGrid(object sender, EventArgs e)
-        {
-            onSetGrid();
-        }
-        public void onSetGrid()
-        {
-            if (setGrid == null)
-                return; //mozno throw exception
-            setGrid(this.results);
-        }
+
     }
 }
