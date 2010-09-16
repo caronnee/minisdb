@@ -48,17 +48,19 @@ namespace myDb
             // 
             // regexp
             // 
-            this.regexp.Location = new System.Drawing.Point(0, 0);
+            this.regexp.Location = new System.Drawing.Point(176, 338);
             this.regexp.Name = "regexp";
             this.regexp.Size = new System.Drawing.Size(100, 20);
             this.regexp.TabIndex = 17;
+            this.regexp.Visible = false;
             // 
             // chosen
             // 
-            this.chosen.Location = new System.Drawing.Point(0, 0);
+            this.chosen.Location = new System.Drawing.Point(296, 338);
             this.chosen.Name = "chosen";
             this.chosen.Size = new System.Drawing.Size(100, 20);
             this.chosen.TabIndex = 18;
+            this.chosen.Visible = false;
             // 
             // addInteger
             // 
@@ -86,9 +88,9 @@ namespace myDb
             // 
             this.definitionPanel.AutoScroll = true;
             this.definitionPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.definitionPanel.Location = new System.Drawing.Point(31, 50);
+            this.definitionPanel.Location = new System.Drawing.Point(12, 38);
             this.definitionPanel.Name = "definitionPanel";
-            this.definitionPanel.Size = new System.Drawing.Size(100, 100);
+            this.definitionPanel.Size = new System.Drawing.Size(684, 294);
             this.definitionPanel.TabIndex = 6;
             // 
             // addEnum

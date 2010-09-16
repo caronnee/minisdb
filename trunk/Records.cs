@@ -201,9 +201,37 @@ namespace myDb
                 Control c = pattern[i].showControl(vals[i]);
                 c.Location = new System.Drawing.Point(controlInfo[i].x,controlInfo[i].y);
                 c.Size = new System.Drawing.Size(controlInfo[i].width, controlInfo[i].heigth);
+                c.Name = this.pattern[i].getName();
+
+                //malo by si to niest aj I..TODO
+                c.SizeChanged +=new EventHandler(c_SizeChanged);
+                c.LocationChanged += new EventHandler(c_LocationChanged);
                 p.Controls.Add(c); 
             }
             return p;
+        }
+
+        void c_LocationChanged(object sender, EventArgs e)
+        {
+            //TOTO nu chcelo az po kliknuti - TODO
+            Control c = sender as Control;
+            int index = getIndex(c.Name);
+            controlInfo[index].x = c.Location.X;
+            controlInfo[index].y = c.Location.Y;
+        }
+        private int getIndex(string name)
+        {
+            for (int i = 0; i < pattern.Count; i++)
+                if (pattern[i].getName().Equals(name))
+                    return i;
+            return -1;
+        }
+        void c_SizeChanged(object sender, EventArgs e)
+        {
+            Control c = sender as Control;
+            int index = getIndex(c.Name);
+            controlInfo[index].width = c.Size.Width;
+            controlInfo[index].heigth = c.Size.Height;
         }
         private Record findRecord(Value v)
         {
@@ -224,14 +252,25 @@ namespace myDb
                     throw new Exception("unexpected value");
                 List<AbstractControl> ctrls = new List<AbstractControl>();
                 List<Value> row = r.getValues();
-                for (int i = 0; i < row.Count; i++)
+                for (int i = 0; i < row.Count -1; i++)
                 {
                     AbstractControl c = pattern[i].getControl();
                     c.setValue(row[i]);
                     ctrls.Add(c);
                 }
+                ctrls.Add(additionalHiddenControl(row[pattern.Count]));
                 where.add(ctrls);
             }
+        }
+        private AbstractControl additionalHiddenControl(Value t)
+        {
+            Value input = t;
+            if (t == null)
+                input = getIdValue();
+            MNumeric m = new MNumeric(true);
+            m.setValue(input);
+            m.Hide();
+            return m;
         }
         public void addRow(InsertStrip sender)
         {
@@ -240,10 +279,7 @@ namespace myDb
             {
                 ctrls.Add(pattern[i].getControl());//a poslednu Hidden?
             }
-            MNumeric m = new MNumeric(true);
-            m.setValue(getIdValue());
-            m.Hide();
-            ctrls.Add(m);
+            ctrls.Add(additionalHiddenControl(null));
             sender.add(ctrls);
         }
         private Value getIdValue()
@@ -280,7 +316,10 @@ namespace myDb
                     continue;
                 }
                 int index = records.IndexOf(findRecord(r.getIdValue())); //if not null..co by nemal byt
-                records[index] = r; //zamenime
+                if (index < 0)
+                    records.Add(r);
+                else
+                    records[index] = r; //zamenime
             }
         }
         public List<Record> find()
