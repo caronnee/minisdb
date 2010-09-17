@@ -48,7 +48,7 @@ namespace myDb
         public ConditionEqual(string name, Value v) : base(name, v) { }
         public override bool compareTo(Value v)
         {
-            return toCompare.compare(v) == 0;
+            return v.compare(toCompare) == 0;
         }
     }
     public class ConditionLessEqual : Condition
