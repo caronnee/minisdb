@@ -37,12 +37,11 @@ namespace myDb
             //inicializuj enumy
             loadEnums();
         }
-
         void Create_Resize(object sender, EventArgs e)
         {
             this.definitionPanel.Size = new Size(
                 -this.definitionPanel.Location.X + this.addEnum.Location.X - 10,
-                -this.definitionPanel.Location.Y + this.cancelButton.Location.X - 10);
+                -this.definitionPanel.Location.Y + this.cancelButton.Location.Y - 10);
         }
         private void LoadFromFile_Click(object sender, EventArgs e)
         {
@@ -198,57 +197,57 @@ namespace myDb
         }
         private void createButton_Click(object sender, EventArgs e)
         {
-            //check for all attributed to be correct
-            if (this.definitionPanel.Controls.Count == 0)
-                return; //new meesage - warning!
-            //check for name duplicity
-            for (int i = 0; i < this.definitionPanel.Controls.Count; i++)
+            try
             {
-                AbstractAttribute a = (AbstractAttribute)this.definitionPanel.Controls[i];
-                string s = a.getAttributeName();
-                for (int j = i + 1; j < this.definitionPanel.Controls.Count; j++)
+                //check for all attributed to be correct
+                if (this.definitionPanel.Controls.Count == 0)
+                    throw new Exception("record of no data! please add some data");
+                //check for name duplicity
+                for (int i = 0; i < this.definitionPanel.Controls.Count; i++)
                 {
-                    if (((AbstractAttribute)this.definitionPanel.Controls[j]).getAttributeName().Equals(s))
+                    AbstractAttribute a = (AbstractAttribute)this.definitionPanel.Controls[i];
+                    string s = a.getAttributeName();
+                    for (int j = i + 1; j < this.definitionPanel.Controls.Count; j++)
                     {
-                        MessageBox.Show("Two attributes with same name! <" + s + ">");
-                        return;
+                        if (((AbstractAttribute)this.definitionPanel.Controls[j]).getAttributeName().Equals(s))
+                            throw new Exception("Two attributes with same name! <" + s + ">");
                     }
                 }
-            }
-            foreach (AbstractAttribute a in this.definitionPanel.Controls)
-            {
-                //a.Controls.Remove(warnLabel);
-                //a.Controls.Remove(warn);
-                a.ForeColor = Color.Empty;
-                if (a.isMandatory() && (a.getControl().getValue() == null))
+                foreach (AbstractAttribute a in this.definitionPanel.Controls)
                 {
-                    a.ForeColor = Color.Firebrick;
-                    MessageBox.Show("Error on attribute " + a.getAttributeName(),
-                        "Warning", MessageBoxButtons.OK);
-                    return;
-                }
-            }
-            string name = dbName.Text + Files.fileType;
-            if (dbName.Equals("") || File.Exists(name))
-            {
-                MessageBox.Show("File already exists!");
-                return;
-            }
-            this.records.changeName(this.dbName.Text);
-            this.saveEnums();
 
-            //vsetky regexoy
-            List<Regex> regExp = new List<Regex>();
-            //otvorenie suboro
-            string[] files = chosen.Text.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string file in files)
-            {
-                getRecords(file); //s je stream
+                    if (a.getAttributeName().Equals(""))
+                        throw new Exception("Empty attribute name!");
+                    if (a.isMandatory() && (a.getControl().getValue() == null))
+                        throw new Exception("Error on attribute " + 
+                            a.getAttributeName() + 
+                            "should be set and it is not");
+                }
+                if (dbName.Text.Equals(""))
+                    throw new Exception("No databse name set!");
+                string name = dbName.Text + Files.fileType;
+                if (File.Exists(name))
+                    throw new Exception("File already exists!");
+                this.records.changeName(this.dbName.Text);
+                this.saveEnums();
+
+                //vsetky regexoy
+                List<Regex> regExp = new List<Regex>();
+                //otvorenie suboro
+                string[] files = chosen.Text.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string file in files)
+                {
+                    getRecords(file); //s je stream
+                }
+                this.records.save();
+                this.endState = Forms.FormFormular;
+                this.finalWord = name;
+                this.Close();
             }
-            this.records.save();
-            this.endState = Forms.FormFormular;
-            this.finalWord = name;
-            this.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Warning!",MessageBoxButtons.OK);
+            }
         }
         public void getRecords(string file)
         {
