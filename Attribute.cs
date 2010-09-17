@@ -60,8 +60,8 @@ namespace myDb
 
 			fillLabel = new Label();
 			fillLabel.AutoSize = true;
-			fillLabel.Text = "Must be";
-			fillLabel.Name = "Must be filled";
+			fillLabel.Text = "Mandatory";
+			fillLabel.Name = "Mandatory";
 			fillLabel.Size = new System.Drawing.Size(35, 20);
 
 			fill.CheckedChanged += new EventHandler(fill_CheckedChanged);

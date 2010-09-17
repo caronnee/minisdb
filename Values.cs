@@ -54,6 +54,10 @@ namespace myDb
                 return -1;
             return compare(text);
         }
+        public override int contains(Value v)
+        {
+            return v.contains(text);
+        }
         public override int contains(string s)
         {
             return text.IndexOf(s);
@@ -73,6 +77,10 @@ namespace myDb
         public ValueInteger(int i)
         {
             value = i;
+        }
+        public override int contains(Value v)
+        {
+            return v.contains(value.ToString());
         }
         public override int compare(int i)
         {
@@ -99,6 +107,10 @@ namespace myDb
         public ValueDate(DateTime d)
         {
             dTime = d;
+        }
+        public override int contains(Value v)
+        {
+            return v.contains(dTime.ToString());
         }
         public override int contains(string s)
         {

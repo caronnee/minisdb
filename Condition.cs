@@ -62,7 +62,7 @@ namespace myDb
     public class ConditionNot : Condition //value bude Null/..co uz
     {
         private Condition toNegate;
-        public ConditionNot(Condition c) : base(null, null) 
+        public ConditionNot(Condition c) : base(c.getName(), null) 
         {
             toNegate = c;
         }

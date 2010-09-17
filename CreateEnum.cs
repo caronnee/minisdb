@@ -26,6 +26,7 @@ namespace myDb
             }
             this.defined.Items.Add(toDefine.Text);
             this.toDefine.Text = "";
+            this.toDefine.Focus();
         }
 
         private void remove_Click(object sender, EventArgs e)
@@ -35,12 +36,19 @@ namespace myDb
 
         private void ok_Click(object sender, EventArgs e)
         {
-            if (this.defined.Items.Count == 0)
-                return;
-            if (this.name.Text.Length == 0)
-                return;
-            this.endState = Forms.FormCreateBd;
-            this.Close();
+            try
+            {
+                if (this.defined.Items.Count == 0)
+                    throw new Exception("No enum defined");
+                if (this.name.Text.Length == 0)
+                    throw new Exception("Name of enum is ntot valid!");
+                this.endState = Forms.FormCreateBd;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public string getName()
         {

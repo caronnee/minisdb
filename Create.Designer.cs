@@ -44,6 +44,7 @@ namespace myDb
             this.removeEnum = new System.Windows.Forms.Button();
             this.dbName = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.dbNameLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // regexp
@@ -88,9 +89,9 @@ namespace myDb
             // 
             this.definitionPanel.AutoScroll = true;
             this.definitionPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.definitionPanel.Location = new System.Drawing.Point(12, 38);
+            this.definitionPanel.Location = new System.Drawing.Point(12, 50);
             this.definitionPanel.Name = "definitionPanel";
-            this.definitionPanel.Size = new System.Drawing.Size(684, 294);
+            this.definitionPanel.Size = new System.Drawing.Size(160, 68);
             this.definitionPanel.TabIndex = 6;
             // 
             // addEnum
@@ -172,7 +173,7 @@ namespace myDb
             // dbName
             // 
             this.dbName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.dbName.Location = new System.Drawing.Point(131, 12);
+            this.dbName.Location = new System.Drawing.Point(133, 12);
             this.dbName.Name = "dbName";
             this.dbName.Size = new System.Drawing.Size(517, 20);
             this.dbName.TabIndex = 15;
@@ -180,6 +181,7 @@ namespace myDb
             // 
             // cancelButton
             // 
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.Location = new System.Drawing.Point(625, 338);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
@@ -188,12 +190,24 @@ namespace myDb
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // dbNameLabel
+            // 
+            this.dbNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.dbNameLabel.AutoSize = true;
+            this.dbNameLabel.Location = new System.Drawing.Point(45, 15);
+            this.dbNameLabel.Name = "dbNameLabel";
+            this.dbNameLabel.Size = new System.Drawing.Size(82, 13);
+            this.dbNameLabel.TabIndex = 19;
+            this.dbNameLabel.Text = "Database name";
+            // 
             // Create
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(796, 378);
+            this.Controls.Add(this.dbNameLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.dbName);
             this.Controls.Add(this.removeEnum);
@@ -232,5 +246,6 @@ namespace myDb
 
 	private System.Windows.Forms.TextBox regexp;
 	private System.Windows.Forms.TextBox chosen;
+    private System.Windows.Forms.Label dbNameLabel;
     }
 }
