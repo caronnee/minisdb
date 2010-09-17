@@ -139,7 +139,23 @@ namespace myDb
             //layout
             this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.infoBox.Dock = System.Windows.Forms.DockStyle.Right;
-                                                         
+            
+            //default page showing all racords
+            System.Windows.Forms.TabPage firstPage = new System.Windows.Forms.TabPage();
+            firstPage.Text = "All records";
+
+            System.Windows.Forms.DataGridView grid = new System.Windows.Forms.DataGridView();
+            grid.AllowUserToAddRows = false;
+            grid.ReadOnly = true;
+            grid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            grid.DoubleClick += new System.EventHandler(grid_DoubleClick);
+            grid.Dock = System.Windows.Forms.DockStyle.Fill;
+
+            records.settingGrid(grid);
+            records.filter(grid, "");
+            firstPage.Controls.Add(grid);
+            tabs.Controls.Add(firstPage);
+                     
          // this.Resize += new System.EventHandler(Formular_Resize);
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -158,6 +174,14 @@ namespace myDb
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        void grid_DoubleClick(object sender, System.EventArgs e)
+        {
+            System.Windows.Forms.DataGridView d = sender as System.Windows.Forms.DataGridView;
+           foreach ( System.Windows.Forms.DataGridViewRow r in d.SelectedRows)
+
+               selectToolStripMenuItem_recordChosen(r.Cells[Files.Id].Value as Value);
         }
         private void edit(List<Value> values)
         {
