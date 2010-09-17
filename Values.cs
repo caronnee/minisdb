@@ -54,7 +54,7 @@ namespace myDb
         {
             if (v == null) //FUJ! musim stale ifovat
                 return -1;
-            return compare(text);
+            return v.compare(text);
         }
         public override string ToString()
         {

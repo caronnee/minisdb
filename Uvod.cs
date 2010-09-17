@@ -46,7 +46,7 @@ namespace myDb
         {
             if (this.chooseDb.Items.Count == 0)
                 return; //ziadne warnig
-            DialogResult result = MessageBox.Show("You're sure to remove " + this.chooseDb.SelectedItem.ToString(),"warning!",MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("Are you sure to remove " + this.chooseDb.SelectedItem.ToString()+ "?","Warning!",MessageBoxButtons.YesNo);
             if (result == DialogResult.No)
                 return;
             File.Delete("./" + this.chooseDb.SelectedItem.ToString());
