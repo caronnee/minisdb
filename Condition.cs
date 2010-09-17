@@ -30,7 +30,7 @@ namespace myDb
         }
         public override bool compareTo(Value v)
         {
-            return toCompare.contains(v) > 0;
+            return v.contains(toCompare) >= 0;
         }
     }
     public class ConditionLess : Condition

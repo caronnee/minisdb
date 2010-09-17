@@ -30,11 +30,13 @@ namespace myDb
         }
         public virtual int contains(string s)
         {
-            throw new Exception("No such type allowed to compare ");
+            return this.ToString().IndexOf(s);
         }
         public virtual int contains(Value v)
         {
-            throw new Exception("Not implemented yet..and never will!");
+            if (v == null)
+                return -1;
+            return this.contains(v.ToString());
         }
     }
     class ValueText : Value
@@ -54,14 +56,6 @@ namespace myDb
                 return -1;
             return compare(text);
         }
-        public override int contains(Value v)
-        {
-            return v.contains(text);
-        }
-        public override int contains(string s)
-        {
-            return text.IndexOf(s);
-        }
         public override string ToString()
         {
             return text;
@@ -78,10 +72,6 @@ namespace myDb
         {
             value = i;
         }
-        public override int contains(Value v)
-        {
-            return v.contains(value.ToString());
-        }
         public override int compare(int i)
         {
             return value - i;
@@ -91,10 +81,6 @@ namespace myDb
             if (v == null) //FUJ! musim stale ifovat
                 return -1;
             return v.compare(value);
-        }
-        public override int contains(string s)
-        {
-            return value.ToString().IndexOf(s);
         }
         public override string ToString()
         {
@@ -107,14 +93,6 @@ namespace myDb
         public ValueDate(DateTime d)
         {
             dTime = d;
-        }
-        public override int contains(Value v)
-        {
-            return v.contains(dTime.ToString());
-        }
-        public override int contains(string s)
-        {
-            return dTime.ToString().IndexOf(s);
         }
         public override int compare(DateTime d)
         {
