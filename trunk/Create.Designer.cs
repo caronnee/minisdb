@@ -45,11 +45,18 @@ namespace myDb
             this.dbName = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.dbNameLabel = new System.Windows.Forms.Label();
+            this.ManipulationControls = new System.Windows.Forms.GroupBox();
+            this.RecordItemsArea = new System.Windows.Forms.GroupBox();
+            this.dbNameArea = new System.Windows.Forms.GroupBox();
+            this.ManipulationControls.SuspendLayout();
+            this.RecordItemsArea.SuspendLayout();
+            this.dbNameArea.SuspendLayout();
             this.SuspendLayout();
             // 
             // regexp
             // 
-            this.regexp.Location = new System.Drawing.Point(176, 338);
+            this.regexp.Dock = System.Windows.Forms.DockStyle.Left;
+            this.regexp.Location = new System.Drawing.Point(3, 16);
             this.regexp.Name = "regexp";
             this.regexp.Size = new System.Drawing.Size(100, 20);
             this.regexp.TabIndex = 17;
@@ -57,7 +64,8 @@ namespace myDb
             // 
             // chosen
             // 
-            this.chosen.Location = new System.Drawing.Point(296, 338);
+            this.chosen.Dock = System.Windows.Forms.DockStyle.Left;
+            this.chosen.Location = new System.Drawing.Point(103, 16);
             this.chosen.Name = "chosen";
             this.chosen.Size = new System.Drawing.Size(100, 20);
             this.chosen.TabIndex = 18;
@@ -65,10 +73,10 @@ namespace myDb
             // 
             // addInteger
             // 
-            this.addInteger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addInteger.Location = new System.Drawing.Point(702, 79);
+            this.addInteger.Dock = System.Windows.Forms.DockStyle.Top;
+            this.addInteger.Location = new System.Drawing.Point(3, 16);
             this.addInteger.Name = "addInteger";
-            this.addInteger.Size = new System.Drawing.Size(77, 22);
+            this.addInteger.Size = new System.Drawing.Size(72, 22);
             this.addInteger.TabIndex = 4;
             this.addInteger.Text = "add integer";
             this.addInteger.UseVisualStyleBackColor = true;
@@ -76,10 +84,10 @@ namespace myDb
             // 
             // addTextAttribute
             // 
-            this.addTextAttribute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addTextAttribute.Location = new System.Drawing.Point(702, 50);
+            this.addTextAttribute.Dock = System.Windows.Forms.DockStyle.Top;
+            this.addTextAttribute.Location = new System.Drawing.Point(3, 61);
             this.addTextAttribute.Name = "addTextAttribute";
-            this.addTextAttribute.Size = new System.Drawing.Size(77, 23);
+            this.addTextAttribute.Size = new System.Drawing.Size(72, 23);
             this.addTextAttribute.TabIndex = 5;
             this.addTextAttribute.Text = "add text";
             this.addTextAttribute.UseVisualStyleBackColor = true;
@@ -89,17 +97,19 @@ namespace myDb
             // 
             this.definitionPanel.AutoScroll = true;
             this.definitionPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.definitionPanel.Location = new System.Drawing.Point(12, 50);
+            this.definitionPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.definitionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.definitionPanel.Location = new System.Drawing.Point(0, 49);
             this.definitionPanel.Name = "definitionPanel";
-            this.definitionPanel.Size = new System.Drawing.Size(160, 68);
+            this.definitionPanel.Size = new System.Drawing.Size(718, 283);
             this.definitionPanel.TabIndex = 6;
             // 
             // addEnum
             // 
-            this.addEnum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addEnum.Location = new System.Drawing.Point(702, 192);
+            this.addEnum.Dock = System.Windows.Forms.DockStyle.Top;
+            this.addEnum.Location = new System.Drawing.Point(3, 128);
             this.addEnum.Name = "addEnum";
-            this.addEnum.Size = new System.Drawing.Size(77, 23);
+            this.addEnum.Size = new System.Drawing.Size(72, 23);
             this.addEnum.TabIndex = 7;
             this.addEnum.Text = "add enum";
             this.addEnum.UseVisualStyleBackColor = true;
@@ -107,10 +117,10 @@ namespace myDb
             // 
             // addImage
             // 
-            this.addImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addImage.Location = new System.Drawing.Point(702, 107);
+            this.addImage.Dock = System.Windows.Forms.DockStyle.Top;
+            this.addImage.Location = new System.Drawing.Point(3, 84);
             this.addImage.Name = "addImage";
-            this.addImage.Size = new System.Drawing.Size(77, 21);
+            this.addImage.Size = new System.Drawing.Size(72, 21);
             this.addImage.TabIndex = 8;
             this.addImage.Text = "add image";
             this.addImage.UseVisualStyleBackColor = true;
@@ -118,10 +128,10 @@ namespace myDb
             // 
             // createEnum
             // 
-            this.createEnum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.createEnum.Location = new System.Drawing.Point(702, 163);
+            this.createEnum.Dock = System.Windows.Forms.DockStyle.Top;
+            this.createEnum.Location = new System.Drawing.Point(3, 105);
             this.createEnum.Name = "createEnum";
-            this.createEnum.Size = new System.Drawing.Size(75, 23);
+            this.createEnum.Size = new System.Drawing.Size(72, 23);
             this.createEnum.TabIndex = 10;
             this.createEnum.Text = "Create enum";
             this.createEnum.UseVisualStyleBackColor = true;
@@ -129,10 +139,10 @@ namespace myDb
             // 
             // addTime
             // 
-            this.addTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addTime.Location = new System.Drawing.Point(702, 134);
+            this.addTime.Dock = System.Windows.Forms.DockStyle.Top;
+            this.addTime.Location = new System.Drawing.Point(3, 38);
             this.addTime.Name = "addTime";
-            this.addTime.Size = new System.Drawing.Size(75, 23);
+            this.addTime.Size = new System.Drawing.Size(72, 23);
             this.addTime.TabIndex = 11;
             this.addTime.Text = "add time";
             this.addTime.UseVisualStyleBackColor = true;
@@ -140,10 +150,10 @@ namespace myDb
             // 
             // createButton
             // 
-            this.createButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.createButton.Location = new System.Drawing.Point(534, 338);
+            this.createButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.createButton.Location = new System.Drawing.Point(718, 16);
             this.createButton.Name = "createButton";
-            this.createButton.Size = new System.Drawing.Size(75, 23);
+            this.createButton.Size = new System.Drawing.Size(75, 27);
             this.createButton.TabIndex = 12;
             this.createButton.Text = "Create";
             this.createButton.UseVisualStyleBackColor = true;
@@ -151,20 +161,20 @@ namespace myDb
             // 
             // definedEnums
             // 
-            this.definedEnums.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.definedEnums.Dock = System.Windows.Forms.DockStyle.Top;
             this.definedEnums.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.definedEnums.FormattingEnabled = true;
-            this.definedEnums.Location = new System.Drawing.Point(702, 225);
+            this.definedEnums.Location = new System.Drawing.Point(3, 151);
             this.definedEnums.Name = "definedEnums";
-            this.definedEnums.Size = new System.Drawing.Size(74, 21);
+            this.definedEnums.Size = new System.Drawing.Size(72, 21);
             this.definedEnums.TabIndex = 13;
             // 
             // removeEnum
             // 
-            this.removeEnum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.removeEnum.Location = new System.Drawing.Point(702, 256);
+            this.removeEnum.Dock = System.Windows.Forms.DockStyle.Top;
+            this.removeEnum.Location = new System.Drawing.Point(3, 172);
             this.removeEnum.Name = "removeEnum";
-            this.removeEnum.Size = new System.Drawing.Size(77, 23);
+            this.removeEnum.Size = new System.Drawing.Size(72, 23);
             this.removeEnum.TabIndex = 14;
             this.removeEnum.Text = "remove enum";
             this.removeEnum.UseVisualStyleBackColor = true;
@@ -172,19 +182,19 @@ namespace myDb
             // 
             // dbName
             // 
-            this.dbName.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.dbName.Location = new System.Drawing.Point(133, 12);
+            this.dbName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbName.Location = new System.Drawing.Point(3, 16);
             this.dbName.Name = "dbName";
-            this.dbName.Size = new System.Drawing.Size(517, 20);
+            this.dbName.Size = new System.Drawing.Size(790, 20);
             this.dbName.TabIndex = 15;
             this.dbName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cancelButton
             // 
-            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Location = new System.Drawing.Point(625, 338);
+            this.cancelButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.cancelButton.Location = new System.Drawing.Point(643, 16);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.Size = new System.Drawing.Size(75, 27);
             this.cancelButton.TabIndex = 16;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -192,40 +202,72 @@ namespace myDb
             // 
             // dbNameLabel
             // 
-            this.dbNameLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dbNameLabel.AutoSize = true;
-            this.dbNameLabel.Location = new System.Drawing.Point(45, 15);
+            this.dbNameLabel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dbNameLabel.Location = new System.Drawing.Point(3, 16);
             this.dbNameLabel.Name = "dbNameLabel";
             this.dbNameLabel.Size = new System.Drawing.Size(82, 13);
             this.dbNameLabel.TabIndex = 19;
             this.dbNameLabel.Text = "Database name";
             // 
+            // ManipulationControls
+            // 
+            this.ManipulationControls.Controls.Add(this.cancelButton);
+            this.ManipulationControls.Controls.Add(this.chosen);
+            this.ManipulationControls.Controls.Add(this.createButton);
+            this.ManipulationControls.Controls.Add(this.regexp);
+            this.ManipulationControls.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ManipulationControls.Location = new System.Drawing.Point(0, 332);
+            this.ManipulationControls.Name = "ManipulationControls";
+            this.ManipulationControls.Size = new System.Drawing.Size(796, 46);
+            this.ManipulationControls.TabIndex = 20;
+            this.ManipulationControls.TabStop = false;
+            // 
+            // RecordItemsArea
+            // 
+            this.RecordItemsArea.Controls.Add(this.removeEnum);
+            this.RecordItemsArea.Controls.Add(this.definedEnums);
+            this.RecordItemsArea.Controls.Add(this.addEnum);
+            this.RecordItemsArea.Controls.Add(this.createEnum);
+            this.RecordItemsArea.Controls.Add(this.addImage);
+            this.RecordItemsArea.Controls.Add(this.addTextAttribute);
+            this.RecordItemsArea.Controls.Add(this.addTime);
+            this.RecordItemsArea.Controls.Add(this.addInteger);
+            this.RecordItemsArea.Dock = System.Windows.Forms.DockStyle.Right;
+            this.RecordItemsArea.Location = new System.Drawing.Point(718, 49);
+            this.RecordItemsArea.Name = "RecordItemsArea";
+            this.RecordItemsArea.Size = new System.Drawing.Size(78, 283);
+            this.RecordItemsArea.TabIndex = 21;
+            this.RecordItemsArea.TabStop = false;
+            // 
+            // dbNameArea
+            // 
+            this.dbNameArea.Controls.Add(this.dbName);
+            this.dbNameArea.Controls.Add(this.dbNameLabel);
+            this.dbNameArea.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dbNameArea.Location = new System.Drawing.Point(0, 0);
+            this.dbNameArea.Name = "dbNameArea";
+            this.dbNameArea.Size = new System.Drawing.Size(796, 49);
+            this.dbNameArea.TabIndex = 22;
+            this.dbNameArea.TabStop = false;
+            // 
             // Create
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(796, 378);
-            this.Controls.Add(this.dbNameLabel);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.dbName);
-            this.Controls.Add(this.removeEnum);
-            this.Controls.Add(this.definedEnums);
-            this.Controls.Add(this.createButton);
-            this.Controls.Add(this.addTime);
-            this.Controls.Add(this.createEnum);
-            this.Controls.Add(this.addImage);
-            this.Controls.Add(this.addEnum);
             this.Controls.Add(this.definitionPanel);
-            this.Controls.Add(this.addTextAttribute);
-            this.Controls.Add(this.addInteger);
-            this.Controls.Add(this.regexp);
-            this.Controls.Add(this.chosen);
+            this.Controls.Add(this.RecordItemsArea);
+            this.Controls.Add(this.ManipulationControls);
+            this.Controls.Add(this.dbNameArea);
             this.Name = "Create";
             this.Text = "Create";
+            this.ManipulationControls.ResumeLayout(false);
+            this.ManipulationControls.PerformLayout();
+            this.RecordItemsArea.ResumeLayout(false);
+            this.dbNameArea.ResumeLayout(false);
+            this.dbNameArea.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -247,5 +289,8 @@ namespace myDb
 	private System.Windows.Forms.TextBox regexp;
 	private System.Windows.Forms.TextBox chosen;
     private System.Windows.Forms.Label dbNameLabel;
+    private System.Windows.Forms.GroupBox ManipulationControls;
+    private System.Windows.Forms.GroupBox RecordItemsArea;
+    private System.Windows.Forms.GroupBox dbNameArea;
     }
 }

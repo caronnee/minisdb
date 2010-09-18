@@ -41,6 +41,9 @@ namespace myDb
         List<ControlInfo> controlInfo;
         private int recordId;
 
+        public delegate void InfoHandler(string s);
+        public event InfoHandler infoHandler;
+
         /* methods */
         public Records()
         {
@@ -55,6 +58,15 @@ namespace myDb
             dbName_ = dbName;
             load();
         }
+        protected void onInfoHandler(string s)
+        {
+            if (infoHandler == null)
+                return;
+            infoHandler(s);
+        }
+
+        /* methods used for creating db */
+
         /* changes name of the database that enables saving to another name */
         public void changeName(string s) //jednoduche kopirovanie;)
         {
@@ -70,25 +82,7 @@ namespace myDb
         {
             this.pattern.Remove(a);
         }
-        public void delete(DataGridView grid)
-        {
-            //musime tam mat este nejake ID a to mat v gride
-            foreach (DataGridViewRow row in grid.SelectedRows)
-            {//najdi poslednu value
-
-                foreach (Record r in records)
-                {
-                    Value rowValue = row.Cells[grid.ColumnCount - 1].Value as Value;
-                    List<Value> v = r.getValues();
-                    if (v[v.Count - 1].compare(rowValue) != 0) //last Cell, snad to zavola to intove
-                        continue;
-                    records.Remove(r);
-                    grid.Rows.Remove(row); //snad to funguje
-                    break;
-                }
-
-            }
-        }
+        
         public void settingGrid(DataGridView grid)
         {
             grid.ColumnCount = pattern.Count + 1;
@@ -100,6 +94,182 @@ namespace myDb
             grid.Columns[pattern.Count].Name = Files.Id; //pripisat aj typ? Ano, bo to budeme zoradovat..a lexikograficke cisla nie su zoradene spravne..nehovoriac o datumoch
             //typ tu nepotrebujeme
         }
+        public void addRow(InsertStrip where, List<Value> values)
+        {
+            foreach (Value v in values)
+            {
+                Record r = findRecord(v);
+                if (r == null)
+                    throw new Exception("unexpected value");
+                List<AbstractControl> ctrls = new List<AbstractControl>();
+                List<Value> row = r.getValues();
+                for (int i = 0; i < row.Count - 1; i++)
+                {
+                    AbstractControl c = pattern[i].getControl();
+                    c.setValue(row[i]);
+                    ctrls.Add(c);
+                }
+                ctrls.Add(additionalHiddenControl(row[pattern.Count]));
+                where.add(ctrls);
+            }
+        }
+        public void addRecord(List<String> values)
+        {
+            //predpokladame ticho, ze pocet hodnot pre jedno a druhe je stejne
+            Record record = new Record();
+            //ja sa ich tu pokusim nacitat a ked nie, tak buchnem
+            try
+            {
+                for (int i = 0; i < values.Count; i++)
+                {
+                    record.add(pattern[i].getControl().getValue(values[i]));
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        } //NEPOUZITE
+     
+        /* methods in formular */
+        public TabPage getDetail(Value idValue)
+        {
+            onInfoHandler("Displaying selected record, with id " + idValue.ToString() + "..");
+            Record r = this.findRecord(idValue);
+            TabPage p = new TabPage();
+            p.BorderStyle = BorderStyle.FixedSingle;
+            p.AutoScroll = true;
+            p.Text = idValue.ToString();
+            List<Value> vals = r.getValues();
+            for (int i = 0; i < pattern.Count; i++) //posledne neberieme
+            {
+                Control c = pattern[i].showControl(vals[i]);
+                c.Location = new System.Drawing.Point(controlInfo[i].x, controlInfo[i].y);
+                c.Size = new System.Drawing.Size(controlInfo[i].width, controlInfo[i].heigth);
+                c.Name = this.pattern[i].getName();
+
+                //malo by si to niest aj I..TODO
+                c.SizeChanged += new EventHandler(c_SizeChanged);
+                c.LocationChanged += new EventHandler(c_LocationChanged);
+                p.Controls.Add(c);
+            }
+            onInfoHandler("Displayed. \r\n");
+            return p;
+        }
+        void c_LocationChanged(object sender, EventArgs e)
+        {
+            //TOTO nu chcelo az po kliknuti - TODO, inak nebudu fungovat infoboxy//mozno hover? TODO
+            Control c = sender as Control;
+            int index = getIndex(c.Name);
+            controlInfo[index].x = c.Location.X;
+            controlInfo[index].y = c.Location.Y;
+        }
+        void c_SizeChanged(object sender, EventArgs e)
+        {
+            Control c = sender as Control;
+            onInfoHandler("Size changed to width = " + c.Size.Width.ToString() + "and heigth" + c.Size.Height.ToString() + "\r\n" );
+            int index = getIndex(c.Name);
+            controlInfo[index].width = c.Size.Width;
+            controlInfo[index].heigth = c.Size.Height;
+        }
+        public void filter(DataGridView data, string query)
+        {
+            if (query == "")
+                onInfoHandler("Refreshing database...");
+            else 
+                onInfoHandler("Selecting records by query " + query + "\r\n..");
+            List<Condition> conditions = this.parseQuery(query);
+            //regexp = '*'
+            if (conditions == null)
+                return; //+ nejake warning? Myslim, ze netreba
+
+            data.Rows.Clear();
+            for (int i = 0; i < records.Count; i++)
+            {
+                int index;
+                foreach (Condition c in conditions)
+                {
+                    index = pattern.IndexOf(this.find(c.getName()));
+                    Value v1 = records[i].getValues()[index];
+                    if (v1 == null)
+                        goto Next;
+                    if (!c.compareTo(v1))
+                        goto Next; //goTO!!..ale brekeke!..FUUUUUUUJ
+                }
+                index = data.Rows.Add();
+                //mozem sa spolahnut na poeradie?..vlastne musim;)..vlastne nie:D TODO dat do columns
+                for (int j = 0; j < pattern.Count; j++)
+                    data.Rows[index].Cells[j].Value = records[i].getValues()[j];
+                data.Rows[index].Cells[pattern.Count].Value = records[i].getIdValue();
+                data.Rows[index].HeaderCell.Value = (index + 1).ToString();
+            Next:
+                ;
+            }
+            onInfoHandler("Completed.\r\n");
+        }
+        public void addRow(InsertStrip sender)
+        {
+            List<AbstractControl> ctrls = new List<AbstractControl>();
+            for (int i = 0; i < pattern.Count; i++)
+            {
+                ctrls.Add(pattern[i].getControl());//a poslednu Hidden?
+            }
+            ctrls.Add(additionalHiddenControl(null));
+            sender.add(ctrls);
+        }
+        public void addRecord(object sender, RecordEventArgs e)
+        {
+            //skontrolovat, ci sa nam to tam uz nenachadza, ci to nie je edit, to jest vsetko,, co je mensie ako posledne nacitany zaznam.
+            onInfoHandler("Updating database...\r\n");
+            foreach (Record r in e.records)
+            {
+                if (r.getIdValue().compare(records.Count) > 0)
+                {                
+                    this.records.Add(r);
+                    onInfoHandler("Inserted record with Id " + r.getIdValue().ToString() +"\r\n");
+                    continue;
+                }
+                int index = records.IndexOf(findRecord(r.getIdValue())); //if not null..co by nemal byt
+                if (index < 0)
+                    throw new Exception(" Not fulfilled preRequisity, consult creator");
+                    //records.Add(r); //???
+                 records[index] = r; //zamenime
+                 onInfoHandler("Updated record with Id "+ r.getIdValue().ToString() +"\r\n");
+            }
+        } //tot posiela insert strip
+        //myslim..
+        public void delete(DataGridView grid)
+        {
+            //musime tam mat este nejake ID a to mat v gride
+            foreach (DataGridViewRow row in grid.SelectedRows)
+            {//najdi poslednu value
+
+                foreach (Record r in records)
+                {
+                    onInfoHandler("Deleting record with id" + r.getIdValue().ToString() + "..\r\n");
+                    Value rowValue = row.Cells[grid.ColumnCount - 1].Value as Value;
+                    List<Value> v = r.getValues();
+                    if (v[v.Count - 1].compare(rowValue) != 0) //last Cell, snad to zavola to intove
+                        continue;
+                    records.Remove(r);
+                    grid.Rows.Remove(row); //snad to funguje
+                    onInfoHandler("Deleted");
+                    break;
+                }
+
+            }
+        }
+        public void addNames(InsertStrip strip)
+        {
+            List<string> list = new List<string>();
+            for (int i = 0; i < pattern.Count; i++)
+            {
+                list.Add(pattern[i].getAttributeName());
+            }
+            strip.setNames(list);
+        }
+
+        /* private methods */
         private AbstractAttribute find(string nm)
         {
             string cmp = nm.ToLower();
@@ -184,54 +354,12 @@ namespace myDb
             }
             return result;
         }
-        public void remove(Attribute t)
-        {
-            pattern.Remove(t);
-        }
-        public TabPage getDetail(Value idValue)
-        {
-            Record r = this.findRecord(idValue);
-            TabPage p = new TabPage();
-            p.BorderStyle = BorderStyle.FixedSingle;
-            p.AutoScroll = true;
-            p.Text = idValue.ToString();
-            List<Value> vals = r.getValues();
-            for (int i = 0; i < pattern.Count; i++) //posledne neberieme
-            {
-                Control c = pattern[i].showControl(vals[i]);
-                c.Location = new System.Drawing.Point(controlInfo[i].x,controlInfo[i].y);
-                c.Size = new System.Drawing.Size(controlInfo[i].width, controlInfo[i].heigth);
-                c.Name = this.pattern[i].getName();
-
-                //malo by si to niest aj I..TODO
-                c.SizeChanged +=new EventHandler(c_SizeChanged);
-                c.LocationChanged += new EventHandler(c_LocationChanged);
-                p.Controls.Add(c); 
-            }
-            return p;
-        }
-
-        void c_LocationChanged(object sender, EventArgs e)
-        {
-            //TOTO nu chcelo az po kliknuti - TODO
-            Control c = sender as Control;
-            int index = getIndex(c.Name);
-            controlInfo[index].x = c.Location.X;
-            controlInfo[index].y = c.Location.Y;
-        }
         private int getIndex(string name)
         {
             for (int i = 0; i < pattern.Count; i++)
                 if (pattern[i].getName().Equals(name))
                     return i;
             return -1;
-        }
-        void c_SizeChanged(object sender, EventArgs e)
-        {
-            Control c = sender as Control;
-            int index = getIndex(c.Name);
-            controlInfo[index].width = c.Size.Width;
-            controlInfo[index].heigth = c.Size.Height;
         }
         private Record findRecord(Value v)
         {
@@ -243,25 +371,6 @@ namespace myDb
             }
             return null;
         }
-        public void addRow(InsertStrip where, List<Value> values)
-        {
-            foreach (Value v in values)
-            {
-                Record r = findRecord(v);
-                if (r == null)
-                    throw new Exception("unexpected value");
-                List<AbstractControl> ctrls = new List<AbstractControl>();
-                List<Value> row = r.getValues();
-                for (int i = 0; i < row.Count -1; i++)
-                {
-                    AbstractControl c = pattern[i].getControl();
-                    c.setValue(row[i]);
-                    ctrls.Add(c);
-                }
-                ctrls.Add(additionalHiddenControl(row[pattern.Count]));
-                where.add(ctrls);
-            }
-        }
         private AbstractControl additionalHiddenControl(Value t)
         {
             Value input = t;
@@ -272,100 +381,14 @@ namespace myDb
             m.Hide();
             return m;
         }
-        public void addRow(InsertStrip sender)
-        {
-            List<AbstractControl> ctrls = new List<AbstractControl>();
-            for (int i = 0; i < pattern.Count; i++)
-            {
-                ctrls.Add(pattern[i].getControl());//a poslednu Hidden?
-            }
-            ctrls.Add(additionalHiddenControl(null));
-            sender.add(ctrls);
-        }
         private Value getIdValue()
         {
             Value m = new ValueInteger(recordId);
             recordId++;
             return m;
         }
-        public void addRecord(List<String> values)
-        {
-            //predpokladame ticho, ze pocet hodnot pre jedno a druhe je stejne
-            Record record = new Record();
-            //ja sa ich tu pokusim nacitat a ked nie, tak buchnem
-            try
-            {
-                for (int i = 0; i < values.Count; i++)
-                {
-                    record.add(pattern[i].getControl().getValue(values[i]));
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-        } //NEPOUZITE
-        public void addRecord(object sender, RecordEventArgs e)
-        {
-            //skontrolovat, ci sa nam to tam uz nenachadza, ci to nie je edit, to jest vsetko,, co je mensie ako posledne nacitany zaznam.
-            foreach (Record r in e.records)
-            {
-                if (r.getIdValue().compare(records.Count) > 0)
-                {
-                    this.records.Add(r);
-                    continue;
-                }
-                int index = records.IndexOf(findRecord(r.getIdValue())); //if not null..co by nemal byt
-                if (index < 0)
-                    records.Add(r);
-                else
-                    records[index] = r; //zamenime
-            }
-        }
-        public List<Record> find()
-        {
-            List<Record> result = new List<Record>();
-            return result;
-        }
-        public void addNames(InsertStrip strip)
-        {
-            List<string> list = new List<string>();
-            for (int i = 0; i < pattern.Count; i++)
-            {
-                list.Add(pattern[i].getAttributeName());
-            }
-            strip.setNames(list);
-        }
-        public void filter(DataGridView data, string query)
-        {
-            List<Condition> conditions = this.parseQuery(query);
-            //regexp = '*'
-            if (conditions == null)
-                return; //+ nejake warning? Myslim, ze netreba
 
-            data.Rows.Clear();
-            for (int i = 0; i < records.Count; i++)
-            {
-                int index;
-                foreach (Condition c in conditions)
-                {
-                    index = pattern.IndexOf(this.find(c.getName()));
-                    Value v1 = records[i].getValues()[index];
-                    if (v1 == null)
-                        goto Next;
-                    if (!c.compareTo(v1))
-                        goto Next; //goTO!!..ale brekeke!..FUUUUUUUJ
-                }
-                index = data.Rows.Add();
-                //mozem sa spolahnut na poeradie?..vlastne musim;)..vlastne nie:D TODO dat do columns
-                for (int j = 0; j < pattern.Count; j++)
-                    data.Rows[index].Cells[j].Value = records[i].getValues()[j];
-                data.Rows[index].Cells[pattern.Count].Value = records[i].getIdValue();
-                data.Rows[index].HeaderCell.Value = (index + 1).ToString();
-            Next:
-                ;
-            }
-        }
+        /* commom methods */
         /* save whole database */
         public void save()
         {
@@ -389,7 +412,7 @@ namespace myDb
             }
             write.Close();
             saveConfig();
-        }
+        } 
         /* private methods */
         /* load attributes and records */
         private void load()
