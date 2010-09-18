@@ -16,7 +16,6 @@ namespace myDb
         //bolo by pekne..vyzistit!
         private System.Windows.Forms.Label warn;
         private System.Windows.Forms.Label warnLabel;
-
         public Create()
         {
             InitializeComponent();
@@ -264,10 +263,8 @@ namespace myDb
             }
 
         }
-
         private Records records;
         private System.Collections.Generic.List<System.Windows.Forms.ComboBox> enums;
-
         private void cancelButton_Click(object sender, EventArgs e)
         {
             //ak existuju uz databaze, tak ok
