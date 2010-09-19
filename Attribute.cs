@@ -663,7 +663,7 @@ namespace myDb
 	}
 	public class AttributeTime : AbstractAttribute
 	{
-        public static string todayString = "today";
+        public static string todayString = "Today";
 		private MDate dateTimeTick;
 		private Label todayText;
 		private bool today;
@@ -728,7 +728,12 @@ namespace myDb
         {
             MDate dt = new MDate(isMandatory());
             if (isMandatory())
-                dt.Value = dateTimeTick.Value;
+            {
+                if (today)
+                    dt.Value = DateTime.Today;
+                else 
+                    dt.Value = dateTimeTick.Value;
+            }
             return dt;
         }
 	}	
