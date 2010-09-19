@@ -287,14 +287,15 @@ namespace myDb
             {
                 string[] strs = s.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 if (strs.Length != 3)
-                    throw new Exception("Syntax error: '" + s + "', syntax is: \n " +
-                     " attribute_name {containts, misses, >=, >, <=, <, =, !=} value \n");
+                    throw new Exception(" Syntax error on" + s + "\r\n"+ Files.help);
                 AbstractAttribute a;
                 a = find(strs[0]);
                 if (a == null)
                     throw new Exception("Name " + strs[0] + " is not recognized.");
+                if ((strs[1].Equals("misses")) && (strs[2].Equals("data")))
+                    return new ConditionIsNull(strs[0], null);
                 Value v = a.getControl().getValue(strs[2]);
-                switch (strs[1])
+                switch (strs[1].ToLower())
                 {
                     case "contains": //check name!
                         {
@@ -332,7 +333,7 @@ namespace myDb
                             break;
                         }
                     default:
-                        throw new Exception("Syntax error at condition '" + strs[1] + "'- no such condition implemented"); //+ nejaky help?
+                        throw new Exception("Syntax error at condition '" + strs[1] + "'- no such condition implemented\r\n" + Files.help); //+ nejaky help?
                 }
             }
             catch (Exception e)

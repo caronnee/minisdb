@@ -21,6 +21,20 @@ namespace myDb
         }
         abstract public bool compareTo(Value v);
     }
+    public class ConditionIsNull : Condition
+    {
+        public ConditionIsNull(string name, Value v)
+            : base(name, v)
+        { 
+            //nothing there so far, just initialization
+        }
+        public override bool compareTo(Value v)
+        {
+            if (v == null)
+                return true;
+            return false;
+        }
+    }
     public class ConditionContains : Condition
     {
         public ConditionContains(string name, Value v)
