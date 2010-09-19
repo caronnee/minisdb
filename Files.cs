@@ -9,6 +9,10 @@ namespace myDb
 {
     static class Files //TODO premenovat
     {
+        public const string help = "Syntax is: \r\n " +
+                     " 'attribute_name <operation> value'\r\n As operation can bbu currently used words:\r\n" +
+                     " contains, misses, <, <=, >, >=, =, != \r\n" +
+                     " For searching value that is not set use syntax attribute_name misses data"; //pekne blbinka
         public const string noImagePath = "./images/noImage.jpg";
         public const int space = 10;
         public const string Id = "ID";
