@@ -100,7 +100,7 @@ namespace myDb
             {
                 Record r = findRecord(v);
                 if (r == null)
-                    throw new Exception("unexpected value");
+                    throw new Exception("Unexpected value");
                 List<AbstractControl> ctrls = new List<AbstractControl>();
                 List<Value> row = r.getValues();
                 for (int i = 0; i < row.Count - 1; i++)
