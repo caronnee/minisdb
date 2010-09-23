@@ -44,6 +44,8 @@ namespace myDb
         }
         public override bool compareTo(Value v)
         {
+            if (v == null)
+                return false;
             return v.contains(toCompare) >= 0;
         }
     }
@@ -54,6 +56,8 @@ namespace myDb
         { }
         public override bool compareTo(Value v)
         {
+            if (v == null)
+                return false;
             return toCompare.compare(v) < 0;
         }
     }
@@ -62,6 +66,8 @@ namespace myDb
         public ConditionEqual(string name, Value v) : base(name, v) { }
         public override bool compareTo(Value v)
         {
+            if (v == null)
+                return false;
             return v.compare(toCompare) == 0;
         }
     }
@@ -70,6 +76,8 @@ namespace myDb
         public ConditionLessEqual(string name, Value v) : base(name, v) { }
         public override bool compareTo(Value v)
         {
+            if (v == null)
+                return false;
             return toCompare.compare(v) <= 0;
         }
     }
@@ -82,6 +90,8 @@ namespace myDb
         }
         public override bool compareTo(Value v)
         {
+            if (v == null)
+                return false;
             return !toNegate.compareTo(v);
         }
     }

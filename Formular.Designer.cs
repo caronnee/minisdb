@@ -188,26 +188,7 @@ namespace myDb
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
-
-        void grid_DoubleClick(object sender, System.EventArgs e)
-        {
-            System.Windows.Forms.DataGridView d = sender as System.Windows.Forms.DataGridView;
-           foreach ( System.Windows.Forms.DataGridViewRow r in d.SelectedRows)
-
-               selectToolStripMenuItem_recordChosen(r.Cells[Files.Id].Value as Value);
-        }
-        
-        void changeDb_Click(object sender, System.EventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
-        void backToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            this.endState = Forms.FormLoad;
-            this.Close();
-        }
-     
+        }    
         #endregion
 
         private System.Windows.Forms.DataGridView grid; //je to FUJ, ale co uz

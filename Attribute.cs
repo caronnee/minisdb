@@ -195,7 +195,7 @@ namespace myDb
 	}
 	class MTextBox : TextBox, AbstractControl
 	{
-		AttributeState state;
+		public readonly AttributeState state;
 
 		public MTextBox(bool mandatory_)
 		{
@@ -239,16 +239,14 @@ namespace myDb
             if (v == null)
                 return;
             this.Text = v.ToString();
+            if (!state.mandatory)
+                state.enable(this,null);
         }
 	}
     class MNumeric : NumericUpDown, AbstractControl
     {
         private AttributeState state;
 
-        public void setValue(Value v)
-        {
-            this.Value = System.Convert.ToInt32(v.ToString()); //Ale fuuuuuuuj! MNE to prejde, horsie to bude s nasledovatelmi, catch int?
-        }
         public MNumeric(bool mandatory) //kontext menu na disable
         {
             state = new AttributeState(this, mandatory);
@@ -269,6 +267,14 @@ namespace myDb
             if (text.Equals(""))
                 return null;
             return new ValueInteger(System.Convert.ToInt32(text));
+        }
+        public void setValue(Value v)
+        {
+            if (v == null)
+                return;
+            this.Value = System.Convert.ToInt32(v.ToString()); //Ale fuuuuuuuj! MNE to prejde, horsie to bude s nasledovatelmi, catch int?
+            if (!state.mandatory)
+                state.enable(this, null);
         }
     }
     class MCombobox : ComboBox, AbstractControl
@@ -307,6 +313,8 @@ namespace myDb
         {
             if (v == null)
                 return;
+            if (!state.mandatory)
+                state.enable(this, null);
             foreach (string s in this.Items)
                 if (s.Equals(v.ToString()))
                 {
@@ -348,6 +356,8 @@ namespace myDb
         {
             if (v == null)
                 return; //uvidime, + is Mandatory a today
+            if (!state.mandatory)
+                state.enable(this, null);
             this.Value = DateTime.ParseExact(v.ToString(), Files.dateFormat, null);
         }
     }
@@ -387,7 +397,7 @@ namespace myDb
             f.Title = "Choose location of picture";
             f.Multiselect = false;
             f.InitialDirectory = "c:\\";
-	    f.Filter = "*.png"|"*.png";
+	    f.Filter = "*.jpg"|"*.png";
             DialogResult res = f.ShowDialog();
             if (res != DialogResult.OK)
                 return;
@@ -420,6 +430,10 @@ namespace myDb
         }
         public void setValue(Value v)
         {
+            if (v == null)
+                return;
+            if (path.state.mandatory)
+                path.state.enable(this, null);
             this.path.Text = v.ToString();
         }
     }
@@ -440,19 +454,25 @@ namespace myDb
                 return;
 
             control.ParentChanged += new EventHandler(control_ParentChanged);
-            control.LocationChanged += new EventHandler(control_LocationChanged);
+            control.LocationChanged += new EventHandler(control_LocationChanged); //toto tu snad ani nepotrebujem...
 
             clickToEnableLabel = new Label();
             clickToEnableLabel.Hide();
             clickToEnableLabel.Size = new System.Drawing.Size(control.Width, control.Height);
             clickToEnableLabel.Text = "Click to enable";
             clickToEnableLabel.Click += new EventHandler(this.enable);
+            clickToEnableLabel.LocationChanged += new EventHandler(clickToEnableLabel_LocationChanged);
 
             MenuItem m = new MenuItem(disableMenu);
             control.ContextMenu.MenuItems.Add(m);
             m.Click += new EventHandler(this.disable);
             control.Hide();
             clickToEnableLabel.Show();
+        }
+
+        void clickToEnableLabel_LocationChanged(object sender, EventArgs e)
+        {
+            clickToEnableLabel.Location = new System.Drawing.Point(parent.Location.X, parent.Location.Y);
         }
         void control_LocationChanged(object sender, EventArgs e)
         {
@@ -461,15 +481,21 @@ namespace myDb
         void control_ParentChanged(object sender, EventArgs e)
         {
             if (parent.Parent == null)
+            {
+                if (this.clickToEnableLabel.Parent == null)
+                    return;
+                this.clickToEnableLabel.Parent.Controls.Remove(clickToEnableLabel);
                 return; //zistit, naco to tu vlastne je
+            }
             parent.Parent.Controls.Add(this.clickToEnableLabel);
+            this.clickToEnableLabel.Name = parent.Name; //FUJ! zjevny mismas v abstrakcii
         }
-        void disable(object sender, EventArgs e)
+        public void disable(object sender, EventArgs e)
         {
             parent.Hide();
             clickToEnableLabel.Show();
         }
-        void enable(object sender, EventArgs e)
+        public void enable(object sender, EventArgs e)
         {
             parent.Show();
             clickToEnableLabel.Hide();

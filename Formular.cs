@@ -34,7 +34,15 @@ namespace myDb
             this.records.infoHandler += new Records.InfoHandler(records_infoHandler);
             this.Disposed += new EventHandler(Formular_Disposed);
         }
-
+        void changeDb_Click(object sender, System.EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+        void backToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            this.endState = Forms.FormLoad;
+            this.Close();
+        }
         void records_infoHandler(string s)
         {
             this.infoBox.Text += s;
@@ -45,11 +53,25 @@ namespace myDb
         }
         private void edit(List<Value> values)
         {
-            records.addRow(this.insertToolStripMenuItem, values);
+            //this.insertToolStripMenuItem.
+            this.insertToolStripMenuItem.removeRows();
+            records.addRow(this.insertToolStripMenuItem, values); //inrt najskor cleannuty
+            if (this.insertToolStripMenuItem.getTab().Parent != this.tabs)
+                this.tabs.Controls.Add(this.insertToolStripMenuItem.getTab());
+            this.tabs.SelectedTab = this.insertToolStripMenuItem.getTab();
         }
         void selectToolStripMenuItem_recordChosen(Value v)
         {
-            this.tabs.Controls.Add(records.getDetail(v));
+            //if not exists
+            foreach (TabPage p in this.tabs.Controls)
+                if (p.Text.Equals(v.ToString()))
+                {
+                    this.tabs.SelectedTab = p;
+                    return;
+                }
+            TabPage t = records.getDetail(v);
+            this.tabs.Controls.Add(t);
+            this.tabs.SelectedTab = t;
         }
         void tabs_MouseClick(object sender, MouseEventArgs e)
         {
@@ -74,6 +96,13 @@ namespace myDb
         void Formular_Disposed(object sender, EventArgs e)
         {
             records.save();
+        }
+        void grid_DoubleClick(object sender, System.EventArgs e)
+        {
+            System.Windows.Forms.DataGridView d = sender as System.Windows.Forms.DataGridView;
+            foreach (System.Windows.Forms.DataGridViewRow r in d.SelectedRows)
+
+                selectToolStripMenuItem_recordChosen(r.Cells[Files.Id].Value as Value);
         }
     }
 }

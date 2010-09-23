@@ -36,10 +36,10 @@ namespace myDb
         private int heigthToAdd;
         private int numberOfValues; //na ukladanie do jedneho pola
         private Panel recordPanel;
-        private Panel buttonPanel; //jaj, tu by sa mi hodilo QT!
+        private Panel buttonPanel; 
         private NumericUpDown howMany;
         private List<Label> labels;
-        private List<AbstractControl> controls;
+        private List<AbstractControl> controls; //tie, o krote nam ide
         private List<AbstractControl> toAddRecords;
 
         /* events */
@@ -125,7 +125,7 @@ namespace myDb
             addButton = new Button();
             addButton.Text = "Add selected records";
             addButton.AutoSize = true;
-            addButton.Location = new System.Drawing.Point(howMany.Location.X + howMany.Width + 10, 0);
+            addButton.Location = new System.Drawing.Point(howMany.Location.X + howMany.Width + 10, howMany.Location.Y);
             addButton.Click += new System.EventHandler(addButton_Click);
             buttonPanel.Controls.Add(addButton);
 
@@ -154,9 +154,9 @@ namespace myDb
             controls.Clear();
             labels.Clear();
             heigthToAdd = 0;
-            onAddRow();
-            onAddLabels();
-            if (getTab().Parent == null)
+            onAddRow(); //getSize..getLayout
+          //  onAddLabels();
+            if (getTab().Parent == null) //nevidim dovod..?
                 return;
             if (labels.Count != this.controls.Count-1)
                 throw new Exception("Labels and boxes have different dimensions ");
@@ -168,7 +168,18 @@ namespace myDb
             }
             for (int i = 0; i < labels.Count; i++)
                 recordPanel.Controls.Add(labels[i]);
-            this.heigthToAdd += labels[0].PreferredHeight +10;
+        }
+        private void setLabels()
+        {
+            onAddLabels();
+            for (int i = 0; i < labels.Count; i++)
+            {
+                labels[i].Location = new System.Drawing.Point(((Control)controls[i]).Location.X, 0);
+                ((Control)controls[i]).Location = new System.Drawing.Point(labels[i].Location.X, labels[i].PreferredHeight + 10);
+            }
+            for (int i = 0; i < labels.Count; i++)
+                recordPanel.Controls.Add(labels[i]);
+            this.heigthToAdd += labels[0].PreferredHeight + 10;
         }
         void InsertStrip_Resize(object sender, EventArgs e)
         {
@@ -183,24 +194,70 @@ namespace myDb
         {
             if (ctrls.Count == 0)
                 throw new Exception("Zero attributes, not legal database!");
-
+            
             this.numberOfValues = ctrls.Count;
             this.controls.AddRange(ctrls);
+          
+            Button removeRowButton = new Button();
+            removeRowButton.Text = "Cancel";
+            removeRowButton.Click += new EventHandler(removeRowButton_Click);
+            removeRowButton.Name = ctrls[ctrls.Count - 1].getValue().ToString();//unikat
 
             Control c = (Control)ctrls[0];
+            c.Name = removeRowButton.Name;
             System.Drawing.Point point = new System.Drawing.Point(0, this.heigthToAdd);
             c.Location = new System.Drawing.Point(0, this.heigthToAdd);
             this.recordPanel.Controls.Add(c);
-
+            
             for (int i = 1; i < ctrls.Count; i++)
             {
                 c = (Control)ctrls[i];
+                c.Name = removeRowButton.Name;
                 point = new System.Drawing.Point(point.X + ((Control)ctrls[i - 1]).Width + 10, point.Y);// FIXME UPRAVIT
                 c.Location = point;
                 this.recordPanel.Controls.Add(c);
             }
+            removeRowButton.Location = new System.Drawing.Point(point.X + ((Control)ctrls[ctrls.Count-1]).Width + 10, ((Control) ctrls[0]).Location.Y);
             this.toAddRecords.AddRange(ctrls);
+            this.recordPanel.Controls.Add(removeRowButton);
             this.heigthToAdd += c.Height + 10;
+            if (labels.Count == 0)
+                setLabels();
+        }
+        public void removeRows()
+        {
+            if (labels.Count == 0)
+                return;
+            foreach (Control c in toAddRecords)
+            {
+                while (this.recordPanel.Controls.IndexOfKey(c.Name) >=0)
+                    this.recordPanel.Controls.RemoveByKey(c.Name);
+            }
+            toAddRecords.Clear();
+            heigthToAdd = labels[0].PreferredHeight + 10;
+        }
+        void removeRowButton_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            //a vsetky usporiadaj
+            int lower = this.recordPanel.Controls[0].Height +10;
+            this.heigthToAdd -= lower;
+ 
+            foreach (Control c in this.recordPanel.Controls)
+            {
+                if (c.Name.Equals(b.Name))
+                    this.toAddRecords.Remove(c as AbstractControl);
+            }
+            //OMG FUJ!
+            while (this.recordPanel.Controls.IndexOfKey(b.Name) >= 0)
+                this.recordPanel.Controls.RemoveByKey(b.Name);
+            foreach (Control c in this.recordPanel.Controls)
+            {
+                if (c.Location.Y > b.Location.Y)
+                {
+                    c.Location = new System.Drawing.Point(c.Location.X, c.Location.Y - lower);
+                }
+            }
         }
         /* sender calls for filling boxes */
         void addRows_click(object sender, EventArgs e)
@@ -326,7 +383,6 @@ namespace myDb
         {
             onRecordChosen();
         }
-
         protected void onRecordChosen()
         {
             if (recordChosen == null)
@@ -401,6 +457,5 @@ namespace myDb
                 return; //skontrolovat
             onSetGrid();
         }
-
     }
 }

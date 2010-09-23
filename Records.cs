@@ -82,7 +82,6 @@ namespace myDb
         {
             this.pattern.Remove(a);
         }
-        
         public void settingGrid(DataGridView grid)
         {
             grid.ColumnCount = pattern.Count + 1;
@@ -154,7 +153,20 @@ namespace myDb
                 p.Controls.Add(c);
             }
             onInfoHandler("Displayed. \r\n");
+            p.Enter += new EventHandler(p_Enter);
             return p;
+        }
+
+        void p_Enter(object sender, EventArgs e)
+        {
+            TabPage page = sender as TabPage;
+            for (int i = 0; i < page.Controls.Count; i++)
+            {
+                page.Controls[i].Location = new System.Drawing.Point(controlInfo[i].x,
+                    controlInfo[i].y);
+                page.Controls[i].Size = new System.Drawing.Size(controlInfo[i].width,
+                    controlInfo[i].heigth);
+            }
         }
         void c_LocationChanged(object sender, EventArgs e)
         {
@@ -191,8 +203,6 @@ namespace myDb
                 {
                     index = pattern.IndexOf(this.find(c.getName()));
                     Value v1 = records[i].getValues()[index];
-                    if (v1 == null)
-                        goto Next;
                     if (!c.compareTo(v1))
                         goto Next; //goTO!!..ale brekeke!..FUUUUUUUJ
                 }
@@ -223,7 +233,7 @@ namespace myDb
             onInfoHandler("Updating database...\r\n");
             foreach (Record r in e.records)
             {
-                if (r.getIdValue().compare(records.Count) > 0)
+                if (r.getIdValue().compare(records.Count) >= 0)
                 {                
                     this.records.Add(r);
                     onInfoHandler("Inserted record with Id " + r.getIdValue().ToString() +"\r\n");
@@ -231,7 +241,7 @@ namespace myDb
                 }
                 int index = records.IndexOf(findRecord(r.getIdValue())); //if not null..co by nemal byt
                 if (index < 0)
-                    throw new Exception(" Not fulfilled preRequisity, consult creator");
+                    throw new Exception(" Not fulfilled prerequisity, consult creator");
                     //records.Add(r); //???
                  records[index] = r; //zamenime
                  onInfoHandler("Updated record with Id "+ r.getIdValue().ToString() +"\r\n");
