@@ -440,6 +440,8 @@ namespace myDb
         }
         private void saveConfig()
         {
+            if (this.controlInfo.Count == 0)
+                return;
             StreamWriter write = new StreamWriter(this.dbName_ + ".config");
             for (int i = 0; i < this.controlInfo.Count; i++)
             {

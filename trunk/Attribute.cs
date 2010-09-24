@@ -397,7 +397,7 @@ namespace myDb
             f.Title = "Choose location of picture";
             f.Multiselect = false;
             f.InitialDirectory = "c:\\";
-	    f.Filter = "*.jpg"|"*.png";
+            f.Filter = "Image files (*.png, *.jpg, *.bmp))|*.jpg;*.png;*.bmp";
             DialogResult res = f.ShowDialog();
             if (res != DialogResult.OK)
                 return;

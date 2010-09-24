@@ -86,6 +86,8 @@ namespace myDb
             {
                 if (!tabControl.GetTabRect(i).Contains(e.Location))
                     continue;
+                if (tabControl.TabPages[i].Text.ToLower().Equals("all records"))
+                    return;
                 tabPageCurrent = tabControl.TabPages[i];
                 break;
             }
