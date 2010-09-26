@@ -461,18 +461,12 @@ namespace myDb
             clickToEnableLabel.Size = new System.Drawing.Size(control.Width, control.Height);
             clickToEnableLabel.Text = "Click to enable";
             clickToEnableLabel.Click += new EventHandler(this.enable);
-            clickToEnableLabel.LocationChanged += new EventHandler(clickToEnableLabel_LocationChanged);
 
             MenuItem m = new MenuItem(disableMenu);
             control.ContextMenu.MenuItems.Add(m);
             m.Click += new EventHandler(this.disable);
             control.Hide();
             clickToEnableLabel.Show();
-        }
-
-        void clickToEnableLabel_LocationChanged(object sender, EventArgs e)
-        {
-            clickToEnableLabel.Location = new System.Drawing.Point(parent.Location.X, parent.Location.Y);
         }
         void control_LocationChanged(object sender, EventArgs e)
         {
@@ -494,11 +488,13 @@ namespace myDb
         {
             parent.Hide();
             clickToEnableLabel.Show();
+            clickToEnableLabel.Location = new System.Drawing.Point(parent.Location.X, parent.Location.Y);
         }
         public void enable(object sender, EventArgs e)
         {
-            parent.Show();
             clickToEnableLabel.Hide();
+            parent.Show();
+            parent.Location = new System.Drawing.Point(clickToEnableLabel.Location.X, clickToEnableLabel.Location.Y);
         }
     }
 	public class Attribute : AbstractAttribute
