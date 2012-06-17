@@ -46,6 +46,9 @@ namespace myDb
             this.insertToolStripMenuItem = new myDb.InsertStrip();
             this.selectToolStripMenuItem = new myDb.SelectStrip();
             this.backToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insertToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.changeDb = new System.Windows.Forms.ToolStripMenuItem();
             this.b = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
@@ -81,7 +84,7 @@ namespace myDb
             this.firstPage.Controls.Add(this.grid);
             this.firstPage.Controls.Add(this.refresh);
             this.firstPage.Location = new System.Drawing.Point(4, 22);
-            this.firstPage.Name = "FirstPage";
+            this.firstPage.Name = "firstPage";
             this.firstPage.Size = new System.Drawing.Size(677, 216);
             this.firstPage.TabIndex = 0;
             this.firstPage.Text = "All records";
@@ -124,7 +127,8 @@ namespace myDb
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.insertToolStripMenuItem,
             this.selectToolStripMenuItem,
-            this.backToolStripMenuItem});
+            this.backToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(841, 24);
@@ -151,6 +155,29 @@ namespace myDb
             this.backToolStripMenuItem.Size = new System.Drawing.Size(111, 20);
             this.backToolStripMenuItem.Text = "Choose another db";
             this.backToolStripMenuItem.Click += new System.EventHandler(this.backToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.insertToolStripMenuItem1,
+            this.selectToolStripMenuItem1});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // insertToolStripMenuItem1
+            // 
+            this.insertToolStripMenuItem1.Name = "insertToolStripMenuItem1";
+            this.insertToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.insertToolStripMenuItem1.Text = "Insert";
+            this.insertToolStripMenuItem1.Click += new System.EventHandler(this.insertToolStripMenuItem1_Click);
+            // 
+            // selectToolStripMenuItem1
+            // 
+            this.selectToolStripMenuItem1.Name = "selectToolStripMenuItem1";
+            this.selectToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.selectToolStripMenuItem1.Text = "Select";
+            this.selectToolStripMenuItem1.Click += new System.EventHandler(this.selectToolStripMenuItem1_Click);
             // 
             // changeDb
             // 
@@ -202,6 +229,9 @@ namespace myDb
         private SelectStrip selectToolStripMenuItem;
         private System.Windows.Forms.Button b;
         private System.Windows.Forms.TabPage firstPage;
-        private System.Windows.Forms.Button refresh; 
+        private System.Windows.Forms.Button refresh;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem insertToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem selectToolStripMenuItem1; 
     }
 }

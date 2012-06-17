@@ -12,12 +12,14 @@ namespace myDb
         public const string help = "Syntax is: \r\n " +
                      " 'attribute_name <operation> value'\r\n As operation can bbu currently used words:\r\n" +
                      " contains, misses, <, <=, >, >=, =, != \r\n" +
-                     " For searching value that is not set use syntax attribute_name misses data"; //pekne blbinka
+                     " For searching value that is not set use syntax attribute_name misses data";
+        public const string insertHelp = "You can insert multiple rows  ( add column to to add more records )";
         public const string noImagePath = "./images/noImage.jpg";
         public const int space = 10;
         public const string Id = "ID";
         public const string dateFormat = "dd.MMMM,yyyy";
-        public const string enumFile = "./enums.data";
+        // enums are independant from rest of the databases, one database can use multiple enums
+        public const string enumFile = "./enums.data"; 
         public const string fileType = ".myDb";
         public static List<string> readEnum()
         {

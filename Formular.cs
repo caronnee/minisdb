@@ -106,5 +106,15 @@ namespace myDb
 
                 selectToolStripMenuItem_recordChosen(r.Cells[Files.Id].Value as Value);
         }
+        private void selectToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //show window with the help of how syntx should lok like
+            MessageBox.Show( Files.help,"Syntax Help", MessageBoxButtons.OK);
+        }
+
+        private void insertToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show( Files.insertHelp,"Insert help", MessageBoxButtons.OK);
+        }
     }
 }
