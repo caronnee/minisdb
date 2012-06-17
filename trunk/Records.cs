@@ -297,7 +297,7 @@ namespace myDb
             {
                 string[] strs = s.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 if (strs.Length != 3)
-                    throw new Exception(" Syntax error on" + s + "\r\n"+ Files.help);
+                    throw new Exception(" Syntax error on " + s + "\r\n"+ Files.help);
                 AbstractAttribute a;
                 a = find(strs[0]);
                 if (a == null)
@@ -306,7 +306,7 @@ namespace myDb
                     return new ConditionIsNull(strs[0], null);
                 Value v = a.getControl().getValue(strs[2]);
                 switch (strs[1].ToLower())
-                {
+                {// genericFactory
                     case "contains": //check name!
                         {
                             c = new ConditionContains(strs[0], v);
@@ -343,7 +343,7 @@ namespace myDb
                             break;
                         }
                     default:
-                        throw new Exception("Syntax error at condition '" + strs[1] + "'- no such condition implemented\r\n" + Files.help); //+ nejaky help?
+                        throw new Exception("Syntax error at condition '" + strs[1] + "'- no such condition implemented\r\n" + Files.help); 
                 }
             }
             catch (Exception e)
