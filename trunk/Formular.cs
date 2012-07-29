@@ -82,7 +82,7 @@ namespace myDb
 
             TabPage tabPageCurrent = null;
 
-            for (var i = 0; i < tabControl.TabCount; i++)
+            for (int i = 0; i < tabControl.TabCount; i++)
             {
                 if (!tabControl.GetTabRect(i).Contains(e.Location))
                     continue;

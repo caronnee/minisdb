@@ -1,0 +1,98 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F953E535-B9A6-49E7-9F23-7368DD849063}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>Minis</AssemblyName>
+    <RootNamespace>Minis</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attribute.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Condition.cs" />
+    <Compile Include="ControlInfo.cs" />
+    <Compile Include="Create.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Create.Designer.cs">
+      <DependentUpon>Create.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateEnum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateEnum.Designer.cs">
+      <DependentUpon>CreateEnum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Detail.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Events.cs" />
+    <Compile Include="Files.cs" />
+    <Compile Include="Formular.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formular.Designer.cs">
+      <DependentUpon>Formular.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GridPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GridPanel.Designer.cs">
+      <DependentUpon>GridPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Records.cs" />
+    <Compile Include="Resolver.cs" />
+    <Compile Include="setSizeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="setSizeForm.Designer.cs">
+      <DependentUpon>setSizeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="showBoxes.cs" />
+    <Compile Include="Uvod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Uvod.Designer.cs">
+      <DependentUpon>Uvod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Values.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="program_dok.doc" />
+    <None Include="uzivatelska_dok.doc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>
