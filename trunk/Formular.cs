@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace myDb
 {
-    public partial class Formular : MyForm
+    public partial class Formular : AbstractForm
     {
         private Records records;
 

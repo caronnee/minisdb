@@ -9,7 +9,7 @@ using System.IO;
 
 namespace myDb
 {
-    public partial class Uvod : MyForm
+    public partial class Uvod : AbstractForm
     {
         public Uvod()
         {       

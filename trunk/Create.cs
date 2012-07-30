@@ -10,9 +10,8 @@ using System.IO;
 
 namespace myDb
 {
-    public partial class Create : MyForm
+    public partial class Create : AbstractForm
     {
-
         //bolo by pekne..vyzistit!
         private System.Windows.Forms.Label warn;
         private System.Windows.Forms.Label warnLabel;

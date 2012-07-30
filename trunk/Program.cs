@@ -23,7 +23,7 @@ namespace myDb
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false); //IF sa spravi tu
-            MyForm activeForm = new Uvod();
+            AbstractForm activeForm = new Uvod();
             if (activeForm.endCode() == Forms.FormCreateBd)
                 activeForm = new Create();
             while (activeForm != null)

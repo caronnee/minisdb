@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace myDb
 {
-    public class MyForm : Form
+    public class AbstractForm : Form
     {
-        public MyForm()
+        public AbstractForm()
         {
             endState = Forms.FormEnd;
             finalWord = "";

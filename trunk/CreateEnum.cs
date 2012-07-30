@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace myDb
 {
-    public partial class CreateEnum : MyForm
+    public partial class CreateEnum : AbstractForm
     {
         public CreateEnum()
         {
