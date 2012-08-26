@@ -4,12 +4,16 @@ using System.Windows.Forms;
 
 namespace myDb
 {
-
+    // formular that is possible to show as main window
     public enum Forms
     {
+        // in this formular user can choose if it create a database or will load old one
         FormLoad,
+        // bye bye formular - program should end at this state
         FormEnd,
+        // database id loaded
         FormFormular,
+        // formular for creating database - insetring columns etc
         FormCreateBd
     }
 
@@ -23,7 +27,7 @@ namespace myDb
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false); //IF sa spravi tu
-            AbstractForm activeForm = new Uvod();
+            DisplayedForm activeForm = new CreateLoadDbForm();
             if (activeForm.endCode() == Forms.FormCreateBd)
                 activeForm = new Create();
             while (activeForm != null)
@@ -34,7 +38,7 @@ namespace myDb
                 switch (activeForm.endCode())
                 {
                     case Forms.FormLoad:
-                        activeForm = new Uvod();
+                        activeForm = new CreateLoadDbForm();
                         break;
                     case Forms.FormCreateBd:
                         activeForm = new Create();

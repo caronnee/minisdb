@@ -72,19 +72,39 @@
             // 
             this.width.Dock = System.Windows.Forms.DockStyle.Fill;
             this.width.Location = new System.Drawing.Point(72, 3);
-            this.width.Minimum = 20;
-            this.width.Maximum = int.MaxValue;
+            this.width.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.width.Minimum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.width.Name = "width";
             this.width.Size = new System.Drawing.Size(64, 20);
             this.width.TabIndex = 2;
-            this.width.Value = 100;
+            this.width.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             // 
             // heigth
             // 
             this.heigth.Dock = System.Windows.Forms.DockStyle.Fill;
             this.heigth.Location = new System.Drawing.Point(72, 32);
-            this.heigth.Minimum = 20;
-            this.heigth.Maximum = int.MaxValue;
+            this.heigth.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.heigth.Minimum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.heigth.Name = "heigth";
             this.heigth.Size = new System.Drawing.Size(64, 20);
             this.heigth.TabIndex = 3;

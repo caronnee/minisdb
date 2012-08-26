@@ -76,7 +76,7 @@ namespace myDb
             this.addInteger.Dock = System.Windows.Forms.DockStyle.Top;
             this.addInteger.Location = new System.Drawing.Point(3, 16);
             this.addInteger.Name = "addInteger";
-            this.addInteger.Size = new System.Drawing.Size(72, 22);
+            this.addInteger.Size = new System.Drawing.Size(72, 23);
             this.addInteger.TabIndex = 4;
             this.addInteger.Text = "add integer";
             this.addInteger.UseVisualStyleBackColor = true;
@@ -85,7 +85,7 @@ namespace myDb
             // addTextAttribute
             // 
             this.addTextAttribute.Dock = System.Windows.Forms.DockStyle.Top;
-            this.addTextAttribute.Location = new System.Drawing.Point(3, 61);
+            this.addTextAttribute.Location = new System.Drawing.Point(3, 62);
             this.addTextAttribute.Name = "addTextAttribute";
             this.addTextAttribute.Size = new System.Drawing.Size(72, 23);
             this.addTextAttribute.TabIndex = 5;
@@ -107,7 +107,7 @@ namespace myDb
             // addEnum
             // 
             this.addEnum.Dock = System.Windows.Forms.DockStyle.Top;
-            this.addEnum.Location = new System.Drawing.Point(3, 128);
+            this.addEnum.Location = new System.Drawing.Point(3, 129);
             this.addEnum.Name = "addEnum";
             this.addEnum.Size = new System.Drawing.Size(72, 23);
             this.addEnum.TabIndex = 7;
@@ -118,7 +118,7 @@ namespace myDb
             // addImage
             // 
             this.addImage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.addImage.Location = new System.Drawing.Point(3, 84);
+            this.addImage.Location = new System.Drawing.Point(3, 85);
             this.addImage.Name = "addImage";
             this.addImage.Size = new System.Drawing.Size(72, 21);
             this.addImage.TabIndex = 8;
@@ -129,7 +129,7 @@ namespace myDb
             // createEnum
             // 
             this.createEnum.Dock = System.Windows.Forms.DockStyle.Top;
-            this.createEnum.Location = new System.Drawing.Point(3, 105);
+            this.createEnum.Location = new System.Drawing.Point(3, 106);
             this.createEnum.Name = "createEnum";
             this.createEnum.Size = new System.Drawing.Size(72, 23);
             this.createEnum.TabIndex = 10;
@@ -140,7 +140,7 @@ namespace myDb
             // addTime
             // 
             this.addTime.Dock = System.Windows.Forms.DockStyle.Top;
-            this.addTime.Location = new System.Drawing.Point(3, 38);
+            this.addTime.Location = new System.Drawing.Point(3, 39);
             this.addTime.Name = "addTime";
             this.addTime.Size = new System.Drawing.Size(72, 23);
             this.addTime.TabIndex = 11;
@@ -164,7 +164,7 @@ namespace myDb
             this.definedEnums.Dock = System.Windows.Forms.DockStyle.Top;
             this.definedEnums.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.definedEnums.FormattingEnabled = true;
-            this.definedEnums.Location = new System.Drawing.Point(3, 151);
+            this.definedEnums.Location = new System.Drawing.Point(3, 152);
             this.definedEnums.Name = "definedEnums";
             this.definedEnums.Size = new System.Drawing.Size(72, 21);
             this.definedEnums.TabIndex = 13;
@@ -172,7 +172,7 @@ namespace myDb
             // removeEnum
             // 
             this.removeEnum.Dock = System.Windows.Forms.DockStyle.Top;
-            this.removeEnum.Location = new System.Drawing.Point(3, 172);
+            this.removeEnum.Location = new System.Drawing.Point(3, 173);
             this.removeEnum.Name = "removeEnum";
             this.removeEnum.Size = new System.Drawing.Size(72, 23);
             this.removeEnum.TabIndex = 14;
@@ -183,9 +183,9 @@ namespace myDb
             // dbName
             // 
             this.dbName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dbName.Location = new System.Drawing.Point(3, 16);
+            this.dbName.Location = new System.Drawing.Point(85, 16);
             this.dbName.Name = "dbName";
-            this.dbName.Size = new System.Drawing.Size(790, 20);
+            this.dbName.Size = new System.Drawing.Size(708, 20);
             this.dbName.TabIndex = 15;
             this.dbName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
