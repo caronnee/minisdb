@@ -9,9 +9,9 @@ using System.IO;
 
 namespace myDb
 {
-    public partial class Uvod : AbstractForm
+    public partial class CreateLoadDbForm : DisplayedForm
     {
-        public Uvod()
+        public CreateLoadDbForm()
         {       
             InitializeComponent();
           

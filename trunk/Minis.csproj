@@ -46,6 +46,12 @@
     <Compile Include="CreateEnum.Designer.cs">
       <DependentUpon>CreateEnum.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateGroup.Designer.cs">
+      <DependentUpon>CreateGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Detail.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -63,11 +69,17 @@
     <Compile Include="GridPanel.Designer.cs">
       <DependentUpon>GridPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyForm.cs">
+    <Compile Include="DisplayedForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MyToolStrip.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Panel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Panel.Designer.cs">
+      <DependentUpon>Panel.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Records.cs" />
@@ -79,17 +91,39 @@
       <DependentUpon>setSizeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="showBoxes.cs" />
-    <Compile Include="Uvod.cs">
+    <Compile Include="CreateLoadDbForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Uvod.Designer.cs">
-      <DependentUpon>Uvod.cs</DependentUpon>
+    <Compile Include="CreateLoadDbForm.Designer.cs">
+      <DependentUpon>CreateLoadDbForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Values.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="program_dok.doc" />
     <None Include="uzivatelska_dok.doc" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DisplayedForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DisplayedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Create.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateGroup.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CreateGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Panel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="setSizeForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>setSizeForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

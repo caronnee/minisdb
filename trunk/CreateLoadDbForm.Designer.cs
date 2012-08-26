@@ -1,6 +1,6 @@
 ﻿namespace myDb
 {
-    partial class Uvod
+    partial class CreateLoadDbForm
     {
         /// <summary>
         /// Required designer variable.

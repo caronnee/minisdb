@@ -32,7 +32,7 @@ namespace myDb
             return this.values[this.values.Count - 1];
         }
     }
-    public class Records //singleton, FUJ
+    public class Records
     {
         private string dbName_;
         private List<Record> records;

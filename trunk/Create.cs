@@ -10,7 +10,11 @@ using System.IO;
 
 namespace myDb
 {
-    public partial class Create : AbstractForm
+    public interface AttributeRegister
+    {
+        void RegisterAttribute(AbstractAttribute attr);
+    };
+    public partial class Create : DisplayedForm
     {
         //bolo by pekne..vyzistit!
         private System.Windows.Forms.Label warn;
