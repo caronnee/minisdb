@@ -72,14 +72,14 @@
     <Compile Include="DisplayedForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyToolStrip.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Panel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Panel.Designer.cs">
-      <DependentUpon>Panel.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Records.cs" />
@@ -116,9 +116,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>CreateGroup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Panel.resx">
+    <EmbeddedResource Include="Main.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>Panel.cs</DependentUpon>
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="setSizeForm.resx">
       <SubType>Designer</SubType>
