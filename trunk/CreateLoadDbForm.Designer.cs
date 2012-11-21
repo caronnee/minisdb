@@ -1,4 +1,4 @@
-﻿namespace myDb
+﻿namespace Minis
 {
     partial class CreateLoadDbForm
     {
@@ -74,8 +74,6 @@
             // 
             // Uvod
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(295, 127);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.chooseDb);

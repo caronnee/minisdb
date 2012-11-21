@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Windows.Forms;
 
-namespace myDb
+namespace Minis
 {
     public class Record
     {

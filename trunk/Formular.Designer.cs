@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace myDb
+namespace Minis
 {
     partial class Formular
     {
@@ -43,8 +43,8 @@ namespace myDb
             this.refresh = new System.Windows.Forms.Button();
             this.infoLabel = new System.Windows.Forms.Label();
             this.menu = new System.Windows.Forms.MenuStrip();
-            this.insertToolStripMenuItem = new myDb.InsertStrip();
-            this.selectToolStripMenuItem = new myDb.SelectStrip();
+            this.insertToolStripMenuItem = new Minis.InsertStrip();
+            this.selectToolStripMenuItem = new Minis.SelectStrip();
             this.backToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -195,14 +195,11 @@ namespace myDb
             // 
             // Formular
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(841, 266);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.tabs);
             this.Controls.Add(this.infoBox);
             this.Controls.Add(this.menu);
-            this.MainMenuStrip = this.menu;
             this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "Formular";
             this.Text = "Formular";

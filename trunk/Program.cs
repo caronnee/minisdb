@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace myDb
+namespace Minis
 {
     // formular that is possible to show as main window
     public enum Forms
@@ -27,28 +27,7 @@ namespace myDb
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false); //IF sa spravi tu
-            DisplayedForm activeForm = new CreateLoadDbForm();
-            if (activeForm.endCode() == Forms.FormCreateBd)
-                activeForm = new Create();
-            while (activeForm != null)
-            {
-                Application.Run(activeForm);
-                if (activeForm.endCode() == Forms.FormEnd) //bez toho, zby zmenil
-                    break;
-                switch (activeForm.endCode())
-                {
-                    case Forms.FormLoad:
-                        activeForm = new CreateLoadDbForm();
-                        break;
-                    case Forms.FormCreateBd:
-                        activeForm = new Create();
-                        break;
-                    case Forms.FormFormular:
-                        activeForm = new Formular(activeForm.getFinalWord());
-                        break;
-                    default: throw new Exception("No such type in zero level switch handled");
-                }
-            }
+            Application.Run (new MainContainer());
         }
     }
 }

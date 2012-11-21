@@ -8,9 +8,9 @@ using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace myDb
+namespace Minis
 {
-    public partial class Formular : DisplayedForm
+    public partial class Formular : Panel
     {
         private Records records;
 
@@ -40,8 +40,7 @@ namespace myDb
         }
         void backToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            this.endState = Forms.FormLoad;
-            this.Close();
+            //TODO change to infrom main component
         }
         void records_infoHandler(string s)
         {

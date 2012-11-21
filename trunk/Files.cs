@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 
-namespace myDb
+namespace Minis
 {
     static class Files //TODO premenovat
     {
@@ -19,7 +19,7 @@ namespace myDb
         public const string dateFormat = "dd.MMMM,yyyy";
         // enums are independant from rest of the databases, one database can use multiple enums
         public const string enumFile = "./enums.data"; 
-        public const string fileType = ".myDb";
+        public const string fileType = ".Minis";
         public static List<string> readEnum()
         {
             List<string> l = new List<string>();

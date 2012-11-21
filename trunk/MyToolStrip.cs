@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Text;
 
-namespace myDb
+namespace Minis
 {
     public class MyToolStrip : ToolStripMenuItem
     {

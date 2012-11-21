@@ -7,9 +7,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-namespace myDb
+namespace Minis
 {
-    public partial class CreateLoadDbForm : DisplayedForm
+    public partial class CreateLoadDbForm : Panel
     {
         public CreateLoadDbForm()
         {       
@@ -20,16 +20,14 @@ namespace myDb
             FileInfo[] dbs = dirInfo.GetFiles("*" + Files.fileType);
             if (dbs.Length == 0)
             {
-                this.endState = Forms.FormCreateBd;
-                return;
+                // TODO inform about changed formular
             }
             this.chooseDb.Items.AddRange(dbs);
             this.chooseDb.SelectedIndex = 0;
         }
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            endState = Forms.FormCreateBd;
-            this.Close();
+            // TODO inform main formular
         }
         private void Load_Click(object sender, EventArgs e)
         {
@@ -38,9 +36,7 @@ namespace myDb
                 MessageBox.Show("Hold on! No database chosen");
                 return;
             }
-            endState = Forms.FormFormular;
-            this.finalWord = ((FileInfo)this.chooseDb.SelectedItem).Name;
-            this.Close();
+            // TODO inform main formular
         }
         private void removeButton_Click(object sender, EventArgs e)
         {
@@ -53,9 +49,7 @@ namespace myDb
             this.chooseDb.Items.Remove(this.chooseDb.SelectedItem);
             if (chooseDb.Items.Count == 0)
             {
-                endState = Forms.FormCreateBd;
-                this.Close();
-                return;
+                // TODO inform main formular
             }
             this.chooseDb.SelectedIndex = 0;
         }

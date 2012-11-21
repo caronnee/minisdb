@@ -1,6 +1,6 @@
 namespace Minis
 {
-    partial class Main
+    partial class MainContainer
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,8 @@ namespace Minis
             this.managersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enumManegerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.about = new System.Windows.Forms.ToolStripMenuItem();
+            this.databaseManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,7 +41,7 @@ namespace Minis
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.managersToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.about});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(693, 24);
@@ -51,7 +52,8 @@ namespace Minis
             // 
             this.managersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.groupManagerToolStripMenuItem,
-            this.enumManegerToolStripMenuItem});
+            this.enumManegerToolStripMenuItem,
+            this.databaseManagerToolStripMenuItem});
             this.managersToolStripMenuItem.Name = "managersToolStripMenuItem";
             this.managersToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.managersToolStripMenuItem.Text = "Managers";
@@ -59,29 +61,37 @@ namespace Minis
             // groupManagerToolStripMenuItem
             // 
             this.groupManagerToolStripMenuItem.Name = "groupManagerToolStripMenuItem";
-            this.groupManagerToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.groupManagerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.groupManagerToolStripMenuItem.Text = "Group manager";
             // 
             // enumManegerToolStripMenuItem
             // 
             this.enumManegerToolStripMenuItem.Name = "enumManegerToolStripMenuItem";
-            this.enumManegerToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.enumManegerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.enumManegerToolStripMenuItem.Text = "Enum maneger";
             // 
-            // aboutToolStripMenuItem
+            // about
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.about.Name = "about";
+            this.about.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.about.Size = new System.Drawing.Size(52, 20);
+            this.about.Text = "About";
+            this.about.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // Main
+            // databaseManagerToolStripMenuItem
+            // 
+            this.databaseManagerToolStripMenuItem.Name = "databaseManagerToolStripMenuItem";
+            this.databaseManagerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.databaseManagerToolStripMenuItem.Text = "Database manager";
+            // 
+            // MainContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 262);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Main";
+            this.Name = "MainContainer";
             this.Text = "Main";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -96,6 +106,7 @@ namespace Minis
         private System.Windows.Forms.ToolStripMenuItem managersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem groupManagerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enumManegerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem about;
+        private System.Windows.Forms.ToolStripMenuItem databaseManagerToolStripMenuItem;
     }
 }

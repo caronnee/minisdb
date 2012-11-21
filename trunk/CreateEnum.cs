@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace myDb
+namespace Minis
 {
-    public partial class CreateEnum : DisplayedForm
+    public partial class CreateEnum : Panel
     {
         public CreateEnum()
         {
@@ -42,8 +42,7 @@ namespace myDb
                     throw new Exception("No enum defined");
                 if (this.name.Text.Length == 0)
                     throw new Exception("Name of enum is ntot valid!");
-                this.endState = Forms.FormCreateBd;
-                this.Close();
+                //TODO inform about changed state
             }
             catch (Exception ex)
             {

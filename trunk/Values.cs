@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 
-namespace myDb
+namespace Minis
 {
     public abstract class Value 
     {
