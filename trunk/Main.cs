@@ -1,23 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
 namespace Minis
 {
-    public partial class Panel : UserControl
+    public partial class Main : Form
     {
-        public Panel()
+        public Main()
         {
             InitializeComponent();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }

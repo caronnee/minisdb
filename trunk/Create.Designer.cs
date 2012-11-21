@@ -47,6 +47,7 @@ namespace myDb
             this.dbNameLabel = new System.Windows.Forms.Label();
             this.ManipulationControls = new System.Windows.Forms.GroupBox();
             this.RecordItemsArea = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.dbNameArea = new System.Windows.Forms.GroupBox();
             this.ManipulationControls.SuspendLayout();
             this.RecordItemsArea.SuspendLayout();
@@ -225,6 +226,7 @@ namespace myDb
             // 
             // RecordItemsArea
             // 
+            this.RecordItemsArea.Controls.Add(this.button1);
             this.RecordItemsArea.Controls.Add(this.removeEnum);
             this.RecordItemsArea.Controls.Add(this.definedEnums);
             this.RecordItemsArea.Controls.Add(this.addEnum);
@@ -239,6 +241,15 @@ namespace myDb
             this.RecordItemsArea.Size = new System.Drawing.Size(78, 283);
             this.RecordItemsArea.TabIndex = 21;
             this.RecordItemsArea.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(0, 202);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Manage groups";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // dbNameArea
             // 
@@ -292,5 +303,6 @@ namespace myDb
     private System.Windows.Forms.GroupBox ManipulationControls;
     private System.Windows.Forms.GroupBox RecordItemsArea;
     private System.Windows.Forms.GroupBox dbNameArea;
+        private System.Windows.Forms.Button button1;
     }
 }
