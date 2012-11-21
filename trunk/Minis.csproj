@@ -70,7 +70,7 @@
       <DependentUpon>Formular.cs</DependentUpon>
     </Compile>
     <Compile Include="GridPanel.cs">
-      <SubType>Form</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="GridPanel.Designer.cs">
       <DependentUpon>GridPanel.cs</DependentUpon>
