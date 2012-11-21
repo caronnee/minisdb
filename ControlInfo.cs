@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace myDb
+namespace Minis
 {
     class ControlInfo
     {

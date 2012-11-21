@@ -8,13 +8,13 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.IO;
 
-namespace myDb
+namespace Minis
 {
     public interface AttributeRegister
     {
         void RegisterAttribute(AbstractAttribute attr);
     };
-    public partial class Create : DisplayedForm
+    public partial class Create : Panel
     {
         //bolo by pekne..vyzistit!
         private System.Windows.Forms.Label warn;
@@ -158,15 +158,16 @@ namespace myDb
         {
             using (CreateEnum en = new CreateEnum())
             {
-                en.ShowDialog();
-                if (en.endCode() == Forms.FormEnd)
-                    return;
-                this.definedEnums.Items.Add(en.getName());
-                ComboBox b = new ComboBox();
-                b.Items.AddRange(en.getValues());
-                enums.Add(b);
-                if (definedEnums.Items.Count > 0)
-                    definedEnums.SelectedIndex = 0;
+                //TODO change
+                //en.ShowDialog();
+                //if (en.endCode() == Forms.FormEnd)
+                //    return;
+                //this.definedEnums.Items.Add(en.getName());
+                //ComboBox b = new ComboBox();
+                //b.Items.AddRange(en.getValues());
+                //enums.Add(b);
+                //if (definedEnums.Items.Count > 0)
+                //    definedEnums.SelectedIndex = 0;
             }
         }
         private void removeEnum_Click(object sender, EventArgs e) //TODO zkontrolovat ostatnee db, ci h pouzivaju/ask db to recreate
@@ -242,9 +243,6 @@ namespace myDb
                     getRecords(file); //s je stream
                 }
                 this.records.save();
-                this.endState = Forms.FormFormular;
-                this.finalWord = name;
-                this.Close();
             }
             catch (Exception ex)
             {
@@ -270,13 +268,14 @@ namespace myDb
         private System.Collections.Generic.List<System.Windows.Forms.ComboBox> enums;
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            //ak existuju uz databaze, tak ok
-            DirectoryInfo d = new DirectoryInfo(".");
-            if (d.GetFiles("*.myDb", SearchOption.TopDirectoryOnly).Length == 0)
-                this.endState = Forms.FormEnd;
-            else 
-                this.endState = Forms.FormLoad;
-            this.Close();
+            //TODO change
+            ////ak existuju uz databaze, tak ok
+            //DirectoryInfo d = new DirectoryInfo(".");
+            //if (d.GetFiles("*.Minis", SearchOption.TopDirectoryOnly).Length == 0)
+            //    this.endState = Forms.FormEnd;
+            //else 
+            //    this.endState = Forms.FormLoad;
+            //this.Close();
         }
     }
 }

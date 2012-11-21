@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace myDb
+namespace Minis
 {
     partial class Create
     {
@@ -264,8 +264,6 @@ namespace myDb
             // 
             // Create
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 378);
             this.Controls.Add(this.definitionPanel);
             this.Controls.Add(this.RecordItemsArea);

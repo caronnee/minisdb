@@ -29,19 +29,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Attribute.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Condition.cs" />
     <Compile Include="ControlInfo.cs" />
     <Compile Include="Create.cs">
-      <SubType>Form</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Create.Designer.cs">
       <DependentUpon>Create.cs</DependentUpon>
     </Compile>
     <Compile Include="CreateEnum.cs">
-      <SubType>Form</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CreateEnum.Designer.cs">
       <DependentUpon>CreateEnum.cs</DependentUpon>
@@ -58,7 +64,7 @@
     <Compile Include="Events.cs" />
     <Compile Include="Files.cs" />
     <Compile Include="Formular.cs">
-      <SubType>Form</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Formular.Designer.cs">
       <DependentUpon>Formular.cs</DependentUpon>
@@ -69,19 +75,17 @@
     <Compile Include="GridPanel.Designer.cs">
       <DependentUpon>GridPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="DisplayedForm.cs">
+    <Compile Include="MainContainer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="MainContainer.Designer.cs">
+      <DependentUpon>MainContainer.cs</DependentUpon>
     </Compile>
     <Compile Include="MyToolStrip.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Records.cs" />
     <Compile Include="Resolver.cs" />
     <Compile Include="setSizeForm.cs">
@@ -92,7 +96,7 @@
     </Compile>
     <Compile Include="showBoxes.cs" />
     <Compile Include="CreateLoadDbForm.cs">
-      <SubType>Form</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CreateLoadDbForm.Designer.cs">
       <DependentUpon>CreateLoadDbForm.cs</DependentUpon>
@@ -104,9 +108,9 @@
     <None Include="uzivatelska_dok.doc" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DisplayedForm.resx">
+    <EmbeddedResource Include="AboutBox.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>DisplayedForm.cs</DependentUpon>
+      <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Create.resx">
       <SubType>Designer</SubType>
@@ -116,9 +120,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>CreateGroup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Include="MainContainer.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>Main.cs</DependentUpon>
+      <DependentUpon>MainContainer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="setSizeForm.resx">
       <SubType>Designer</SubType>

@@ -1,4 +1,4 @@
-﻿namespace myDb
+﻿namespace Minis
 {
     partial class CreateEnum
     {
@@ -113,8 +113,6 @@
             // 
             // CreateEnum
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(300, 215);
             this.Controls.Add(this.name);
@@ -125,7 +123,6 @@
             this.Controls.Add(this.toDefine);
             this.Controls.Add(this.remove);
             this.Controls.Add(this.add);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "CreateEnum";
             this.Text = "CreateEnum";
             this.ResumeLayout(false);

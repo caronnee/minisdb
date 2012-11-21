@@ -1,4 +1,4 @@
-﻿namespace myDb
+﻿namespace Minis
 {
     partial class GridPanel
     {

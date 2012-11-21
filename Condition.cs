@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace myDb
+namespace Minis
 {
     //for all select that can be writable
     abstract public class Condition //co tak radsej interface?

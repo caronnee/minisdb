@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System.Text;
 using System.IO;
 
-namespace myDb
+namespace Minis
 {
 	public abstract class AbstractAttribute : System.Windows.Forms.Panel 
 	{
