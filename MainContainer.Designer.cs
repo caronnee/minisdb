@@ -28,12 +28,13 @@ namespace Minis
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainContainer));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.managersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enumManegerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.about = new System.Windows.Forms.ToolStripMenuItem();
             this.databaseManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.about = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,6 +71,12 @@ namespace Minis
             this.enumManegerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.enumManegerToolStripMenuItem.Text = "Enum maneger";
             // 
+            // databaseManagerToolStripMenuItem
+            // 
+            this.databaseManagerToolStripMenuItem.Name = "databaseManagerToolStripMenuItem";
+            this.databaseManagerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.databaseManagerToolStripMenuItem.Text = "Database manager";
+            // 
             // about
             // 
             this.about.Name = "about";
@@ -78,21 +85,16 @@ namespace Minis
             this.about.Text = "About";
             this.about.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // databaseManagerToolStripMenuItem
-            // 
-            this.databaseManagerToolStripMenuItem.Name = "databaseManagerToolStripMenuItem";
-            this.databaseManagerToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.databaseManagerToolStripMenuItem.Text = "Database manager";
-            // 
             // MainContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 262);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainContainer";
-            this.Text = "Main";
+            this.Text = "Mini database";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

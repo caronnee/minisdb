@@ -21,7 +21,7 @@ namespace Minis
             // show about
             // about is dialog
             AboutBox box = new AboutBox();
-            box.Show();
+            box.ShowDialog();
         }
     }
 }

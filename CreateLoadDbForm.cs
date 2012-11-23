@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Minis
 {
-    public partial class CreateLoadDbForm : Panel
+    public partial class CreateLoadDbForm : UserControl
     {
         public CreateLoadDbForm()
         {       
@@ -41,7 +41,7 @@ namespace Minis
         private void removeButton_Click(object sender, EventArgs e)
         {
             if (this.chooseDb.Items.Count == 0)
-                return; //ziadne warnig
+                return; //ziadne warnig?
             DialogResult result = MessageBox.Show("Are you sure to remove " + this.chooseDb.SelectedItem.ToString()+ "?","Warning!",MessageBoxButtons.YesNo);
             if (result == DialogResult.No)
                 return;
