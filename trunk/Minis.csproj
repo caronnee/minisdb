@@ -125,6 +125,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>CreateGroup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Intro.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Intro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainContainer.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainContainer.cs</DependentUpon>
