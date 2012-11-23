@@ -100,11 +100,11 @@
       <DependentUpon>setSizeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="showBoxes.cs" />
-    <Compile Include="CreateLoadDbForm.cs">
+    <Compile Include="Intro.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CreateLoadDbForm.Designer.cs">
-      <DependentUpon>CreateLoadDbForm.cs</DependentUpon>
+    <Compile Include="Intro.Designer.cs">
+      <DependentUpon>Intro.cs</DependentUpon>
     </Compile>
     <Compile Include="Values.cs" />
   </ItemGroup>

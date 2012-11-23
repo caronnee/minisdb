@@ -9,9 +9,9 @@ using System.IO;
 
 namespace Minis
 {
-    public partial class CreateLoadDbForm : UserControl
+    public partial class Intro : UserControl
     {
-        public CreateLoadDbForm()
+        public Intro()
         {       
             InitializeComponent();
           
@@ -21,6 +21,7 @@ namespace Minis
             if (dbs.Length == 0)
             {
                 // TODO inform about changed formular
+                return;
             }
             this.chooseDb.Items.AddRange(dbs);
             this.chooseDb.SelectedIndex = 0;
