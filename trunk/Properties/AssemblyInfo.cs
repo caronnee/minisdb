@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Mini database")]
-[assembly: AssemblyDescription("For everyone that need to look through record")]
+[assembly: AssemblyDescription("This should serve all people who writes records and likes to search through them. \nLike me\n.If you encounter any problem, bug or some functionality you would like, mail me ( caronnee@gmail.com ) :)")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HP")]
 [assembly: AssemblyProduct("Mini database")]
