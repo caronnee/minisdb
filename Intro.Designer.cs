@@ -1,6 +1,6 @@
 ﻿namespace Minis
 {
-    partial class CreateLoadDbForm
+    partial class Intro
     {
         /// <summary>
         /// Required designer variable.

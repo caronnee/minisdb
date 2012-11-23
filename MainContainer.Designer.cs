@@ -35,6 +35,7 @@ namespace Minis
             this.enumManegerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.databaseManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.about = new System.Windows.Forms.ToolStripMenuItem();
+            this.screen = new Minis.Intro();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@ namespace Minis
             this.about});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(693, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(617, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -85,11 +86,23 @@ namespace Minis
             this.about.Text = "About";
             this.about.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // screen
+            // 
+            this.screen.AutoSize = true;
+            this.screen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.screen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.screen.Location = new System.Drawing.Point(0, 24);
+            this.screen.Name = "screen";
+            this.screen.Size = new System.Drawing.Size(617, 238);
+            this.screen.TabIndex = 1;
+            // 
             // MainContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(693, 262);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(617, 262);
+            this.Controls.Add(this.screen);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -110,5 +123,6 @@ namespace Minis
         private System.Windows.Forms.ToolStripMenuItem enumManegerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem about;
         private System.Windows.Forms.ToolStripMenuItem databaseManagerToolStripMenuItem;
+        private Intro screen;
     }
 }
