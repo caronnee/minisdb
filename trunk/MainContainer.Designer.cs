@@ -95,6 +95,7 @@ namespace Minis
             this.screen.Name = "screen";
             this.screen.Size = new System.Drawing.Size(582, 206);
             this.screen.TabIndex = 1;
+            this.screen.Paint += new System.Windows.Forms.PaintEventHandler(this.CheckControls);
             // 
             // MainContainer
             // 
@@ -122,6 +123,6 @@ namespace Minis
         private System.Windows.Forms.ToolStripMenuItem enumManegerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem about;
         private System.Windows.Forms.ToolStripMenuItem databaseManagerToolStripMenuItem;
-        private Intro screen;
+        private StateManager screen;
     }
 }
