@@ -14,11 +14,15 @@ namespace Minis
     {
         void RegisterAttribute(AbstractAttribute attr);
     };
-    public partial class Create : Panel
+    public partial class Create : StateManager
     {
         //bolo by pekne..vyzistit!
         private System.Windows.Forms.Label warn;
         private System.Windows.Forms.Label warnLabel;
+        public override void InitState()
+        {
+            // do nothing
+        }
         public Create()
         {
             InitializeComponent();

@@ -6,21 +6,26 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace Minis
 {
-    public partial class Intro : UserControl
+    public partial class Intro : StateManager
     {
         public Intro()
         {       
             InitializeComponent();
-          
+        }
+
+        public override void InitState()
+        {
             //Load to combobox all databases
             DirectoryInfo dirInfo = new DirectoryInfo(".");
             FileInfo[] dbs = dirInfo.GetFiles("*" + Files.fileType);
             if (dbs.Length == 0)
             {
-                // TODO inform about changed formular
+                // create immediately some database
+                OnStateChanged(State.StateCreateDatabase,"");
                 return;
             }
             this.chooseDb.Items.AddRange(dbs);
@@ -28,7 +33,7 @@ namespace Minis
         }
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            // TODO inform main formular
+            OnStateChanged( State.StateCreateDatabase, "" );
         }
         private void Load_Click(object sender, EventArgs e)
         {
@@ -37,12 +42,11 @@ namespace Minis
                 MessageBox.Show("Hold on! No database chosen");
                 return;
             }
-            // TODO inform main formular
+            OnStateChanged(State.StateLoadDatabase, this.chooseDb.SelectedItem.ToString() );
         }
         private void removeButton_Click(object sender, EventArgs e)
         {
-            if (this.chooseDb.Items.Count == 0)
-                return; //ziadne warnig?
+            Debug.Assert(this.chooseDb.Items.Count == 0);
             DialogResult result = MessageBox.Show("Are you sure to remove " + this.chooseDb.SelectedItem.ToString()+ "?","Warning!",MessageBoxButtons.YesNo);
             if (result == DialogResult.No)
                 return;
@@ -50,7 +54,7 @@ namespace Minis
             this.chooseDb.Items.Remove(this.chooseDb.SelectedItem);
             if (chooseDb.Items.Count == 0)
             {
-                // TODO inform main formular
+                OnStateChanged(State.StateCreateDatabase,"");
             }
             this.chooseDb.SelectedIndex = 0;
         }

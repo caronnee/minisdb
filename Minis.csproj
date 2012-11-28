@@ -41,7 +41,7 @@
     <Compile Include="Condition.cs" />
     <Compile Include="ControlInfo.cs" />
     <Compile Include="Create.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Create.Designer.cs">
       <DependentUpon>Create.cs</DependentUpon>
@@ -105,6 +105,9 @@
     </Compile>
     <Compile Include="Intro.Designer.cs">
       <DependentUpon>Intro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StateManager.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Values.cs" />
   </ItemGroup>
