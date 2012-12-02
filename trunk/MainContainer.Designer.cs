@@ -19,7 +19,17 @@ namespace Minis
             }
             base.Dispose(disposing);
         }
-
+        void SetUpScreen()
+        {
+            this.screen.AutoSize = true;
+            this.screen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.screen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.screen.Location = new System.Drawing.Point(0, 24);
+            this.screen.Name = "screen";
+            this.screen.Size = new System.Drawing.Size(582, 206);
+            this.screen.TabIndex = 1;
+            this.screen.Paint += new System.Windows.Forms.PaintEventHandler(this.CheckControls);
+        }
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -35,7 +45,7 @@ namespace Minis
             this.enumManegerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.databaseManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.about = new System.Windows.Forms.ToolStripMenuItem();
-            this.screen = new Minis.Intro();
+            this.screen = new Minis.Create();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +56,7 @@ namespace Minis
             this.about});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(582, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(685, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -88,12 +98,10 @@ namespace Minis
             // 
             // screen
             // 
-            this.screen.AutoSize = true;
-            this.screen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.screen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.screen.Location = new System.Drawing.Point(0, 24);
             this.screen.Name = "screen";
-            this.screen.Size = new System.Drawing.Size(582, 206);
+            this.screen.Size = new System.Drawing.Size(685, 293);
             this.screen.TabIndex = 1;
             this.screen.Paint += new System.Windows.Forms.PaintEventHandler(this.CheckControls);
             // 
@@ -101,7 +109,7 @@ namespace Minis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 230);
+            this.ClientSize = new System.Drawing.Size(685, 317);
             this.Controls.Add(this.screen);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -123,6 +131,6 @@ namespace Minis
         private System.Windows.Forms.ToolStripMenuItem enumManegerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem about;
         private System.Windows.Forms.ToolStripMenuItem databaseManagerToolStripMenuItem;
-        private StateManager screen;
+        private Create screen;
     }
 }

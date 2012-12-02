@@ -32,6 +32,7 @@ namespace Minis
 
         private void CheckControls(object sender, PaintEventArgs e)
         {
+            return;
             //TODO use repaint or not?
             if (_modeChanged == State.StateNone)
                 return;
