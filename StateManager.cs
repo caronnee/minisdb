@@ -13,8 +13,8 @@ namespace Minis
         StateNone
     };
 
-
-    public abstract class StateManager : UserControl
+    // todo change for anstract
+    public class StateManager : UserControl
     {
         public delegate void StateHandler(UserControl sender, State s, String str);
         public event StateHandler StateChanged;
@@ -23,6 +23,6 @@ namespace Minis
             if (StateChanged != null)
                 StateChanged(this, newState, arg);
         }
-        public abstract void InitState();
+        public virtual void InitState() {}
     }
 }

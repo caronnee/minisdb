@@ -77,7 +77,7 @@ namespace Minis
             this.addInteger.Dock = System.Windows.Forms.DockStyle.Top;
             this.addInteger.Location = new System.Drawing.Point(3, 16);
             this.addInteger.Name = "addInteger";
-            this.addInteger.Size = new System.Drawing.Size(72, 23);
+            this.addInteger.Size = new System.Drawing.Size(75, 23);
             this.addInteger.TabIndex = 4;
             this.addInteger.Text = "add integer";
             this.addInteger.UseVisualStyleBackColor = true;
@@ -88,7 +88,7 @@ namespace Minis
             this.addTextAttribute.Dock = System.Windows.Forms.DockStyle.Top;
             this.addTextAttribute.Location = new System.Drawing.Point(3, 62);
             this.addTextAttribute.Name = "addTextAttribute";
-            this.addTextAttribute.Size = new System.Drawing.Size(72, 23);
+            this.addTextAttribute.Size = new System.Drawing.Size(75, 23);
             this.addTextAttribute.TabIndex = 5;
             this.addTextAttribute.Text = "add text";
             this.addTextAttribute.UseVisualStyleBackColor = true;
@@ -97,12 +97,10 @@ namespace Minis
             // definitionPanel
             // 
             this.definitionPanel.AutoScroll = true;
-            this.definitionPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.definitionPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.definitionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.definitionPanel.Location = new System.Drawing.Point(0, 49);
             this.definitionPanel.Name = "definitionPanel";
-            this.definitionPanel.Size = new System.Drawing.Size(718, 283);
+            this.definitionPanel.Size = new System.Drawing.Size(520, 262);
             this.definitionPanel.TabIndex = 6;
             // 
             // addEnum
@@ -110,7 +108,7 @@ namespace Minis
             this.addEnum.Dock = System.Windows.Forms.DockStyle.Top;
             this.addEnum.Location = new System.Drawing.Point(3, 129);
             this.addEnum.Name = "addEnum";
-            this.addEnum.Size = new System.Drawing.Size(72, 23);
+            this.addEnum.Size = new System.Drawing.Size(75, 23);
             this.addEnum.TabIndex = 7;
             this.addEnum.Text = "add enum";
             this.addEnum.UseVisualStyleBackColor = true;
@@ -121,7 +119,7 @@ namespace Minis
             this.addImage.Dock = System.Windows.Forms.DockStyle.Top;
             this.addImage.Location = new System.Drawing.Point(3, 85);
             this.addImage.Name = "addImage";
-            this.addImage.Size = new System.Drawing.Size(72, 21);
+            this.addImage.Size = new System.Drawing.Size(75, 21);
             this.addImage.TabIndex = 8;
             this.addImage.Text = "add image";
             this.addImage.UseVisualStyleBackColor = true;
@@ -132,7 +130,7 @@ namespace Minis
             this.createEnum.Dock = System.Windows.Forms.DockStyle.Top;
             this.createEnum.Location = new System.Drawing.Point(3, 106);
             this.createEnum.Name = "createEnum";
-            this.createEnum.Size = new System.Drawing.Size(72, 23);
+            this.createEnum.Size = new System.Drawing.Size(75, 23);
             this.createEnum.TabIndex = 10;
             this.createEnum.Text = "Create enum";
             this.createEnum.UseVisualStyleBackColor = true;
@@ -143,7 +141,7 @@ namespace Minis
             this.addTime.Dock = System.Windows.Forms.DockStyle.Top;
             this.addTime.Location = new System.Drawing.Point(3, 39);
             this.addTime.Name = "addTime";
-            this.addTime.Size = new System.Drawing.Size(72, 23);
+            this.addTime.Size = new System.Drawing.Size(75, 23);
             this.addTime.TabIndex = 11;
             this.addTime.Text = "add time";
             this.addTime.UseVisualStyleBackColor = true;
@@ -152,7 +150,7 @@ namespace Minis
             // createButton
             // 
             this.createButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.createButton.Location = new System.Drawing.Point(718, 16);
+            this.createButton.Location = new System.Drawing.Point(523, 16);
             this.createButton.Name = "createButton";
             this.createButton.Size = new System.Drawing.Size(75, 27);
             this.createButton.TabIndex = 12;
@@ -165,17 +163,17 @@ namespace Minis
             this.definedEnums.Dock = System.Windows.Forms.DockStyle.Top;
             this.definedEnums.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.definedEnums.FormattingEnabled = true;
-            this.definedEnums.Location = new System.Drawing.Point(3, 152);
+            this.definedEnums.Location = new System.Drawing.Point(3, 175);
             this.definedEnums.Name = "definedEnums";
-            this.definedEnums.Size = new System.Drawing.Size(72, 21);
+            this.definedEnums.Size = new System.Drawing.Size(75, 21);
             this.definedEnums.TabIndex = 13;
             // 
             // removeEnum
             // 
             this.removeEnum.Dock = System.Windows.Forms.DockStyle.Top;
-            this.removeEnum.Location = new System.Drawing.Point(3, 173);
+            this.removeEnum.Location = new System.Drawing.Point(3, 152);
             this.removeEnum.Name = "removeEnum";
-            this.removeEnum.Size = new System.Drawing.Size(72, 23);
+            this.removeEnum.Size = new System.Drawing.Size(75, 23);
             this.removeEnum.TabIndex = 14;
             this.removeEnum.Text = "remove enum";
             this.removeEnum.UseVisualStyleBackColor = true;
@@ -186,14 +184,14 @@ namespace Minis
             this.dbName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dbName.Location = new System.Drawing.Point(85, 16);
             this.dbName.Name = "dbName";
-            this.dbName.Size = new System.Drawing.Size(708, 20);
+            this.dbName.Size = new System.Drawing.Size(513, 20);
             this.dbName.TabIndex = 15;
             this.dbName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cancelButton
             // 
             this.cancelButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.cancelButton.Location = new System.Drawing.Point(643, 16);
+            this.cancelButton.Location = new System.Drawing.Point(448, 16);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 27);
             this.cancelButton.TabIndex = 16;
@@ -203,11 +201,10 @@ namespace Minis
             // 
             // dbNameLabel
             // 
-            this.dbNameLabel.AutoSize = true;
             this.dbNameLabel.Dock = System.Windows.Forms.DockStyle.Left;
             this.dbNameLabel.Location = new System.Drawing.Point(3, 16);
             this.dbNameLabel.Name = "dbNameLabel";
-            this.dbNameLabel.Size = new System.Drawing.Size(82, 13);
+            this.dbNameLabel.Size = new System.Drawing.Size(82, 30);
             this.dbNameLabel.TabIndex = 19;
             this.dbNameLabel.Text = "Database name";
             // 
@@ -218,33 +215,34 @@ namespace Minis
             this.ManipulationControls.Controls.Add(this.createButton);
             this.ManipulationControls.Controls.Add(this.regexp);
             this.ManipulationControls.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ManipulationControls.Location = new System.Drawing.Point(0, 332);
+            this.ManipulationControls.Location = new System.Drawing.Point(0, 311);
             this.ManipulationControls.Name = "ManipulationControls";
-            this.ManipulationControls.Size = new System.Drawing.Size(796, 46);
+            this.ManipulationControls.Size = new System.Drawing.Size(601, 46);
             this.ManipulationControls.TabIndex = 20;
             this.ManipulationControls.TabStop = false;
             // 
             // RecordItemsArea
             // 
+            this.RecordItemsArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.RecordItemsArea.Controls.Add(this.button1);
-            this.RecordItemsArea.Controls.Add(this.removeEnum);
             this.RecordItemsArea.Controls.Add(this.definedEnums);
+            this.RecordItemsArea.Controls.Add(this.removeEnum);
             this.RecordItemsArea.Controls.Add(this.addEnum);
             this.RecordItemsArea.Controls.Add(this.createEnum);
             this.RecordItemsArea.Controls.Add(this.addImage);
             this.RecordItemsArea.Controls.Add(this.addTextAttribute);
             this.RecordItemsArea.Controls.Add(this.addTime);
             this.RecordItemsArea.Controls.Add(this.addInteger);
-            this.RecordItemsArea.Dock = System.Windows.Forms.DockStyle.Right;
-            this.RecordItemsArea.Location = new System.Drawing.Point(718, 49);
+            this.RecordItemsArea.Location = new System.Drawing.Point(520, 49);
             this.RecordItemsArea.Name = "RecordItemsArea";
-            this.RecordItemsArea.Size = new System.Drawing.Size(78, 283);
+            this.RecordItemsArea.Size = new System.Drawing.Size(81, 262);
             this.RecordItemsArea.TabIndex = 21;
             this.RecordItemsArea.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(0, 202);
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.Location = new System.Drawing.Point(3, 196);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 15;
@@ -258,19 +256,18 @@ namespace Minis
             this.dbNameArea.Dock = System.Windows.Forms.DockStyle.Top;
             this.dbNameArea.Location = new System.Drawing.Point(0, 0);
             this.dbNameArea.Name = "dbNameArea";
-            this.dbNameArea.Size = new System.Drawing.Size(796, 49);
+            this.dbNameArea.Size = new System.Drawing.Size(601, 49);
             this.dbNameArea.TabIndex = 22;
             this.dbNameArea.TabStop = false;
             // 
             // Create
             // 
-            this.ClientSize = new System.Drawing.Size(796, 378);
             this.Controls.Add(this.definitionPanel);
             this.Controls.Add(this.RecordItemsArea);
-            this.Controls.Add(this.ManipulationControls);
             this.Controls.Add(this.dbNameArea);
+            this.Controls.Add(this.ManipulationControls);
             this.Name = "Create";
-            this.Text = "Create";
+            this.Size = new System.Drawing.Size(601, 357);
             this.ManipulationControls.ResumeLayout(false);
             this.ManipulationControls.PerformLayout();
             this.RecordItemsArea.ResumeLayout(false);
