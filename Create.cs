@@ -279,5 +279,11 @@ namespace Minis
             //    this.endState = Forms.FormLoad;
             //this.Close();
         }
+
+        private void ClearInput(object sender, EventArgs e)
+        {
+            this.dbName.Clear();
+            this.dbName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+        }
     }
 }
