@@ -15,22 +15,25 @@ namespace Minis
         public Intro()
         {       
             InitializeComponent();
-        }
-
-        public override void InitState()
-        {
             //Load to combobox all databases
             DirectoryInfo dirInfo = new DirectoryInfo(".");
             FileInfo[] dbs = dirInfo.GetFiles("*" + Files.fileType);
-            if (dbs.Length == 0)
+            if (dbs.Length != 0)
+            {
+                this.chooseDb.Items.AddRange(dbs);
+                this.chooseDb.SelectedIndex = 0;
+            }
+        }
+        public override void InitState()
+        {
+            if (this.chooseDb.Items.Count == 0)
             {
                 // create immediately some database
+                //OnStateChanged(State.StateCreateDatabase,"");
                 OnStateChanged(State.StateCreateDatabase,"");
-                return;
             }
-            this.chooseDb.Items.AddRange(dbs);
-            this.chooseDb.SelectedIndex = 0;
         }
+        
         private void CreateButton_Click(object sender, EventArgs e)
         {
             OnStateChanged( State.StateCreateDatabase, "" );

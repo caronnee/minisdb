@@ -19,17 +19,6 @@ namespace Minis
             }
             base.Dispose(disposing);
         }
-        void SetUpScreen()
-        {
-            this.screen.AutoSize = true;
-            this.screen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.screen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.screen.Location = new System.Drawing.Point(0, 24);
-            this.screen.Name = "screen";
-            this.screen.Size = new System.Drawing.Size(582, 206);
-            this.screen.TabIndex = 1;
-            this.screen.Paint += new System.Windows.Forms.PaintEventHandler(this.CheckControls);
-        }
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -39,26 +28,26 @@ namespace Minis
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainContainer));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.managersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enumManegerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.databaseManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.about = new System.Windows.Forms.ToolStripMenuItem();
-            this.screen = new Minis.Create();
-            this.menuStrip1.SuspendLayout();
+            this.screen = new Minis.DisplayPanel();
+            this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // mainMenu
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.managersToolStripMenuItem,
             this.about});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(685, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.mainMenu.Name = "mainMenu";
+            this.mainMenu.Size = new System.Drawing.Size(685, 24);
+            this.mainMenu.TabIndex = 0;
+            this.mainMenu.Text = "menuStrip1";
             // 
             // managersToolStripMenuItem
             // 
@@ -103,21 +92,21 @@ namespace Minis
             this.screen.Name = "screen";
             this.screen.Size = new System.Drawing.Size(685, 293);
             this.screen.TabIndex = 1;
-            this.screen.Paint += new System.Windows.Forms.PaintEventHandler(this.CheckControls);
             // 
             // MainContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(685, 317);
             this.Controls.Add(this.screen);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.mainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.mainMenu;
             this.Name = "MainContainer";
             this.Text = "Mini database";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.mainMenu.ResumeLayout(false);
+            this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,12 +114,12 @@ namespace Minis
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem managersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem groupManagerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enumManegerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem about;
         private System.Windows.Forms.ToolStripMenuItem databaseManagerToolStripMenuItem;
-        private Create screen;
+        private DisplayPanel screen;
     }
 }
