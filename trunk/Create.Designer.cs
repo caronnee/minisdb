@@ -44,11 +44,8 @@ namespace Minis
             this.cancelButton = new System.Windows.Forms.Button();
             this.ManipulationControls = new System.Windows.Forms.Panel();
             this.RecordItemsArea = new System.Windows.Forms.Panel();
-            this.dbNameArea = new System.Windows.Forms.Panel();
-            this.DbNameLabel = new System.Windows.Forms.Label();
             this.ManipulationControls.SuspendLayout();
             this.RecordItemsArea.SuspendLayout();
-            this.dbNameArea.SuspendLayout();
             this.SuspendLayout();
             // 
             // addInteger
@@ -79,9 +76,9 @@ namespace Minis
             this.definitionPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.definitionPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.definitionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.definitionPanel.Location = new System.Drawing.Point(0, 13);
+            this.definitionPanel.Location = new System.Drawing.Point(0, 20);
             this.definitionPanel.Name = "definitionPanel";
-            this.definitionPanel.Size = new System.Drawing.Size(520, 316);
+            this.definitionPanel.Size = new System.Drawing.Size(520, 309);
             this.definitionPanel.TabIndex = 6;
             // 
             // addEnum
@@ -163,12 +160,15 @@ namespace Minis
             // 
             // dbName
             // 
-            this.dbName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dbName.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.dbName.Location = new System.Drawing.Point(0, 0);
             this.dbName.Name = "dbName";
             this.dbName.Size = new System.Drawing.Size(601, 20);
             this.dbName.TabIndex = 15;
+            this.dbName.Text = "<Write here the name of the database>";
             this.dbName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dbName.Enter += new System.EventHandler(this.ClearInput);
             // 
             // cancelButton
             // 
@@ -205,45 +205,21 @@ namespace Minis
             this.RecordItemsArea.Controls.Add(this.addTime);
             this.RecordItemsArea.Controls.Add(this.addInteger);
             this.RecordItemsArea.Dock = System.Windows.Forms.DockStyle.Right;
-            this.RecordItemsArea.Location = new System.Drawing.Point(520, 13);
+            this.RecordItemsArea.Location = new System.Drawing.Point(520, 20);
             this.RecordItemsArea.Name = "RecordItemsArea";
-            this.RecordItemsArea.Size = new System.Drawing.Size(81, 316);
+            this.RecordItemsArea.Size = new System.Drawing.Size(81, 309);
             this.RecordItemsArea.TabIndex = 21;
-            // 
-            // dbNameArea
-            // 
-            this.dbNameArea.AutoSize = true;
-            this.dbNameArea.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.dbNameArea.Controls.Add(this.DbNameLabel);
-            this.dbNameArea.Controls.Add(this.dbName);
-            this.dbNameArea.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dbNameArea.Location = new System.Drawing.Point(0, 0);
-            this.dbNameArea.Name = "dbNameArea";
-            this.dbNameArea.Size = new System.Drawing.Size(601, 13);
-            this.dbNameArea.TabIndex = 22;
-            // 
-            // DbNameLabel
-            // 
-            this.DbNameLabel.AutoSize = true;
-            this.DbNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DbNameLabel.Location = new System.Drawing.Point(0, 0);
-            this.DbNameLabel.Name = "DbNameLabel";
-            this.DbNameLabel.Size = new System.Drawing.Size(85, 13);
-            this.DbNameLabel.TabIndex = 16;
-            this.DbNameLabel.Text = "Document name";
             // 
             // Create
             // 
             this.Controls.Add(this.definitionPanel);
             this.Controls.Add(this.RecordItemsArea);
             this.Controls.Add(this.ManipulationControls);
-            this.Controls.Add(this.dbNameArea);
+            this.Controls.Add(this.dbName);
             this.Name = "Create";
             this.Size = new System.Drawing.Size(601, 357);
             this.ManipulationControls.ResumeLayout(false);
             this.RecordItemsArea.ResumeLayout(false);
-            this.dbNameArea.ResumeLayout(false);
-            this.dbNameArea.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,7 +241,5 @@ namespace Minis
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Panel ManipulationControls;
         private System.Windows.Forms.Panel RecordItemsArea;
-        private System.Windows.Forms.Panel dbNameArea;
-        private System.Windows.Forms.Label DbNameLabel;
     }
 }
