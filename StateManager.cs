@@ -16,12 +16,12 @@ namespace Minis
     // todo change for anstract
     public class StateManager : UserControl
     {
-        public delegate void StateHandler(UserControl sender, State s, String str);
+        public delegate void StateHandler( State s, String str);
         public event StateHandler StateChanged;
-        protected void OnStateChanged(State newState, String arg )
+        public void OnStateChanged(State newState, String arg )
         {
             if (StateChanged != null)
-                StateChanged(this, newState, arg);
+                StateChanged( newState, arg);
         }
         public virtual void InitState() {}
     }

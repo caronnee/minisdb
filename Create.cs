@@ -19,16 +19,12 @@ namespace Minis
         //bolo by pekne..vyzistit!
         private System.Windows.Forms.Label warn;
         private System.Windows.Forms.Label warnLabel;
-        public override void InitState()
-        {
-            // do nothing
-        }
         public Create()
         {
             InitializeComponent();
             records = new Records();
-            Create_Resize(null, null);
-            this.Resize += new EventHandler(Create_Resize);
+            //Create_Resize(null, null);
+            //this.Resize += new EventHandler(Create_Resize);
             enums = new List<ComboBox>();
             warnLabel = new Label();
             warnLabel.Text = "";
@@ -43,27 +39,27 @@ namespace Minis
             //inicializuj enumy
             loadEnums();
         }
-        void Create_Resize(object sender, EventArgs e)
-        {
-            this.definitionPanel.Size = new Size(
-                -this.definitionPanel.Location.X + this.addEnum.Location.X - 10,
-                -this.definitionPanel.Location.Y + this.cancelButton.Location.Y - 10);
-        }
-        private void LoadFromFile_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog b = new OpenFileDialog();
-            b.InitialDirectory = Environment.SpecialFolder.Recent.ToString();
-            b.Multiselect = true;
-            DialogResult res = b.ShowDialog();
-            //  String s = "Subory";
-            if (res.Equals(DialogResult.Cancel))
-                return;
-            chosen.Text = "";
-            for (int i = 0; i < b.FileNames.Length; i++)
-                chosen.Text += ";" + b.FileNames.GetValue(i);
-            //   s += "\n" + b.FileNames.GetValue(i);
-            //   MessageBox.Show(s + "\n boli vybrane");
-        }
+        //void Create_Resize(object sender, EventArgs e)
+        //{
+        //    this.definitionPanel.Size = new Size(
+        //        -this.definitionPanel.Location.X + this.addEnum.Location.X - 10,
+        //        -this.definitionPanel.Location.Y + this.cancelButton.Location.Y - 10);
+        //}
+        //private void LoadFromFile_Click(object sender, EventArgs e)
+        //{
+        //    OpenFileDialog b = new OpenFileDialog();
+        //    b.InitialDirectory = Environment.SpecialFolder.Recent.ToString();
+        //    b.Multiselect = true;
+        //    DialogResult res = b.ShowDialog();
+        //    //  String s = "Subory";
+        //    if (res.Equals(DialogResult.Cancel))
+        //        return;
+        //    chosen.Text = "";
+        //    for (int i = 0; i < b.FileNames.Length; i++)
+        //        chosen.Text += ";" + b.FileNames.GetValue(i);
+        //    //   s += "\n" + b.FileNames.GetValue(i);
+        //    //   MessageBox.Show(s + "\n boli vybrane");
+        //}
         private void addTextAttribute_Click(object sender, EventArgs e)
         {
             Attribute attribute = new Attribute();
@@ -112,6 +108,8 @@ namespace Minis
             }
             if (definedEnums.Items.Count > 0)
                 definedEnums.SelectedIndex = 0;
+            else
+                definedEnums.Enabled = false;
         }
         private void saveEnums()
         {
@@ -187,7 +185,7 @@ namespace Minis
         private void addEnum_Click(object sender, EventArgs e)
         {
             if (definedEnums.Items.Count == 0)
-                return; //TODO warning
+                return; 
             AttributeEnum en = new AttributeEnum(definedEnums.SelectedText, enums[definedEnums.SelectedIndex]);
             en.changeName(definedEnums.Items[definedEnums.SelectedIndex].ToString());
             addAtrribute(en);
@@ -238,15 +236,15 @@ namespace Minis
                 this.records.changeName(this.dbName.Text);
                 this.saveEnums();
 
-                //vsetky regexoy
-                List<Regex> regExp = new List<Regex>();
-                //otvorenie suboro
-                string[] files = chosen.Text.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string file in files)
-                {
-                    getRecords(file); //s je stream
-                }
-                this.records.save();
+                ////vsetky regexoy
+                //List<Regex> regExp = new List<Regex>();
+                ////otvorenie suboro
+                //string[] files = chosen.Text.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                //foreach (string file in files)
+                //{
+                //    getRecords(file); //s je stream
+                //}
+                //this.records.save();
             }
             catch (Exception ex)
             {

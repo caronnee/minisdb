@@ -61,6 +61,12 @@
     <Compile Include="Detail.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DisplayPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DisplayPanel.Designer.cs">
+      <DependentUpon>DisplayPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Events.cs" />
     <Compile Include="Files.cs" />
     <Compile Include="Formular.cs">
@@ -70,7 +76,7 @@
       <DependentUpon>Formular.cs</DependentUpon>
     </Compile>
     <Compile Include="GridPanel.cs">
-      <SubType>Form</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="GridPanel.Designer.cs">
       <DependentUpon>GridPanel.cs</DependentUpon>
@@ -127,6 +133,10 @@
     <EmbeddedResource Include="CreateGroup.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CreateGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplayPanel.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DisplayPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Intro.resx">
       <SubType>Designer</SubType>
