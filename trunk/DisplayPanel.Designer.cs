@@ -2,6 +2,20 @@ namespace Minis
 {
     partial class DisplayPanel
     {
+        private void InitScreenShot()
+        {
+            this.screenContent.StateChanged += new Minis.StateManager.StateHandler(this.SetState);
+
+            this.screenContent.InitState();
+            // 
+            // screenContent
+            // 
+            this.screenContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.screenContent.Location = new System.Drawing.Point(0, 0);
+            this.screenContent.Name = "screenContent";
+            this.screenContent.Size = new System.Drawing.Size(0, 0);
+            this.screenContent.TabIndex = 0;
+        }
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -28,33 +42,10 @@ namespace Minis
         /// </summary>
         private void InitializeComponent()
         {
-            if (Controls.Count > 0)
-                Controls.Remove(this.screenContent);
-            switch (_state)
-            {
-                case State.StateCreateDatabase:
-                    {
-                        this.screenContent = new Minis.Create();
-                        break;
-                    }
-                default:
-                    {
-                        this.screenContent = new Minis.Intro();
-                        break;
-                    }
-            }
-            this.screenContent.StateChanged += new Minis.StateManager.StateHandler(this.SetState);
-
-            this.screenContent.InitState();
+            this.screenContent = new Intro();
             this.SuspendLayout();
-            // 
-            // screenContent
-            // 
-            this.screenContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.screenContent.Location = new System.Drawing.Point(0, 0);
-            this.screenContent.Name = "screenContent";
-            this.screenContent.Size = new System.Drawing.Size(0, 0);
-            this.screenContent.TabIndex = 0;
+            
+            InitScreenShot();
             // 
             // DisplayPanel
             // 

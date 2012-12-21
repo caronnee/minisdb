@@ -244,7 +244,7 @@ namespace Minis
                 //{
                 //    getRecords(file); //s je stream
                 //}
-                //this.records.save();
+                this.records.save();
             }
             catch (Exception ex)
             {
