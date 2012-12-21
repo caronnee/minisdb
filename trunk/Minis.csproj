@@ -69,11 +69,11 @@
     </Compile>
     <Compile Include="Events.cs" />
     <Compile Include="Files.cs" />
-    <Compile Include="Formular.cs">
-      <SubType>Component</SubType>
+    <Compile Include="DatabaseWindow.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Formular.Designer.cs">
-      <DependentUpon>Formular.cs</DependentUpon>
+    <Compile Include="DatabaseWindow.Designer.cs">
+      <DependentUpon>DatabaseWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="GridPanel.cs">
       <SubType>Component</SubType>
@@ -137,6 +137,10 @@
     <EmbeddedResource Include="DisplayPanel.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DisplayPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseWindow.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DatabaseWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Intro.resx">
       <SubType>Designer</SubType>

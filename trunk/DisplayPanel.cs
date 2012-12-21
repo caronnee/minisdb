@@ -23,6 +23,11 @@ namespace Minis
                             this.screenContent = new Create();
                             break;
                         }
+                    case State.StateLoadDatabase:
+                        {
+                            this.screenContent = new DatabaseWindow(args);
+                            break;
+                        }
                     default:
                         {
                             this.screenContent = new Intro();
