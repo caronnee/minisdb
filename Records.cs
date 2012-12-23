@@ -92,7 +92,7 @@ namespace Minis
             grid.Columns[pattern.Count].Name = Files.Id; //pripisat aj typ? Ano, bo to budeme zoradovat..a lexikograficke cisla nie su zoradene spravne..nehovoriac o datumoch
             //typ tu nepotrebujeme
         }
-        public void addRow(InsertStrip where, List<Value> values)
+        public void addRow(InsertContent where, List<Value> values)
         {
             foreach (Value v in values)
             {
@@ -216,7 +216,7 @@ namespace Minis
             }
             onInfoHandler("Completed.\r\n");
         }
-        public void addRow(InsertStrip sender)
+        public void addRow(InsertContent sender)
         {
             List<AbstractControl> ctrls = new List<AbstractControl>();
             for (int i = 0; i < pattern.Count; i++)
@@ -268,7 +268,7 @@ namespace Minis
 
             }
         }
-        public void addNames(InsertStrip strip)
+        public void addNames(InsertContent strip)
         {
             List<string> list = new List<string>();
             for (int i = 0; i < pattern.Count; i++)

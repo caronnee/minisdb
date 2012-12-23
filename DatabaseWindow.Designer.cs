@@ -27,13 +27,13 @@ namespace Minis
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void Menu_Click(object sender, System.EventArgs e)
-        {
-            if (!this.tabs.Contains(((MyToolStrip) sender).getTab()))
-                this.tabs.Controls.Add(((MyToolStrip) sender).getTab());
-            this.tabs.SelectedIndex =
-                this.tabs.Controls.GetChildIndex(((MyToolStrip) sender).getTab());
-        }
+        //private void Menu_Click(object sender, System.EventArgs e)
+        //{
+        //    if (!this.tabs.Contains
+        //        this.tabs.Controls.Add(((MyToolStrip) sender).getTab());
+        //    this.tabs.SelectedIndex =
+        //        this.tabs.Controls.GetChildIndex(((MyToolStrip) sender).getTab());
+        //}
         private void InitializeComponent()
         {
             this.infoBox = new System.Windows.Forms.TextBox();
@@ -41,11 +41,9 @@ namespace Minis
             this.results = new System.Windows.Forms.TabPage();
             this.grid = new System.Windows.Forms.DataGridView();
             this.refresh = new System.Windows.Forms.Button();
-            this.insertPage = new System.Windows.Forms.TabPage();
+            this.insertPage = new Minis.InsertContent();
             this.editPage = new System.Windows.Forms.TabPage();
             this.infoLabel = new System.Windows.Forms.Label();
-            this.changeDb = new System.Windows.Forms.ToolStripMenuItem();
-            this.b = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.results.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
@@ -140,20 +138,6 @@ namespace Minis
             this.infoLabel.TabIndex = 2;
             this.infoLabel.Text = "Info";
             // 
-            // changeDb
-            // 
-            this.changeDb.Name = "changeDb";
-            this.changeDb.Size = new System.Drawing.Size(32, 19);
-            this.changeDb.Text = "Edit db";
-            this.changeDb.Click += new System.EventHandler(this.changeDb_Click);
-            // 
-            // b
-            // 
-            this.b.Location = new System.Drawing.Point(0, 0);
-            this.b.Name = "b";
-            this.b.Size = new System.Drawing.Size(75, 23);
-            this.b.TabIndex = 0;
-            // 
             // DatabaseWindow
             // 
             this.Controls.Add(this.infoLabel);
@@ -172,15 +156,13 @@ namespace Minis
         }    
         #endregion
 
-        private System.Windows.Forms.DataGridView grid; //je to FUJ, ale co uz
+        private System.Windows.Forms.DataGridView grid;
         private System.Windows.Forms.TextBox infoBox;
         private System.Windows.Forms.TabControl tabs;
         private System.Windows.Forms.Label infoLabel;
-        private System.Windows.Forms.ToolStripMenuItem changeDb;
-        private System.Windows.Forms.Button b;
         private System.Windows.Forms.TabPage results;
         private System.Windows.Forms.Button refresh;
-        private System.Windows.Forms.TabPage insertPage;
-        private System.Windows.Forms.TabPage editPage; 
+        private System.Windows.Forms.TabPage editPage;
+        private InsertContent insertPage;
     }
 }
