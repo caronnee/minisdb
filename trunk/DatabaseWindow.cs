@@ -27,9 +27,9 @@ namespace Minis
             records.settingGrid(this.grid);
             records.filter(this.grid, "");
 
-            //this.insertToolStripMenuItem.addRecord += new InsertStrip.addRecordsHandler(records.addRecord);
-            //this.insertToolStripMenuItem.addRow += new InsertStrip.addRowHandler(records.addRow);
-            //this.insertToolStripMenuItem.addLabels += new InsertStrip.AddLabels(records.addNames);
+            this.insertPage.addRecord += new InsertContent.addRecordsHandler(records.addRecord);
+            this.insertPage.addRow += new InsertContent.addRowHandler(records.addRow);
+            this.insertPage.addLabels += new InsertContent.AddLabelsHandler(records.addNames);
             //this.selectToolStripMenuItem.recordChosen += new SelectStrip.RecordChosen(selectToolStripMenuItem_recordChosen);
             this.tabs.MouseClick += new MouseEventHandler(tabs_MouseClick);
             this.records.infoHandler += new Records.InfoHandler(records_infoHandler);

@@ -81,6 +81,12 @@
     <Compile Include="GridPanel.Designer.cs">
       <DependentUpon>GridPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="InsertContent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="InsertContent.Designer.cs">
+      <DependentUpon>InsertContent.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainContainer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>DatabaseWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InsertContent.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InsertContent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Intro.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Intro.cs</DependentUpon>
@@ -165,6 +175,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="todo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
