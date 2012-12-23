@@ -51,7 +51,7 @@ namespace Minis
             if (addRecord == null)
                 return;
             addRecord(this, args);
-            internal_clean(null, null); //no neni toto fuj?
+            //internal_clean(null, null); //no neni toto fuj?
         }
         public void setNames(List<string> names)
         {

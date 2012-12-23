@@ -42,7 +42,7 @@ namespace Minis
             this.grid = new System.Windows.Forms.DataGridView();
             this.refresh = new System.Windows.Forms.Button();
             this.insertPage = new Minis.InsertContent();
-            this.editPage = new System.Windows.Forms.TabPage();
+            this.selectPage = new System.Windows.Forms.TabPage();
             this.infoLabel = new System.Windows.Forms.Label();
             this.tabs.SuspendLayout();
             this.results.SuspendLayout();
@@ -65,7 +65,7 @@ namespace Minis
             this.tabs.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.tabs.Controls.Add(this.results);
             this.tabs.Controls.Add(this.insertPage);
-            this.tabs.Controls.Add(this.editPage);
+            this.tabs.Controls.Add(this.selectPage);
             this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabs.Font = new System.Drawing.Font("Segoe Print", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.tabs.Location = new System.Drawing.Point(0, 0);
@@ -80,6 +80,7 @@ namespace Minis
             // 
             this.results.Controls.Add(this.grid);
             this.results.Controls.Add(this.refresh);
+            this.results.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.results.Location = new System.Drawing.Point(29, 4);
             this.results.Name = "results";
             this.results.Size = new System.Drawing.Size(652, 292);
@@ -90,6 +91,7 @@ namespace Minis
             // grid
             // 
             this.grid.AllowUserToAddRows = false;
+            this.grid.ColumnHeadersHeight = 28;
             this.grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grid.Location = new System.Drawing.Point(0, 0);
             this.grid.Name = "grid";
@@ -119,14 +121,14 @@ namespace Minis
             this.insertPage.Text = "Insert";
             this.insertPage.UseVisualStyleBackColor = true;
             // 
-            // editPage
+            // selectPage
             // 
-            this.editPage.Location = new System.Drawing.Point(29, 4);
-            this.editPage.Name = "editPage";
-            this.editPage.Size = new System.Drawing.Size(652, 292);
-            this.editPage.TabIndex = 2;
-            this.editPage.Text = "Edit";
-            this.editPage.UseVisualStyleBackColor = true;
+            this.selectPage.Location = new System.Drawing.Point(29, 4);
+            this.selectPage.Name = "selectPage";
+            this.selectPage.Size = new System.Drawing.Size(652, 292);
+            this.selectPage.TabIndex = 2;
+            this.selectPage.Text = "Select";
+            this.selectPage.UseVisualStyleBackColor = true;
             // 
             // infoLabel
             // 
@@ -162,7 +164,7 @@ namespace Minis
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.TabPage results;
         private System.Windows.Forms.Button refresh;
-        private System.Windows.Forms.TabPage editPage;
+        private System.Windows.Forms.TabPage selectPage;
         private InsertContent insertPage;
     }
 }
