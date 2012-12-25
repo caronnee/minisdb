@@ -12,27 +12,24 @@ namespace Minis
 {
     public partial class DatabaseWindow : StateManager
     {
-        private Records records;
-
         public DatabaseWindow(string dbName)
         {
-            records = new Records(dbName);
+            RecordsManager.Load(dbName);
             InitializeComponent();
             
-            //this.selectToolStripMenuItem.fillGrid += new SelectStrip.DataToGrid(this.records.filter);
-            //this.selectToolStripMenuItem.deleteData += new SelectStrip.DeleteData(records.delete);
-            //this.selectToolStripMenuItem.setGrid += new SelectStrip.SetGrid(records.settingGrid);
-            //this.selectToolStripMenuItem.edit += new SelectStrip.EditRecords(this.edit);
+            this.selectPage.fillGrid += new SelectContent.DataToGrid(RecordsManager.Filter);
+            //this.selectToolStripMenuItem.deleteData += new SelectContent.DeleteData(records.delete);
+            //this.selectPage.setGrid += new SelectContent.SetGrid(records.initGrid);
+            //this.selectToolStripMenuItem.edit += new SelectContent.EditRecords(this.edit);
+            RecordsManager.LoadColumns(this.grid);
+            RecordsManager.Filter(this.grid, "");
 
-            records.settingGrid(this.grid);
-            records.filter(this.grid, "");
-
-            this.insertPage.addRecord += new InsertContent.addRecordsHandler(records.addRecord);
-            this.insertPage.addRow += new InsertContent.addRowHandler(records.addRow);
-            this.insertPage.addLabels += new InsertContent.AddLabelsHandler(records.addNames);
-            //this.selectToolStripMenuItem.recordChosen += new SelectStrip.RecordChosen(selectToolStripMenuItem_recordChosen);
+            this.insertPage.addRecord += new InsertContent.addRecordsHandler(RecordsManager.AddRecords);
+            this.insertPage.addRow += new InsertContent.addRowHandler(RecordsManager.CreateEmpty);
+           // this.insertPage.addLabels += new InsertContent.AddLabelsHandler(RecordsManager.addNam);
+            //this.selectToolStripMenuItem.recordChosen += new SelectContent.RecordChosen(selectToolStripMenuItem_recordChosen);
             this.tabs.MouseClick += new MouseEventHandler(tabs_MouseClick);
-            this.records.infoHandler += new Records.InfoHandler(records_infoHandler);
+            RecordsManager.infoHandler += new RecordsManager.InfoHandler(records_infoHandler);
             this.Disposed += new EventHandler(Formular_Disposed);
         }
         void changeDb_Click(object sender, System.EventArgs e)
@@ -49,7 +46,7 @@ namespace Minis
         }
         void refresh_Click(object sender, System.EventArgs e)
         {
-            records.filter(this.grid, "");
+            RecordsManager.Filter(this.grid, "");
         }
         private void edit(List<Value> values)
         {
@@ -69,7 +66,7 @@ namespace Minis
                     this.tabs.SelectedTab = p;
                     return;
                 }
-            TabPage t = records.getDetail(v);
+            TabPage t = RecordsManager.GetDetail(v);
             this.tabs.Controls.Add(t);
             this.tabs.SelectedTab = t;
         }
@@ -97,7 +94,7 @@ namespace Minis
         }    
         void Formular_Disposed(object sender, EventArgs e)
         {
-            records.save();
+            RecordsManager.SaveActive();
         }
         void grid_DoubleClick(object sender, System.EventArgs e)
         {

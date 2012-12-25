@@ -27,7 +27,7 @@ namespace Minis
         public event addRecordsHandler addRecord;
 
         /* event on adding rows */
-        public delegate void addRowHandler(InsertContent sender);
+        public delegate void addRowHandler(List<AbstractControl> controls);
         public event addRowHandler addRow;
 
         /* event on setting labels */
@@ -44,7 +44,9 @@ namespace Minis
         {
             if (addRow == null)
                 return;
-            addRow(this);
+            List<AbstractControl> content = new List<AbstractControl>(); 
+            addRow(content);
+            this.add(content);
         }
         protected virtual void onAddRecord(RecordEventArgs args)
         {
@@ -156,8 +158,8 @@ namespace Minis
             this.toAddRecords.AddRange(ctrls);
             this.recordPanel.Controls.Add(removeRowButton);
             this.heigthToAdd += c.Height + 10;
-            if (labels.Count == 0)
-                setLabels();
+            //if (labels.Count == 0)
+            //    setLabels();
         }
         public void removeRows()
         {

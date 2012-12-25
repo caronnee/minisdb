@@ -22,7 +22,6 @@ namespace Minis
         public Create()
         {
             InitializeComponent();
-            records = new Records();
             //Create_Resize(null, null);
             //this.Resize += new EventHandler(Create_Resize);
             enums = new List<ComboBox>();
@@ -81,7 +80,7 @@ namespace Minis
         }
         private void addAtrribute(AbstractAttribute att)
         {
-            records.add(att);
+            RecordsManager.AddToActive(att);
             att.close += new AbstractAttribute.Handler(this.remove);
             int x = 10, y = 10;
             if (this.definitionPanel.Controls.Count > 0)
@@ -233,7 +232,7 @@ namespace Minis
                 string name = dbName.Text + Files.fileType;
                 if (File.Exists(name))
                     throw new Exception("File already exists!");
-                this.records.changeName(this.dbName.Text);
+                RecordsManager.RenameActive(name);
                 this.saveEnums();
 
                 ////vsetky regexoy
@@ -244,7 +243,7 @@ namespace Minis
                 //{
                 //    getRecords(file); //s je stream
                 //}
-                this.records.save();
+                RecordsManager.SaveActive();
             }
             catch (Exception ex)
             {
@@ -266,7 +265,6 @@ namespace Minis
             }
 
         }
-        private Records records;
         private System.Collections.Generic.List<System.Windows.Forms.ComboBox> enums;
         private void cancelButton_Click(object sender, EventArgs e)
         {
