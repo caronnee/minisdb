@@ -28,9 +28,10 @@ namespace Minis
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.select = new System.Windows.Forms.TextBox();
             this.search = new System.Windows.Forms.Button();
+            this.saveSearch = new System.Windows.Forms.Button();
             this.results = new System.Windows.Forms.DataGridView();
             this.buttonPanel = new System.Windows.Forms.Panel();
             this.gridColumns = new System.Windows.Forms.Button();
@@ -63,15 +64,15 @@ namespace Minis
             // results
             // 
             this.results.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.NullValue = "-";
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.results.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.NullValue = "-";
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.results.DefaultCellStyle = dataGridViewCellStyle3;
             this.results.Dock = System.Windows.Forms.DockStyle.Fill;
             this.results.Location = new System.Drawing.Point(0, 96);
             this.results.Name = "results";
@@ -86,6 +87,8 @@ namespace Minis
             this.buttonPanel.Controls.Add(this.gridColumns);
             this.buttonPanel.Controls.Add(this.deleteButton);
             this.buttonPanel.Controls.Add(this.editRecordsButton);
+            this.buttonPanel.Controls.Add(this.saveSearch);
+            this.buttonPanel.Size = new System.Drawing.Size(100,50);
             this.buttonPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.buttonPanel.Location = new System.Drawing.Point(0, 207);
             this.buttonPanel.Name = "buttonPanel";
@@ -121,6 +124,12 @@ namespace Minis
             this.editRecordsButton.TabIndex = 2;
             this.editRecordsButton.Text = "Edit";
             this.editRecordsButton.Click += new System.EventHandler(this.editRecordsButton_Click);
+            //
+            // SaveSearch
+            //
+            this.saveSearch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.saveSearch.Text = "Save search";
+            this.saveSearch.TabIndex = 3;
             // 
             // SelectContent
             // 
@@ -128,7 +137,6 @@ namespace Minis
             this.Controls.Add(this.search);
             this.Controls.Add(this.select);
             this.Controls.Add(this.buttonPanel);
-            this.Name = "SelectContent";
             this.Size = new System.Drawing.Size(314, 227);
             ((System.ComponentModel.ISupportInitialize)(this.results)).EndInit();
             this.buttonPanel.ResumeLayout(false);
@@ -138,6 +146,7 @@ namespace Minis
         }
 
         private System.Windows.Forms.TextBox select;
+        private System.Windows.Forms.Button saveSearch;
         private System.Windows.Forms.Button search;
         private System.Windows.Forms.DataGridView results;
         private System.Windows.Forms.Button gridColumns;
@@ -147,5 +156,6 @@ namespace Minis
         private GridPanel controlPanel;
 
         #endregion
+
     }
 }
