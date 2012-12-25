@@ -128,7 +128,7 @@
     <Compile Include="Values.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="program_dok.doc" />
+    <None Include="Resources\program_dok.doc" />
     <None Include="uzivatelska_dok.doc" />
   </ItemGroup>
   <ItemGroup>
@@ -179,10 +179,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bigIcon.png" />
+    <None Include="Resources\bigIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="icon.png" />
+    <None Include="Resources\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="todo.txt" />

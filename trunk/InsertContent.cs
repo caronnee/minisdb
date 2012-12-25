@@ -17,7 +17,7 @@ namespace Minis
         }
         private int heigthToAdd;
         private int numberOfValues;
-        private List<Label> labels;
+        //private List<Label> labels;
         private List<AbstractControl> controls; //tie, o krote nam ide
         private List<AbstractControl> toAddRecords;
 
@@ -31,15 +31,15 @@ namespace Minis
         public event addRowHandler addRow;
 
         /* event on setting labels */
-        public delegate void AddLabelsHandler(InsertContent sender);
-        public event AddLabelsHandler addLabels;
+        //public delegate void AddLabelsHandler(InsertContent sender);
+        //public event AddLabelsHandler addLabels;
 
-        protected virtual void onAddLabels()
-        {
-            if (addLabels == null)
-                return;
-            addLabels(this);
-        }
+        //protected virtual void onAddLabels()
+        //{
+        //    if (addLabels == null)
+        //        return;
+        //    addLabels(this);
+        //}
         protected virtual void onAddRow()
         {
             if (addRow == null)
@@ -55,18 +55,18 @@ namespace Minis
             addRecord(this, args);
             //internal_clean(null, null); //no neni toto fuj?
         }
-        public void setNames(List<string> names)
-        {
-            for (int i = 0; i < names.Count; i++)
-            {
-                Label l = new Label();
-                l.Text = names[i];
-                labels.Add(l);
-            }
-        }
+        //public void setNames(List<string> names)
+        //{
+        //    for (int i = 0; i < names.Count; i++)
+        //    {
+        //        Label l = new Label();
+        //        l.Text = names[i];
+        //        labels.Add(l);
+        //    }
+        //}
         public void InitUserControls()
         {
-            this.labels = new List<Label>();
+            //this.labels = new List<Label>();
             this.toAddRecords = new List<AbstractControl>();
             this.controls = new List<AbstractControl>();
             this.heigthToAdd = 0;
@@ -87,37 +87,37 @@ namespace Minis
         /* sets labels according to labels */
         private void internal_clean(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            recordPanel.Controls.Clear();
+            addRecordPanel.Controls.Clear();
             controls.Clear();
-            labels.Clear();
+            //labels.Clear();
             heigthToAdd = 0;
             onAddRow(); //getSize..getLayout
           //  onAddLabels();
             if (this.Parent == null) //nevidim dovod..?
                 return;
-            if (labels.Count != this.controls.Count-1)
-                throw new Exception("Labels and boxes have different dimensions ");
+            //if (labels.Count != this.controls.Count-1)
+            //    throw new Exception("Labels and boxes have different dimensions ");
             //a to je uplne jedno kde to tam je...
-            for (int i = 0; i < labels.Count; i++)
-            {
-                labels[i].Location = new System.Drawing.Point(((Control)controls[i]).Location.X, 0);
-                ((Control)controls[i]).Location = new System.Drawing.Point(labels[i].Location.X, labels[i].PreferredHeight + 10);
-            }
-            for (int i = 0; i < labels.Count; i++)
-                recordPanel.Controls.Add(labels[i]);
+            //for (int i = 0; i < labels.Count; i++)
+            //{
+            //    labels[i].Location = new System.Drawing.Point(((Control)controls[i]).Location.X, 0);
+            //    ((Control)controls[i]).Location = new System.Drawing.Point(labels[i].Location.X, labels[i].PreferredHeight + 10);
+            //}
+            //for (int i = 0; i < labels.Count; i++)
+            //    addRecordGrid.Controls.Add(labels[i]);
         }
-        private void setLabels()
-        {
-            onAddLabels();
-            for (int i = 0; i < labels.Count; i++)
-            {
-                labels[i].Location = new System.Drawing.Point(((Control)controls[i]).Location.X, 0);
-                ((Control)controls[i]).Location = new System.Drawing.Point(labels[i].Location.X, labels[i].PreferredHeight + 10);
-            }
-            for (int i = 0; i < labels.Count; i++)
-                recordPanel.Controls.Add(labels[i]);
-            this.heigthToAdd += labels[0].PreferredHeight + 10;
-        }
+        //private void setLabels()
+        //{
+        //    onAddLabels();
+        //    for (int i = 0; i < labels.Count; i++)
+        //    {
+        //        labels[i].Location = new System.Drawing.Point(((Control)controls[i]).Location.X, 0);
+        //        ((Control)controls[i]).Location = new System.Drawing.Point(labels[i].Location.X, labels[i].PreferredHeight + 10);
+        //    }
+        //    for (int i = 0; i < labels.Count; i++)
+        //        addRecordGrid.Controls.Add(labels[i]);
+        //    this.heigthToAdd += labels[0].PreferredHeight + 10;
+        //}
         //void InsertContent_Resize(object sender, EventArgs e)
         //{
         //    recordPanel.Location = new System.Drawing.Point(0, 0);
@@ -144,7 +144,7 @@ namespace Minis
             c.Name = removeRowButton.Name;
             System.Drawing.Point point = new System.Drawing.Point(0, this.heigthToAdd);
             c.Location = new System.Drawing.Point(0, this.heigthToAdd);
-            this.recordPanel.Controls.Add(c);
+            this.addRecordPanel.Controls.Add(c);
             
             for (int i = 1; i < ctrls.Count; i++)
             {
@@ -152,43 +152,43 @@ namespace Minis
                 c.Name = removeRowButton.Name;
                 point = new System.Drawing.Point(point.X + ((Control)ctrls[i - 1]).Width + 10, point.Y);// FIXME UPRAVIT
                 c.Location = point;
-                this.recordPanel.Controls.Add(c);
+                this.addRecordPanel.Controls.Add(c);
             }
             removeRowButton.Location = new System.Drawing.Point(point.X + ((Control)ctrls[ctrls.Count-1]).Width + 10, ((Control) ctrls[0]).Location.Y);
             this.toAddRecords.AddRange(ctrls);
-            this.recordPanel.Controls.Add(removeRowButton);
+            this.addRecordPanel.Controls.Add(removeRowButton);
             this.heigthToAdd += c.Height + 10;
             //if (labels.Count == 0)
             //    setLabels();
         }
         public void removeRows()
         {
-            if (labels.Count == 0)
-                return;
+            //if (labels.Count == 0)
+            //    return;
             foreach (Control c in toAddRecords)
             {
-                while (this.recordPanel.Controls.IndexOfKey(c.Name) >=0)
-                    this.recordPanel.Controls.RemoveByKey(c.Name);
+                while (this.addRecordPanel.Controls.IndexOfKey(c.Name) >=0)
+                    this.addRecordPanel.Controls.RemoveByKey(c.Name);
             }
             toAddRecords.Clear();
-            heigthToAdd = labels[0].PreferredHeight + 10;
+            //heigthToAdd = labels[0].PreferredHeight + 10;
         }
         void removeRowButton_Click(object sender, EventArgs e)
         {
             Button b = sender as Button;
             //a vsetky usporiadaj
-            int lower = this.recordPanel.Controls[0].Height +10;
+            int lower = this.addRecordPanel.Controls[0].Height +10;
             this.heigthToAdd -= lower;
  
-            foreach (Control c in this.recordPanel.Controls)
+            foreach (Control c in this.addRecordPanel.Controls)
             {
                 if (c.Name.Equals(b.Name))
                     this.toAddRecords.Remove(c as AbstractControl);
             }
             //OMG FUJ!
-            while (this.recordPanel.Controls.IndexOfKey(b.Name) >= 0)
-                this.recordPanel.Controls.RemoveByKey(b.Name);
-            foreach (Control c in this.recordPanel.Controls)
+            while (this.addRecordPanel.Controls.IndexOfKey(b.Name) >= 0)
+                this.addRecordPanel.Controls.RemoveByKey(b.Name);
+            foreach (Control c in this.addRecordPanel.Controls)
             {
                 if (c.Location.Y > b.Location.Y)
                 {

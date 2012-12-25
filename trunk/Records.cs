@@ -268,15 +268,15 @@ namespace Minis
 
             }
         }
-        public void addNames(InsertContent strip)
-        {
-            List<string> list = new List<string>();
-            for (int i = 0; i < pattern.Count; i++)
-            {
-                list.Add(pattern[i].getAttributeName());
-            }
-            strip.setNames(list);
-        }
+        //public void addNames(InsertContent strip)
+        //{
+        //    List<string> list = new List<string>();
+        //    for (int i = 0; i < pattern.Count; i++)
+        //    {
+        //        list.Add(pattern[i].getAttributeName());
+        //    }
+        //    strip.setNames(list);
+        //}
 
         /* private methods */
         private AbstractAttribute find(string nm)

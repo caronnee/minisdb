@@ -29,7 +29,7 @@ namespace Minis
         private void InitializeComponent()
         {
             this.addArrays = new System.Windows.Forms.Button();
-            this.recordPanel = new System.Windows.Forms.Panel();
+            this.addRecordPanel = new System.Windows.Forms.Panel();
             this.howMany = new System.Windows.Forms.NumericUpDown();
             this.buttonPanel = new System.Windows.Forms.Panel();
             this.addRecords = new System.Windows.Forms.Button();
@@ -49,13 +49,11 @@ namespace Minis
             // 
             // recordPanel
             // 
-            this.recordPanel.AutoScroll = true;
-            this.recordPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.recordPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.recordPanel.Location = new System.Drawing.Point(0, 0);
-            this.recordPanel.Name = "recordPanel";
-            this.recordPanel.Size = new System.Drawing.Size(517, 254);
-            this.recordPanel.TabIndex = 1;
+            this.addRecordPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addRecordPanel.Location = new System.Drawing.Point(0, 0);
+            this.addRecordPanel.Name = "recordPanel";
+            this.addRecordPanel.Size = new System.Drawing.Size(517, 254);
+            this.addRecordPanel.TabIndex = 1;
             // 
             // howMany
             // 
@@ -104,7 +102,7 @@ namespace Minis
             // 
             // InsertContent
             // 
-            this.Controls.Add(this.recordPanel);
+            this.Controls.Add(this.addRecordPanel);
             this.Controls.Add(this.buttonPanel);
             this.Size = new System.Drawing.Size(517, 276);
             ((System.ComponentModel.ISupportInitialize)(this.howMany)).EndInit();
@@ -115,7 +113,7 @@ namespace Minis
 
         private System.Windows.Forms.Button addRecords;
         private System.Windows.Forms.Button addArrays;
-        private System.Windows.Forms.Panel recordPanel;
+        private System.Windows.Forms.Panel addRecordPanel;
         private System.Windows.Forms.Panel buttonPanel;
         private System.Windows.Forms.NumericUpDown howMany;
         
