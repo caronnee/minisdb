@@ -28,7 +28,7 @@ namespace Minis
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.select = new System.Windows.Forms.TextBox();
             this.search = new System.Windows.Forms.Button();
             this.saveSearch = new System.Windows.Forms.Button();
@@ -61,23 +61,32 @@ namespace Minis
             this.search.Text = "Search";
             this.search.Click += new System.EventHandler(this.search_Click);
             // 
+            // saveSearch
+            // 
+            this.saveSearch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.saveSearch.Location = new System.Drawing.Point(0, 0);
+            this.saveSearch.Name = "saveSearch";
+            this.saveSearch.Size = new System.Drawing.Size(75, 50);
+            this.saveSearch.TabIndex = 3;
+            this.saveSearch.Text = "Save search";
+            // 
             // results
             // 
             this.results.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.NullValue = "-";
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.results.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.NullValue = "-";
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.results.DefaultCellStyle = dataGridViewCellStyle1;
             this.results.Dock = System.Windows.Forms.DockStyle.Fill;
             this.results.Location = new System.Drawing.Point(0, 96);
             this.results.Name = "results";
             this.results.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.results.Size = new System.Drawing.Size(314, 111);
+            this.results.Size = new System.Drawing.Size(314, 81);
             this.results.TabIndex = 0;
             this.results.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.results_SortCompare);
             this.results.DoubleClick += new System.EventHandler(this.results_DoubleClick);
@@ -88,19 +97,18 @@ namespace Minis
             this.buttonPanel.Controls.Add(this.deleteButton);
             this.buttonPanel.Controls.Add(this.editRecordsButton);
             this.buttonPanel.Controls.Add(this.saveSearch);
-            this.buttonPanel.Size = new System.Drawing.Size(100,50);
             this.buttonPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonPanel.Location = new System.Drawing.Point(0, 207);
+            this.buttonPanel.Location = new System.Drawing.Point(0, 177);
             this.buttonPanel.Name = "buttonPanel";
-            this.buttonPanel.Size = new System.Drawing.Size(314, 20);
+            this.buttonPanel.Size = new System.Drawing.Size(314, 50);
             this.buttonPanel.TabIndex = 3;
             // 
             // gridColumns
             // 
             this.gridColumns.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gridColumns.Location = new System.Drawing.Point(150, 0);
+            this.gridColumns.Location = new System.Drawing.Point(225, 0);
             this.gridColumns.Name = "gridColumns";
-            this.gridColumns.Size = new System.Drawing.Size(75, 20);
+            this.gridColumns.Size = new System.Drawing.Size(75, 50);
             this.gridColumns.TabIndex = 0;
             this.gridColumns.Text = "Choose columns";
             this.gridColumns.Click += new System.EventHandler(this.gridColumns_Click);
@@ -108,9 +116,9 @@ namespace Minis
             // deleteButton
             // 
             this.deleteButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.deleteButton.Location = new System.Drawing.Point(75, 0);
+            this.deleteButton.Location = new System.Drawing.Point(150, 0);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 20);
+            this.deleteButton.Size = new System.Drawing.Size(75, 50);
             this.deleteButton.TabIndex = 1;
             this.deleteButton.Text = "Delete";
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
@@ -118,18 +126,12 @@ namespace Minis
             // editRecordsButton
             // 
             this.editRecordsButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.editRecordsButton.Location = new System.Drawing.Point(0, 0);
+            this.editRecordsButton.Location = new System.Drawing.Point(75, 0);
             this.editRecordsButton.Name = "editRecordsButton";
-            this.editRecordsButton.Size = new System.Drawing.Size(75, 20);
+            this.editRecordsButton.Size = new System.Drawing.Size(75, 50);
             this.editRecordsButton.TabIndex = 2;
             this.editRecordsButton.Text = "Edit";
             this.editRecordsButton.Click += new System.EventHandler(this.editRecordsButton_Click);
-            //
-            // SaveSearch
-            //
-            this.saveSearch.Dock = System.Windows.Forms.DockStyle.Left;
-            this.saveSearch.Text = "Save search";
-            this.saveSearch.TabIndex = 3;
             // 
             // SelectContent
             // 

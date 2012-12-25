@@ -175,7 +175,7 @@ namespace Minis
             t.WordWrap = true;
             t.Multiline = true;
             t.Size = new System.Drawing.Size(100, 20);//minml size)
-            return t; //alebo s.t
+            return t;
         }
      
 		/* returns copy of control that should handle value */
