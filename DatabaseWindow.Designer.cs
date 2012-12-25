@@ -42,7 +42,7 @@ namespace Minis
             this.grid = new System.Windows.Forms.DataGridView();
             this.refresh = new System.Windows.Forms.Button();
             this.insertPage = new Minis.InsertContent();
-            this.selectPage = new System.Windows.Forms.TabPage();
+            this.selectPage = new Minis.SelectContent();
             this.infoLabel = new System.Windows.Forms.Label();
             this.tabs.SuspendLayout();
             this.results.SuspendLayout();
@@ -164,7 +164,7 @@ namespace Minis
         private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.TabPage results;
         private System.Windows.Forms.Button refresh;
-        private System.Windows.Forms.TabPage selectPage;
+        private SelectContent selectPage;
         private InsertContent insertPage;
     }
 }

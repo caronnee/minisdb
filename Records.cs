@@ -76,12 +76,14 @@ namespace Minis
             pattern.Add(t);
             t.close += new AbstractAttribute.Handler(this.remove);
         }
+        
         /* removes attribute from database */
         public void remove(AbstractAttribute a)
         {
             this.pattern.Remove(a);
         }
-        public void settingGrid(DataGridView grid)
+
+        public void initGrid(DataGridView grid)
         {
             grid.ColumnCount = pattern.Count + 1;
             for (int i = 0; i < pattern.Count; i++)
@@ -216,15 +218,13 @@ namespace Minis
             }
             onInfoHandler("Completed.\r\n");
         }
-        public void addRow(InsertContent sender)
+        public void addRow(List<AbstractControl> ctrls)
         {
-            List<AbstractControl> ctrls = new List<AbstractControl>();
             for (int i = 0; i < pattern.Count; i++)
             {
                 ctrls.Add(pattern[i].getControl());//a poslednu Hidden?
             }
             ctrls.Add(additionalHiddenControl(null));
-            sender.add(ctrls);
         }
         public void addRecord(object sender, RecordEventArgs e)
         {
