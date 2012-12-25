@@ -109,13 +109,6 @@
     <Compile Include="SelectContent.Designer.cs">
       <DependentUpon>SelectContent.cs</DependentUpon>
     </Compile>
-    <Compile Include="setSizeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="setSizeForm.Designer.cs">
-      <DependentUpon>setSizeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="showBoxes.cs" />
     <Compile Include="Intro.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,10 +165,6 @@
     <EmbeddedResource Include="SelectContent.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SelectContent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="setSizeForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>setSizeForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

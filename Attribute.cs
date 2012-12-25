@@ -165,7 +165,6 @@ namespace Minis
 			return aType +"\t" + name.Text + "\t";
 		}
 
-		/* virtual methods */
         public virtual Control showControl(Value v)
         {
             TextBox t = new TextBox();
@@ -176,7 +175,6 @@ namespace Minis
             t.WordWrap = true;
             t.Multiline = true;
             t.Size = new System.Drawing.Size(100, 20);//minml size)
-            ShowBox s = new ShowBox(t); //jaj, to je zvrhleeee
             return t; //alebo s.t
         }
      
