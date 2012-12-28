@@ -39,7 +39,8 @@ namespace Minis
 
         public static void LoadColumns(System.Windows.Forms.DataGridView results)
         {
-            database.initGrid(results);
+            if (database != null)
+                database.initGrid(results);
         }
 
         public static void Filter(System.Windows.Forms.DataGridView grid, String condition)

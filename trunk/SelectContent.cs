@@ -32,6 +32,7 @@ namespace Minis
 
         public SelectContent()
         {
+            this.results = null;
             InitializeComponent();
             // init grid according to some filter?
             RecordsManager.LoadColumns(this.results);
