@@ -69,6 +69,7 @@ namespace Minis
             this.saveSearch.Size = new System.Drawing.Size(75, 50);
             this.saveSearch.TabIndex = 3;
             this.saveSearch.Text = "Save search";
+            this.saveSearch.Click += new System.EventHandler(this.saveSearch_Click);
             // 
             // results
             // 

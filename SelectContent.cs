@@ -51,7 +51,7 @@ namespace Minis
         {
             if (recordChosen == null)
                 throw new Exception("No action on chosen record");
-            recordChosen(results.SelectedRows[0].Cells[Files.Id].Value as Value);
+            recordChosen(results.SelectedRows[0].Cells[Misc.Id].Value as Value);
         }
         protected void onEdit()
         {
@@ -60,7 +60,7 @@ namespace Minis
             List<Value> v = new List<Value>();
             foreach (DataGridViewRow row in results.SelectedRows)
             {
-                v.Add(row.Cells[Files.Id].Value as Value);
+                v.Add(row.Cells[Misc.Id].Value as Value);
             }
             edit(v);
         }
@@ -114,6 +114,12 @@ namespace Minis
         void search_Click(object sender, EventArgs e)
         {
             onFillGrid();
+        }
+
+        private void saveSearch_Click(object sender, EventArgs e)
+        {
+            // save this to the database profile file
+            RecordsManager.SaveToProfileFile(Misc.savedSearch ,this.select.Text);
         }
     }
 }

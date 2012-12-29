@@ -95,7 +95,7 @@ namespace Minis
         }
         private void loadEnums()
         {
-            List<string> l = Files.readEnum();
+            List<string> l = Misc.readEnum();
             foreach (string s in l)
             {
                 string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
@@ -114,10 +114,10 @@ namespace Minis
         {
             //najskor hladane, ci to je v enumoch, ak nie, priradime ID
             TextReader read = null;
-            if (!File.Exists(Files.enumFile))
-                File.Create(Files.enumFile).Close(); //FUJ - TODO spravit krajsie
+            if (!File.Exists(Misc.enumFile))
+                File.Create(Misc.enumFile).Close(); //FUJ - TODO spravit krajsie
 
-            read = new StreamReader(Files.enumFile);
+            read = new StreamReader(Misc.enumFile);
 
             string str;
             while ((str = read.ReadLine()) != null)
@@ -136,7 +136,7 @@ namespace Minis
             }
             read.Close();
 
-            TextWriter txt = new StreamWriter(Files.enumFile, true);
+            TextWriter txt = new StreamWriter(Misc.enumFile, true);
             // pre vsetky, co zostali, zapis
             for (int i = 0; i < enums.Count; i++)
             {
@@ -229,7 +229,7 @@ namespace Minis
                 }
                 if (dbName.Text.Equals(""))
                     throw new Exception("No databse name set!");
-                string name = dbName.Text + Files.fileType;
+                string name = dbName.Text + Misc.fileType;
                 if (File.Exists(name))
                     throw new Exception("File already exists!");
                 RecordsManager.RenameActive(name);

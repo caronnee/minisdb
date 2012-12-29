@@ -39,6 +39,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Condition.cs" />
+    <Compile Include="ConfigFile.cs" />
     <Compile Include="ControlInfo.cs" />
     <Compile Include="Create.cs">
       <SubType>UserControl</SubType>

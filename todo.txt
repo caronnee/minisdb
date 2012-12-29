@@ -3,3 +3,4 @@
 - zistit, ci sa niektore veci z records manageru nedaju posunut do kodu
 - uzatvaratelne taby
 - prve pole - krizik na delete namiesto buttonceka
+- rozsirenie, aby to robilo aj nieco naviac - pri vypise z receptara vypisalo, ktore potraviny este kupit. Dodatocna vec aplikovana uzivatelom
