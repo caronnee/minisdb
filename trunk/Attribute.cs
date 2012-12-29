@@ -347,7 +347,7 @@ namespace Minis
             DateTime myDt = new DateTime(1984, 5, 18);
           
             return new ValueDate(DateTime.ParseExact(text,new string[]
-            {Files.dateFormat,"dd.MM.yyyy","d.M.yyyy"},null, System.Globalization.DateTimeStyles.AllowWhiteSpaces));
+            {Misc.dateFormat,"dd.MM.yyyy","d.M.yyyy"},null, System.Globalization.DateTimeStyles.AllowWhiteSpaces));
         }
         public void setValue(Value v)
         {
@@ -355,7 +355,7 @@ namespace Minis
                 return; //uvidime, + is Mandatory a today
             if (!state.mandatory)
                 state.enable(this, null);
-            this.Value = DateTime.ParseExact(v.ToString(), Files.dateFormat, null);
+            this.Value = DateTime.ParseExact(v.ToString(), Misc.dateFormat, null);
         }
     }
     class MPanelFile : Panel, AbstractControl
@@ -630,7 +630,7 @@ namespace Minis
 			List<string> enums = null;
 			ComboBox b = new ComboBox();
 			if (enums == null)
-				enums = Files.readEnum();
+				enums = Misc.readEnum();
 
 			foreach ( string s in enums )
 				if ( s.StartsWith(toFind + '\t'))
@@ -730,7 +730,7 @@ namespace Minis
 			if (today)
 				s += todayString;
 			else
-				s += dateTimeTick.Value.ToString(Files.dateFormat); 
+				s += dateTimeTick.Value.ToString(Misc.dateFormat); 
 			return s;
 		}
 		public override void reconstruct(string s)

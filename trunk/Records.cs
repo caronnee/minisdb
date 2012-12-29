@@ -69,7 +69,7 @@ namespace Minis
         /* changes name of the database that enables saving to another name */
         public void changeName(string s) //jednoduche kopirovanie;)
         {
-            dbName_ = s + Files.fileType;
+            dbName_ = s + Misc.fileType;
         }
         public void add(AbstractAttribute t)
         {
@@ -91,7 +91,7 @@ namespace Minis
                 grid.Columns[i].Name = pattern[i].getAttributeName();
                 grid.Columns[i].ValueType = pattern[i].getControl().getType();
             }
-            grid.Columns[pattern.Count].Name = Files.Id; //pripisat aj typ? Ano, bo to budeme zoradovat..a lexikograficke cisla nie su zoradene spravne..nehovoriac o datumoch
+            grid.Columns[pattern.Count].Name = Misc.Id; //pripisat aj typ? Ano, bo to budeme zoradovat..a lexikograficke cisla nie su zoradene spravne..nehovoriac o datumoch
             //typ tu nepotrebujeme
         }
         public void addRow(InsertContent where, List<Value> values)
@@ -296,7 +296,7 @@ namespace Minis
             {
                 string[] strs = s.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 if (strs.Length != 3)
-                    throw new Exception(" Syntax error on " + s + "\r\n"+ Files.help);
+                    throw new Exception(" Syntax error on " + s + "\r\n"+ Misc.help);
                 AbstractAttribute a;
                 a = find(strs[0]);
                 if (a == null)
@@ -342,7 +342,7 @@ namespace Minis
                             break;
                         }
                     default:
-                        throw new Exception("Syntax error at condition '" + strs[1] + "'- no such condition implemented\r\n" + Files.help); 
+                        throw new Exception("Syntax error at condition '" + strs[1] + "'- no such condition implemented\r\n" + Misc.help); 
                 }
             }
             catch (Exception e)
@@ -464,7 +464,7 @@ namespace Minis
             for (int i = 0; i < pattern.Count; i++)
             {
                 controlInfo.Add(new ControlInfo(0,y,width,heigth));
-                y += heigth + Files.space;
+                y += heigth + Misc.space;
             }
         }
         private void loadValues(StreamReader reader)

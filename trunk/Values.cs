@@ -109,7 +109,7 @@ namespace Minis
         }
         public override string ToString()
         {
-            return dTime.ToString(Files.dateFormat);
+            return dTime.ToString(Misc.dateFormat);
         }
     }
 }

@@ -19,18 +19,30 @@ namespace Minis
             
             this.selectPage.fillGrid += new SelectContent.DataToGrid(RecordsManager.Filter);
             //this.selectToolStripMenuItem.deleteData += new SelectContent.DeleteData(records.delete);
-            //this.selectPage.setGrid += new SelectContent.SetGrid(records.initGrid);
             //this.selectToolStripMenuItem.edit += new SelectContent.EditRecords(this.edit);
             RecordsManager.LoadColumns(this.grid);
             RecordsManager.Filter(this.grid, "");
 
             this.insertPage.addRecord += new InsertContent.addRecordsHandler(RecordsManager.AddRecords);
             this.insertPage.addRow += new InsertContent.addRowHandler(RecordsManager.CreateEmpty);
-           // this.insertPage.addLabels += new InsertContent.AddLabelsHandler(RecordsManager.addNam);
             //this.selectToolStripMenuItem.recordChosen += new SelectContent.RecordChosen(selectToolStripMenuItem_recordChosen);
             this.tabs.MouseClick += new MouseEventHandler(tabs_MouseClick);
             RecordsManager.infoHandler += new RecordsManager.InfoHandler(records_infoHandler);
+            RecordsManager.updateHandler += new RecordsManager.UpdateHandler(this.UpdateTabs);
+
             this.Disposed += new EventHandler(Formular_Disposed);
+        }
+        void UpdateTabs(String name, String value)
+        {
+            switch (name)
+            {
+                case Misc.savedSearch:
+                    {
+                        break;
+                    }
+                default:
+                    break;
+            }
         }
         void changeDb_Click(object sender, System.EventArgs e)
         {
@@ -101,17 +113,7 @@ namespace Minis
             System.Windows.Forms.DataGridView d = sender as System.Windows.Forms.DataGridView;
             foreach (System.Windows.Forms.DataGridViewRow r in d.SelectedRows)
 
-                selectToolStripMenuItem_recordChosen(r.Cells[Files.Id].Value as Value);
-        }
-        private void selectToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            //show window with the help of how syntx should lok like
-            MessageBox.Show( Files.help,"Syntax Help", MessageBoxButtons.OK);
-        }
-
-        private void insertToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show( Files.insertHelp,"Insert help", MessageBoxButtons.OK);
+                selectToolStripMenuItem_recordChosen(r.Cells[Misc.Id].Value as Value);
         }
     }
 }

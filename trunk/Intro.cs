@@ -17,7 +17,7 @@ namespace Minis
             InitializeComponent();
             //Load to combobox all databases
             DirectoryInfo dirInfo = new DirectoryInfo(".");
-            FileInfo[] dbs = dirInfo.GetFiles("*" + Files.fileType);
+            FileInfo[] dbs = dirInfo.GetFiles("*" + Misc.fileType);
             if (dbs.Length != 0)
             {
                 this.chooseDb.Items.AddRange(dbs);
