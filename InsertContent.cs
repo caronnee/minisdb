@@ -206,13 +206,12 @@ namespace Minis
         }
         void addButton_Click(object sender, System.EventArgs args)
         {
-            //zistime vsetky recordy, ktore na uzibvatel zadal..ZAJTRA/VECER
             List<Record> r = new List<Record>();
             for (int i = 0; i < toAddRecords.Count; i += this.numberOfValues)
             {
                 Record record = new Record();
                 for (int j = 0; j < this.numberOfValues; j++)
-                    record.add(toAddRecords[i + j].getValue());
+                    record.AddPattern(toAddRecords[i + j].getValue());
                 r.Add(record);
             }
             RecordEventArgs e = new RecordEventArgs(r);

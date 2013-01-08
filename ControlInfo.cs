@@ -16,7 +16,7 @@ namespace Minis
         }
         public ControlInfo(string toConvert)
         {
-            string[] s = toConvert.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] s = toConvert.Split(new char[] { Misc.Deliminer }, StringSplitOptions.RemoveEmptyEntries);
 
             x = System.Convert.ToInt32(s[0]);
             y = System.Convert.ToInt32(s[1]);
@@ -26,9 +26,9 @@ namespace Minis
         public override string ToString()
         {
             return (x.ToString() +
-                "\t" + y.ToString() +
-                "\t" + width.ToString() +
-                "\t" + heigth.ToString());
+                Misc.Deliminer.ToString() + y.ToString() +
+                Misc.Deliminer.ToString() + width.ToString() +
+                Misc.Deliminer.ToString() + heigth.ToString());
         }
     }
 }

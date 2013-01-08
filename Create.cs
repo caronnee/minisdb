@@ -93,12 +93,15 @@ namespace Minis
             this.definitionPanel.Controls.Add(att);
             this.definitionPanel.ResumeLayout();
         }
+
         private void loadEnums()
         {
-            List<string> l = Misc.readEnum();
+            List<string> l = RecordsManager.FindEnumNames();
+            if (l == null)
+                return;
             foreach (string s in l)
             {
-                string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] strs = s.Split(new char[] { Misc.Deliminer }, StringSplitOptions.RemoveEmptyEntries);
                 this.definedEnums.Items.Add(strs[0]);
                 ComboBox b = new ComboBox();
                 b.Items.AddRange(strs);
@@ -109,46 +112,6 @@ namespace Minis
                 definedEnums.SelectedIndex = 0;
             else
                 definedEnums.Enabled = false;
-        }
-        private void saveEnums()
-        {
-            //najskor hladane, ci to je v enumoch, ak nie, priradime ID
-            TextReader read = null;
-            if (!File.Exists(Misc.enumFile))
-                File.Create(Misc.enumFile).Close(); //FUJ - TODO spravit krajsie
-
-            read = new StreamReader(Misc.enumFile);
-
-            string str;
-            while ((str = read.ReadLine()) != null)
-            {
-                //using!
-                int i = 0;
-                while (i < this.definedEnums.Items.Count)
-                {
-                    if (str.StartsWith((string)(this.definedEnums.Items[i] + "\t")))
-                    {
-                        this.definedEnums.Items.RemoveAt(i);
-                        this.enums.RemoveAt(i);
-                        break;
-                    }
-                }
-            }
-            read.Close();
-
-            TextWriter txt = new StreamWriter(Misc.enumFile, true);
-            // pre vsetky, co zostali, zapis
-            for (int i = 0; i < enums.Count; i++)
-            {
-                string nm = (string)definedEnums.Items[i] + "\t";
-
-                //zapis do enumu
-                txt.Write(nm + "\t");
-                foreach (string s in enums[i].Items)
-                    txt.Write(s + "\t");
-                txt.WriteLine("");//ukonci lajnu
-            }
-            txt.Close(); ;
         }
         private void addInteger_Click(object sender, EventArgs e)
         {
@@ -205,11 +168,13 @@ namespace Minis
             {
                 //check for all attributed to be correct
                 if (this.definitionPanel.Controls.Count == 0)
-                    throw new Exception("record of no data! please add some data");
+                    throw new Exception("Record of no data! Please add some data");
                 //check for name duplicity
                 for (int i = 0; i < this.definitionPanel.Controls.Count; i++)
                 {
-                    AbstractAttribute a = (AbstractAttribute)this.definitionPanel.Controls[i];
+                    AbstractAttribute a = this.definitionPanel.Controls[i] as AbstractAttribute;
+                    if (a == null)
+                        continue; // TODO some assert
                     string s = a.getAttributeName();
                     for (int j = i + 1; j < this.definitionPanel.Controls.Count; j++)
                     {
@@ -219,7 +184,6 @@ namespace Minis
                 }
                 foreach (AbstractAttribute a in this.definitionPanel.Controls)
                 {
-
                     if (a.getAttributeName().Equals(""))
                         throw new Exception("Empty attribute name!");
                     if (a.isMandatory() && (a.getControl().getValue() == null))
@@ -228,14 +192,12 @@ namespace Minis
                             "should be set and it is not");
                 }
                 if (dbName.Text.Equals(""))
-                    throw new Exception("No databse name set!");
-                string name = dbName.Text + Misc.fileType;
+                    throw new Exception("No database name set!");
+                string name = dbName.Text;
                 if (File.Exists(name))
                     throw new Exception("File already exists!");
-                RecordsManager.RenameActive(name);
-                this.saveEnums();
 
-                ////vsetky regexoy
+                ////vsetky regexpy
                 //List<Regex> regExp = new List<Regex>();
                 ////otvorenie suboro
                 //string[] files = chosen.Text.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
@@ -243,7 +205,14 @@ namespace Minis
                 //{
                 //    getRecords(file); //s je stream
                 //}
+                // already added when creating
+                //foreach (AbstractAttribute a in this.definitionPanel.Controls)
+                //{
+                //    RecordsManager.AddToActive(a);
+                //}
+                RecordsManager.RenameActive(name);
                 RecordsManager.SaveActive();
+                OnStateChanged(State.StateLoadDatabase, name);
             }
             catch (Exception ex)
             {
@@ -276,6 +245,7 @@ namespace Minis
             //else 
             //    this.endState = Forms.FormLoad;
             //this.Close();
+            OnStateChanged(State.StateIntro, "");
         }
 
         private void ClearInput(object sender, EventArgs e)

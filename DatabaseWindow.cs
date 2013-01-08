@@ -20,7 +20,7 @@ namespace Minis
             this.selectPage.fillGrid += new SelectContent.DataToGrid(RecordsManager.Filter);
             //this.selectToolStripMenuItem.deleteData += new SelectContent.DeleteData(records.delete);
             //this.selectToolStripMenuItem.edit += new SelectContent.EditRecords(this.edit);
-            RecordsManager.LoadColumns(this.grid);
+            RecordsManager.InitGrid(this.grid);
             RecordsManager.Filter(this.grid, "");
 
             this.insertPage.addRecord += new InsertContent.addRecordsHandler(RecordsManager.AddRecords);

@@ -18,6 +18,7 @@ namespace Minis
         //}
         public MainContainer()
         {
+            RecordsManager.Init();
             InitializeComponent();
         }
 
