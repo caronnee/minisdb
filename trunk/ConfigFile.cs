@@ -16,6 +16,16 @@ namespace Minis
         String myName;
         private List<Pair> configValues;
 
+        public List<String> Find(String name)
+        {
+            foreach (Pair p in configValues)
+            {
+                if (p.name.Equals(name))
+                    return p.value;
+            }
+            return null;
+        }
+
         public void Add(String name, String value)
         {
             foreach ( Pair p in configValues)
@@ -32,14 +42,11 @@ namespace Minis
             newPair.value.Add(value);
             configValues.Add(newPair);
         }
-        private void Load(String dbName)
+        private void Load()
         {
-            if (myName.Equals(dbName))
-                return; // was already loaded
-            myName = dbName;
+            configValues = new List<Pair>();
             if (!File.Exists(myName))
                 return;
-            configValues = new List<Pair>();
             TextReader read = new StreamReader(myName);
             String line;
             while ((line = read.ReadLine()) != null)
@@ -56,8 +63,24 @@ RemoveEmptyEntries);
             read.Close();
         }
 
-        ConfigFile()
+        public ConfigFile(String dbName)
         {
+            if ( (myName != null) && (myName.Equals(dbName)) )
+                return; // was already loaded
+            myName = dbName;
+            Load();
         }
+
+        public List<String> ReadPrefix(String prefix)
+        {
+            List<String> str = new List<String>();
+            foreach (Pair p in configValues)
+            {
+                if (p.name.StartsWith(prefix))
+                    str.Add(p.name);
+            }
+            return null;
+        }
+
     }
 }

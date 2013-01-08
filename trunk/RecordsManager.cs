@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Minis
 {
@@ -13,6 +14,17 @@ namespace Minis
         public static InfoHandler infoHandler;
 
         public static ConfigFile configFile;
+
+        public static void Init()
+        {
+            configFile = new ConfigFile(Misc.ProfileFile);
+        }
+
+        public static List<String> FindEnum(String enumName)
+        {
+            String fnd = Misc.enumPrefix + enumName;
+            return configFile.Find(fnd);
+        }
 
         private static void OnUpdateHandler(String name, String val)
         {
@@ -30,8 +42,9 @@ namespace Minis
         }
         public static void CreateEmpty(List<AbstractControl> ctrls)
         {
-            if (database != null)
-                database.addRow(ctrls);
+            if ( database == null )
+                throw new Exception("In insert page this should be set!");
+            database.addRow(ctrls);
         }
         public static void Load(string dbName)
         {
@@ -40,14 +53,19 @@ namespace Minis
 
         public static void AddToActive(AbstractAttribute att)
         {
-            if (database != null)
-                database.add(att);
+            if (database == null)
+                database = new Records("dummy");
+            database.AddPattern(att);
         }
 
         public static void RenameActive(string name)
         {
-            if (database != null)
-                database.changeName(name);
+            if ( (database == null) || (File.Exists(name)) )
+            {
+                // TODO warning
+                return;
+            }
+            database.changeName(name);
         }
 
         public static void SaveActive()
@@ -56,7 +74,7 @@ namespace Minis
                 database.save();
         }
 
-        public static void LoadColumns(System.Windows.Forms.DataGridView results)
+        public static void InitGrid(System.Windows.Forms.DataGridView results)
         {
             if (database != null)
                 database.initGrid(results);
@@ -75,7 +93,14 @@ namespace Minis
 
         public static void SaveToProfileFile(String name, String value)
         {
-            
+            configFile.Add(name, value);
+            //main window may want to detect changes in config file and react promptly
+            OnUpdateHandler(name, value);
+        }
+
+        public static List<string> FindEnumNames()
+        {
+            return configFile.ReadPrefix(Misc.enumPrefix);
         }
 
     }

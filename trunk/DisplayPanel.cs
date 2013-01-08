@@ -18,6 +18,11 @@ namespace Minis
                 Controls.Remove(this.screenContent);
                 switch (state)
                 {
+                    case State.StateIntro:
+                        {
+                            this.screenContent = new Intro();
+                            break;
+                        }
                     case State.StateCreateDatabase:
                         {
                             this.screenContent = new Create();

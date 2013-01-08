@@ -7,6 +7,7 @@ namespace Minis
 {
     public enum State
     {
+        StateIntro,
         StateCreateDatabase,
         StateLoadDatabase,
         StateSearchRecords,

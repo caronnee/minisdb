@@ -19,7 +19,7 @@ namespace Minis
         {
             values.Clear();
         }
-        public void add(Value v) // can be null as not inicialized
+        public void AddPattern(Value v) // can be null as not inicialized
         {
             values.Add(v);
         }
@@ -55,6 +55,8 @@ namespace Minis
             : this() //name of Db
         {
             dbName_ = dbName;
+            if (dbName.EndsWith(Misc.DbExt) == false)
+                dbName_ += Misc.DbExt;
             load();
         }
         protected void onInfoHandler(string s)
@@ -69,9 +71,9 @@ namespace Minis
         /* changes name of the database that enables saving to another name */
         public void changeName(string s) //jednoduche kopirovanie;)
         {
-            dbName_ = s + Misc.fileType;
+            dbName_ = s + Misc.DbExt;
         }
-        public void add(AbstractAttribute t)
+        public void AddPattern(AbstractAttribute t)
         {
             pattern.Add(t);
             t.close += new AbstractAttribute.Handler(this.remove);
@@ -122,7 +124,7 @@ namespace Minis
             {
                 for (int i = 0; i < values.Count; i++)
                 {
-                    record.add(pattern[i].getControl().getValue(values[i]));
+                    record.AddPattern(pattern[i].getControl().getValue(values[i]));
                 }
             }
             catch (Exception e)
@@ -398,12 +400,12 @@ namespace Minis
             return m;
         }
 
-        /* commom methods */
+        /* common methods */
         /* save whole database */
         public void save()
         {
             TextWriter write = new StreamWriter(dbName_, false);
-            //sprav getline az pokial nenajdes prazdnu lajnu
+            // patterns are delimited by blank line
             foreach (AbstractAttribute a in pattern)
                 write.WriteLine(a.ToString());
             write.WriteLine();//empty line to detect beginning of database
@@ -416,7 +418,7 @@ namespace Minis
                 {
                     if (rcs[j] != null)
                         write.Write(rcs[j].ToString());
-                    write.Write('\t'); //v loadovani budeme mat vzdy o nedna viac, ale ignorujeme
+                    write.Write(Misc.Deliminer);
                 }
                 write.WriteLine();
             }
@@ -427,6 +429,8 @@ namespace Minis
         /* load attributes and records */
         private void load()
         {
+            if (!File.Exists(dbName_))
+                return;
             StreamReader stream = new StreamReader(dbName_);
             loadAttributes(stream);
             loadValues(stream);
@@ -474,11 +478,11 @@ namespace Minis
             {
                 if (line.Equals(""))
                     continue;
-                string[] strs = line.Split(new char[] { '\t' });
+                string[] strs = line.Split(new char[] { Misc.Deliminer });
                 Record r = new Record();
                 for (int i = 0; i < pattern.Count; i++)
-                    r.add(pattern[i].getControl().getValue(strs[i]));
-                r.add(getIdValue());
+                    r.AddPattern(pattern[i].getControl().getValue(strs[i]));
+                r.AddPattern(getIdValue());
                 records.Add(r);
             }
         }
@@ -488,7 +492,7 @@ namespace Minis
             while ((line = read.ReadLine()) != null)
             {
                 if (line == "")
-                    break; //to bude znamenat, ze sme na fazi nacotavania values
+                    break;
                 Match m = new Regex("^[0-9]*").Match(line);
                 int def = int.Parse(m.Value);
                 AbstractAttribute att = null;
@@ -512,7 +516,9 @@ namespace Minis
                     default:
                         throw new Exception("No such type can be loaded");
                 }
-                att.reconstruct(line.Substring(m.Value.Length));
+                List<String> str = new List<String>();
+                str.AddRange(line.Split(new char[] { Misc.Deliminer }));
+                att.Reconstruct(str);
                 pattern.Add(att);
             }
         }

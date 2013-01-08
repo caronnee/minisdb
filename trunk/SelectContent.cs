@@ -35,7 +35,7 @@ namespace Minis
             this.results = null;
             InitializeComponent();
             // init grid according to some filter?
-            RecordsManager.LoadColumns(this.results);
+            RecordsManager.InitGrid(this.results);
         }
 
         void editRecordsButton_Click(object sender, EventArgs e)

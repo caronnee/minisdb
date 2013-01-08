@@ -162,7 +162,7 @@ namespace Minis
 		}
 		public string getName()
 		{
-			return aType +"\t" + name.Text + "\t";
+			return aType + Misc.Deliminer.ToString() + name.Text + Misc.Deliminer;
 		}
 
         public virtual Control showControl(Value v)
@@ -180,8 +180,8 @@ namespace Minis
      
 		/* returns copy of control that should handle value */
 		public abstract AbstractControl getControl();
-		/* sets atrribute with defined values, how it should look like */
-		public abstract void reconstruct(String s);   
+		/* sets attribute with defined values, how it should look like */
+        public abstract void Reconstruct(List<String> id);   
 	}
 	public interface AbstractControl 
 	{
@@ -519,12 +519,11 @@ namespace Minis
 			if (isMandatory())
 				s += def.Text;
 			return s;
-		}       
-		public override void reconstruct(String s) //fixme prepisat na reconstruct
+		}
+        public override void Reconstruct(List<String> strs) //fixme prepisat na reconstruct
 		{
-			string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
 			this.name.Text = strs[0];
-			if (strs.Length == 1)
+			if (strs.Count == 1)
 				return;
 			defVal.Text = strs[1];
 			this.fill.Checked = true;
@@ -587,9 +586,9 @@ namespace Minis
 		}
 		public override string ToString()
 		{
-			string s = getName() + min.Value.ToString() + "\t" + max.Value;
+			string s = getName() + min.Value.ToString() + Misc.Deliminer + max.Value;
 			if (isMandatory())
-				s += '\t' + defValue.Value.ToString();
+				s += Misc.Deliminer.ToString() + defValue.Value.ToString();
 			return s;
 		}
 		public override AbstractControl getControl()
@@ -602,15 +601,14 @@ namespace Minis
 		    m.Value = defValue.Value;
 			return m;
 		}
-		public override void reconstruct(string s)
+        public override void Reconstruct(List<String> strs)
 		{
-			string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
 			this.name.Text = strs[0];
 			min.Value = System.Convert.ToInt32(strs[1]);
 			max.Value = System.Convert.ToInt32(strs[2]);
 			defValue.Minimum = min.Value;
 			defValue.Maximum = max.Value;
-			if (strs.Length < 4)
+			if ( strs.Count < 4)
 				return;
 			defValue.Value = System.Convert.ToInt32(strs[3]);
 			this.fill.Checked = true; //mandatory
@@ -627,16 +625,14 @@ namespace Minis
         }
 		public static ComboBox findEnum(string toFind) //pouzivame len pri loadovani
 		{
-			List<string> enums = null;
+			List<string> enums = RecordsManager.FindEnum(toFind);
 			ComboBox b = new ComboBox();
-			if (enums == null)
-				enums = Misc.readEnum();
 
 			foreach ( string s in enums )
-				if ( s.StartsWith(toFind + '\t'))
+				if ( s.StartsWith(toFind + Misc.Deliminer.ToString()))
 				{
-					b.Items.AddRange(s.Split(new char[]{ '\t'},StringSplitOptions.RemoveEmptyEntries));
-					b.Items.Remove(toFind); //nemovneme meno ten jeci ( malo by byt prve, ale kto sa na to moze spolahnut, ze...
+					b.Items.AddRange(s.Split(new char[]{ Misc.Deliminer },StringSplitOptions.RemoveEmptyEntries));
+					b.Items.Remove(toFind);
 					return b;
 				}
 			throw new Exception ( "No such type defined");
@@ -653,22 +649,20 @@ namespace Minis
 			defVal = b ; //mozno add rande?
 			def = defVal; //inak sa to bude menit stale subezne
 		}
-		public override void reconstruct(string id)
+		public override void Reconstruct(List<String> s)
 		{
-			string[] s = id.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
-			//jaky enum z nasej kolekcie
 			this.name.Text = s[0];
 			enumName = s[1];
-			this.defVal = findEnum(s[1]);
+            this.defVal.Items.AddRange(RecordsManager.FindEnum(s[1]).ToArray());
 			//default value
-            if (s.Length < 3)
+            if (s.Count < 3)
                 return;
             defVal.SelectedIndex = System.Convert.ToInt32(int.Parse(s[2]));
             this.fill.Checked = true;
 		}
 		public override string ToString()
 		{
-			string s  = getName()+ this.enumName + "\t";
+			string s  = getName()+ this.enumName + Misc.Deliminer.ToString();
 			if (this.isMandatory())
 				s += defVal.SelectedIndex.ToString();
             return s;
@@ -733,11 +727,10 @@ namespace Minis
 				s += dateTimeTick.Value.ToString(Misc.dateFormat); 
 			return s;
 		}
-		public override void reconstruct(string s)
+        public override void Reconstruct(List<String> strs)
 		{
-			string[] strs = s.Split(new char[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
 			this.name.Text = strs[0];
-            if (strs.Length == 1)
+            if (strs.Count == 1)
                 return;
             this.fill.Checked = true;
             if (strs[1].Equals(todayString))
@@ -772,16 +765,15 @@ namespace Minis
 		public override string ToString()
 		{
 			string s = getName();
-			//only if mandatry
+			//only if mandatory
 			if (isMandatory())
 				s += defaultValue.getText();
 			return s;
 		}
-		public override void reconstruct(string s)
+        public override void Reconstruct(List<String> str)
 		{
-            string[] str = s.Split(new char[]{'\t'}, StringSplitOptions.RemoveEmptyEntries);
             this.name.Text = str[0]; //TIEZ NA NEJAku common funkcicnku?
-            if (str.Length == 1)
+            if (str.Count == 1)
                 return;
 			defaultValue.setText(str[1]);
             this.fill.Checked = true;
