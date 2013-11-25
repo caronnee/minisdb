@@ -1,0 +1,31 @@
+﻿<Window x:Class="MiniDatabase.AboutBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="About" Height="300" Width="300">
+    <DockPanel Background="Orchid">
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Click="OkClick" Content="Ok" Width="84" />
+        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Name="Icon" Stretch="Fill" Source="/MiniDatabase;component/Images/bigIcon.png" />
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0">
+                    Application name: "Minis!" <LineBreak/> Version: 1.3 <LineBreak/>Creator: Eva Peskova 
+                 </TextBlock>
+                <TextBlock Grid.Row="1" Text="Description: 
+This should serve all people who writes records and likes to search through them. 
+Like me.
+
+If you encounter any problem, bug or some functionality you would like, mail me ( caronnee@gmail.com ) :)" />                
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>
