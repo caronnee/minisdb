@@ -1,0 +1,10 @@
+﻿<Window x:Class="MiniDatabase.ContentPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Minis!" Height="350" Width="525">
+    <Grid>
+        <Menu Height="23" HorizontalAlignment="Left" Name="main_menu" VerticalAlignment="Top">
+            <MenuItem Header="_About" Click="AboutClick" />
+        </Menu>
+    </Grid>
+</Window>
