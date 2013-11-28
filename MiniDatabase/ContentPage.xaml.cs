@@ -29,5 +29,10 @@ namespace MiniDatabase
             AboutBox a = new AboutBox();
             a.ShowDialog();
         }
+
+        private void RequestNewDatabase(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
