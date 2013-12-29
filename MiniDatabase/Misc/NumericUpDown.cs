@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MiniDatabase
+namespace MiniDatabase.Misc
 {
     /// <summary>
     /// Follow steps 1a or 1b and then 2 to use this custom control in a XAML file.
@@ -48,6 +48,12 @@ namespace MiniDatabase
         static NumericUpDown()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(typeof(NumericUpDown)));
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            // add rest of the something
         }
     }
 }
