@@ -81,8 +81,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CreateFields\CreateFieldInteger.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateFields\CreateFieldText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateFields\CreateFieldInteger.xaml.cs">
+      <DependentUpon>CreateFieldInteger.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateFields\CreateFieldText.xaml.cs">
+      <DependentUpon>CreateFieldText.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Misc\NumericUpDown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
