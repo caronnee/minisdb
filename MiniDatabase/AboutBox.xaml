@@ -20,11 +20,13 @@
                 <TextBlock Grid.Row="0">
                     Application name: "Minis!" <LineBreak/> Version: 1.3 <LineBreak/>Creator: Eva Peskova 
                  </TextBlock>
-                <TextBlock Grid.Row="1" Text="Description: 
+                <ScrollViewer Grid.Row="1">
+                    <TextBlock  TextWrapping="Wrap" Text="Description: 
 This should serve all people who writes records and likes to search through them. 
 Like me.
 
-If you encounter any problem, bug or some functionality you would like, mail me ( caronnee@gmail.com ) :)" />                
+If you encounter any problem, bug or some functionality you would like, mail me ( caronnee@gmail.com ) :)" /> 
+                </ScrollViewer>               
             </Grid>
         </Grid>
     </DockPanel>
