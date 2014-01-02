@@ -81,6 +81,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CreateFields\CreateFieldEnum.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateFields\CreateFieldInteger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +99,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateFields\CreateFieldEnum.xaml.cs">
+      <DependentUpon>CreateFieldEnum.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateFields\CreateFieldInteger.xaml.cs">
       <DependentUpon>CreateFieldInteger.xaml</DependentUpon>
     </Compile>
@@ -124,9 +131,13 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Docs\uzivatelska_dok.doc" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\bigIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Docs\todo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
