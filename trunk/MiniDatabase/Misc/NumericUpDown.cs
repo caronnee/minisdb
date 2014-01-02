@@ -60,9 +60,6 @@ namespace MiniDatabase.Misc
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            // add rest of the something
-            
-            //add dependency value
             
             // we have two buttons that needs to be have the event
             Button tempButton;
