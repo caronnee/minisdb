@@ -19,8 +19,21 @@ namespace MiniDatabase.CreateFields
     /// </summary>
     public partial class CreateFieldEnum : UserControl
     {
+        public static readonly DependencyProperty NValue = DependencyProperty.Register("EnumSource", typeof(ICollection<String>), typeof(CreateFieldEnum), new PropertyMetadata(0));
+
+        ICollection<String> _enums;
+
+        public ICollection<String> EnumSource
+        {
+            get { return _enums; }
+            set { _enums = value; }
+        }
         public CreateFieldEnum()
         {
+            _enums.Add("a");
+            _enums.Add("ab");
+            _enums.Add("aa");
+            _enums.Add("x");
             InitializeComponent();
         }
     }
