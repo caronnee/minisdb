@@ -1,28 +1,26 @@
 ﻿<Window x:Class="MiniDatabase.ContentPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:misc="clr-namespace:MiniDatabase.Misc"
         Title="Minis!" Height="350" Width="525">
     <Window.Resources>
         
     </Window.Resources>
     <Grid>
-        <StackPanel>
-            <Menu Height="23" HorizontalAlignment="Left" Name="main_menu" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="9*" />
+        </Grid.RowDefinitions>
+            <Menu Name="MainMenu">
             <MenuItem Header="_File">
                 <MenuItem Header="_Create new database" Click="RequestNewDatabase"/>
             </MenuItem>
             <MenuItem Header="_About" Click="AboutClick" />
-        </Menu>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="8*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0">Text</TextBox>
-                <Button Grid.Column="1">Back</Button>
-                <Button Grid.Column="2">Confirm</Button>
-            </Grid>
-        </StackPanel>
+            </Menu>
+            <StackPanel Grid.Row="1">
+                <misc:NumericUpDown />
+                <misc:NumericUpDown />
+                <misc:NumericUpDown />
+            </StackPanel>
     </Grid>
 </Window>
