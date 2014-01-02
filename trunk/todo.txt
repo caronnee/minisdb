@@ -11,3 +11,6 @@ pridat vlastne tlacitka pre vsetky mozne typy vstupov
 pridat switchbox pre multipole
 ------------------
 enumy sa vytvaraju dynamicky pri zadavani databaze 
+
+-------------------------------
+resizovatelny text spolu s controlami
