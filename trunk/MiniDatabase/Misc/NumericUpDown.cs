@@ -50,10 +50,37 @@ namespace MiniDatabase.Misc
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(typeof(NumericUpDown)));
         }
 
+        public static readonly DependencyProperty NValue = DependencyProperty.Register("NumericValue", typeof(Int32), typeof(NumericUpDown), new PropertyMetadata(0));
+
+        public Int32 NumericValue
+        {
+            get { return (Int32)this.GetValue(NValue); }
+            set { this.SetValue(NValue, value); }
+        }
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
             // add rest of the something
+            
+            //add dependency value
+            
+            // we have two buttons that needs to be have the event
+            Button tempButton;
+            tempButton = this.Template.FindName("BPlus", this) as Button;
+            tempButton.Click += new RoutedEventHandler(IncrementValue);
+
+            tempButton = this.Template.FindName("BMinus", this) as Button;
+            tempButton.Click += new RoutedEventHandler(DecrementValue);
+        }
+
+        void DecrementValue(object sender, RoutedEventArgs e)
+        {
+            NumericValue--;
+        }
+
+        void IncrementValue(object sender, RoutedEventArgs e)
+        {
+            NumericValue++;
         }
     }
 }
