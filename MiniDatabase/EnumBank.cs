@@ -21,10 +21,13 @@ namespace MiniDatabase
                 get;
                 set;
             }
+            
+            // creates one collection that is empty
             public EnumCollection(String name)
             {
                 Name = name;
                 Values = new List<String>();
+                Values.Add("<empty>");
             }
         }
         
