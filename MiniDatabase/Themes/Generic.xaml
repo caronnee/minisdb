@@ -4,33 +4,6 @@
     xmlns:createFields="clr-namespace:MiniDatabase.CreateFields"
     xmlns:misc="clr-namespace:MiniDatabase.Misc">
 
-    
-    <Style TargetType="{x:Type createFields:CreateFieldText}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type createFields:CreateFieldText}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type createFields:CreateFieldInteger}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type createFields:CreateFieldInteger}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style TargetType="{x:Type misc:NumericUpDown}">
         <Setter Property="Template">
             <Setter.Value>

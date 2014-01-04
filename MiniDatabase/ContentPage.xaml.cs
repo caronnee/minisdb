@@ -21,7 +21,14 @@ namespace MiniDatabase
     {
         public ContentPage()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception e)
+            {
+                Console.Write("Something wrong happened");
+            }
         }
 
         private void AboutClick(object sender, RoutedEventArgs e)

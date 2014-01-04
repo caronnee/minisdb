@@ -23,7 +23,7 @@ namespace MiniDatabase.CreateFields
         public CreateFieldGeneric()
         {
             InitializeComponent();
-            Specialization = new CreateFieldInteger();
+            Specialization = new CreateFieldEnum();
         }
         public Control Specialization
         {

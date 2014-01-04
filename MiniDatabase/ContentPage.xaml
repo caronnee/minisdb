@@ -24,9 +24,9 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <createFields:CreateFieldGeneric />
-                    <misc:NumericUpDown />
-                    <misc:NumericUpDown />
+                    <createFields:CreateFieldGeneric/>
+                    <createFields:CreateFieldGeneric/>
+                    <createFields:CreateFieldGeneric/>
                     <misc:NumericUpDown />
                 </StackPanel>
             <StackPanel Grid.Column="1">
