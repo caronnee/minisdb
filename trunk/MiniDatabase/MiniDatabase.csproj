@@ -58,6 +58,7 @@
     <Compile Include="AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Types.cs" />
     <Page Include="Attribute.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
