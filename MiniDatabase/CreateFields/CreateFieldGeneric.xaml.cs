@@ -19,9 +19,16 @@ namespace MiniDatabase.CreateFields
     /// </summary>
     public partial class CreateFieldGeneric : UserControl
     {
+        // bind to depedency
         public CreateFieldGeneric()
         {
             InitializeComponent();
+            Specialization = new CreateFieldInteger();
+        }
+        public Control Specialization
+        {
+            get;
+            set;
         }
     }
 }
