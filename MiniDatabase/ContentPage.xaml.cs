@@ -41,5 +41,32 @@ namespace MiniDatabase
         {
 
         }
+
+        private void TreeAttribute_Selected(object sender, RoutedEventArgs e)
+        {
+            // show the content of the selected tree in the second window
+
+        }
+
+        private void attributeAtt(object sender, RoutedEventArgs e)
+        {
+            Point relativeToContext = Mouse.GetPosition(sender as IInputElement);
+            Point p = Mouse.GetPosition(this);
+            p.Offset( -relativeToContext.X, -relativeToContext.Y);
+            HitTestResult result = VisualTreeHelper.HitTest(this, p );
+            DependencyObject obj = result.VisualHit;
+            while (!(obj is TreeViewItem))
+            {
+                if (obj == null)
+                    return;
+                obj = VisualTreeHelper.GetParent(obj);
+            }
+            TreeViewItem nod = obj as TreeViewItem;
+            Misc.TreeAttribute n = new Misc.TreeAttribute();
+            int sons = nod.Items.Count;
+            string newName= "Attribute " + sons.ToString();
+            n.Header = newName;
+            nod.Items.Add(n);
+        }
     }
 }
