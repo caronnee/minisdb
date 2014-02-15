@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="EnumBank.cs" />
     <Compile Include="Misc\NumericUpDown.cs" />
+    <Compile Include="Misc\TreeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

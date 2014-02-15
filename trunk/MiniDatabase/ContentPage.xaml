@@ -5,7 +5,9 @@
         xmlns:createFields="clr-namespace:MiniDatabase.CreateFields"
         Title="Minis!" Height="350" Width="525">
     <Window.Resources>
-        
+        <ContextMenu x:Key="TreeItemContextMenu">
+            <MenuItem Header="Add New Attribute" Click="attributeAtt"/>
+        </ContextMenu>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -20,20 +22,15 @@
             </Menu>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
                 <ColumnDefinition Width="10*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <createFields:CreateFieldGeneric/>
-                    <createFields:CreateFieldGeneric/>
-                    <createFields:CreateFieldGeneric/>
-                    <misc:NumericUpDown />
-                </StackPanel>
-            <StackPanel Grid.Column="1">
-                <Button>Add Enum</Button>
-                <Button>Add Text</Button>
-                <Button>Add date</Button>
-                <Button>Add integer</Button>
+            <StackPanel Grid.Column="0">
+                <TreeView BorderThickness="0" Name="Attributes">
+                    <TreeViewItem Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}">
+                        <misc:TreeAttribute Header="Empty" Selected="TreeAttribute_Selected" />
+                    </TreeViewItem>
+                </TreeView>
             </StackPanel>
         </Grid>
     </Grid>
