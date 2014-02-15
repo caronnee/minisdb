@@ -19,15 +19,13 @@ namespace MiniDatabase.CreateFields
     /// </summary>
     public partial class CreateFieldEnum : UserControl
     {
-        public static readonly DependencyProperty EnumValue = DependencyProperty.Register("EnumSource", typeof(ICollection<String>), typeof(CreateFieldEnum), new PropertyMetadata(null));
-
-        ICollection<String> _enums;
-
-        public ICollection<String> EnumSource
+        public static readonly DependencyProperty EnumValue = DependencyProperty.Register("EnumSource", typeof(ICollection<Control>), typeof(CreateFieldEnum), new PropertyMetadata(null));
+        
+        public ICollection<Control> EnumSource
         {
             get
             {
-                return (ICollection<String>) GetValue(EnumValue);
+                return (ICollection<Control>)GetValue(EnumValue);
             }
             set
             {
@@ -36,19 +34,13 @@ namespace MiniDatabase.CreateFields
         }
         public CreateFieldEnum()
         {
-            _enums = new List<String>();
-            _enums.Add("a");
-            _enums.Add("ab");
-            _enums.Add("aa");
-            _enums.Add("x");
-            EnumSource = _enums;
             try
             {
                 InitializeComponent();
             }
             catch (Exception e)
             {
-                Console.Write("Exception occured");
+                Console.Write("Exception occured {0}",e.ToString());
             }
         }
     }

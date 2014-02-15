@@ -27,7 +27,7 @@ namespace MiniDatabase
             }
             catch (Exception e)
             {
-                Console.Write("Something wrong happened");
+                Console.Write("Something wrong happened {0}",e.ToString());
             }
         }
 
