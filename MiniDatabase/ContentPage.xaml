@@ -6,7 +6,8 @@
         Title="Minis!" Height="350" Width="525">
     <Window.Resources>
         <ContextMenu x:Key="TreeItemContextMenu">
-            <MenuItem Header="Add New Attribute" Click="attributeAtt"/>
+            <MenuItem Header="Add child" Click="attributeAdd"/>
+            <MenuItem Header="Remove" Click="attributeRemove" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ContextMenu, AncestorLevel=1}, Path=PlacementTarget.CanBeRemoved}"/>
         </ContextMenu>
     </Window.Resources>
     <Grid>
@@ -27,9 +28,9 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <TreeView BorderThickness="0" Name="Attributes">
-                    <TreeViewItem Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}">
-                        <misc:TreeAttribute Header="Empty" Selected="TreeAttribute_Selected" />
-                    </TreeViewItem>
+                    <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False">
+                        <misc:TreeAttribute Header="Empty" Selected="TreeAttribute_Selected" ContextMenu="{StaticResource TreeItemContextMenu}" CanBeRemoved="False"/>
+                    </misc:TreeAttribute>
                 </TreeView>
             </StackPanel>
         </Grid>
