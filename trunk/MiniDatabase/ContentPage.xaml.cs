@@ -48,25 +48,49 @@ namespace MiniDatabase
 
         }
 
-        private void attributeAtt(object sender, RoutedEventArgs e)
+        private TreeViewItem GetTreeItemFromContext( object sender )
         {
-            Point relativeToContext = Mouse.GetPosition(sender as IInputElement);
-            Point p = Mouse.GetPosition(this);
-            p.Offset( -relativeToContext.X, -relativeToContext.Y);
-            HitTestResult result = VisualTreeHelper.HitTest(this, p );
-            DependencyObject obj = result.VisualHit;
-            while (!(obj is TreeViewItem))
-            {
-                if (obj == null)
-                    return;
-                obj = VisualTreeHelper.GetParent(obj);
-            }
-            TreeViewItem nod = obj as TreeViewItem;
-            Misc.TreeAttribute n = new Misc.TreeAttribute();
+            MenuItem contextItem = sender as MenuItem;
+            ContextMenu ctx = contextItem.Parent as ContextMenu;
+            return ctx.PlacementTarget as TreeViewItem;
+        }
+
+        private void attributeRemove(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem nod = GetTreeItemFromContext(sender);
+            if (nod == null)
+                return;
+            TreeViewItem parent = nod.Parent as TreeViewItem;
+            parent.Items.Remove(nod);
+            UpdateFirstChild();
+        }
+
+        private void UpdateFirstChild()
+        {
+            // check first childs
+            Misc.TreeAttribute root = FindName("databaseName") as Misc.TreeAttribute;
+            Misc.TreeAttribute child = root.Items[0] as Misc.TreeAttribute;
+            child.CanBeRemoved = root.Items.Count > 1;
+        }
+
+        private Misc.TreeAttribute CreateTreeAttribute(string name)
+        {
+            Misc.TreeAttribute att = new Misc.TreeAttribute();
+            att.Header = name;
+            object o = TryFindResource("TreeItemContextMenu");
+            att.ContextMenu = o as ContextMenu;
+            att.CanBeRemoved = true;
+            return att;
+        }
+        
+        private void attributeAdd(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem nod = GetTreeItemFromContext(sender);
             int sons = nod.Items.Count;
-            string newName= "Attribute " + sons.ToString();
-            n.Header = newName;
-            nod.Items.Add(n);
+            string newName = "Attribute " + sons.ToString();
+            Misc.TreeAttribute t = CreateTreeAttribute(newName);
+            nod.Items.Add(t);
+            UpdateFirstChild();
         }
     }
 }

@@ -9,5 +9,11 @@ namespace MiniDatabase.Misc
     class TreeAttribute : TreeViewItem
     {
         UserControl contentForWindows;
+
+        public Boolean CanBeRemoved
+        {
+            set;
+            get;
+        }
     }
 }
