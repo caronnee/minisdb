@@ -5,15 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:misc="clr-namespace:MiniDatabase.Misc"
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="300">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <misc:NumericUpDown Grid.Column="0"></misc:NumericUpDown>
-        <TextBox Grid.Column="1">min</TextBox>
-        <TextBox Grid.Column="2">max</TextBox>
-    </Grid>
+             d:DesignHeight="150" d:DesignWidth="300">
+    <StackPanel>
+        <DockPanel>
+            <TextBox>Value</TextBox>
+            <misc:NumericUpDown/>
+        </DockPanel>
+        <DockPanel>
+            <TextBox>Maximum</TextBox>
+            <misc:NumericUpDown/>
+        </DockPanel>
+        <DockPanel>
+            <TextBox>Value</TextBox>
+            <misc:NumericUpDown/>
+        </DockPanel>       
+    </StackPanel>
 </UserControl>
