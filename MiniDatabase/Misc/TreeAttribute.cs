@@ -8,7 +8,15 @@ namespace MiniDatabase.Misc
 {
     class TreeAttribute : TreeViewItem
     {
-        UserControl contentForWindows;
+        TreeAttribute()
+        {
+            AttributeContent = null;
+        }
+        public UserControl AttributeContent
+        {
+            get;
+            set;
+        }
 
         public Boolean CanBeRemoved
         {

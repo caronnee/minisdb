@@ -4,17 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="300" xmlns:my="clr-namespace:MiniDatabase.CreateFields">
-    <Grid >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <ComboBox Name="EnumName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CreateFieldEnum, AncestorLevel=1}, Path=EnumSource}">
-        </ComboBox>
-        <ComboBox Grid.Column="1" IsEditable="True" Name="EnumValues" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CreateFieldEnum, AncestorLevel=1}, Path=EnumSource}" >   
-        </ComboBox>
-        <Button Grid.Column="2" Content="Button" Name="buttonX"/>
-    </Grid>
+             d:DesignHeight="150" d:DesignWidth="300" xmlns:my="clr-namespace:MiniDatabase.CreateFields">
+    <StackPanel>
+        <DockPanel>
+            <Label>Enum set</Label>
+            <ComboBox Name="EnumName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CreateFieldEnum, AncestorLevel=1}, Path=EnumSource}">
+            </ComboBox>
+        </DockPanel>
+        <DockPanel>
+            <Label>Default value</Label>
+            <ComboBox Name="EnumValues" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CreateFieldEnum, AncestorLevel=1}, Path=EnumSource}" >
+            </ComboBox>
+        </DockPanel>
+    </StackPanel>
 </UserControl>
