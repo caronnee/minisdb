@@ -86,6 +86,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CreateFields\CreateFieldGeneric.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateFields\CreateFieldInteger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,6 +106,9 @@
   <ItemGroup>
     <Compile Include="CreateFields\CreateFieldEnum.xaml.cs">
       <DependentUpon>CreateFieldEnum.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateFields\CreateFieldGeneric.xaml.cs">
+      <DependentUpon>CreateFieldGeneric.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreateFields\CreateFieldInteger.xaml.cs">
       <DependentUpon>CreateFieldInteger.xaml</DependentUpon>
