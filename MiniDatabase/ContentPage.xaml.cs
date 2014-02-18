@@ -94,6 +94,7 @@ namespace MiniDatabase
         private Misc.TreeAttribute CreateTreeAttribute(string name)
         {
             Misc.TreeAttribute att = new Misc.TreeAttribute();
+            att.Selected += new RoutedEventHandler(TreeAttribute_Selected);
             att.Header = name;
             object o = TryFindResource("TreeItemContextMenu");
             att.ContextMenu = o as ContextMenu;
