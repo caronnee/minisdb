@@ -8,10 +8,10 @@ namespace MiniDatabase.Misc
 {
     class TreeAttribute : TreeViewItem
     {
-        TreeAttribute()
+        public TreeAttribute()
         {
-            AttributeContent = null;
         }
+
         public UserControl AttributeContent
         {
             get;

@@ -19,6 +19,22 @@ namespace MiniDatabase
     /// </summary>
     public partial class ContentPage : Window
     {
+        public static DependencyProperty AttributeProperty =
+           DependencyProperty.Register("SelectedContent", typeof(UserControl),
+           typeof(ContentPage), new UIPropertyMetadata(null));
+
+        public UserControl SelectedContent
+        {
+            get
+            {
+                return (UserControl)GetValue(AttributeProperty);
+            }
+            set
+            {
+                SetValue(AttributeProperty, value);
+            }
+        }
+
         public ContentPage()
         {
             try
@@ -45,7 +61,9 @@ namespace MiniDatabase
         private void TreeAttribute_Selected(object sender, RoutedEventArgs e)
         {
             // show the content of the selected tree in the second window
-
+            Misc.TreeAttribute att = sender as Misc.TreeAttribute;
+            if (att.IsSelected)
+                SelectedContent = att.AttributeContent;
         }
 
         private TreeViewItem GetTreeItemFromContext( object sender )
