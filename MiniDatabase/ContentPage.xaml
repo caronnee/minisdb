@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:misc="clr-namespace:MiniDatabase.Misc"
         xmlns:createFields="clr-namespace:MiniDatabase.CreateFields"
-        Title="Minis!" Height="350" Width="525">
+        Title="Minis!" Height="350" Width="525" xmlns:my="clr-namespace:MiniDatabase">
     <Window.Resources>
         <ContextMenu x:Key="TreeItemContextMenu">
             <MenuItem Header="Add child" Click="attributeAdd"/>
@@ -28,13 +28,19 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <TreeView BorderThickness="0" Name="Attributes">
-                    <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False">
-                        <misc:TreeAttribute Header="Empty" Selected="TreeAttribute_Selected" ContextMenu="{StaticResource TreeItemContextMenu}" CanBeRemoved="False"/>
+                    <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" Selected="TreeAttribute_Selected" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False">
+                        <misc:TreeAttribute.AttributeContent>
+                            <createFields:DatabaseProperties />
+                        </misc:TreeAttribute.AttributeContent>
+                        <misc:TreeAttribute Header="Empty" Selected="TreeAttribute_Selected" ContextMenu="{StaticResource TreeItemContextMenu}" CanBeRemoved="False">
+                            <misc:TreeAttribute.AttributeContent>
+                                <createFields:CreateFieldGeneric />
+                            </misc:TreeAttribute.AttributeContent>
+                        </misc:TreeAttribute>
                     </misc:TreeAttribute>
                 </TreeView>
-            </StackPanel>
-            <DockPanel x:Name="AttributeContent" Grid.Column="1">                
-            </DockPanel>
+            </StackPanel>    
+            <ContentControl x:Name="Test" Grid.Column="1" Content="{Binding Path=SelectedContent, RelativeSource={RelativeSource FindAncestor, AncestorType=my:ContentPage, AncestorLevel=1}}" />
         </Grid>
     </Grid>
 </Window>

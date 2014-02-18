@@ -98,6 +98,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CreateFields\DatabaseProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -115,6 +119,9 @@
     </Compile>
     <Compile Include="CreateFields\CreateFieldText.xaml.cs">
       <DependentUpon>CreateFieldText.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateFields\DatabaseProperties.xaml.cs">
+      <DependentUpon>DatabaseProperties.xaml</DependentUpon>
     </Compile>
     <Compile Include="EnumBank.cs" />
     <Compile Include="Misc\NumericUpDown.cs" />
