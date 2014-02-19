@@ -10,7 +10,14 @@ namespace MiniDatabase.Misc
     {
         public TreeAttribute()
         {
-            AttributeContent = new CreateFields.CreateFieldGeneric();
+            CreateFields.CreateFieldGeneric c = new CreateFields.CreateFieldGeneric();
+            c.controlCreated += new CreateFields.CreateFieldGeneric.ControlCreated(changeControl);
+            AttributeContent = c;
+        }
+
+        void changeControl(UserControl control)
+        {
+            AttributeContent = control;
         }
 
         public UserControl AttributeContent
