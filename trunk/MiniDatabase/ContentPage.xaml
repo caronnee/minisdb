@@ -28,11 +28,11 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <TreeView BorderThickness="0" Name="Attributes">
-                    <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" Selected="TreeAttribute_Selected" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False">
+                    <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False">
                         <misc:TreeAttribute.AttributeContent>
                             <createFields:DatabaseProperties />
                         </misc:TreeAttribute.AttributeContent>
-                        <misc:TreeAttribute Header="Empty" Selected="TreeAttribute_Selected" ContextMenu="{StaticResource TreeItemContextMenu}" CanBeRemoved="False">
+                        <misc:TreeAttribute Header="Empty" ContextMenu="{StaticResource TreeItemContextMenu}" CanBeRemoved="False">
                         </misc:TreeAttribute>
                     </misc:TreeAttribute>
                 </TreeView>
