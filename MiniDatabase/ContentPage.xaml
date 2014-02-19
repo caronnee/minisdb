@@ -33,14 +33,11 @@
                             <createFields:DatabaseProperties />
                         </misc:TreeAttribute.AttributeContent>
                         <misc:TreeAttribute Header="Empty" Selected="TreeAttribute_Selected" ContextMenu="{StaticResource TreeItemContextMenu}" CanBeRemoved="False">
-                            <misc:TreeAttribute.AttributeContent>
-                                <createFields:CreateFieldGeneric />
-                            </misc:TreeAttribute.AttributeContent>
                         </misc:TreeAttribute>
                     </misc:TreeAttribute>
                 </TreeView>
             </StackPanel>    
-            <ContentControl x:Name="Test" Grid.Column="1" Content="{Binding Path=SelectedContent, RelativeSource={RelativeSource FindAncestor, AncestorType=my:ContentPage, AncestorLevel=1}}" />
+            <ContentControl x:Name="Test" Grid.Column="1" Content="{Binding Path=SelectedItem.AttributeContent, ElementName=Attributes}" />
         </Grid>
     </Grid>
 </Window>
