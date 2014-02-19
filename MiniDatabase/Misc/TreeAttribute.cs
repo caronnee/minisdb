@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace MiniDatabase.Misc
 {
     class TreeAttribute : TreeViewItem
     {
+        public static DependencyProperty AContent = DependencyProperty.Register("AttributeContent", typeof(UserControl), typeof(TreeAttribute), new PropertyMetadata(null));
+
         public TreeAttribute()
         {
             CreateFields.CreateFieldGeneric c = new CreateFields.CreateFieldGeneric();
@@ -22,8 +25,14 @@ namespace MiniDatabase.Misc
 
         public UserControl AttributeContent
         {
-            get;
-            set;
+            get
+            {
+                return (UserControl)GetValue(AContent);
+            }
+            set
+            {
+                SetValue(AContent, value);
+            }
         }
 
         public Boolean CanBeRemoved

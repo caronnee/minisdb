@@ -42,14 +42,6 @@ namespace MiniDatabase
 
         }
 
-        private void TreeAttribute_Selected(object sender, RoutedEventArgs e)
-        {
-            // show the content of the selected tree in the second window
-            //Misc.TreeAttribute att = sender as Misc.TreeAttribute;
-            //if (att.IsSelected)
-            //    SelectedContent = att.AttributeContent;
-        }
-
         private TreeViewItem GetTreeItemFromContext( object sender )
         {
             MenuItem contextItem = sender as MenuItem;
@@ -78,7 +70,6 @@ namespace MiniDatabase
         private Misc.TreeAttribute CreateTreeAttribute(string name)
         {
             Misc.TreeAttribute att = new Misc.TreeAttribute();
-            att.Selected += new RoutedEventHandler(TreeAttribute_Selected);
             att.Header = name;
             object o = TryFindResource("TreeItemContextMenu");
             att.ContextMenu = o as ContextMenu;
