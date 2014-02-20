@@ -49,5 +49,10 @@ namespace MiniDatabase
         {
             CurrentContent = new Content.CreateDatabase();
         }
+
+        private void RequestManageEnums(object sender, RoutedEventArgs e)
+        {
+            CurrentContent = new Content.CreateEnums();
+        }
     }
 }
