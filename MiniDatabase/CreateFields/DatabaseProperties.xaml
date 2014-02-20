@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" xmlns:my="clr-namespace:MiniDatabase.Misc">
     <StackPanel>
-        <CheckBox>something</CheckBox>
+        <Label>choose skin!</Label>
         <Label> some other property</Label>
         <Label>some generalization</Label>
         <Label>maybe some picture!</Label>

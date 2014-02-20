@@ -86,6 +86,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Content\CreateEnums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateFields\CreateFieldEnum.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -114,6 +118,9 @@
   <ItemGroup>
     <Compile Include="Content\CreateDatabase.xaml.cs">
       <DependentUpon>CreateDatabase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\CreateEnums.xaml.cs">
+      <DependentUpon>CreateEnums.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreateFields\CreateFieldEnum.xaml.cs">
       <DependentUpon>CreateFieldEnum.xaml</DependentUpon>
