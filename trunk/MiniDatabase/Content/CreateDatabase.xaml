@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="MiniDatabase.Content.CreateDatabase"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:misc="clr-namespace:MiniDatabase.Misc"
+             xmlns:createFields="clr-namespace:MiniDatabase.CreateFields"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="430">
+    <UserControl.Resources>
+        <ContextMenu x:Key="TreeItemContextMenu">
+            <MenuItem Header="Add child" Click="attributeAdd"/>
+            <MenuItem Header="Remove" Click="attributeRemove" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ContextMenu, AncestorLevel=1}, Path=PlacementTarget.CanBeRemoved}"/>
+        </ContextMenu>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="10*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0">
+            <TreeView BorderThickness="0" Name="Attributes">
+                <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False" IsSelected="True">
+                    <misc:TreeAttribute.AttributeContent>
+                        <createFields:DatabaseProperties />
+                    </misc:TreeAttribute.AttributeContent>
+                    <misc:TreeAttribute Header="Empty" ContextMenu="{StaticResource TreeItemContextMenu}" CanBeRemoved="False">
+                    </misc:TreeAttribute>
+                </misc:TreeAttribute>
+            </TreeView>
+        </DockPanel>
+        <StackPanel Grid.Column="1">
+            <DockPanel>
+                <Label>Name:</Label>
+                <TextBox Text="{Binding Path=SelectedItem.Header, ElementName=Attributes}" AcceptsReturn="False" AcceptsTab="False" KeyUp="OnEnterUpdate" />
+            </DockPanel>
+            <ContentControl Content="{Binding Path=SelectedItem.AttributeContent, ElementName=Attributes}" />
+        </StackPanel>
+    </Grid>
+</UserControl>
