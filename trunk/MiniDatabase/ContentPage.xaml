@@ -18,6 +18,7 @@
             <Menu Name="MainMenu">
             <MenuItem Header="_File">
                 <MenuItem Header="_Create new database" Click="RequestNewDatabase"/>
+                <MenuItem Header="_Manage enums" />
             </MenuItem>
             <MenuItem Header="_About" Click="AboutClick" />
             </Menu>
@@ -40,7 +41,7 @@
             <StackPanel Grid.Column="1">
                 <DockPanel>
                     <Label>Name:</Label>
-                    <TextBox Text="{Binding Path=SelectedItem.Header, ElementName=Attributes}" />
+                    <TextBox Text="{Binding Path=SelectedItem.Header, ElementName=Attributes}" AcceptsReturn="False" AcceptsTab="False" KeyUp="OnEnterUpdate" />
                 </DockPanel> 
                 <ContentControl Content="{Binding Path=SelectedItem.AttributeContent, ElementName=Attributes}" />
             </StackPanel>

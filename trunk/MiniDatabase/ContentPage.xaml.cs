@@ -86,5 +86,15 @@ namespace MiniDatabase
             nod.Items.Add(t);
             UpdateFirstChild();
         }
+
+        private void OnEnterUpdate(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                TextBox b = sender as TextBox;
+                BindingExpression be = b.GetBindingExpression(TextBox.TextProperty);
+                be.UpdateSource();
+            }
+        }
     }
 }
