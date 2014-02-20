@@ -6,9 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" xmlns:my="clr-namespace:MiniDatabase.Misc">
     <StackPanel>
-        <Label>Database name</Label>
-        <TextBox Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:TreeAttribute, AncestorLevel=1}, Path=Header}" />
         <CheckBox>something</CheckBox>
         <Label> some other property</Label>
+        <Label>some generalization</Label>
+        <Label>maybe some picture!</Label>
     </StackPanel>
 </UserControl>

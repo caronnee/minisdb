@@ -28,7 +28,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <TreeView BorderThickness="0" Name="Attributes">
-                    <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False">
+                    <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False" IsSelected="True">
                         <misc:TreeAttribute.AttributeContent>
                             <createFields:DatabaseProperties />
                         </misc:TreeAttribute.AttributeContent>
@@ -36,8 +36,14 @@
                         </misc:TreeAttribute>
                     </misc:TreeAttribute>
                 </TreeView>
-            </StackPanel>    
-            <ContentControl x:Name="Test" Grid.Column="1" Content="{Binding Path=SelectedItem.AttributeContent, ElementName=Attributes}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <DockPanel>
+                    <Label>Name:</Label>
+                    <TextBox Text="{Binding Path=SelectedItem.Header, ElementName=Attributes}" />
+                </DockPanel> 
+                <ContentControl Content="{Binding Path=SelectedItem.AttributeContent, ElementName=Attributes}" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
