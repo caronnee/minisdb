@@ -19,6 +19,14 @@ namespace MiniDatabase
     /// </summary>
     public partial class ContentPage : Window
     {
+        public static readonly DependencyProperty AContent = DependencyProperty.Register("CurrentContent", typeof(UserControl), typeof(ContentPage), new PropertyMetadata(null));
+
+        public UserControl CurrentContent
+        {
+            set { SetValue(AContent,value); }
+            get { return (UserControl)GetValue(AContent); }
+        }
+
         public ContentPage()
         {
             try
@@ -39,62 +47,7 @@ namespace MiniDatabase
 
         private void RequestNewDatabase(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private TreeViewItem GetTreeItemFromContext( object sender )
-        {
-            MenuItem contextItem = sender as MenuItem;
-            ContextMenu ctx = contextItem.Parent as ContextMenu;
-            return ctx.PlacementTarget as TreeViewItem;
-        }
-
-        private void attributeRemove(object sender, RoutedEventArgs e)
-        {
-            TreeViewItem nod = GetTreeItemFromContext(sender);
-            if (nod == null)
-                return;
-            TreeViewItem parent = nod.Parent as TreeViewItem;
-            parent.Items.Remove(nod);
-            UpdateFirstChild();
-        }
-
-        private void UpdateFirstChild()
-        {
-            // check first childs
-            Misc.TreeAttribute root = FindName("databaseName") as Misc.TreeAttribute;
-            Misc.TreeAttribute child = root.Items[0] as Misc.TreeAttribute;
-            child.CanBeRemoved = root.Items.Count > 1;
-        }
-
-        private Misc.TreeAttribute CreateTreeAttribute(string name)
-        {
-            Misc.TreeAttribute att = new Misc.TreeAttribute();
-            att.Header = name;
-            object o = TryFindResource("TreeItemContextMenu");
-            att.ContextMenu = o as ContextMenu;
-            att.CanBeRemoved = true;
-            return att;
-        }
-        
-        private void attributeAdd(object sender, RoutedEventArgs e)
-        {
-            TreeViewItem nod = GetTreeItemFromContext(sender);
-            int sons = nod.Items.Count;
-            string newName = "Attribute " + sons.ToString();
-            Misc.TreeAttribute t = CreateTreeAttribute(newName);
-            nod.Items.Add(t);
-            UpdateFirstChild();
-        }
-
-        private void OnEnterUpdate(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                TextBox b = sender as TextBox;
-                BindingExpression be = b.GetBindingExpression(TextBox.TextProperty);
-                be.UpdateSource();
-            }
+            CurrentContent = new Content.CreateDatabase();
         }
     }
 }
