@@ -37,6 +37,10 @@ namespace MiniDatabase.Banks
                 Name = name;
                 Values = new List<String>();
             }
+            public override string ToString()
+            {
+                return Name;
+            }
         }
 
         public static DependencyProperty CollectionProperty = DependencyProperty.Register("Collections", typeof(ObservableCollection<EnumCollection>), typeof(EnumBank), new PropertyMetadata(null));
@@ -72,17 +76,6 @@ namespace MiniDatabase.Banks
             {
                 return c.Name == s;
             };
-        }
-
-        public EnumCollection GetEnum(String name)
-        {
-            //EnumCollection c = Collections.aa .Find(ByName(name));
-            //if (c == null)
-            //{
-            //    c = CreateEnum(name);
-            //}
-            //return c;
-            return null;
         }
     }
 }
