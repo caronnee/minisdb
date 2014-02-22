@@ -17,16 +17,6 @@
         <ListBox x:Name="enumNamesHolder" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CreateEnums, AncestorLevel=1}, Path=Enums.Collections}"></ListBox>
         <TextBox x:Name="enumNames" Grid.Column="0" Grid.Row="1" ToolTip="Write here value for enum name and press enter" GotFocus="focusGained" LostFocus="focusLostName" Loaded="focusLostName" KeyUp="checkEnterName"></TextBox>
         <TextBox Grid.Column="1" Grid.Row="1" Loaded="focusLost" ToolTip="Write here value for enums and press enter" GotFocus="focusGained" LostFocus="focusLost" KeyUp="checkEnter"></TextBox>
-        <ListBox Grid.Column="1" Grid.Row="0">
-            <ListBoxItem>
-                <Label>1test</Label>
-            </ListBoxItem>
-            <ListBoxItem>
-                <Label>1test2</Label>
-            </ListBoxItem>
-            <ListBoxItem>
-                <Label>1test3</Label>
-            </ListBoxItem>
-        </ListBox>
+        <ListBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding ElementName=enumNamesHolder, Path=SelectedItem.Values}" />
     </Grid>
 </UserControl>
