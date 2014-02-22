@@ -19,12 +19,22 @@ namespace MiniDatabase.Content
     /// </summary>
     public partial class CreateEnums : UserControl
     {
-        private EnumBank enumBank;
+        public static DependencyProperty EnumsProperty = DependencyProperty.Register("Enums", typeof(Banks.EnumBank), typeof(CreateEnums), new PropertyMetadata(null));
 
         public CreateEnums()
         {
             InitializeComponent();
-            enumBank = new EnumBank();
+            Enums = new Banks.EnumBank();// or load
+        }
+
+        public Banks.EnumBank Enums
+        {
+            get {
+                return (Banks.EnumBank)GetValue(EnumsProperty);
+            }
+            set { 
+                SetValue(EnumsProperty,value); 
+            }
         }
 
         private void focusGained(object sender, RoutedEventArgs e)
@@ -42,20 +52,26 @@ namespace MiniDatabase.Content
         {
             TextBox b = sender as TextBox;
             focusLostGeneric(b);
-            b.Text = "&lt;Write here enum name and press enter&gt;";
+            b.Text = "<Write here enum name and press enter>";
         }
         private void focusLost(object sender, RoutedEventArgs e)
         {
             TextBox b = sender as TextBox;
             focusLostGeneric(b);
-            b.Text = "&lt;Write here enum value and press enter&gt;";
+            b.Text = "<Write here enum value and press enter>";
         }
 
         private void checkEnterName(object sender, KeyEventArgs e)
         {
             TextBox b = sender as TextBox;
+            String name = b.Text;
             if (!checkEnter(b, e))
                 return;
+            int index = Enums.CreateEnum(name);
+            // select the one added
+            object o = FindName("enumNamesHolder");
+            ListBox l = o as ListBox;
+            l.SelectedIndex = index;
             // ad between names and focus
         }
         
