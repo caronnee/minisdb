@@ -137,7 +137,7 @@
     <Compile Include="CreateFields\DatabaseProperties.xaml.cs">
       <DependentUpon>DatabaseProperties.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EnumBank.cs" />
+    <Compile Include="Banks\EnumBank.cs" />
     <Compile Include="Misc\NumericUpDown.cs" />
     <Compile Include="Misc\TreeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

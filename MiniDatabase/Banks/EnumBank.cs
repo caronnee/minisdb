@@ -27,16 +27,15 @@ namespace MiniDatabase
             {
                 Name = name;
                 Values = new List<String>();
-                Values.Add("<empty>");
             }
         }
         
-        EnumBank()
+        public EnumBank()
         {
             _collections = new List<EnumCollection>();
         }
 
-        EnumCollection CreateEnum(String name)
+        public EnumCollection CreateEnum(String name)
         {
             EnumCollection c = new EnumCollection(name);
             _collections.Add(c);
