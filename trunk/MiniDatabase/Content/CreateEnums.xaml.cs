@@ -87,8 +87,14 @@ namespace MiniDatabase.Content
         private void checkEnter(object sender, KeyEventArgs e)
         {
             TextBox b = sender as TextBox;
+            String c = b.Text;
             if (!checkEnter(b, e))
                 return;
+            // add value to the cirrectly selected item
+            object o = FindName("enumNamesHolder");
+            ListBox l = o as ListBox;
+            Banks.EnumBank.EnumCollection collection = l.SelectedItem as Banks.EnumBank.EnumCollection;
+            collection.Values.Add(c);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace MiniDatabase.Banks
     {
         public class EnumCollection
         {
-            public ICollection<String> Values
+            public ObservableCollection<String> Values
             {
                 get;
                 set;
@@ -35,7 +35,7 @@ namespace MiniDatabase.Banks
             public EnumCollection(String name)
             {
                 Name = name;
-                Values = new List<String>();
+                Values = new ObservableCollection<String>();
             }
             public override string ToString()
             {
