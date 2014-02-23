@@ -96,5 +96,10 @@ namespace MiniDatabase.Content
             Banks.EnumBank.EnumCollection collection = l.SelectedItem as Banks.EnumBank.EnumCollection;
             collection.Values.Add(c);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+          Enums.Save();
+        }
     }
 }

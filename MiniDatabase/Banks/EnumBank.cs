@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace MiniDatabase.Banks
 {
@@ -48,12 +49,56 @@ namespace MiniDatabase.Banks
         public EnumBank()
         {
             Collections = new ObservableCollection<EnumCollection>();
+            Load();
+        }
+
+        private static char[] separators = new char[] { '.', ' ' };
+        private string EnumConfigFile = "enums.config";
+
+        private void Load()
+        {
+          try
+          {
+            StreamReader reader = new StreamReader(EnumConfigFile);
+            while (reader.EndOfStream == false)
+            {
+              String s = reader.ReadLine();
+              String[] val = s.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+              int index = CreateEnum(val[0]);
+              EnumCollection c = Collections.ElementAt(index);
+              for (int i = 1; i < val.GetLength(0); i++)
+              {
+                c.Values.Add(val[i]);
+              }
+            }
+          }
+          catch (Exception e)
+          {
+            Console.Out.WriteLine(e.ToString());
+          }
+        }
+        public void Save()
+        {
+          StreamWriter writer = new StreamWriter(EnumConfigFile);
+          foreach (EnumCollection c in Collections)
+          {
+            if (c.Values.Count == 0)
+              continue;
+            writer.Write(c.Name);
+            foreach (String s in c.Values)
+            {
+              writer.Write(separators[0]);
+              writer.Write(s);
+            }
+            writer.WriteLine();
+          }
+          writer.Close();
         }
 
         public ObservableCollection<EnumCollection> Collections
         {
-            get { return (ObservableCollection<EnumCollection>)GetValue(CollectionProperty); }
-            set { SetValue(CollectionProperty, value); }
+          get { return (ObservableCollection<EnumCollection>)GetValue(CollectionProperty); }
+          set { SetValue(CollectionProperty, value); }
         }
 
         public int CreateEnum(String name)
