@@ -13,7 +13,14 @@ namespace MiniDatabase.Content
             ResultSuccess,
             ResultCancel,
         }
-        public delegate void Done(ContentResult result);
+        public delegate void Done( ContentGeneric next );
         public event Done Result;
+
+        virtual public void OnResult( ContentGeneric next )
+        {
+            if (Result == null)
+                return;
+            Result(next);
+        }
     }
 }
