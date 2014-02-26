@@ -11,13 +11,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace MiniDatabase.Content
 {
     /// <summary>
     /// Interaction logic for CreateEnums.xaml
     /// </summary>
-    public partial class CreateEnums : UserControl
+    public partial class CreateEnums : ContentGeneric
     {
         public static DependencyProperty EnumsProperty = DependencyProperty.Register("Enums", typeof(Banks.EnumBank), typeof(CreateEnums), new PropertyMetadata(null));
 
@@ -75,6 +76,7 @@ namespace MiniDatabase.Content
             // ad between names and focus
         }
         
+
         private bool checkEnter(TextBox b, KeyEventArgs e)
         {
             if (e.Key != Key.Enter)
@@ -97,9 +99,29 @@ namespace MiniDatabase.Content
             collection.Values.Add(c);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void removeFromListValue(object sender, RoutedEventArgs e)
         {
-          Enums.Save();
+            object o = FindName("enumNamesHolder");
+            ListBox l = o as ListBox;
+            MenuItem m = sender as MenuItem;
+            ContextMenu t = m.Parent as ContextMenu;
+            ListBox l2 = t.PlacementTarget as ListBox;
+            Banks.EnumBank.EnumCollection s = Enums.Collections.ElementAt(l.SelectedIndex);
+            Array values = Array.CreateInstance(typeof(String), l2.SelectedItems.Count);
+            l2.SelectedItems.CopyTo(values, 0);
+            foreach (String st in values)
+            {
+                s.Values.Remove(st);
+            }
+        }
+
+        private void removeFromListName(object sender, RoutedEventArgs e)
+        {
+            MenuItem m = sender as MenuItem;
+            ContextMenu t = m.Parent as ContextMenu;
+            ListBox b = t.PlacementTarget as ListBox;
+            // remove all selected
+            Enums.Collections.Remove(b.SelectedItem as Banks.EnumBank.EnumCollection);
         }
     }
 }

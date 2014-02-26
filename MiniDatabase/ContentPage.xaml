@@ -12,7 +12,7 @@
                 <MenuItem Header="_Create new database" Click="RequestNewDatabase"/>
                 <MenuItem Header="_Manage enums" Click="RequestManageEnums" />
             </MenuItem>
-            <MenuItem Header="_About" Click="AboutClick" />
+             <MenuItem Header="_About" Click="AboutClick" />
             </Menu>
         <ContentControl Grid.Row="1" Content="{Binding Path=CurrentContent, RelativeSource={RelativeSource FindAncestor, AncestorType=my:ContentPage, AncestorLevel=1}}" />
     </Grid>

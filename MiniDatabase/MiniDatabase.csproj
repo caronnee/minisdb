@@ -116,6 +116,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Content\ContentGeneric.cs" />
     <Compile Include="Content\CreateDatabase.xaml.cs">
       <DependentUpon>CreateDatabase.xaml</DependentUpon>
     </Compile>
