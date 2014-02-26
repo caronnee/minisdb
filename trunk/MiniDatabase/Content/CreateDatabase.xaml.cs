@@ -17,7 +17,7 @@ namespace MiniDatabase.Content
     /// <summary>
     /// Interaction logic for ContentCreateDatabase.xaml
     /// </summary>
-    public partial class CreateDatabase : UserControl
+    public partial class CreateDatabase : ContentGeneric
     {
         public  CreateDatabase()
         {

@@ -19,7 +19,7 @@ namespace MiniDatabase
     /// </summary>
     public partial class ContentPage : Window
     {
-        public static readonly DependencyProperty AContent = DependencyProperty.Register("CurrentContent", typeof(UserControl), typeof(ContentPage), new PropertyMetadata(null));
+        public static readonly DependencyProperty AContent = DependencyProperty.Register("CurrentContent", typeof(Content.ContentGeneric), typeof(ContentPage), new PropertyMetadata(null));
 
         public UserControl CurrentContent
         {
