@@ -21,10 +21,10 @@ namespace MiniDatabase
     {
         public static readonly DependencyProperty AContent = DependencyProperty.Register("CurrentContent", typeof(Content.ContentGeneric), typeof(ContentPage), new PropertyMetadata(null));
 
-        public UserControl CurrentContent
+        public Content.ContentGeneric CurrentContent
         {
             set { SetValue(AContent,value); }
-            get { return (UserControl)GetValue(AContent); }
+            get { return (Content.ContentGeneric)GetValue(AContent); }
         }
 
         public ContentPage()
@@ -48,11 +48,20 @@ namespace MiniDatabase
         private void RequestNewDatabase(object sender, RoutedEventArgs e)
         {
             CurrentContent = new Content.CreateDatabase();
+            CurrentContent.Result += new MiniDatabase.Content.ContentGeneric.Done(CurrentContent_Result);
+        }
+
+        void CurrentContent_Result( Content.ContentGeneric nextPage)
+        {
+            CurrentContent = nextPage;
+            if (CurrentContent!= null)
+                CurrentContent.Result += new MiniDatabase.Content.ContentGeneric.Done(CurrentContent_Result);
         }
 
         private void RequestManageEnums(object sender, RoutedEventArgs e)
         {
             CurrentContent = new Content.CreateEnums();
+            CurrentContent.Result += new MiniDatabase.Content.ContentGeneric.Done(CurrentContent_Result);
         }
     }
 }

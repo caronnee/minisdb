@@ -123,5 +123,11 @@ namespace MiniDatabase.Content
             // remove all selected
             Enums.Collections.Remove(b.SelectedItem as Banks.EnumBank.EnumCollection);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Enums.Save();
+            OnResult(null);
+        }
     }
 }
