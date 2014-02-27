@@ -115,6 +115,13 @@ namespace MiniDatabase.Banks
             return Collections.Count -1;
         }
 
+        public int Rename(String oldName, String newName)
+        {
+            int index = CreateEnum(oldName);
+            Collections[index].Name = newName;
+            return index;
+        }
+
         static Predicate<EnumCollection> ByName(String s)
         {
             return delegate(EnumCollection c)

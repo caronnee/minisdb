@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using MiniDatabase.Banks;
 
 namespace MiniDatabase.Content
 {
@@ -21,11 +22,13 @@ namespace MiniDatabase.Content
     public partial class CreateEnums : ContentGeneric
     {
         public static DependencyProperty EnumsProperty = DependencyProperty.Register("Enums", typeof(Banks.EnumBank), typeof(CreateEnums), new PropertyMetadata(null));
+        private String renaming;
 
         public CreateEnums()
         {
             InitializeComponent();
             Enums = new Banks.EnumBank();// or load
+            renaming = null;
         }
 
         public Banks.EnumBank Enums
@@ -48,7 +51,9 @@ namespace MiniDatabase.Content
         private void focusLostGeneric(TextBox b)
         {
             b.Foreground = Brushes.Gray;
+            renaming = null;
         }
+
         private void focusLostName(object sender, RoutedEventArgs e)
         {
             TextBox b = sender as TextBox;
@@ -68,8 +73,14 @@ namespace MiniDatabase.Content
             String name = b.Text;
             if (!checkEnter(b, e))
                 return;
-            int index = Enums.CreateEnum(name);
-            // select the one added
+            int index;
+            if (renaming != null)
+            {
+                index = Enums.Rename(renaming,name);
+            }
+            else
+                index = Enums.CreateEnum(name);
+            // select the one added/renamed
             object o = FindName("enumNamesHolder");
             ListBox l = o as ListBox;
             l.SelectedIndex = index;
@@ -92,11 +103,47 @@ namespace MiniDatabase.Content
             String c = b.Text;
             if (!checkEnter(b, e))
                 return;
-            // add value to the cirrectly selected item
+            // add value to the currently selected item
             object o = FindName("enumNamesHolder");
             ListBox l = o as ListBox;
             Banks.EnumBank.EnumCollection collection = l.SelectedItem as Banks.EnumBank.EnumCollection;
-            collection.Values.Add(c);
+            if (renaming != null)
+            {
+                for (int i = 0; i < collection.Values.Count; i++)
+                {
+                    if (collection.Values[i] == renaming)
+                    {
+                        collection.Values[i] = c;
+                        break;
+                    }
+                }
+            }
+            else
+                collection.Values.Add(c);
+        }
+
+        private void renameName(object sender, RoutedEventArgs e)
+        {
+            MenuItem m = sender as MenuItem;
+            ContextMenu t = m.Parent as ContextMenu;
+            ListBox l = t.PlacementTarget as ListBox;
+            EnumBank.EnumCollection ec = l.SelectedItem as EnumBank.EnumCollection;
+            renaming = ec.Name;
+            TextBox b = FindName("enumNames") as TextBox;
+            b.Focus();
+            b.Text = renaming;
+        }
+
+        private void renameValue(object sender, RoutedEventArgs e)
+        {
+            MenuItem m = sender as MenuItem;
+            ContextMenu t = m.Parent as ContextMenu;
+            ListBox l = t.PlacementTarget as ListBox;
+            String ec = l.SelectedItem as String;
+            renaming = ec;
+            TextBox b = FindName("enumValues") as TextBox;
+            b.Focus();
+            b.Text = renaming;
         }
 
         private void removeFromListValue(object sender, RoutedEventArgs e)
