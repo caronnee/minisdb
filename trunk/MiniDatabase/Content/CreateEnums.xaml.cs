@@ -75,9 +75,7 @@ namespace MiniDatabase.Content
                 return;
             int index;
             if (renaming != null)
-            {
                 index = Enums.Rename(renaming,name);
-            }
             else
                 index = Enums.CreateEnum(name);
             // select the one added/renamed
