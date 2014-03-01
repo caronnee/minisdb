@@ -9,15 +9,15 @@
     <StackPanel>
         <DockPanel>
             <TextBox>Value</TextBox>
-            <misc:NumericUpDown/>
+            <misc:NumericUpDown Minimum="{Binding NumericValue, ElementName=Minimum}" Maximum="{Binding NumericValue, ElementName=Maximum}" />
         </DockPanel>
         <DockPanel>
             <TextBox>Maximum</TextBox>
-            <misc:NumericUpDown/>
+            <misc:NumericUpDown x:Name="Maximum" Minimum="-1000" Maximum="1000" NumericValue="10"/>
         </DockPanel>
         <DockPanel>
-            <TextBox>Value</TextBox>
-            <misc:NumericUpDown/>
-        </DockPanel>       
+            <TextBox>Minimum</TextBox>
+            <misc:NumericUpDown x:Name="Minimum" Minimum="-1000" Maximum="1000" NumericValue="-1"/>
+    </DockPanel>       
     </StackPanel>
 </UserControl>

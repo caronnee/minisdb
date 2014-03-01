@@ -84,9 +84,9 @@ namespace MiniDatabase.Banks
               }
             }
           }
-          catch (Exception e)
+          catch (FileNotFoundException)
           {
-            Console.Out.WriteLine(e.ToString());
+            Console.Out.WriteLine("File was not found. Creating default one");
           }
         }
         public void Save()

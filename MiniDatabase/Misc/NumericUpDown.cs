@@ -50,13 +50,31 @@ namespace MiniDatabase.Misc
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(typeof(NumericUpDown)));
         }
 
-        public static readonly DependencyProperty NValue = DependencyProperty.Register("NumericValue", typeof(Int32), typeof(NumericUpDown), new PropertyMetadata(0));
+        public static DependencyProperty NValue = DependencyProperty.Register("NumericValue", typeof(Int32), typeof(NumericUpDown), new PropertyMetadata(0));
+        public static DependencyProperty MinValue = DependencyProperty.Register("Minimum", typeof(Int32), typeof(NumericUpDown), new PropertyMetadata(0));
+        public static DependencyProperty MaxValue = DependencyProperty.Register("Maximum", typeof(Int32), typeof(NumericUpDown), new PropertyMetadata(0));
 
         public Int32 NumericValue
         {
             get { return (Int32)this.GetValue(NValue); }
-            set { this.SetValue(NValue, value); }
+            set { 
+              if ( ( value >=Minimum ) && ( value <= Maximum))
+                this.SetValue(NValue, value); 
+            }
         }
+
+        public Int32 Minimum
+        {
+          get { return (Int32)this.GetValue(MinValue); }
+          set { this.SetValue(MinValue, value); }
+        }
+
+        public Int32 Maximum
+        {
+          get { return (Int32)this.GetValue(MaxValue); }
+          set { this.SetValue(MaxValue, value); }
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
