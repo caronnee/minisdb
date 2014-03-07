@@ -6,12 +6,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="300" xmlns:my="clr-namespace:MiniDatabase.CreateFields">
     <StackPanel>
-        <DockPanel>
+        <DockPanel Margin="10,10">
             <Label>Enum set</Label>
             <ComboBox Name="EnumName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CreateFieldEnum, AncestorLevel=1}, Path=EnumSource.Collections}" DisplayMemberPath="Name" SelectedIndex="0">
             </ComboBox>
         </DockPanel>
-        <DockPanel>
+        <DockPanel Margin="10,10">
             <Label>Default value</Label>
             <ComboBox Name="EnumValues" ItemsSource="{Binding ElementName=EnumName, Path=SelectedItem.Values}" IsReadOnly="True" IsSynchronizedWithCurrentItem="True">
             </ComboBox>
