@@ -19,17 +19,13 @@ namespace MiniDatabase.CreateFields
     /// </summary>
     public partial class CreateFieldEnum : UserControl
     {
-        public static readonly DependencyProperty EnumValue = DependencyProperty.Register("EnumSource", typeof(ICollection<Control>), typeof(CreateFieldEnum), new PropertyMetadata(null));
+        //public static readonly DependencyProperty EnumValue = DependencyProperty.Register("EnumSource", typeof(ICollection<Control>), typeof(CreateFieldEnum), new PropertyMetadata(null));
         
-        public ICollection<Control> EnumSource
+        public Banks.EnumBank EnumSource
         {
             get
             {
-                return (ICollection<Control>)GetValue(EnumValue);
-            }
-            set
-            {
-                SetValue(EnumValue,value);
+                return Banks.EnumBank.Bank;
             }
         }
         public CreateFieldEnum()

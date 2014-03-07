@@ -8,12 +8,12 @@
     <StackPanel>
         <DockPanel>
             <Label>Enum set</Label>
-            <ComboBox Name="EnumName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CreateFieldEnum, AncestorLevel=1}, Path=EnumSource}">
+            <ComboBox Name="EnumName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CreateFieldEnum, AncestorLevel=1}, Path=EnumSource.Collections}" DisplayMemberPath="Name" SelectedIndex="0">
             </ComboBox>
         </DockPanel>
         <DockPanel>
             <Label>Default value</Label>
-            <ComboBox Name="EnumValues" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CreateFieldEnum, AncestorLevel=1}, Path=EnumSource}" >
+            <ComboBox Name="EnumValues" ItemsSource="{Binding ElementName=EnumName, Path=SelectedItem.Values}" IsReadOnly="True" IsSynchronizedWithCurrentItem="True">
             </ComboBox>
         </DockPanel>
     </StackPanel>
