@@ -19,6 +19,21 @@ namespace MiniDatabase.Banks
 {
     public class EnumBank : DependencyObject 
     {
+        private static EnumBank _bank;
+
+        static public EnumBank Bank
+        {
+            get
+            {
+                if ( _bank == null )
+                {
+                    _bank = new EnumBank();
+                    _bank.Load();
+                }
+                return _bank;
+            }
+        }
+        
         public class EnumCollection : INotifyPropertyChanged
         {
             public ObservableCollection<String> Values
@@ -61,7 +76,6 @@ namespace MiniDatabase.Banks
         public EnumBank()
         {
             Collections = new ObservableCollection<EnumCollection>();
-            Load();
         }
 
         private static char[] separators = new char[] { '.', ' ' };

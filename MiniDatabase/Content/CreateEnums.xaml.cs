@@ -27,7 +27,7 @@ namespace MiniDatabase.Content
         public CreateEnums()
         {
             InitializeComponent();
-            Enums = new Banks.EnumBank();// or load
+            Enums = Banks.EnumBank.Bank;
             renaming = null;
         }
 
