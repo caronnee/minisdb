@@ -20,9 +20,9 @@
             <ColumnDefinition Width="10*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Column="0">
-            <TreeView BorderThickness="0" Name="Attributes">
-                <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False" IsSelected="True">
-                    <misc:TreeAttribute.AttributeContent>
+            <TreeView BorderThickness="0" Name="Attributes" AlternationCount="1">
+                <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False" IsSelected="True" IsExpanded="True">
+                    <misc:TreeAttribute.AttributeContent >
                         <createFields:DatabaseProperties />
                     </misc:TreeAttribute.AttributeContent>
                     <misc:TreeAttribute Header="Empty" ContextMenu="{StaticResource TreeItemContextMenu}" CanBeRemoved="False">

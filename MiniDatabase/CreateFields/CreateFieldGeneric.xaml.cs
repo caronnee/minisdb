@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MiniDatabase.Banks;
 
 namespace MiniDatabase.CreateFields
 {
@@ -38,6 +39,11 @@ namespace MiniDatabase.CreateFields
         {
             if (controlCreated == null)
                 return;
+            if (EnumBank.Bank.Collections.Count == 0)
+            {
+                MessageBox.Show("Unable to create enums, no enum defined\nPlease go to the manage enums and create the one enum", "Unable to create enum", MessageBoxButton.OK);
+                return;
+            }
             controlCreated(new CreateFieldEnum());
         }
 
