@@ -30,12 +30,12 @@
                 </misc:TreeAttribute>
             </TreeView>
         </DockPanel>
-        <StackPanel Grid.Column="1">
-            <DockPanel>
+        <DockPanel Grid.Column="1" LastChildFill="True">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
                 <Label>Name:</Label>
                 <TextBox Text="{Binding Path=SelectedItem.Header, ElementName=Attributes}" AcceptsReturn="False" AcceptsTab="False" KeyUp="OnEnterUpdate" />
-            </DockPanel>
-            <ContentControl Content="{Binding Path=SelectedItem.AttributeContent, ElementName=Attributes}" />
-        </StackPanel>
+            </StackPanel>
+            <ContentControl Content="{Binding Path=SelectedItem.AttributeContent, ElementName=Attributes}"/>
+        </DockPanel>
     </Grid>
 </my:ContentGeneric>
