@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="300">
-    <DockPanel LastChildFill="True" Margin="10,5">
+             d:DesignHeight="50" d:DesignWidth="300" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+    <DockPanel LastChildFill="True" Margin="10,5" >
         <Label>Default value</Label>
-        <TextBox Name="TextField" MinLines="10" MaxLines="11"  TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto"/>
+        <TextBox Name="TextField" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
     </DockPanel>
 </UserControl>
