@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="300">
-    <DockPanel>
+    <DockPanel LastChildFill="True" Margin="10,5">
         <Label>Default value</Label>
-        <TextBox Name="TextField" />
+        <TextBox Name="TextField" MinLines="10" MaxLines="11"  TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto"/>
     </DockPanel>
 </UserControl>
