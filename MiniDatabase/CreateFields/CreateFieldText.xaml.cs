@@ -11,17 +11,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MiniDatabase.Records;
 
 namespace MiniDatabase.CreateFields
 {
     /// <summary>
     /// Interaction logic for CreateFieldText.xaml
     /// </summary>
-    public partial class CreateFieldText : UserControl
+    public partial class CreateFieldText : UserControl, CreateFieldBase
     {
         public CreateFieldText()
         {
             InitializeComponent();
+        }
+        public bool Valid() { return true; }
+        public Record GetRecord()
+        {
+            RecordText r = new RecordText();
+            return r;
         }
     }
 }
