@@ -8,6 +8,5 @@ namespace MiniDatabase.Records
     public class Record
     {
         int ID { get; set; }
-
     }
 }
