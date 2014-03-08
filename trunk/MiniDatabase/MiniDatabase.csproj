@@ -153,6 +153,7 @@
       <DependentUpon>DatabaseProperties.xaml</DependentUpon>
     </Compile>
     <Compile Include="Banks\EnumBank.cs" />
+    <Compile Include="Misc\Common.cs" />
     <Compile Include="Misc\NumericUpDown.cs" />
     <Compile Include="Misc\TreeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
