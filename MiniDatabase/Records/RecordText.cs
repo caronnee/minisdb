@@ -5,7 +5,17 @@ using System.Text;
 
 namespace MiniDatabase.Records
 {
-    class RecordText : Record
+    public class RecordText : Record
     {
+        String Name
+        {
+            get;
+            set;
+        }
+        String Value
+        {
+            get;
+            set;
+        }
     }
 }
