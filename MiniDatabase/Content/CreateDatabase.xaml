@@ -8,34 +8,43 @@
              xmlns:createFields="clr-namespace:MiniDatabase.CreateFields"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="430">
-    <my:ContentGeneric.Resources>
-        <ContextMenu x:Key="TreeItemContextMenu">
-            <MenuItem Header="Add child" Click="attributeAdd"/>
-            <MenuItem Header="Remove" Click="attributeRemove" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ContextMenu, AncestorLevel=1}, Path=PlacementTarget.CanBeRemoved}"/>
-        </ContextMenu>
-    </my:ContentGeneric.Resources>
-    <Grid>
+  <my:ContentGeneric.Resources>
+    <ContextMenu x:Key="TreeItemContextMenu">
+      <MenuItem Header="Add child" Click="attributeAdd"/>
+      <MenuItem Header="Remove" Click="attributeRemove" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ContextMenu, AncestorLevel=1}, Path=PlacementTarget.CanBeRemoved}"/>
+    </ContextMenu>
+  </my:ContentGeneric.Resources>
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="4*"></ColumnDefinition>
+      <ColumnDefinition Width="10*"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    <DockPanel Grid.Column="0">
+      <TreeView BorderThickness="0" Name="Attributes" AlternationCount="1">
+        <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False" IsSelected="True" IsExpanded="True">
+          <misc:TreeAttribute.AttributeContent >
+            <createFields:DatabaseProperties />
+          </misc:TreeAttribute.AttributeContent>
+          <misc:TreeAttribute Header="Empty" ContextMenu="{StaticResource TreeItemContextMenu}" CanBeRemoved="False">
+          </misc:TreeAttribute>
+        </misc:TreeAttribute>
+      </TreeView>
+    </DockPanel>
+    <DockPanel Grid.Column="1" LastChildFill="True">
+      <Grid DockPanel.Dock="Top">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
-            <ColumnDefinition Width="10*"></ColumnDefinition>
+          <ColumnDefinition Width="2*"></ColumnDefinition>
+          <ColumnDefinition Width="8*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0">
-            <TreeView BorderThickness="0" Name="Attributes" AlternationCount="1">
-                <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False" IsSelected="True" IsExpanded="True">
-                    <misc:TreeAttribute.AttributeContent >
-                        <createFields:DatabaseProperties />
-                    </misc:TreeAttribute.AttributeContent>
-                    <misc:TreeAttribute Header="Empty" ContextMenu="{StaticResource TreeItemContextMenu}" CanBeRemoved="False">
-                    </misc:TreeAttribute>
-                </misc:TreeAttribute>
-            </TreeView>
-        </DockPanel>
-        <DockPanel Grid.Column="1" LastChildFill="True">
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                <Label>Name:</Label>
-                <TextBox Text="{Binding Path=SelectedItem.Header, ElementName=Attributes}" AcceptsReturn="False" AcceptsTab="False" KeyUp="OnEnterUpdate" />
-            </StackPanel>
-            <ContentControl Content="{Binding Path=SelectedItem.AttributeContent, ElementName=Attributes}"/>
-        </DockPanel>
-    </Grid>
+        <Label Grid.Column="0">Name:</Label>
+        <TextBox Grid.Column="1" Text="{Binding Path=SelectedItem.Header, ElementName=Attributes}" AcceptsReturn="False" AcceptsTab="False" KeyUp="OnEnterUpdate" VerticalAlignment="Stretch"/>
+      </Grid>
+      <StackPanel HorizontalAlignment="Right" DockPanel.Dock="Bottom" Orientation="Horizontal">
+        <Button Width="80" Margin="10">Done</Button>
+        <Button Width="80" Margin="10">Cancel</Button>
+      </StackPanel>
+      <ContentControl Content="{Binding Path=SelectedItem.AttributeContent, ElementName=Attributes}"/>
+      
+    </DockPanel>
+  </Grid>
 </my:ContentGeneric>
