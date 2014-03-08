@@ -56,7 +56,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Condition.cs" />
-    <Compile Include="ConfigFile.cs" />
     <Compile Include="ControlInfo.cs" />
     <Compile Include="Create.cs">
       <SubType>UserControl</SubType>
@@ -73,7 +72,6 @@
     <Compile Include="DisplayPanel.Designer.cs">
       <DependentUpon>DisplayPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Events.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="DatabaseWindow.cs">
       <SubType>UserControl</SubType>
