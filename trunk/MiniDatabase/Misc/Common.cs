@@ -5,6 +5,13 @@ using System.IO;
 
 namespace MiniDatabase.Misc
 {
+    enum Types
+    {
+        TypeText,
+        TypeInteger,
+        TypeEnum
+    }
+
     static class Common
     {
         public const string help = "Syntax is: \r\n " +
