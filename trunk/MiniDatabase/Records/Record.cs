@@ -19,9 +19,12 @@ namespace MiniDatabase.Records
 
         public void SetValue(Value v, int index)
         {
-            if (index < 0 || index >= _values.Count)
-                throw new Exception("Value out of range");
             _values[index] = v;
+        }
+
+        internal Value GetValue(int i)
+        {
+            return _values[i];
         }
     }
 }

@@ -7,9 +7,9 @@ using MiniDatabase.Misc;
 
 namespace MiniDatabase.Records
 {
-    public class RecordDescription : RecordDescriptionInterface
+    public class RecordDescription
     {
-        public Value ReadValueFromDescription(BinaryReader reader)
+        public virtual Value ReadValueFromDescription(BinaryReader reader)
         {
             Value ret;
             switch (GetRecordType())
@@ -23,7 +23,7 @@ namespace MiniDatabase.Records
             return ret;
         }
 
-        public Types GetRecordType()
+        public virtual Types GetRecordType()
         {
             return Types.TypeUnknown;
         }
@@ -40,7 +40,7 @@ namespace MiniDatabase.Records
             {
                 case Types.TypeText:
                     {
-                        return new RecordText();
+                        return new RecordDescriptionText();
                     }
                 default:
                     throw new Exception("Something bad happened, Harry");

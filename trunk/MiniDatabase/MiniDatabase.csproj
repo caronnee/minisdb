@@ -64,13 +64,12 @@
     <Compile Include="CreateFields\CreateFieldBase.cs" />
     <Compile Include="Records\Record.cs" />
     <Compile Include="Records\RecordDescription.cs" />
-    <Compile Include="Records\RecordDescriptionInterface.cs" />
     <Compile Include="Records\RecordsManager.cs" />
-    <Compile Include="Records\RecordText.cs" />
+    <Compile Include="Records\Text\RecordText.cs" />
     <Compile Include="Records\Value.cs" />
-    <Compile Include="Records\ValueDate.cs" />
-    <Compile Include="Records\ValueInteger.cs" />
-    <Compile Include="Records\ValueText.cs" />
+    <Compile Include="Records\Date\ValueDate.cs" />
+    <Compile Include="Records\Integer\ValueInteger.cs" />
+    <Compile Include="Records\Text\ValueText.cs" />
     <Page Include="ContentPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -196,6 +195,7 @@
     <Resource Include="Docs\todo.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Records\Enum\" />
     <Folder Include="SearchEngine\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
