@@ -41,18 +41,17 @@ namespace MiniDatabase.Records
             Load();
         }
 
-        void AddRecord(RecordDescription rec)
+        public void AddDescription(RecordDescription rec)
         {
             _description.Add(rec);
-            maxRecordId++;
         }
 
         /** Changing name of the database */
-        public void ChangeName(string s) //jednoduche kopirovanie;)
+        public void ChangeName(string s) 
         {
             onInfoHandler("Renaming " + Name + " to " + s );
             Name = s + Common.DbExt;
-            // TODO delete the old file, or rename, mar the change
+            // TODO delete the old file, or rename, mark the change
             onInfoHandler("Database renamed");
         }
 

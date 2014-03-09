@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MiniDatabase.Records;
+using MiniDatabase.Misc;
+using MiniDatabase.CreateFields;
 
 namespace MiniDatabase.Content
 {
@@ -88,6 +90,12 @@ namespace MiniDatabase.Content
         private void Create(object sender, RoutedEventArgs e)
         {
             RecordsManager manager = new RecordsManager();
+            TreeView attributes = FindName("Attributes") as TreeView;
+            foreach (TreeAttribute att in attributes.Items)
+            {
+                CreateFieldInterface attInterface = att.AttributeContent as CreateFieldInterface;
+                manager.AddDescription( attInterface.GetRecordDescription() );
+            }
         }
     }
 }

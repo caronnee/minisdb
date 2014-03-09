@@ -18,7 +18,7 @@ namespace MiniDatabase.CreateFields
     /// <summary>
     /// Interaction logic for CreateFieldText.xaml
     /// </summary>
-    public partial class CreateFieldText : UserControl, CreateFieldBase
+    public partial class CreateFieldText : UserControl, CreateFieldInterface
     {
         public static DependencyProperty CRecord = DependencyProperty.Register("CurrentContent", typeof(CreateFieldText), typeof(RecordText), new PropertyMetadata(null));
 
@@ -36,7 +36,7 @@ namespace MiniDatabase.CreateFields
      
         public bool Valid() { return true; }
 
-        public RecordDescription GetRecord()
+        public RecordDescription GetRecordDescription()
         {
             return CreatedRecord;
         }

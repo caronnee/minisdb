@@ -11,17 +11,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MiniDatabase.Records;
 
 namespace MiniDatabase.CreateFields
 {
     /// <summary>
     /// Interaction logic for CreateFieldInteger.xaml
     /// </summary>
-    public partial class CreateFieldInteger : UserControl
+    public partial class CreateFieldInteger : UserControl, CreateFieldInterface
     {
         public CreateFieldInteger()
         {
             InitializeComponent();
+        }
+        public bool Valid() { return true; }
+
+        public RecordDescription GetRecordDescription()
+        {
+            throw new Exception("not implemented yet");
         }
     }
 }
