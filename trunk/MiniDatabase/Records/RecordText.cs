@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MiniDatabase.Records
 {
-    public class RecordText : Record
+    public class RecordText : RecordDescription
     {
         String Name
         {

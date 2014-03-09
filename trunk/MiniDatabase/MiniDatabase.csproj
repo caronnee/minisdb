@@ -60,8 +60,14 @@
     </Compile>
     <Compile Include="CreateFields\CreateFieldBase.cs" />
     <Compile Include="Records\Record.cs" />
+    <Compile Include="Records\RecordDescription.cs" />
+    <Compile Include="Records\RecordDescriptionInterface.cs" />
     <Compile Include="Records\RecordsManager.cs" />
     <Compile Include="Records\RecordText.cs" />
+    <Compile Include="Records\Value.cs" />
+    <Compile Include="Records\ValueDate.cs" />
+    <Compile Include="Records\ValueInteger.cs" />
+    <Compile Include="Records\ValueText.cs" />
     <Page Include="ContentPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

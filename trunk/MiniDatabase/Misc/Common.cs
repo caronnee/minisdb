@@ -5,11 +5,12 @@ using System.IO;
 
 namespace MiniDatabase.Misc
 {
-    enum Types
+    public enum Types
     {
+        TypeUnknown,
         TypeText,
         TypeInteger,
-        TypeEnum
+        TypeEnum,
     }
 
     static class Common
