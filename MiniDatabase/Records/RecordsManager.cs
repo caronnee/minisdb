@@ -79,11 +79,36 @@ namespace MiniDatabase.Records
 
             while (reader.BaseStream.Length != reader.BaseStream.Position)
             {
-                Types t = (Types)reader.ReadInt32();
-                RecordDescription record = RecordDescription.GetRecordFromType(t);
-                record.Load(reader);
+                int type = reader.ReadInt32();
+                if (type < 0)
+                    break; // database starts
+                Types t = (Types)type;
+                RecordDescription description = RecordDescription.GetRecordFromType(t);
+                description.Load(reader);
+                AddDescription(description);
+            }
+            // read the records
+            int count = _description.Count;
+            if ( count <= 0 )
+                throw new Exception("Database corrupted");
+            while (reader.BaseStream.Length != reader.BaseStream.Position)
+            {
+                Record record = new Record(count);
+                for (int i = 0; i < _description.Count; i++)
+                {
+                    Value val = _description[i].ReadValueFromDescription(reader);
+                    record.SetValue(val, i);
+                }
+                AddRecord(record);
             }
             reader.Close();
+        }
+
+        public void AddRecord(Record record)
+        {
+            record.ID = maxRecordId;
+            maxRecordId++;
+            _records.Add(record);
         }
 
         /** calls information about operation on database */

@@ -43,5 +43,9 @@ namespace MiniDatabase.Records
         {
             throw new NotImplementedException();
         }
+        public virtual void Load(System.IO.BinaryReader writer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
