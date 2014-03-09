@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace Minis
 {
-    public partial class DatabaseWindow : StateManager
+    public partial class DatabaseWindow : Form
     {
         public DatabaseWindow(string dbName)
         {

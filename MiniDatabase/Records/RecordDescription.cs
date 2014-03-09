@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using MiniDatabase.Misc;
+using System.Windows;
 
 namespace MiniDatabase.Records
 {
-    public class RecordDescription
+    public class RecordDescription : DependencyObject
     {
         public virtual Value ReadValueFromDescription(BinaryReader reader)
         {

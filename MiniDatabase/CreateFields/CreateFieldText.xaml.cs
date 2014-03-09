@@ -20,7 +20,7 @@ namespace MiniDatabase.CreateFields
     /// </summary>
     public partial class CreateFieldText : UserControl, CreateFieldInterface
     {
-        public static DependencyProperty CRecord = DependencyProperty.Register("CurrentContent", typeof(CreateFieldText), typeof(RecordDescriptionText), new PropertyMetadata(null));
+        public static DependencyProperty CRecord = DependencyProperty.Register("CreatedRecord", typeof(RecordDescriptionText), typeof(CreateFieldText), new PropertyMetadata(null));
 
         public CreateFieldText()
         {

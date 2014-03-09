@@ -55,10 +55,9 @@
     <Compile Include="Attribute.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Condition.cs" />
     <Compile Include="ControlInfo.cs" />
     <Compile Include="Create.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Create.Designer.cs">
       <DependentUpon>Create.cs</DependentUpon>
@@ -72,9 +71,8 @@
     <Compile Include="DisplayPanel.Designer.cs">
       <DependentUpon>DisplayPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Misc.cs" />
     <Compile Include="DatabaseWindow.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="DatabaseWindow.Designer.cs">
       <DependentUpon>DatabaseWindow.cs</DependentUpon>
@@ -91,13 +89,6 @@
     <Compile Include="InsertContent.Designer.cs">
       <DependentUpon>InsertContent.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainContainer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainContainer.Designer.cs">
-      <DependentUpon>MainContainer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -113,19 +104,9 @@
     <Compile Include="SelectContent.Designer.cs">
       <DependentUpon>SelectContent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Intro.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Intro.Designer.cs">
-      <DependentUpon>Intro.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StateManager.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\program_dok.doc" />
-    <None Include="uzivatelska_dok.doc" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Create.resx">
@@ -144,14 +125,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>InsertContent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Intro.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>Intro.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainContainer.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>MainContainer.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
@@ -167,9 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="todo.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

@@ -5,8 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:content="clr-namespace:MiniDatabase.Content"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="500">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TabControl Name="ResultControl" TabStripPlacement="Left">
+            <TabItem Grid.Column="0"  Header="Adding" Name="Selects">
+                <Grid>
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Selects" Name="Addings">
+                <Grid></Grid>
+            </TabItem>
+        </TabControl>
+        <TextBlock Grid.Column="1"  HorizontalAlignment="Left" Name="textBlock1" Text="Info:" VerticalAlignment="Top" Margin="5"/>
     </Grid>
 </content:ContentGeneric>

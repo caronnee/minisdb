@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MiniDatabase.Records;
 
-namespace Minis
+namespace Minis.SearchEngine.Conditions
 {
     //for all select that can be writable
-    abstract public class Condition //co tak radsej interface?
+    abstract public class Condition
     {
         private string name_;
         protected Value toCompare;

@@ -70,6 +70,7 @@
     <Compile Include="Records\Date\ValueDate.cs" />
     <Compile Include="Records\Integer\ValueInteger.cs" />
     <Compile Include="Records\Text\ValueText.cs" />
+    <Compile Include="SearchEngine\Conditions\Condition.cs" />
     <Page Include="ContentPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -196,7 +197,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Records\Enum\" />
-    <Folder Include="SearchEngine\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

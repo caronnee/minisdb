@@ -4,7 +4,6 @@ namespace Minis
     {
         private void InitScreenShot()
         {
-            this.screenContent.StateChanged += new Minis.StateManager.StateHandler(this.SetState);
 
             this.screenContent.InitState();
             // 
@@ -57,7 +56,7 @@ namespace Minis
 
         #endregion
 
-        private StateManager screenContent;
+
 
     }
 }

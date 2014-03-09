@@ -41,7 +41,7 @@
       </Grid>
       <StackPanel HorizontalAlignment="Right" DockPanel.Dock="Bottom" Orientation="Horizontal">
                 <Button Width="80" Margin="10" Click="Cancel">Cancel</Button>
-                <Button Width="80" Margin="10" Click="Create">Done</Button>
+                <Button Width="80" Margin="10" Click="Create">Create</Button>
       </StackPanel>
       <ContentControl Content="{Binding Path=SelectedItem.AttributeContent, ElementName=Attributes}"/>
     </DockPanel>

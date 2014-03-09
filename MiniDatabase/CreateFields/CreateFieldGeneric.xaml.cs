@@ -33,7 +33,14 @@ namespace MiniDatabase.CreateFields
         {
             if (controlCreated == null)
                 return;
-            controlCreated(new CreateFieldText());
+            try
+            {
+                controlCreated(new CreateFieldText());
+            }
+            catch (System.Exception ex)
+            {
+                System.Console.Write(ex.ToString());
+            }
         }
 
         private void createEnumClick(object sender, RoutedEventArgs e)
@@ -59,7 +66,7 @@ namespace MiniDatabase.CreateFields
         {
             throw new Exception("Not implemented yet");
         }
-        public bool Valid() { return true; }
+        public bool Valid() { return false; }
 
         public RecordDescription GetRecordDescription()
         {
