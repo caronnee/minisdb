@@ -12,13 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MiniDatabase.Banks;
+using MiniDatabase.Records;
 
 namespace MiniDatabase.CreateFields
 {
     /// <summary>
     /// Interaction logic for CreateFieldGeneric.xaml
     /// </summary>
-    public partial class CreateFieldGeneric : UserControl
+    public partial class CreateFieldGeneric : UserControl, CreateFieldInterface
     {
         public delegate void ControlCreated(UserControl control);
         public event ControlCreated controlCreated;
@@ -56,8 +57,13 @@ namespace MiniDatabase.CreateFields
 
         private void createCompositeClick(object sender, RoutedEventArgs e)
         {
-            // TODO implement
-            return;
+            throw new Exception("Not implemented yet");
+        }
+        public bool Valid() { return true; }
+
+        public RecordDescription GetRecordDescription()
+        {
+            throw new Exception("not implemented yet");
         }
     }
 }

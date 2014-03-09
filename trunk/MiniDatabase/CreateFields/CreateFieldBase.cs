@@ -6,12 +6,12 @@ using MiniDatabase.Records;
 
 namespace MiniDatabase.CreateFields
 {
-    interface CreateFieldBase
+    interface CreateFieldInterface
     {
         /** Checks if this record is fully set up */
         bool Valid();
 
         /* Return valid record corresponding to the control that implements this */
-        RecordDescription GetRecord();
+        RecordDescription GetRecordDescription();
     }
 }
