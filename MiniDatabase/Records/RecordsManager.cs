@@ -59,18 +59,20 @@ namespace MiniDatabase.Records
         /* save whole database */
         public void Save()
         {
-            BinaryWriter write = new BinaryWriter( File.Open(Name,FileMode.CreateNew) );
+            BinaryWriter writer = new BinaryWriter( File.Open(Name,FileMode.CreateNew) );
             // patterns are delimited by blank line
             foreach (RecordDescription a in _description)
             {
-                a.Save(write);
+                a.Save(writer);
             }
-            write.Write(-1); //deliminer
+            writer.Write(-1); //deliminer
+            int count = _description.Count;
             foreach (Record a in _records)
             {
-                a.Save(write);
+                for (int i = 0; i < count; i++)
+                    a.GetValue(i).Save(writer);
             }
-            write.Close();
+            writer.Close();
         }
 
         public void Load()
