@@ -7,7 +7,7 @@ using System.IO;
 
 namespace MiniDatabase.Records
 {
-    class RecordsManager
+    public class RecordsManager
     {
         /** Records */
         List<RecordDescription> _description;
@@ -23,13 +23,21 @@ namespace MiniDatabase.Records
             set;
         }
 
-        /** Constructor */
-        public RecordsManager(String name)
+        void Clear()
         {
-            Name = name;
             maxRecordId = 0;
             _description = new List<RecordDescription>();
             _records = new List<Record>();
+        }
+        /** Constructor */
+        public RecordsManager()
+        {
+            Clear();
+        }
+        public RecordsManager(String name)
+        {
+            Name = name;
+            Clear();
             Load();
         }
 

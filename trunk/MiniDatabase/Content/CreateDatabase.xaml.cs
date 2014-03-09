@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MiniDatabase.Records;
 
 namespace MiniDatabase.Content
 {
@@ -77,6 +78,16 @@ namespace MiniDatabase.Content
                 BindingExpression be = b.GetBindingExpression(TextBox.TextProperty);
                 be.UpdateSource();
             }
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            OnResult(null);
+        }
+
+        private void Create(object sender, RoutedEventArgs e)
+        {
+            RecordsManager manager = new RecordsManager();
         }
     }
 }

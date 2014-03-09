@@ -11,20 +11,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MiniDatabase.Records;
 
 namespace MiniDatabase.Content
 {
     /// <summary>
-    /// Interaction logic for Results.xaml
+    /// Interaction logic for AddRecords.xaml
     /// </summary>
-    public partial class Results : ContentGeneric
+    public partial class AddRecords : ContentGeneric
     {
-        RecordsManager _database;
-
-        public Results(RecordsManager database)
+        public AddRecords()
         {
-            _database = database;
             InitializeComponent();
         }
     }
