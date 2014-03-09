@@ -14,7 +14,7 @@ namespace Minis
     {
         void RegisterAttribute(AbstractAttribute attr);
     };
-    public partial class Create : StateManager
+    public partial class Create : Form
     {
         //bolo by pekne..vyzistit!
         private System.Windows.Forms.Label warn;
@@ -120,7 +120,7 @@ namespace Minis
         }
         private void createEnum_Click(object sender, EventArgs e)
         {
-            using (CreateEnum en = new CreateEnum())
+            //using (CreateEnum en = new CreateEnum())
             {
                 //TODO change
                 //en.ShowDialog();
@@ -212,7 +212,7 @@ namespace Minis
                 //}
                 RecordsManager.RenameActive(name);
                 RecordsManager.SaveActive();
-                OnStateChanged(State.StateLoadDatabase, name);
+                //OnStateChanged(State.StateLoadDatabase, name);
             }
             catch (Exception ex)
             {
@@ -245,7 +245,7 @@ namespace Minis
             //else 
             //    this.endState = Forms.FormLoad;
             //this.Close();
-            OnStateChanged(State.StateIntro, "");
+            //OnStateChanged(State.StateIntro, "");
         }
 
         private void ClearInput(object sender, EventArgs e)

@@ -90,12 +90,20 @@ namespace MiniDatabase.Content
         private void Create(object sender, RoutedEventArgs e)
         {
             RecordsManager manager = new RecordsManager();
-            TreeView attributes = FindName("Attributes") as TreeView;
+            TreeViewItem attributes = FindName("databaseName") as TreeViewItem;
             foreach (TreeAttribute att in attributes.Items)
             {
                 CreateFieldInterface attInterface = att.AttributeContent as CreateFieldInterface;
+                if (!attInterface.Valid())
+                {
+                    //TODO say all invalid nodes that his has
+                    MessageBox.Show("Some input is invalid. Node ( " + att.Header+" )", "Invalid Entry",MessageBoxButton.OK);
+                    return; // do nothing
+                }
                 manager.AddDescription( attInterface.GetRecordDescription() );
             }
+            Results w = new Results(manager);
+            OnResult(w);
         }
     }
 }
