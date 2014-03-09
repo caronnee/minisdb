@@ -10,21 +10,18 @@ namespace MiniDatabase.Records
     {
         List<Value> _values;
 
-        public Record()
+        public int ID { get; set; }
+
+        public Record( int recordSize )
         {
-            _values = new List<Value>();
+            _values = new List<Value>( recordSize );
         }
 
-        public void Save(BinaryWriter writer)
+        public void SetValue(Value v, int index)
         {
-            foreach (Value v in _values)
-            {
-                v.Save(writer);
-            }
-        }
-        public void Load(BinaryReader reader)
-        {
-
+            if (index < 0 || index >= _values.Count)
+                throw new Exception("Value out of range");
+            _values[index] = v;
         }
     }
 }
