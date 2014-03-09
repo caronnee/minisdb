@@ -36,7 +36,7 @@ namespace MiniDatabase.CreateFields
      
         public bool Valid() { return true; }
 
-        public Record GetRecord()
+        public RecordDescription GetRecord()
         {
             return CreatedRecord;
         }

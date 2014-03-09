@@ -12,6 +12,6 @@ namespace MiniDatabase.CreateFields
         bool Valid();
 
         /* Return valid record corresponding to the control that implements this */
-        Record GetRecord();
+        RecordDescription GetRecord();
     }
 }
