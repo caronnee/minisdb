@@ -5,18 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="160" d:DesignWidth="288">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="80" Width="*" />
-            <ColumnDefinition MinWidth="80" Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition MinHeight="50" Height="*" />
-            <RowDefinition MinHeight="50" Height="*" />
-        </Grid.RowDefinitions>
-        <Button Grid.Column="0" Grid.Row="0" Margin="15" MinHeight="30" MinWidth="50" Click="createTextClick">Create text</Button>
-        <Button Grid.Column="0" Grid.Row="1" Margin="15" MinHeight="30" MinWidth="50" Click="createIntClick">Create int value</Button>
-        <Button Grid.Column="1" Grid.Row="0" Margin="15" MinHeight="30" MinWidth="50" Click="createEnumClick">Create enum</Button>
-        <Button Grid.Column="1" Grid.Row="1" Margin="15" MinHeight="30" MinWidth="50">Create composite</Button>
-    </Grid>
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition MinWidth="80" Width="*" />
+      <ColumnDefinition MinWidth="80" Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition MinHeight="50" Height="*" />
+      <RowDefinition MinHeight="50" Height="*" />
+      <RowDefinition MinHeight="50" Height="*" />
+    </Grid.RowDefinitions>
+    <Button Grid.Column="0" Grid.Row="0" Margin="15" Click="createTextClick">Create text</Button>
+    <Button Grid.Column="0" Grid.Row="1" Margin="15" Click="createIntClick">Create int value</Button>
+    <Button Grid.Column="1" Grid.Row="0" Margin="15" Click="createEnumClick">Create enum</Button>
+    <Button Grid.Column="1" Grid.Row="1" Margin="15" IsEnabled="False" >Create composite</Button>
+    <Button Grid.Column="0" Grid.Row="2" Margin="15" IsEnabled="False">Create Data</Button>
+    <Button Grid.Column="1" Grid.Row="2" Margin="15" IsEnabled="False">Create Image</Button>
+  </Grid>
 </UserControl>
