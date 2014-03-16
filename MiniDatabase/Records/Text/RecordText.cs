@@ -12,7 +12,7 @@ namespace MiniDatabase.Records
             get;
             set;
         }
-        String Value
+        Value Val
         {
             get;
             set;

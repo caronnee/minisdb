@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:content="clr-namespace:MiniDatabase.Content"
+             xmlns:tabs="clr-namespace:MiniDatabase.Content.ResultsTab"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <Grid>
@@ -20,6 +21,7 @@
             <TabItem Header="Selects" Name="Addings">
                 <Grid></Grid>
             </TabItem>
+            <tabs:ResultList Header="All" x:Name="All" />
         </TabControl>
         <TextBlock Grid.Column="1"  HorizontalAlignment="Left" Name="textBlock1" Text="Info:" VerticalAlignment="Top" Margin="5"/>
     </Grid>
