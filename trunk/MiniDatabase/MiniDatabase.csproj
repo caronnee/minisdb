@@ -61,6 +61,9 @@
     <Compile Include="Content\AddRecords.xaml.cs">
       <DependentUpon>AddRecords.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\ResultsTab\ResultList.xaml.cs">
+      <DependentUpon>ResultList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateFields\CreateFieldBase.cs" />
     <Compile Include="Records\Record.cs" />
     <Compile Include="Records\RecordDescription.cs" />
@@ -104,6 +107,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\Results.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\ResultsTab\ResultList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
