@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid ItemsSource="{Binding Results}" AutoGenerateColumns="False" >
+        <DataGrid ItemsSource="{Binding Results}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="test1" />
                 <DataGridTextColumn Header="test2" />

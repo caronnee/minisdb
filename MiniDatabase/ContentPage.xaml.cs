@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MiniDatabase.Content;
 
 namespace MiniDatabase
 {
@@ -45,6 +46,11 @@ namespace MiniDatabase
             a.ShowDialog();
         }
 
+        private void LoadDatabase(object sender, RoutedEventArgs e)
+        {
+            Window w = new OpenDatabase();
+            w.ShowDialog();
+        }
         private void RequestNewDatabase(object sender, RoutedEventArgs e)
         {
             CurrentContent = new Content.CreateDatabase();

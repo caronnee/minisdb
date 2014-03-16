@@ -29,6 +29,9 @@ namespace MiniDatabase.Content.ResultsTab
         public ResultList()
         {
             InitializeComponent();
+            Results = new List<Value>();
+            ValueText v = new ValueText("test");
+            Results.Add(v);
         }
     }
 }

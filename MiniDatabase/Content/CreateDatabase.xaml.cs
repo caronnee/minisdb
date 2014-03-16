@@ -102,6 +102,8 @@ namespace MiniDatabase.Content
                 }
                 manager.AddDescription( attInterface.GetRecordDescription() );
             }
+            manager.ChangeName(attributes.Header as String);
+            manager.Save();
             Results w = new Results(manager);
             OnResult(w);
         }
