@@ -61,6 +61,9 @@
     <Compile Include="Content\AddRecords.xaml.cs">
       <DependentUpon>AddRecords.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\OpenDatabase.xaml.cs">
+      <DependentUpon>OpenDatabase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\ResultsTab\ResultList.xaml.cs">
       <DependentUpon>ResultList.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\Detail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\OpenDatabase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

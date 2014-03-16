@@ -10,6 +10,7 @@
             <Menu Name="MainMenu">
             <MenuItem Header="_File">
                 <MenuItem Header="_Create new database" Click="RequestNewDatabase"/>
+                <MenuItem Header="_Load database" Click="LoadDatabase" />
                 <MenuItem Header="_Manage enums" Click="RequestManageEnums" />
             </MenuItem>
              <MenuItem Header="_About" Click="AboutClick" />
