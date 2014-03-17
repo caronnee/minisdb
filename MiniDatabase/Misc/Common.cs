@@ -15,6 +15,7 @@ namespace MiniDatabase.Misc
 
     static class Common
     {
+        public const String saveInProgressAppendix = ".part";
         public const string help = "Syntax is: \r\n " +
                      " 'attribute_name <operation> value'\r\n As operation can bbu currently used words:\r\n" +
                      " contains, misses, <, <=, >, >=, =, != \r\n" +

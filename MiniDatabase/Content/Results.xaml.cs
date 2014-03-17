@@ -20,11 +20,16 @@ namespace MiniDatabase.Content
     /// </summary>
     public partial class Results : ContentGeneric
     {
-        RecordsManager _database;
+        RecordsManager Database
+        {
+            get;
+            set;
+        }
 
         public Results(RecordsManager database)
         {
-            _database = database;
+            Database = database;
+            DataContext = Database;
             InitializeComponent();
         }
     }

@@ -6,7 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="200">
     <DockPanel LastChildFill="True">
-        <Button Content="Add" DockPanel.Dock="Bottom"></Button>
-        <StackPanel Name="Controls" />
+        <Button Content="Done" DockPanel.Dock="Bottom"/>
+        <Button Content="Add" DockPanel.Dock="Bottom" Click="Plus"/>
+        <StackPanel Name="Controls">
+        </StackPanel>
     </DockPanel>
 </TabItem>

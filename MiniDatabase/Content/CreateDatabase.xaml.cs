@@ -100,7 +100,9 @@ namespace MiniDatabase.Content
                     MessageBox.Show("Some input is invalid. Node ( " + att.Header+" )", "Invalid Entry",MessageBoxButton.OK);
                     return; // do nothing
                 }
-                manager.AddDescription( attInterface.GetRecordDescription() );
+                RecordDescription desc = attInterface.GetRecordDescription();// TODO remove this and add binding
+                desc.Name = att.Header.ToString();
+                manager.AddDescription( desc );
             }
             manager.ChangeName(attributes.Header as String);
             manager.Save();

@@ -35,12 +35,13 @@ namespace MiniDatabase.Records
         public virtual void Save(BinaryWriter writer)
         {
             writer.Write((int)GetRecordType());
+            writer.Write(Name);
+            writer.Write(Misc.Common.Deliminer);
         }
 
-        public Control InputControl
+        public virtual Control CreateControl()
         {
-            get;
-            set;
+            throw new Exception("Not implemented");
         }
 
         public static RecordDescription GetRecordFromType(Types type)
@@ -59,7 +60,20 @@ namespace MiniDatabase.Records
         /** basic load */
         public virtual void Load( BinaryReader reader)
         {
-            // nothing needs to be loaded
+            char c = reader.ReadChar();
+            StringBuilder builder = new StringBuilder();
+            while (c != Misc.Common.Deliminer)
+            {
+                builder.Append(c);
+                c = reader.ReadChar();
+            }
+            Name = builder.ToString();
+        }
+
+        public String Name
+        {
+            get;
+            set;
         }
     }
 }

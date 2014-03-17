@@ -4,31 +4,33 @@ using System.Text;
 
 namespace MiniDatabase.Records
 {
-    class ValueText : Value
+    public class ValueText : Value
     {
-        // todo this textu should go into some tree maybe?
-        protected string text;
+        // todo this Textu should go into some tree maybe?
+        public String Text
+        {
+            get;
+            set;
+        }
         public ValueText(string txt = "")
         {
-            text = txt;
+            Text = txt;
         }
         public override int compare(string s)
         {
-            return text.CompareTo(s);
+            return Text.CompareTo(s);
         }
         public override int compare(Value v)
         {
-            if (v == null) //FUJ! musim stale ifovat
-                return -1;
-            return v.compare(text);
+            return v.compare(Text);
         }
         public override string ToString()
         {
-            return text;
+            return Text;
         }
         public override void Save(System.IO.BinaryWriter writer)
         {
-            writer.Write(text);
+            writer.Write(Text);
         }
     }
 }

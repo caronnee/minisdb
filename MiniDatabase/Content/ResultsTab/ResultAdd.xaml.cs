@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MiniDatabase.Records;
 
 namespace MiniDatabase.Content.ResultsTab
 {
@@ -22,6 +23,17 @@ namespace MiniDatabase.Content.ResultsTab
         public ResultAdd()
         {
             InitializeComponent();
+        }
+
+        // add rows
+        private void Plus(object sender, RoutedEventArgs e)
+        {
+            RecordsManager manager = DataContext as RecordsManager;
+            StackPanel c = FindName("Controls") as StackPanel;
+            foreach ( RecordDescription r in manager.Description)
+            {
+                c.Children.Add(r.CreateControl());
+            }
         }
     }
 }

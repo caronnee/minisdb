@@ -16,8 +16,8 @@
       <RowDefinition MinHeight="50" Height="*" />
     </Grid.RowDefinitions>
     <Button Grid.Column="0" Grid.Row="0" Margin="15" Click="createTextClick">Create text</Button>
-    <Button Grid.Column="0" Grid.Row="1" Margin="15" Click="createIntClick">Create int value</Button>
-    <Button Grid.Column="1" Grid.Row="0" Margin="15" Click="createEnumClick">Create enum</Button>
+    <Button Grid.Column="0" Grid.Row="1" Margin="15" Click="createIntClick" IsEnabled="False">Create int value</Button>
+    <Button Grid.Column="1" Grid.Row="0" Margin="15" Click="createEnumClick" IsEnabled="False">Create enum</Button>
     <Button Grid.Column="1" Grid.Row="1" Margin="15" IsEnabled="False" >Create composite</Button>
     <Button Grid.Column="0" Grid.Row="2" Margin="15" IsEnabled="False">Create Data</Button>
     <Button Grid.Column="1" Grid.Row="2" Margin="15" IsEnabled="False">Create Image</Button>
