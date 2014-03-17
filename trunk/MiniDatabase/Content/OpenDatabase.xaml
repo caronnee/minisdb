@@ -8,14 +8,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <HeaderedItemsControl Header="aldhakjdfh">
-            <ListBox x:Name="Databases"  Margin="10" ItemsSource="{Binding Filenames}" SelectedValue="{Binding Filename, Mode=OneWay}">
+            <ListBox x:Name="Databases"  Margin="10" ItemsSource="{Binding Filenames}" DisplayMemberPath="Name"  SelectedValue="{Binding Filename}">
             </ListBox>
-        </HeaderedItemsControl>
-        
-        <StackPanel Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+        <StackPanel Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Right" Margin="15">
             <Button Width="100" IsCancel="True">Cancel</Button>
             <Button Width="100" IsDefault="True" Click="LoadDatabase">Ok</Button>
         </StackPanel>

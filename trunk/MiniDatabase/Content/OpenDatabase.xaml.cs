@@ -25,27 +25,30 @@ namespace MiniDatabase.Content
         public OpenDatabase()
         {
             DataContext = this;
-            InitializeComponent();
-            Filenames = new ObservableCollection<String>();
+            Filenames = new ObservableCollection<FileInfo>();
             //find all files in database
+            InitializeComponent();
+
             DirectoryInfo d = new DirectoryInfo(@"."); // TODO specified directory
             ListBox box = FindName("Databases") as ListBox;
             foreach (FileInfo fi in d.GetFiles())
             {
                 if (fi.Extension.Equals( Common.DbExt ))
                 {
-                    Filenames.Add(fi.FullName);
+                    Filenames.Add(fi);               
                 }
             }
+            if (Filenames.Count == 0)
+                throw new MiniDatabase.Exceptions.ExceptionNoData();
         }
 
-        public ObservableCollection<String> Filenames
+        public ObservableCollection<FileInfo> Filenames
         {
             get;
             set;
         }
 
-        public String Filename
+        public FileInfo Filename
         {
             get;
             set;
