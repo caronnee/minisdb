@@ -13,14 +13,7 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TabControl Name="ResultControl" TabStripPlacement="Left">
-            <TabItem Grid.Column="0"  Header="Adding" Name="Selects">
-                <Grid>
-                    
-                </Grid>
-            </TabItem>
-            <TabItem Header="Selects" Name="Addings">
-                <Grid></Grid>
-            </TabItem>
+            <tabs:ResultAdd Grid.Column="0"  Header="Adding" x:Name="Add" />
             <tabs:ResultList Header="All" x:Name="All" />
         </TabControl>
         <TextBlock Grid.Column="1"  HorizontalAlignment="Left" Name="textBlock1" Text="Info:" VerticalAlignment="Top" Margin="5"/>

@@ -64,6 +64,9 @@
     <Compile Include="Content\OpenDatabase.xaml.cs">
       <DependentUpon>OpenDatabase.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\ResultsTab\ResultAdd.xaml.cs">
+      <DependentUpon>ResultAdd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\ResultsTab\ResultList.xaml.cs">
       <DependentUpon>ResultList.xaml</DependentUpon>
     </Compile>
@@ -73,6 +76,9 @@
     <Compile Include="Records\Record.cs" />
     <Compile Include="Records\RecordDescription.cs" />
     <Compile Include="Records\RecordsManager.cs" />
+    <Compile Include="Records\Text\InputControlText.xaml.cs">
+      <DependentUpon>InputControlText.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Records\Text\RecordText.cs" />
     <Compile Include="Records\Value.cs" />
     <Compile Include="Records\Date\ValueDate.cs" />
@@ -119,6 +125,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Content\ResultsTab\ResultAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\ResultsTab\ResultList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateFields\DatabaseProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Records\Text\InputControlText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

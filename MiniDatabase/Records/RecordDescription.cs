@@ -6,6 +6,7 @@ using System.IO;
 using MiniDatabase.Misc;
 using System.Windows;
 using MiniDatabase.Exceptions;
+using System.Windows.Controls;
 
 namespace MiniDatabase.Records
 {
@@ -34,6 +35,12 @@ namespace MiniDatabase.Records
         public virtual void Save(BinaryWriter writer)
         {
             writer.Write((int)GetRecordType());
+        }
+
+        public Control InputControl
+        {
+            get;
+            set;
         }
 
         public static RecordDescription GetRecordFromType(Types type)
