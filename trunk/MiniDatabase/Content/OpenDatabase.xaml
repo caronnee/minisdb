@@ -10,7 +10,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-            <ListBox x:Name="Databases"  Margin="10" ItemsSource="{Binding Filenames}" DisplayMemberPath="Name"  SelectedValue="{Binding Filename}">
+        <ListBox x:Name="Databases"  Margin="10" ItemsSource="{Binding Filenames}" DisplayMemberPath="Name"  SelectedValue="{Binding Filename}" MouseDoubleClick="LoadDatabase">
             </ListBox>
         <StackPanel Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Right" Margin="15">
             <Button Width="100" IsCancel="True" Margin="0,0,10,0">Cancel</Button>

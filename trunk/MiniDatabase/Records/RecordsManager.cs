@@ -10,7 +10,6 @@ namespace MiniDatabase.Records
     public class RecordsManager
     {
         /** Records */
-        List<RecordDescription> _description;
         List<Record> _records;
         
         /** Highest record id */
@@ -23,10 +22,15 @@ namespace MiniDatabase.Records
             set;
         }
 
+        public List<RecordDescription> Description
+        {
+            get;
+            set;
+        }
         void Clear()
         {
             maxRecordId = 0;
-            _description = new List<RecordDescription>();
+            Description = new List<RecordDescription>();
             _records = new List<Record>();
         }
         /** Constructor */
@@ -43,7 +47,7 @@ namespace MiniDatabase.Records
 
         public void AddDescription(RecordDescription rec)
         {
-            _description.Add(rec);
+            Description.Add(rec);
         }
 
         /** Changing name of the database */
@@ -59,20 +63,22 @@ namespace MiniDatabase.Records
         /* save whole database */
         public void Save()
         {
-            BinaryWriter writer = new BinaryWriter( File.Open(Name,FileMode.CreateNew) );
+            String tempName = Name + Misc.Common.saveInProgressAppendix;
+            BinaryWriter writer = new BinaryWriter(File.Open(tempName, FileMode.CreateNew));
             // patterns are delimited by blank line
-            foreach (RecordDescription a in _description)
+            foreach (RecordDescription a in Description)
             {
                 a.Save(writer);
             }
             writer.Write(-1); //deliminer
-            int count = _description.Count;
+            int count = Description.Count;
             foreach (Record a in _records)
             {
                 for (int i = 0; i < count; i++)
                     a.GetValue(i).Save(writer);
             }
             writer.Close();
+            File.Move(tempName,Name);
         }
 
         public void Load()
@@ -90,15 +96,18 @@ namespace MiniDatabase.Records
                 AddDescription(description);
             }
             // read the records
-            int count = _description.Count;
-            if ( count <= 0 )
+            int count = Description.Count;
+            if (count <= 0)
+            {
+                reader.Close();
                 throw new Exception("Database corrupted");
+            }
             while (reader.BaseStream.Length != reader.BaseStream.Position)
             {
                 Record record = new Record(count);
-                for (int i = 0; i < _description.Count; i++)
+                for (int i = 0; i < Description.Count; i++)
                 {
-                    Value val = _description[i].ReadValueFromDescription(reader);
+                    Value val = Description[i].ReadValueFromDescription(reader);
                     record.SetValue(val, i);
                 }
                 AddRecord(record);

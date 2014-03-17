@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using MiniDatabase.Misc;
 using MiniDatabase.Records.Text;
+using System.Windows.Controls;
+using System.IO;
 
 namespace MiniDatabase.Records
 {
@@ -11,18 +13,31 @@ namespace MiniDatabase.Records
     {
         public RecordDescriptionText()
         {
-            InputControl = new InputControlText();
+            Val = new ValueText();
         }
-        String Name
+        public override void Save(BinaryWriter writer)
+        {
+            base.Save(writer);
+            Val.Save(writer);
+        }
+
+        public override void Load(BinaryReader reader)
+        {
+            base.Load(reader);
+            Val = new ValueText();
+            Val.Load(reader);
+        }
+        public override Control CreateControl()
+        {
+            return new InputControlText(Val.ToString());
+        }
+
+        public ValueText Val
         {
             get;
             set;
         }
-        Value Val
-        {
-            get;
-            set;
-        }
+
         public override Types GetRecordType()
         {
             return Types.TypeText;

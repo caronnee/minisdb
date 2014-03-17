@@ -19,9 +19,19 @@ namespace MiniDatabase.Records.Text
     /// </summary>
     public partial class InputControlText : TextBox
     {
-        public InputControlText()
+        private void Init(String val)
         {
             InitializeComponent();
+            Text = val;
+        }
+        public InputControlText(String val)
+        {
+            Init(val);
+        }
+
+        public InputControlText()
+        {
+            Init("");
         }
     }
 }
