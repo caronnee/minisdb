@@ -48,8 +48,25 @@ namespace MiniDatabase
 
         private void LoadDatabase(object sender, RoutedEventArgs e)
         {
-            Window w = new OpenDatabase();
-            w.ShowDialog();
+            try
+            {
+                OpenDatabase w = new OpenDatabase();
+                w.ShowDialog();
+                if (w.DialogResult == false)
+                    return; // nothing happens
+                Records.RecordsManager manager = new Records.RecordsManager(w.Filename.FullName);
+                Results r = new Results(manager);
+                CurrentContent_Result(r);
+            }
+            catch (MiniDatabase.Exceptions.ExceptionNoData)
+            {
+                MessageBox.Show("No valid database found. Please create one first");
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show("Corrupted database!","Corruption detected");
+            }
+            
         }
         private void RequestNewDatabase(object sender, RoutedEventArgs e)
         {

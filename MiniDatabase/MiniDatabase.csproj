@@ -68,6 +68,8 @@
       <DependentUpon>ResultList.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreateFields\CreateFieldBase.cs" />
+    <Compile Include="Exceptions\ExceptionBadData.cs" />
+    <Compile Include="Exceptions\ExceptionNoData.cs" />
     <Compile Include="Records\Record.cs" />
     <Compile Include="Records\RecordDescription.cs" />
     <Compile Include="Records\RecordsManager.cs" />

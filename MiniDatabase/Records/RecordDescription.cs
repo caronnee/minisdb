@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using MiniDatabase.Misc;
 using System.Windows;
+using MiniDatabase.Exceptions;
 
 namespace MiniDatabase.Records
 {
@@ -26,7 +27,7 @@ namespace MiniDatabase.Records
 
         public virtual Types GetRecordType()
         {
-            return Types.TypeUnknown;
+            throw new MiniDatabase.Exceptions.ExceptionBadData("Bad record type");
         }
 
         /** basic save */
@@ -44,7 +45,7 @@ namespace MiniDatabase.Records
                         return new RecordDescriptionText();
                     }
                 default:
-                    throw new Exception("Something bad happened, Harry");
+                    throw new ExceptionBadData("Something bad had happened, Harry");
             }
         }
 
