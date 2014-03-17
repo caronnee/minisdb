@@ -24,8 +24,8 @@ namespace MiniDatabase.CreateFields
 
         public CreateFieldText()
         {
-            InitializeComponent();
             CreatedRecord = new RecordDescriptionText(); 
+            InitializeComponent();
         }
 
         public RecordDescriptionText CreatedRecord
