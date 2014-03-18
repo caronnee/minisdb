@@ -31,6 +31,18 @@ namespace MiniDatabase.Records
         public override void Save(System.IO.BinaryWriter writer)
         {
             writer.Write(Text);
+            writer.Write(Misc.Common.Deliminer);
+        }
+        public override void Load(System.IO.BinaryReader reader)
+        {
+            char s = reader.ReadChar();
+            StringBuilder builder = new StringBuilder();
+            while (s != Misc.Common.Deliminer)
+            {
+                builder.Append(s);
+                s = reader.ReadChar();
+            }
+            Text = builder.ToString();
         }
     }
 }
