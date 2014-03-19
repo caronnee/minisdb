@@ -32,5 +32,9 @@ namespace MiniDatabase.Content
             DataContext = Database;
             InitializeComponent();
         }
+        public void Dispose()
+        {
+            Database.Save();
+        }
     }
 }

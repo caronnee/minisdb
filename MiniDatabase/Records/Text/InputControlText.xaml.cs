@@ -17,13 +17,19 @@ namespace MiniDatabase.Records.Text
     /// <summary>
     /// Interaction logic for InputControlText.xaml
     /// </summary>
-    public partial class InputControlText : TextBox
+    public partial class InputControlText : TextBox, ControlValue
     {
         private void Init(String val)
         {
             InitializeComponent();
             Text = val;
         }
+
+        public Value ConvertToValue()
+        {
+            return new ValueText(Text);
+        }
+         
         public InputControlText(String val)
         {
             Init(val);

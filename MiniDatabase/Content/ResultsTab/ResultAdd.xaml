@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="200">
+             d:DesignHeight="125" d:DesignWidth="200">
     <DockPanel LastChildFill="True">
-        <Button Content="Done" DockPanel.Dock="Bottom"/>
+        <Button Content="Done" DockPanel.Dock="Bottom" Click="AddRecords"/>
         <Button Content="Add" DockPanel.Dock="Bottom" Click="Plus"/>
         <StackPanel Name="Controls">
         </StackPanel>
