@@ -15,6 +15,8 @@ namespace MiniDatabase.Records
         public Record( int recordSize )
         {
             _values = new List<Value>( recordSize );
+            for (int i = 0; i < recordSize; i++)
+                _values.Add(null);// TODO special value
         }
 
         public void SetValue(Value v, int index)

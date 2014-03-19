@@ -58,9 +58,6 @@
     <Compile Include="AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\AddRecords.xaml.cs">
-      <DependentUpon>AddRecords.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Content\OpenDatabase.xaml.cs">
       <DependentUpon>OpenDatabase.xaml</DependentUpon>
     </Compile>
@@ -73,6 +70,7 @@
     <Compile Include="CreateFields\CreateFieldBase.cs" />
     <Compile Include="Exceptions\ExceptionBadData.cs" />
     <Compile Include="Exceptions\ExceptionNoData.cs" />
+    <Compile Include="Records\ControlValue.cs" />
     <Compile Include="Records\Record.cs" />
     <Compile Include="Records\RecordDescription.cs" />
     <Compile Include="Records\RecordsManager.cs" />
@@ -98,10 +96,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="AboutBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Content\AddRecords.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
