@@ -7,11 +7,7 @@
              d:DesignHeight="200" d:DesignWidth="200">
     <Grid>
         <DataGrid ItemsSource="{Binding Results}" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="test1" />
-                <DataGridTextColumn Header="test2" />
-                <DataGridTextColumn Header="test3" />
-            </DataGrid.Columns>
+      
         </DataGrid>
     </Grid>
 </TabItem>
