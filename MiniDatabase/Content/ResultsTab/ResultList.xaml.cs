@@ -20,7 +20,7 @@ namespace MiniDatabase.Content.ResultsTab
     /// </summary>
     public partial class ResultList : TabItem
     {
-        public List<Value> Results
+        public List<Record> Results
         {
             get;
             set;
@@ -29,9 +29,8 @@ namespace MiniDatabase.Content.ResultsTab
         public ResultList()
         {
             InitializeComponent();
-            Results = new List<Value>();
-            ValueText v = new ValueText("test");
-            Results.Add(v);
+            RecordsManager manager = DataContext as RecordsManager;
+            Results = manager.Select(null);
         }
     }
 }

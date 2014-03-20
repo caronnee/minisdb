@@ -33,11 +33,18 @@ namespace MiniDatabase.Records
             Description = new List<RecordDescription>();
             _records = new List<Record>();
         }
+        
         /** Constructor */
         public RecordsManager()
         {
             Clear();
         }
+        
+        public List<Record> Select(object o)
+        {
+            return _records;
+        }
+
         public RecordsManager(String name)
         {
             Name = name;
