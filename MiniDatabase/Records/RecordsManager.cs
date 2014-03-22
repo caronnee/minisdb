@@ -40,7 +40,7 @@ namespace MiniDatabase.Records
         {
             Clear();
         }
-        
+
         public List<Record> Select(object condition, int offset, int count)
         {
             List<Record> rec = new List<Record>();
@@ -129,7 +129,7 @@ namespace MiniDatabase.Records
                 Record record = new Record(count);
                 for (int i = 0; i < Description.Count; i++)
                 {
-                    Value val = Description[i].ReadValueFromDescription(reader);
+                    Value val = new ValueText();// Description[i].ReadValueFromDescription(reader);
                     val.Load(reader);
                     record.SetValue(val, i);
                 }
