@@ -62,6 +62,7 @@ namespace MiniDatabase.Content.ResultsTab
                     index = 0;
                 }
             }
+            manager.Save();
             c.Children.Clear();
         }
     }
