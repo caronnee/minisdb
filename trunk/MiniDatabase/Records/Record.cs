@@ -8,25 +8,26 @@ namespace MiniDatabase.Records
 {
     public class Record
     {
-        List<Value> _values;
-
         public int ID { get; set; }
+        public List<Value> Values { get; set; }
 
         public Record( int recordSize )
         {
-            _values = new List<Value>( recordSize );
+            Values = new List<Value>(recordSize);
             for (int i = 0; i < recordSize; i++)
-                _values.Add(null);// TODO special value
+                Values.Add(null);// TODO special value
         }
 
         public void SetValue(Value v, int index)
         {
-            _values[index] = v;
+            Values[index] = v;
         }
 
         internal Value GetValue(int i)
         {
-            return _values[i];
+            if (Values.Count <= i)
+                return null;
+            return Values[i];
         }
     }
 }

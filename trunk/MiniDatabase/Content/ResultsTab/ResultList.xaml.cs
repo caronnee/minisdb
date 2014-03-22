@@ -21,34 +21,50 @@ namespace MiniDatabase.Content.ResultsTab
     /// </summary>
     public partial class ResultList : TabItem
     {
+        public ObservableCollection<String> Columns
+        {
+            get;
+            set;
+        }
+        public ObservableCollection<Record> Results
+        {
+            get;
+            set;
+        }
         public ResultList()
         {
+            Results = new ObservableCollection<Record>();
+            Columns = new ObservableCollection<String>();
             InitializeComponent();
         }
 
         private void ReloadEntries()
         {
             RecordsManager manager = DataContext as RecordsManager;
-            List<Record> rec = new List<Record>();
-            rec = manager.Select(null, 0, -1);       
-            //foreach ( Record r in rec )
-            //{
-            //    DataGridRow row = new DataGridRow();
-                
-            //    Results.Items.Add(row);
-            //}
+            Results.Clear();
+            List<Record> l = manager.Select(null, 0, -1);
+            foreach ( Record r in l )
+            {
+                Results.Add(r);
+            }
         }
         private void InitEntries(object sender, RoutedEventArgs e)
         {
             // set the names
             RecordsManager manager = DataContext as RecordsManager;
+            Columns.Clear();
             for (int i = 0; i < manager.Description.Count; i++)
             {
-                DataGridTextColumn col = new DataGridTextColumn();
-                col.Header = manager.Description[i].Name;
-                Results.Columns.Add(col);
+                String col = manager.Description[i].Name.ToString();
+                Columns.Add(col);
             }
-                ReloadEntries();
+            //for (int i = 0; i < manager.Description.Count; i++)
+            //{
+            //    DataGridTextColumn col = new DataGridTextColumn();
+            //    col.Header = manager.Description[i].Name;
+            //    Results.Columns.Add(col);
+            //}
+            ReloadEntries();
         }
     }
 }
