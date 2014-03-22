@@ -5,6 +5,8 @@ using System.Text;
 using MiniDatabase.Misc;
 using System.IO;
 using System.Collections.ObjectModel;
+using MiniDatabase.SearchEngine.Conditions;
+
 
 namespace MiniDatabase.Records
 {
@@ -64,6 +66,138 @@ namespace MiniDatabase.Records
             Name = name;
             Clear();
             Load();
+        }
+        private int FindDescriptionIndex(String name)
+        {
+            for (int i = 0; i < Description.Count; i++)
+            {
+                if (Description[i].Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public List<Record> Filter(String query)
+        {
+            if (query == "")
+                onInfoHandler("Refreshing database...");
+            else
+                onInfoHandler("Selecting records by query " + query + "\r\n..");
+            List<Condition> conditions = this.ParseQuery(query);
+            
+            if (conditions == null)
+            {
+                onInfoHandler("no conditions set");
+                return null;
+            }
+
+            List<Record> results = new List<Record>();
+
+            for (int i = 0; i < _records.Count; i++)
+            {
+                bool isMatch = true;
+                foreach (Condition c in conditions)
+                {
+                    int index = FindDescriptionIndex(c.getName());
+                    if (index < 0)
+                    {
+                        onInfoHandler("Unable to recognize attribute name");
+                        return null;
+                    }
+                    Value v1 = _records[i].GetValue(index);
+                    if (!c.compareTo(v1))
+                    {
+                        isMatch = false;
+                        break;
+                    }
+                }
+                if (isMatch)
+                {
+                    results.Add(_records[i]);
+                }
+            }
+            onInfoHandler("Completed.\r\n");
+            return results;
+        }
+
+        private Condition ConvertToCondition(string s)
+        {
+            Condition c = null;
+            try
+            {
+                string[] strs = s.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (strs.Length != 3)
+                    throw new Exception(" Syntax error on " + s + "\r\n" + Misc.Common.help);
+                RecordDescription description;
+                Predicate<RecordDescription> finder = (RecordDescription p) => { return p.Name == strs[0]; };
+                description = Description.Find(finder);
+                if (description == null)
+                    throw new Exception("Name " + strs[0] + " is not recognized.");
+                if ((strs[1].Equals("misses")) && (strs[2].Equals("data")))
+                    return new ConditionIsNull(strs[0], null);
+                Value v = description.CreateValueFromString(strs[2]);
+                switch (strs[1].ToLower())
+                {// genericFactory
+                    case "contains": //check name!
+                        {
+                            c = new ConditionContains(strs[0], v);
+                            break;
+                        }
+                    case "misses":
+                        {
+                            c = new ConditionNot(new ConditionContains(strs[0], v));
+                            break;
+                        }
+                    case "=":
+                        {
+                            c = new ConditionEqual(strs[0], v);
+                            break;
+                        }
+                    case "<=":
+                        {
+                            c = new ConditionLessEqual(strs[0], v);
+                            break;
+                        }
+                    case "<":
+                        {
+                            c = new ConditionLess(strs[0], v);
+                            break;
+                        }
+                    case ">=":
+                        {
+                            c = new ConditionNot(new ConditionLess(strs[0], v));
+                            break;
+                        }
+                    case ">":
+                        {
+                            c = new ConditionNot(new ConditionLessEqual(strs[0], v));
+                            break;
+                        }
+                    default:
+                        throw new Exception("Syntax error at condition '" + strs[1] + "'- no such condition implemented\r\n" + Misc.Common.help);
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message, "Error found!");
+            }
+            return c;
+        }
+
+        private List<Condition> ParseQuery(string s)
+        {
+            List<Condition> result = new List<Condition>();
+            string[] lines = s.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string line in lines)
+            {
+                Condition c = ConvertToCondition(line);
+                if (c == null)
+                    return null;
+                result.Add(c);
+            }
+            return result;
         }
 
         public void AddDescription(RecordDescription rec)

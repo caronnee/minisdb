@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minis", "Minis.csproj", "{F953E535-B9A6-49E7-9F23-7368DD849063}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniDatabase", "MiniDatabase\MiniDatabase.csproj", "{38B17553-DB31-4684-B1C4-A4CE2B736E54}"
 EndProject
 Global
@@ -15,16 +13,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F953E535-B9A6-49E7-9F23-7368DD849063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F953E535-B9A6-49E7-9F23-7368DD849063}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F953E535-B9A6-49E7-9F23-7368DD849063}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F953E535-B9A6-49E7-9F23-7368DD849063}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F953E535-B9A6-49E7-9F23-7368DD849063}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F953E535-B9A6-49E7-9F23-7368DD849063}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F953E535-B9A6-49E7-9F23-7368DD849063}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F953E535-B9A6-49E7-9F23-7368DD849063}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{F953E535-B9A6-49E7-9F23-7368DD849063}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{F953E535-B9A6-49E7-9F23-7368DD849063}.Release|x86.ActiveCfg = Release|Any CPU
 		{38B17553-DB31-4684-B1C4-A4CE2B736E54}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{38B17553-DB31-4684-B1C4-A4CE2B736E54}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{38B17553-DB31-4684-B1C4-A4CE2B736E54}.Debug|Mixed Platforms.Build.0 = Debug|x86

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using MiniDatabase.Records;
 
-namespace Minis.SearchEngine.Conditions
+namespace MiniDatabase.SearchEngine.Conditions
 {
     //for all select that can be writable
     abstract public class Condition

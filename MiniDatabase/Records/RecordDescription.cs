@@ -12,6 +12,11 @@ namespace MiniDatabase.Records
 {
     public class RecordDescription : DependencyObject
     {
+        public virtual Value CreateValueFromString(String str)
+        {
+            return null;
+        }
+
         public virtual Value ReadValueFromDescription(BinaryReader reader)
         {
             Value ret;
