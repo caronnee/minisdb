@@ -41,8 +41,9 @@ namespace MiniDatabase.Records
             Clear();
         }
         
-        public void Select(object condition, ObservableCollection<Record> rec, int offset, int count)
+        public List<Record> Select(object condition, int offset, int count)
         {
+            List<Record> rec = new List<Record>();
             if (count < 0)
                 count = _records.Count;
             if ( condition == null)
@@ -52,9 +53,10 @@ namespace MiniDatabase.Records
                     if ( i + offset < _records.Count)
                         rec.Add(_records[i + offset]);
                 }
-                return;
             }
-            throw new NotImplementedException("Selection of the records");
+            else
+                throw new NotImplementedException("Selection of the records");
+            return rec;
         }
 
         public RecordsManager(String name)

@@ -21,27 +21,34 @@ namespace MiniDatabase.Content.ResultsTab
     /// </summary>
     public partial class ResultList : TabItem
     {
-        public ObservableCollection<Record> Results
-        {
-            get;
-            set;
-        }
-
         public ResultList()
         {
             InitializeComponent();
-            Results = new ObservableCollection<Record>();
         }
 
         private void ReloadEntries()
         {
             RecordsManager manager = DataContext as RecordsManager;
-            Results.Clear();
-            manager.Select(null, Results, 0, -1);
+            List<Record> rec = new List<Record>();
+            rec = manager.Select(null, 0, -1);       
+            //foreach ( Record r in rec )
+            //{
+            //    DataGridRow row = new DataGridRow();
+                
+            //    Results.Items.Add(row);
+            //}
         }
         private void InitEntries(object sender, RoutedEventArgs e)
         {
-            ReloadEntries();
+            // set the names
+            RecordsManager manager = DataContext as RecordsManager;
+            for (int i = 0; i < manager.Description.Count; i++)
+            {
+                DataGridTextColumn col = new DataGridTextColumn();
+                col.Header = manager.Description[i].Name;
+                Results.Columns.Add(col);
+            }
+                ReloadEntries();
         }
     }
 }
