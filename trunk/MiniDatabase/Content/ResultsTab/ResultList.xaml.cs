@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MiniDatabase.Records;
+using System.Collections.ObjectModel;
 
 namespace MiniDatabase.Content.ResultsTab
 {
@@ -20,7 +21,7 @@ namespace MiniDatabase.Content.ResultsTab
     /// </summary>
     public partial class ResultList : TabItem
     {
-        public List<Record> Results
+        public ObservableCollection<Record> Results
         {
             get;
             set;
@@ -29,8 +30,18 @@ namespace MiniDatabase.Content.ResultsTab
         public ResultList()
         {
             InitializeComponent();
+            Results = new ObservableCollection<Record>();
+        }
+
+        private void ReloadEntries()
+        {
             RecordsManager manager = DataContext as RecordsManager;
-            Results = manager.Select(null);
+            Results.Clear();
+            manager.Select(null, Results, 0, -1);
+        }
+        private void InitEntries(object sender, RoutedEventArgs e)
+        {
+            ReloadEntries();
         }
     }
 }

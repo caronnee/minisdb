@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="200">
+             d:DesignHeight="200" d:DesignWidth="200" Loaded="InitEntries" xmlns:my="clr-namespace:MiniDatabase.Content.ResultsTab">
     <Grid>
-        <DataGrid ItemsSource="{Binding Results}" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding Path=Results, RelativeSource={RelativeSource FindAncestor, AncestorType=my:ResultList, AncestorLevel=1}}" AutoGenerateColumns="False">
       
         </DataGrid>
     </Grid>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MiniDatabase.Misc;
 using System.IO;
+using System.Collections.ObjectModel;
 
 namespace MiniDatabase.Records
 {
@@ -40,9 +41,20 @@ namespace MiniDatabase.Records
             Clear();
         }
         
-        public List<Record> Select(object o)
+        public void Select(object condition, ObservableCollection<Record> rec, int offset, int count)
         {
-            return _records;
+            if (count < 0)
+                count = _records.Count;
+            if ( condition == null)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    if ( i + offset < _records.Count)
+                        rec.Add(_records[i + offset]);
+                }
+                return;
+            }
+            throw new NotImplementedException("Selection of the records");
         }
 
         public RecordsManager(String name)
@@ -85,6 +97,7 @@ namespace MiniDatabase.Records
                     a.GetValue(i).Save(writer);
             }
             writer.Close();
+            File.Delete(Name);
             File.Move(tempName,Name);
         }
 
@@ -115,6 +128,7 @@ namespace MiniDatabase.Records
                 for (int i = 0; i < Description.Count; i++)
                 {
                     Value val = Description[i].ReadValueFromDescription(reader);
+                    val.Load(reader);
                     record.SetValue(val, i);
                 }
                 AddRecord(record);
