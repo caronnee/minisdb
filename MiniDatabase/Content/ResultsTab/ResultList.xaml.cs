@@ -41,6 +41,8 @@ namespace MiniDatabase.Content.ResultsTab
         private void ReloadEntries()
         {
             RecordsManager manager = DataContext as RecordsManager;
+            if (DataContext == null)
+              return;
             Results.Clear();
             List<Record> l = manager.Select(null, 0, -1);
             foreach ( Record r in l )
@@ -51,8 +53,10 @@ namespace MiniDatabase.Content.ResultsTab
         private void InitEntries(object sender, RoutedEventArgs e)
         {
             // set the names
-            RecordsManager manager = DataContext as RecordsManager;
             Columns.Clear();
+            RecordsManager manager = DataContext as RecordsManager;
+            if (manager == null)
+              return;
             for (int i = 0; i < manager.Description.Count; i++)
             {
                 String col = manager.Description[i].Name.ToString();
