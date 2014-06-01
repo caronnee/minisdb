@@ -26,6 +26,10 @@ namespace MiniDatabase.Content
             set;
         }
 
+        public Results() : base()
+        {
+          InitializeComponent();
+        }
         public Results(RecordsManager database)
         {
             Database = database;
