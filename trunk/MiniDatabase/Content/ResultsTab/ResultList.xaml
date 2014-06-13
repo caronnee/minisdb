@@ -11,7 +11,6 @@
                 <DataGridTextColumn 
                              Binding="{Binding ID}"  
                              Header="ID"/>
-
                  <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.HeaderStyle>
                         <Style 
