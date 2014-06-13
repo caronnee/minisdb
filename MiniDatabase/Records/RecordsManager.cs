@@ -30,6 +30,7 @@ namespace MiniDatabase.Records
             get;
             set;
         }
+
         void Clear()
         {
             maxRecordId = 0;
@@ -67,6 +68,7 @@ namespace MiniDatabase.Records
             Clear();
             Load();
         }
+
         private int FindDescriptionIndex(String name)
         {
             for (int i = 0; i < Description.Count; i++)
@@ -235,6 +237,7 @@ namespace MiniDatabase.Records
             writer.Close();
             File.Delete(Name);
             File.Move(tempName,Name);
+            onUpdate();
         }
 
         public void Load()
@@ -263,7 +266,7 @@ namespace MiniDatabase.Records
                 Record record = new Record(count);
                 for (int i = 0; i < Description.Count; i++)
                 {
-                    Value val = new ValueText();// Description[i].ReadValueFromDescription(reader);
+                    Value val = new ValueText();    // Description[i].ReadValueFromDescription(reader);
                     val.Load(reader);
                     record.SetValue(val, i);
                 }
@@ -277,6 +280,16 @@ namespace MiniDatabase.Records
             record.ID = maxRecordId;
             maxRecordId++;
             _records.Add(record);
+        }
+        /** calls information about operation on database */
+        public delegate void UpdateHandler();
+        public event UpdateHandler updateAction;
+
+        protected void onUpdate()
+        {
+            if (updateAction == null)
+                return;
+            updateAction();
         }
 
         /** calls information about operation on database */

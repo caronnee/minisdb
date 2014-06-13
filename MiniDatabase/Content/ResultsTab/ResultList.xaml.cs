@@ -26,30 +26,53 @@ namespace MiniDatabase.Content.ResultsTab
             get;
             set;
         }
+
         public ObservableCollection<Record> Results
         {
             get;
             set;
         }
+
+        public object Condition
+        {
+            get;
+            set;
+        }
+
         public ResultList()
         {
             Results = new ObservableCollection<Record>();
             Columns = new ObservableCollection<String>();
+            MinPerPage = 0;
+            MaxPerPage = -1;
             InitializeComponent();
         }
 
-        private void ReloadEntries()
+        public int MaxPerPage
+        {
+            get;
+            set;
+        }
+
+        public int MinPerPage
+        {
+            get;
+            set;
+        }
+        
+        public void ReloadEntries( )
         {
             RecordsManager manager = DataContext as RecordsManager;
             if (DataContext == null)
               return;
             Results.Clear();
-            List<Record> l = manager.Select(null, 0, -1);
+            List<Record> l = manager.Select(Condition, MinPerPage, MaxPerPage);
             foreach ( Record r in l )
             {
                 Results.Add(r);
             }
         }
+
         private void InitEntries(object sender, RoutedEventArgs e)
         {
             // set the names
@@ -57,6 +80,7 @@ namespace MiniDatabase.Content.ResultsTab
             RecordsManager manager = DataContext as RecordsManager;
             if (manager == null)
               return;
+            manager.updateAction += new RecordsManager.UpdateHandler( ReloadEntries );
             for (int i = 0; i < manager.Description.Count; i++)
             {
                 String col = manager.Description[i].Name.ToString();
