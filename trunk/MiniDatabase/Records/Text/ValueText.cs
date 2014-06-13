@@ -30,7 +30,8 @@ namespace MiniDatabase.Records
         }
         public override void Save(System.IO.BinaryWriter writer)
         {
-            writer.Write(Text);
+            if ( Text.Length > 0)
+                writer.Write(Text);
             writer.Write(Misc.Common.Deliminer);
         }
         public override void Load(System.IO.BinaryReader reader)
