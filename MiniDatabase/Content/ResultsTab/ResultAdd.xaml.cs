@@ -60,6 +60,7 @@ namespace MiniDatabase.Content.ResultsTab
                 {
                     manager.AddRecord(rec);
                     index = 0;
+                    rec = new Record(count);
                 }
             }
             manager.Save();
