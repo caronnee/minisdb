@@ -11,7 +11,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Name="myIcon" Stretch="Fill" Source="/MiniDatabase;component/Images/bigIcon.png" />
+            <Image Grid.Column="0" Name="myIcon" Stretch="Fill" Source="/Images/bigIcon.png" />
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
