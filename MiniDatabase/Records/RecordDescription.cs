@@ -73,6 +73,7 @@ namespace MiniDatabase.Records
                 c = reader.ReadChar();
             }
             Name = builder.ToString();
+            Name.Trim(Common.Whitespaces);
         }
 
         public String Name

@@ -58,8 +58,8 @@
     <Compile Include="AboutBox.xaml.cs">
       <DependentUpon>AboutBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\OpenDatabase.xaml.cs">
-      <DependentUpon>OpenDatabase.xaml</DependentUpon>
+    <Compile Include="Content\ChooseDatabase.xaml.cs">
+      <DependentUpon>ChooseDatabase.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\ResultsTab\ResultAdd.xaml.cs">
       <DependentUpon>ResultAdd.xaml</DependentUpon>
@@ -111,7 +111,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\OpenDatabase.xaml">
+    <Page Include="Content\ChooseDatabase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

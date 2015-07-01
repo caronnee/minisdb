@@ -8,7 +8,7 @@
     <DockPanel LastChildFill="True">
         <Button Content="Done" DockPanel.Dock="Bottom" Click="AddRecords"/>
         <Button Content="Add" DockPanel.Dock="Bottom" Click="Plus"/>
-        <StackPanel Name="Controls">
+        <StackPanel Name="Controls" CanHorizontallyScroll="True" CanVerticallyScroll="True">
         </StackPanel>
     </DockPanel>
 </TabItem>

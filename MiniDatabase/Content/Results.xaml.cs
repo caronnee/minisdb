@@ -20,7 +20,7 @@ namespace MiniDatabase.Content
     /// </summary>
     public partial class Results : ContentGeneric
     {
-        RecordsManager Database
+        public RecordsManager Database
         {
             get;
             set;
