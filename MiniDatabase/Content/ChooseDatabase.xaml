@@ -1,0 +1,20 @@
+﻿<Window x:Class="MiniDatabase.Content.OpenDatabase"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <ListBox x:Name="Databases"  Margin="10" ItemsSource="{Binding Filenames}" DisplayMemberPath="Name"  SelectedValue="{Binding Filename}" MouseDoubleClick="LoadDatabase">
+            </ListBox>
+        <StackPanel Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Right" Margin="15">
+            <Button Width="100" IsCancel="True" Margin="0,0,10,0">Cancel</Button>
+            <Button Width="100" IsDefault="True"  Margin="10,0,0,0" Click="LoadDatabase">Ok</Button>
+        </StackPanel>
+    </Grid>
+</Window>
