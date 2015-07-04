@@ -172,7 +172,7 @@ namespace MiniDatabase.Content
         private void enumsChanged(object sender, RoutedEventArgs e)
         {
             Enums.Save();
-            OnResult(null);
+            OnResult(new ChooseDatabase());
         }
     }
 }

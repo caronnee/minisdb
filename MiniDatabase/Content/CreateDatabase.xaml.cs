@@ -84,7 +84,7 @@ namespace MiniDatabase.Content
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            OnResult(null);
+            OnResult(new ChooseDatabase());
         }
 
         private void Create(object sender, RoutedEventArgs e)
