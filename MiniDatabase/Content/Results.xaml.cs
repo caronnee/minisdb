@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MiniDatabase.Records;
+using MiniDatabase.Content.ResultsTab;
 
 namespace MiniDatabase.Content
 {
@@ -26,15 +27,19 @@ namespace MiniDatabase.Content
             set;
         }
 
-        public Results() : base()
-        {
-          InitializeComponent();
-        }
         public Results(RecordsManager database)
         {
             Database = database;
             DataContext = Database;
             InitializeComponent();
+        }
+
+        private void ResultControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+          ResultAdd current = (sender as TabControl).SelectedItem as ResultAdd;
+          if (current == null)
+            return;
+          current.CreateNewForm();
         }
     }
 }

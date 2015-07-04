@@ -8,17 +8,13 @@ namespace MiniDatabase.Content
 {
   public class ContentGeneric : UserControl
   {
-    public enum ContentResult
-    {
-      ResultSuccess,
-      ResultCancel,
-    }
     public delegate void Done(ContentGeneric next);
     public event Done Result;
 
     protected void OnResult(ContentGeneric next)
     {
-      Result(next);
+      if ( Result!= null)
+        Result(next);
     }
 
     public delegate void InfoHandler(string message);
