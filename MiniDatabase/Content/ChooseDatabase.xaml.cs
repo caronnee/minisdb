@@ -20,9 +20,9 @@ namespace MiniDatabase.Content
     /// <summary>
     /// Interaction logic for OpenDatabase.xaml
     /// </summary>
-    public partial class OpenDatabase : Window
+    public partial class ChooseDatabase : ContentGeneric
     {
-        public OpenDatabase()
+        public ChooseDatabase()
         {
             DataContext = this;
             Filenames = new ObservableCollection<FileInfo>();
@@ -38,8 +38,6 @@ namespace MiniDatabase.Content
                     Filenames.Add(fi);               
                 }
             }
-            if (Filenames.Count == 0)
-                throw new MiniDatabase.Exceptions.ExceptionNoData();
         }
 
         public ObservableCollection<FileInfo> Filenames
@@ -56,7 +54,26 @@ namespace MiniDatabase.Content
 
         private void LoadDatabase(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+          try
+          {
+            Records.RecordsManager manager = new Records.RecordsManager(Filename.ToString());
+            Results r = new Results(manager);
+            OnResult(r);
+          }
+          catch (MiniDatabase.Exceptions.ExceptionNoData)
+          {
+            MessageBox.Show("No valid database found. Please create one first");
+          }
+          catch (System.Exception)
+          {
+            MessageBox.Show("Corrupted database!", "Corruption detected");
+          }
+
+        }
+
+        private void NewDatabase(object sender, RoutedEventArgs e)
+        {
+          OnResult(new CreateDatabase());
         }
     }
 }
