@@ -6,21 +6,32 @@ using System.Windows.Controls;
 
 namespace MiniDatabase.Content
 {
-    public class ContentGeneric : UserControl
+  public class ContentGeneric : UserControl
+  {
+    public enum ContentResult
     {
-        public enum ContentResult
-        {
-            ResultSuccess,
-            ResultCancel,
-        }
-        public delegate void Done( ContentGeneric next );
-        public event Done Result;
-
-        virtual public void OnResult( ContentGeneric next )
-        {
-            if (Result == null)
-                return;
-            Result(next);
-        }
+      ResultSuccess,
+      ResultCancel,
     }
+    public delegate void Done(ContentGeneric next);
+    public event Done Result;
+
+    protected void OnResult(ContentGeneric next)
+    {
+      Result(next);
+    }
+
+    public delegate void InfoHandler(string message);
+    public event InfoHandler Info;
+
+    protected void OnInfo(string ctx)
+    {
+      Info(ctx);
+    }
+
+    public virtual void Init()
+    {
+
+    }
+  }
 }

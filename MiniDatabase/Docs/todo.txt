@@ -1,3 +1,4 @@
-﻿- pridat odstranovanie databaze
-- pridat zobrazovani mriezky
-- odstranit tabelovanie
+﻿- info handler
+- new type ( int )
+- order accrding to type
+- select - new page
