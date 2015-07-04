@@ -52,6 +52,12 @@ namespace MiniDatabase.Content
             set;
         }
 
+        private void DeleteDatabase(object sender, RoutedEventArgs e)
+        {
+          File.Delete(Filename.ToString());
+          Filenames.Remove(Filename);
+        }
+
         private void LoadDatabase(object sender, RoutedEventArgs e)
         {
           try

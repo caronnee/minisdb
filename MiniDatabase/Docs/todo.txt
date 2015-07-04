@@ -1,3 +1,3 @@
 ﻿- pridat odstranovanie databaze
 - pridat zobrazovani mriezky
-- odstranit tabelovanie
+- automaticky pridat handler pre kazdy page, podobne ako on result

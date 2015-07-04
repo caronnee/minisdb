@@ -14,8 +14,9 @@
         <ListBox x:Name="Databases"  Margin="10" ItemsSource="{Binding Filenames}" DisplayMemberPath="Name"  SelectedValue="{Binding Filename}" MouseDoubleClick="LoadDatabase">
             </ListBox>
         <StackPanel Grid.Row="1" HorizontalAlignment="Right"  Orientation="Horizontal">
-            <Button Margin="10" Content="Load Database" Click="LoadDatabase"></Button>
-            <Button Margin="10" Content="Create New Database" Click="NewDatabase"></Button>
+            <Button Margin="10" Content="Delete" Click="DeleteDatabase"></Button>
+            <Button Margin="10" Content="Load" Click="LoadDatabase"></Button>
+            <Button Margin="10" Content="Create" Click="NewDatabase"></Button>
         </StackPanel>
     </Grid>
 </my:ContentGeneric>
