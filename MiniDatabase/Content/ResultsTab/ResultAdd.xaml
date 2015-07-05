@@ -7,7 +7,8 @@
              d:DesignHeight="125" d:DesignWidth="200">
     <DockPanel LastChildFill="True">
         <Button Content="Add and Next" DockPanel.Dock="Bottom" Click="AddRecord"/>
-        <StackPanel Name="Controls" CanHorizontallyScroll="True" CanVerticallyScroll="True">
-        </StackPanel>
+    <ScrollViewer>
+      <StackPanel Name="Controls" CanHorizontallyScroll="True" CanVerticallyScroll="True" VerticalAlignment="Top" />
+    </ScrollViewer>      
     </DockPanel>
 </TabItem>
