@@ -15,56 +15,48 @@ using MiniDatabase.Records;
 
 namespace MiniDatabase.Content.ResultsTab
 {
-    /// <summary>
-    /// Interaction logic for ResultAdd.xaml
-    /// </summary>
-    public partial class ResultAdd : TabItem
+  /// <summary>
+  /// Interaction logic for ResultAdd.xaml
+  /// </summary>
+  public partial class ResultAdd : TabItem
+  {
+    public ResultAdd()
     {
-        public ResultAdd()
-        {
-            InitializeComponent();
-        }
-
-        // add rows
-        private void Plus(object sender, RoutedEventArgs e)
-        {
-            RecordsManager manager = DataContext as RecordsManager;
-            StackPanel c = FindName("Controls") as StackPanel;
-            foreach ( RecordDescription r in manager.Description)
-            {
-                // todo improve
-                Label l = new Label();
-                l.Content = r.Name;
-                c.Children.Add(l);
-                c.Children.Add(r.CreateControl());
-            }
-            Separator s = new Separator();
-            c.Children.Add(s);
-        }
-
-        private void AddRecords(object sender, RoutedEventArgs e)
-        {
-            RecordsManager manager = DataContext as RecordsManager;
-            StackPanel c = FindName("Controls") as StackPanel;
-            int count = manager.Description.Count;
-            Record rec = new Record(count);
-            int index =0;
-            for (int i = 0; i < c.Children.Count; i++ )
-            {
-                ControlValue val = c.Children[i] as ControlValue;
-                if ( val == null )
-                    continue;
-                rec.SetValue(val.ConvertToValue(), index);
-                index++;
-                if (index == count)
-                {
-                    manager.AddRecord(rec);
-                    index = 0;
-                    rec = new Record(count);
-                }
-            }
-            manager.Save();
-            c.Children.Clear();
-        }
+      InitializeComponent();
     }
+
+    public void CreateNewForm()
+    {
+      RecordsManager manager = DataContext as RecordsManager;
+      StackPanel c = FindName("Controls") as StackPanel;
+      c.Children.Clear();
+      foreach (RecordDescription r in manager.Description)
+      {
+        // todo improve
+        Label l = new Label();
+        l.Content = r.Name;
+        c.Children.Add(l);
+        c.Children.Add(r.CreateControl());
+      }
+      Separator s = new Separator();
+      c.Children.Add(s);
+    }
+
+    private void AddRecord(object sender, RoutedEventArgs e)
+    {
+      RecordsManager manager = DataContext as RecordsManager;
+      StackPanel c = FindName("Controls") as StackPanel;
+      int count = manager.Description.Count;
+      Record rec = new Record(count);
+      for (int index = 0; index < count; index++ )
+      {
+        ControlValue val = c.Children[index] as ControlValue;
+        if (val == null)
+          continue;
+        rec.SetValue(val.ConvertToValue(), index);
+      }
+      manager.AddRecord(rec);
+      CreateNewForm();
+    }
+  }
 }

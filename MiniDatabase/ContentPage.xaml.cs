@@ -34,9 +34,9 @@ namespace MiniDatabase
       {
         InitializeComponent();
         ContentGeneric page = new ChooseDatabase();
-        page.Result += new MiniDatabase.Content.ContentGeneric.Done(CurrentContent_Result);
         CurrentContent_Result(page);
       }
+
       catch (Exception e)
       {
         Console.Write("Something wrong happened {0}", e.ToString());
@@ -58,7 +58,16 @@ namespace MiniDatabase
     {
       CurrentContent = nextPage;
       if (CurrentContent != null)
+      {
         CurrentContent.Result += new MiniDatabase.Content.ContentGeneric.Done(CurrentContent_Result);
+        CurrentContent.Info += new ContentGeneric.InfoHandler(CurrentContent_Info);
+        CurrentContent.Init();
+      }
+    }
+
+    void CurrentContent_Info(string message)
+    {
+      infoBlock.Text += message;
     }
 
     private void RequestSwitchDatabase(object sender, RoutedEventArgs e)

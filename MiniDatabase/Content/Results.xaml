@@ -7,15 +7,10 @@
              xmlns:tabs="clr-namespace:MiniDatabase.Content.ResultsTab"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="7*"></ColumnDefinition>
-            <ColumnDefinition Width="3*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <TabControl Name="ResultControl" TabStripPlacement="Left">
+    <DockPanel>
+        <TabControl Name="ResultControl" TabStripPlacement="Left" SelectionChanged="ResultControl_SelectionChanged">
             <tabs:ResultList Header="All" x:Name="All" />
             <tabs:ResultAdd Grid.Column="0"  Header="Adding" x:Name="Add" />
         </TabControl>
-        <TextBlock Grid.Column="1"  HorizontalAlignment="Left" Name="textBlock1" Text="Info:" VerticalAlignment="Top" Margin="5"/>
-    </Grid>
+    </DockPanel>
 </content:ContentGeneric>

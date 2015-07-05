@@ -2,13 +2,17 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:my="clr-namespace:MiniDatabase"
-        Title="Minis!" Height="279" Width="371" >
+        Title="Minis!" Height="279" Width="561" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="9*" />
         </Grid.RowDefinitions>
-            <Menu Name="MainMenu">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+            <Menu Name="MainMenu" Grid.ColumnSpan="2">
             <MenuItem Header="_File">
                 <MenuItem Header="_Create new database" Click="RequestNewDatabase"/>
                 <MenuItem Header="_Manage enums" Click="RequestManageEnums" />
@@ -17,5 +21,6 @@
              <MenuItem Header="_About" Click="AboutClick" />
             </Menu>
         <ContentControl Grid.Row="1" Content="{Binding Path=CurrentContent, RelativeSource={RelativeSource FindAncestor, AncestorType=my:ContentPage, AncestorLevel=1}}" />
+        <TextBlock Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Left" Name="infoBlock" Text="Info:" VerticalAlignment="Top" Margin="5"/>
     </Grid>
 </Window>
