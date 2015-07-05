@@ -20,7 +20,7 @@ namespace MiniDatabase.Content
     public delegate void InfoHandler(string message);
     public event InfoHandler Info;
 
-    protected void OnInfo(string ctx)
+    public void OnInfo(string ctx)
     {
       Info(ctx);
     }
