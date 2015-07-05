@@ -1,3 +1,4 @@
 ﻿
-- pridat zobrazovani mriezky
+- pridat zobrazovanie zvislej mriezky
 - automaticky pridat handler pre kazdy page, podobne ako on result
+- select tabulka
