@@ -72,10 +72,12 @@ namespace MiniDatabase.Content
       catch (MiniDatabase.Exceptions.ExceptionNoData)
       {
         MessageBox.Show("No valid database found. Please create one first");
+        OnInfo("No valid database found");
       }
       catch (System.Exception)
       {
         MessageBox.Show("Corrupted database!", "Corruption detected");
+        OnInfo(string.Format("Unable to load database {0}", Filename.ToString()));
       }
     }
 
