@@ -10,7 +10,7 @@
     <DockPanel>
         <TabControl Name="ResultControl" TabStripPlacement="Left" SelectionChanged="ResultControl_SelectionChanged">
             <tabs:ResultList Header="All" x:Name="All" />
-            <tabs:ResultAdd Grid.Column="0"  Header="Adding" x:Name="Add" />
+            <tabs:ResultDetail Grid.Column="0"  Header="Adding" x:Name="Add" CanBeEdited="True" />
         </TabControl>
     </DockPanel>
 </content:ContentGeneric>

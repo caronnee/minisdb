@@ -36,8 +36,8 @@ namespace MiniDatabase.Content
 
         private void ResultControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-          ResultAdd current = (sender as TabControl).SelectedItem as ResultAdd;
-          if (current == null)
+          ResultDetail current = (sender as TabControl).SelectedItem as ResultDetail;
+          if (current == null || !current.CanBeEdited ) // can be edited for show only
             return;
           current.CreateNewForm();
         }

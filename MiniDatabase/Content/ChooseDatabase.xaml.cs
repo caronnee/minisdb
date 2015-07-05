@@ -59,6 +59,7 @@ namespace MiniDatabase.Content
     {
       File.Delete(Filename.ToString());
       Filenames.Remove(Filename);
+      OnInfo(string.Format("Database {0} deleted",Filename.ToString()));
     }
 
     private void LoadDatabase(object sender, RoutedEventArgs e)
@@ -84,6 +85,7 @@ namespace MiniDatabase.Content
     private void NewDatabase(object sender, RoutedEventArgs e)
     {
       OnResult(new CreateDatabase());
+      OnInfo("Creating new database");
     }
   }
 }

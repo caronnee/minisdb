@@ -15,7 +15,7 @@ namespace MiniDatabase.Misc
 
     static class Common
     {
-      public static char[] Whitespaces = { ' ', '\n', '\r', '\t' };
+      public static char[] Whitespaces = { ' ',  '\a', '\b', '\n', '\r', '\f', '\t', '\v' };
       public const String saveInProgressAppendix = ".part";
       public const string help = "Syntax is: \r\n " +
                    " 'attribute_name <operation> value'\r\n As operation can bbu currently used words:\r\n" +
