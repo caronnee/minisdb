@@ -68,9 +68,10 @@ namespace MiniDatabase.Content.ResultsTab
       var first = dg.ItemsSource.Cast<object>().FirstOrDefault() as DynamicObject;
       if (first == null) return;
       var names = first.GetDynamicMemberNames();
+      DataGridLength len = new DataGridLength(1, DataGridLengthUnitType.Star);
       foreach (var name in names)
       {
-        dg.Columns.Add(new DataGridTextColumn { Header = name, Binding = new Binding(name) });
+        dg.Columns.Add(new DataGridTextColumn { Header = name, Binding = new Binding(name), Width=len });
       }
     }
 
