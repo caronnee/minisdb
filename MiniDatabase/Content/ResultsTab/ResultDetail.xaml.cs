@@ -20,7 +20,7 @@ namespace MiniDatabase.Content.ResultsTab
   /// </summary>
   /// 
   // server also as detail of the form
-  public partial class ResultDetail : TabItem
+  public partial class ResultDetail : RecordableTab
   {
     public ResultDetail()
     {

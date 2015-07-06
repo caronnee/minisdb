@@ -61,6 +61,7 @@
     <Compile Include="Content\ChooseDatabase.xaml.cs">
       <DependentUpon>ChooseDatabase.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\ResultsTab\RecordableTab.cs" />
     <Compile Include="Content\ResultsTab\ResultDetail.xaml.cs">
       <DependentUpon>ResultDetail.xaml</DependentUpon>
     </Compile>
