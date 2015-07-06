@@ -53,7 +53,7 @@ namespace MiniDatabase.Content.ResultsTab
     private void AddRecord(object sender, RoutedEventArgs e)
     {
       RecordsManager manager = DataContext as RecordsManager;
-      StackPanel c = FindName("Controls") as StackPanel;
+      StackPanel c = FindName("Entries") as StackPanel;
       int count = manager.Description.Count;
       Record rec = new Record(count);
       for (int index = 0; index < count; index++ )
