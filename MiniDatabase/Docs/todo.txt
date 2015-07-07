@@ -1,4 +1,2 @@
-﻿
-- pridat zobrazovanie zvislej mriezky
-- automaticky pridat handler pre kazdy page, podobne ako on result
-- select tabulka
+﻿- select tabulka
+- load from file of some format
