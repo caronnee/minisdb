@@ -1,2 +1,3 @@
 ﻿- select tabulka
 - load from file of some format
+- compare two results

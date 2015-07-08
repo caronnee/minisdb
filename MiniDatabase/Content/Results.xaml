@@ -10,7 +10,8 @@
     <DockPanel>
         <TabControl Name="ResultControl" TabStripPlacement="Left" SelectionChanged="ResultControl_SelectionChanged">
             <tabs:ResultList Header="All" x:Name="All" ParentContent="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=content:ContentGeneric}}" />
-            <tabs:ResultDetail Grid.Column="0"  Header="Adding" x:Name="Add" CanBeEdited="True" ParentContent="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=content:ContentGeneric}}" />
+            <tabs:ResultDetail Grid.Column="0"  Header="Adding" x:Name="Add" CanBeEdited="True" ParentContent="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=content:ContentGeneric}}"  />
+            <tabs:ResultSelect Header="Select" ParentContent="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=content:ContentGeneric}}"></tabs:ResultSelect>
         </TabControl>
     </DockPanel>
 </content:ContentGeneric>

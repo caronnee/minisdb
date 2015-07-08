@@ -72,6 +72,9 @@
     <Compile Include="Content\ResultsTab\ResultList.xaml.cs">
       <DependentUpon>ResultList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\ResultsTab\ResultSelect.xaml.cs">
+      <DependentUpon>ResultSelect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateFields\CreateFieldBase.cs" />
     <Compile Include="Exceptions\ExceptionBadData.cs" />
     <Compile Include="Exceptions\ExceptionNoData.cs" />
@@ -126,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\ResultsTab\ResultList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\ResultsTab\ResultSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

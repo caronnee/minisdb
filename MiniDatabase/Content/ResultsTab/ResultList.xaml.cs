@@ -29,6 +29,12 @@ namespace MiniDatabase.Content.ResultsTab
       set;
     }
 
+    public String Question
+    {
+      get;
+      set;
+    }
+
     public object Condition
     {
       get;
@@ -40,6 +46,7 @@ namespace MiniDatabase.Content.ResultsTab
       Results = new ObservableCollection<object>();
       MaxPerPage = 100;
       InitializeComponent();
+      Question = "xxxx";
     }
 
     public int MaxPerPage
