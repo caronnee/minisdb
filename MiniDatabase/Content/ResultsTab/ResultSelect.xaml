@@ -7,6 +7,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
-            
+        <TextBlock x:Name="Conditions"></TextBlock>
+        <StackPanel>
+            <ListBox x:Name="attname"></ListBox>
+            <ListBox x:Name="op">
+                <ListBoxItem>And</ListBoxItem>
+                <ListBoxItem>Or</ListBoxItem>
+                <ListBoxItem>Not</ListBoxItem>
+            </ListBox>
+            <DockPanel x:Name="Dummyholder"></DockPanel>
+        </StackPanel>
+        <Button>Select</Button>
     </StackPanel>
 </parentTab:RecordableTab>
