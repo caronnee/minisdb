@@ -23,5 +23,10 @@ namespace MiniDatabase.Content.ResultsTab
     {
       InitializeComponent();
     }
+
+    private void attname_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
   }
 }

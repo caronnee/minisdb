@@ -9,7 +9,7 @@
     <StackPanel>
         <TextBlock x:Name="Conditions"></TextBlock>
         <StackPanel>
-            <ListBox x:Name="attname"></ListBox>
+            <ListBox x:Name="attname" SelectionChanged="attname_SelectionChanged"></ListBox>
             <ListBox x:Name="op">
                 <ListBoxItem>And</ListBoxItem>
                 <ListBoxItem>Or</ListBoxItem>
