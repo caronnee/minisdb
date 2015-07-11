@@ -46,7 +46,7 @@ namespace MiniDatabase.Content.ResultsTab
       Results = new ObservableCollection<object>();
       MaxPerPage = 100;
       InitializeComponent();
-      Question = "xxxx";
+      Question = "Default view";
     }
 
     public int MaxPerPage
