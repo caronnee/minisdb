@@ -24,6 +24,11 @@ namespace MiniDatabase.Content.ResultsTab
       InitializeComponent();
     }
 
+    public string FilterName
+    {
+      get;
+      set;
+    }
     private void attname_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
 

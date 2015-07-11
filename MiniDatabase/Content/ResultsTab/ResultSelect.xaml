@@ -7,30 +7,25 @@
              xmlns:parentTab="clr-namespace:MiniDatabase.Content.ResultsTab"
              mc:Ignorable="d" 
              d:DesignHeight="225" d:DesignWidth="300">
-    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <TextBlock Margin="7"  HorizontalAlignment="Center" x:Name="Conditions">Current search options</TextBlock>
+    <DockPanel LastChildFill="True">
+        <TextBox Margin="3" HorizontalAlignment="Center" x:Name="Filter_name" DockPanel.Dock="Top" Text="{Binding Path=FilterName}" MinWidth="20"/>
+        <TextBlock Margin="3" HorizontalAlignment="Center" x:Name="Conditions" DockPanel.Dock="Top">Current search options</TextBlock>
+        <UniformGrid DockPanel.Dock="Bottom" Rows="1">
+            <Button Margin="5,5,5,5">And</Button>
+            <Button Margin="5,5,5,5">Or</Button>
+            <Button Margin="5,5,5,5">Neg</Button>
+            <Button Margin="5,5,5,5">Select!</Button>
+            <Button Margin="5,5,5,5">Clear</Button>
+        </UniformGrid>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" x:Name="attname" />
-            <ListBox Grid.Column="2" x:Name="op">
-                <ListBoxItem>And</ListBoxItem>
-                <ListBoxItem>Or</ListBoxItem>
-                <ListBoxItem>Not</ListBoxItem>
-            </ListBox>
-            <ListBox Grid.Column="4" x:Name="result" SelectionChanged="attname_SelectionChanged">
+            <ListBox Margin="7"  Grid.Column="0" x:Name="AttributeName" ItemsSource="{Binding Description}" DisplayMemberPath="Name" />
+            <ListBox Margin="7"  Grid.Column="1" x:Name="entry" SelectionChanged="attname_SelectionChanged">
                 <ListBoxItem>aa</ListBoxItem>
             </ListBox>
         </Grid>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Margin="5,5,5,5">Add condition</Button>
-            <Button Margin="5,5,5,5">Select</Button>
-            <Button Margin="5,5,5,5">Clear</Button>
-        </StackPanel>
-    </StackPanel>
+    </DockPanel>
 </parentTab:RecordableTab>
