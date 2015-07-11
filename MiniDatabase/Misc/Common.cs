@@ -16,11 +16,12 @@ namespace MiniDatabase.Misc
 
     static class Common
     {
-      public static List<Condition> SimpleExpression = new List<Condition>() { 
-        new ConditionContains(),
-        new ConditionEqual(),
-        new ConditionIsNull()
+      public static List<SimpleExpressionHolder> SimpleExpressions = new List<SimpleExpressionHolder>() { 
+        new SimpleExpressionHolder(){ InvertedOperationName="Less than", OperationName="more", CCondition=new ConditionLess() }, 
+        new SimpleExpressionHolder(){ InvertedOperationName="Contains", OperationName="Misses", CCondition=new ConditionContains() } ,
+        new SimpleExpressionHolder(){ InvertedOperationName="Equas;", OperationName="Differs", CCondition=new ConditionEqual() } 
       };
+
       public static char[] Whitespaces = { ' ',  '\a', '\b', '\n', '\r', '\f', '\t', '\v' };
       public const String saveInProgressAppendix = ".part";
       public const string help = "Syntax is: \r\n " +

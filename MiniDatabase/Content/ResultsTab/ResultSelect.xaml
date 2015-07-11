@@ -12,10 +12,9 @@
         <TextBlock Margin="3" HorizontalAlignment="Center" x:Name="Conditions" DockPanel.Dock="Top">Current search options</TextBlock>
         <UniformGrid DockPanel.Dock="Bottom" Rows="1">
             <Button Margin="5,5,5,5">And</Button>
-            <Button Margin="5,5,5,5">Or</Button>
             <Button Margin="5,5,5,5">Neg</Button>
-            <Button Margin="5,5,5,5">Select!</Button>
             <Button Margin="5,5,5,5">Clear</Button>
+            <Button Margin="5,5,5,5">Select!</Button>
         </UniformGrid>
         <Grid>
             <Grid.ColumnDefinitions>

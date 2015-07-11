@@ -36,7 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -65,20 +66,21 @@
     <Compile Include="Content\ChooseDatabase.xaml.cs">
       <DependentUpon>ChooseDatabase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\ResultsTab\RecordableTab.cs" />
-    <Compile Include="Content\ResultsTab\ResultDetail.xaml.cs">
+    <Compile Include="Banks\ResultsTab\RecordableTab.cs" />
+    <Compile Include="Banks\ResultsTab\ResultDetail.xaml.cs">
       <DependentUpon>ResultDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\ResultsTab\ResultList.xaml.cs">
+    <Compile Include="Banks\ResultsTab\ResultList.xaml.cs">
       <DependentUpon>ResultList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\ResultsTab\ResultSelect.xaml.cs">
+    <Compile Include="Banks\ResultsTab\ResultSelect.xaml.cs">
       <DependentUpon>ResultSelect.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreateFields\CreateFieldBase.cs" />
     <Compile Include="Exceptions\ExceptionBadData.cs" />
     <Compile Include="Exceptions\ExceptionNoData.cs" />
     <Compile Include="Misc\BindableDynamicDictionary.cs" />
+    <Compile Include="Misc\SimpleExpressionHolder.cs" />
     <Compile Include="Records\ControlValue.cs" />
     <Compile Include="Records\Record.cs" />
     <Compile Include="Records\RecordDescription.cs" />
@@ -129,15 +131,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\ResultsTab\ResultDetail.xaml">
+    <Page Include="Banks\ResultsTab\ResultDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\ResultsTab\ResultList.xaml">
+    <Page Include="Banks\ResultsTab\ResultList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\ResultsTab\ResultSelect.xaml">
+    <Page Include="Banks\ResultsTab\ResultSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -231,9 +233,6 @@
     <Resource Include="Docs\todo.txt" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Resource Include="icon.ico" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
