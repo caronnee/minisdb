@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using MiniDatabase.SearchEngine.Conditions;
 
 namespace MiniDatabase.Misc
 {
@@ -15,6 +16,11 @@ namespace MiniDatabase.Misc
 
     static class Common
     {
+      public static List<Condition> SimpleExpression = new List<Condition>() { 
+        new ConditionContains(),
+        new ConditionEqual(),
+        new ConditionIsNull()
+      };
       public static char[] Whitespaces = { ' ',  '\a', '\b', '\n', '\r', '\f', '\t', '\v' };
       public const String saveInProgressAppendix = ".part";
       public const string help = "Syntax is: \r\n " +

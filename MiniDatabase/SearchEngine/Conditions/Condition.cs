@@ -5,94 +5,43 @@ using MiniDatabase.Records;
 
 namespace MiniDatabase.SearchEngine.Conditions
 {
-    //for all select that can be writable
-    abstract public class Condition
+  //for all select that can be writable
+  abstract public class Condition
+  {
+    public int Index
     {
-        private string name_;
-        protected Value toCompare;
-        public Condition(string name, Value tc)
-        {
-            this.toCompare = tc;
-            this.name_ = name;
-        }
-        public string getName()
-        {
-            return name_;
-        }
-        abstract public bool compareTo(Value v);
+      get;
+      set;
     }
-    public class ConditionIsNull : Condition
+
+    public Value Reference
     {
-        public ConditionIsNull(string name, Value v)
-            : base(name, v)
-        { 
-            //nothing there so far, just initialization
-        }
-        public override bool compareTo(Value v)
-        {
-            if (v == null)
-                return true;
-            return false;
-        }
+      get;
+      set;
     }
-    public class ConditionContains : Condition
+
+    virtual public bool Compare(Record record)
     {
-        public ConditionContains(string name, Value v)
-            : base(name, v)
-        { 
-            //nothing there so far, just initialization
-        }
-        public override bool compareTo(Value v)
-        {
-            if (v == null)
-                return false;
-            return v.contains(toCompare) >= 0;
-        }
+      bool result = false;
+      record.GetValue(Index).Eval(this, ref result);
+      return result;
     }
-    public class ConditionLess : Condition
+
+    virtual public void Compare(Value v, ref bool result)
     {
-        public ConditionLess(string name, Value v)
-            : base(name, v)
-        { }
-        public override bool compareTo(Value v)
-        {
-            if (v == null)
-                return false;
-            return toCompare.compare(v) < 0;
-        }
+      result = false;
     }
-    public class ConditionEqual : Condition
+    virtual public void Compare(ValueText v, ref bool result)
     {
-        public ConditionEqual(string name, Value v) : base(name, v) { }
-        public override bool compareTo(Value v)
-        {
-            if (v == null)
-                return false;
-            return v.compare(toCompare) == 0;
-        }
+      result = false;
     }
-    public class ConditionLessEqual : Condition
+    virtual public void Compare(ValueDate v, ref bool result)
     {
-        public ConditionLessEqual(string name, Value v) : base(name, v) { }
-        public override bool compareTo(Value v)
-        {
-            if (v == null)
-                return false;
-            return toCompare.compare(v) <= 0;
-        }
+      result = false;
     }
-    public class ConditionNot : Condition //value bude Null/..co uz
+    virtual public void Compare(ValueInteger v, ref bool result)
     {
-        private Condition toNegate;
-        public ConditionNot(Condition c) : base(c.getName(), null) 
-        {
-            toNegate = c;
-        }
-        public override bool compareTo(Value v)
-        {
-            if (v == null)
-                return false;
-            return !toNegate.compareTo(v);
-        }
+      result = false;
     }
+  }
 }

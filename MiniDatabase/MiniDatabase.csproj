@@ -83,15 +83,20 @@
     <Compile Include="Records\Record.cs" />
     <Compile Include="Records\RecordDescription.cs" />
     <Compile Include="Records\RecordsManager.cs" />
-    <Compile Include="Records\Text\InputControlText.xaml.cs">
+    <Compile Include="Records\Values\InputControlText.xaml.cs">
       <DependentUpon>InputControlText.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Records\Text\RecordText.cs" />
+    <Compile Include="Records\Values\RecordText.cs" />
     <Compile Include="Records\Value.cs" />
-    <Compile Include="Records\Date\ValueDate.cs" />
-    <Compile Include="Records\Integer\ValueInteger.cs" />
-    <Compile Include="Records\Text\ValueText.cs" />
+    <Compile Include="Records\Values\ValueDate.cs" />
+    <Compile Include="Records\Values\ValueInteger.cs" />
+    <Compile Include="Records\Values\ValueText.cs" />
     <Compile Include="SearchEngine\Conditions\Condition.cs" />
+    <Compile Include="SearchEngine\Conditions\ConditionContains.cs" />
+    <Compile Include="SearchEngine\Conditions\ConditionEqual.cs" />
+    <Compile Include="SearchEngine\Conditions\ConditionLess.cs" />
+    <Compile Include="SearchEngine\Conditions\ConditionNot.cs" />
+    <Compile Include="SearchEngine\Conditions\ConditionNull.cs" />
     <Page Include="ContentPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -156,7 +161,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Records\Text\InputControlText.xaml">
+    <Page Include="Records\Values\InputControlText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -225,9 +230,7 @@
   <ItemGroup>
     <Resource Include="Docs\todo.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Records\Enum\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="icon.ico" />
   </ItemGroup>

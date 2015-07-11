@@ -20,11 +20,13 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.4*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <ListBox Margin="7"  Grid.Column="0" x:Name="AttributeName" ItemsSource="{Binding Description}" DisplayMemberPath="Name" />
-            <ListBox Margin="7"  Grid.Column="1" x:Name="entry" SelectionChanged="attname_SelectionChanged">
-                <ListBoxItem>aa</ListBoxItem>
+            <ListBox Grid.Column="1"  ItemsSource="{Binding }"/>
+            <ListBox Margin="7"  Grid.Column="2" x:Name="entry" SelectionChanged="attname_SelectionChanged">
+                <ListBoxItem>Dynamic content</ListBoxItem>
             </ListBox>
         </Grid>
     </DockPanel>
