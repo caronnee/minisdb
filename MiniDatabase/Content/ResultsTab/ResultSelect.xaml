@@ -3,20 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:content="clr-namespace:MiniDatabase.Content"
              xmlns:parentTab="clr-namespace:MiniDatabase.Content.ResultsTab"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
-        <TextBlock x:Name="Conditions"></TextBlock>
-        <StackPanel>
-            <ListBox x:Name="attname" SelectionChanged="attname_SelectionChanged"></ListBox>
-            <ListBox x:Name="op">
+             d:DesignHeight="225" d:DesignWidth="300">
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <TextBlock Margin="7"  HorizontalAlignment="Center" x:Name="Conditions">Current search options</TextBlock>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" x:Name="attname" />
+            <ListBox Grid.Column="2" x:Name="op">
                 <ListBoxItem>And</ListBoxItem>
                 <ListBoxItem>Or</ListBoxItem>
                 <ListBoxItem>Not</ListBoxItem>
             </ListBox>
-            <DockPanel x:Name="Dummyholder"></DockPanel>
+            <ListBox Grid.Column="4" x:Name="result" SelectionChanged="attname_SelectionChanged">
+                <ListBoxItem>aa</ListBoxItem>
+            </ListBox>
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="5,5,5,5">Add condition</Button>
+            <Button Margin="5,5,5,5">Select</Button>
+            <Button Margin="5,5,5,5">Clear</Button>
         </StackPanel>
-        <Button>Select</Button>
     </StackPanel>
 </parentTab:RecordableTab>
