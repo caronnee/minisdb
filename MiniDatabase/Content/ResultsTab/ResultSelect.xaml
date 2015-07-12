@@ -11,8 +11,8 @@
         <TextBox Margin="3" HorizontalAlignment="Center" x:Name="Filter_name" DockPanel.Dock="Top" Text="{Binding Path=FilterName}" MinWidth="20"/>
         <TextBlock Margin="3" HorizontalAlignment="Center" x:Name="Conditions" DockPanel.Dock="Top">Current search options</TextBlock>
         <UniformGrid DockPanel.Dock="Bottom" Rows="1">
+            <ToggleButton Margin="5,5,5,5" Click="ToggleButton_Click">Negative</ToggleButton>
             <Button Margin="5,5,5,5">And</Button>
-            <Button Margin="5,5,5,5">Neg</Button>
             <Button Margin="5,5,5,5">Clear</Button>
             <Button Margin="5,5,5,5">Select!</Button>
         </UniformGrid>
@@ -24,7 +24,7 @@
             </Grid.ColumnDefinitions>
             <ListBox Margin="7"  Grid.Column="0" x:Name="AttributeName" ItemsSource="{Binding Description}" DisplayMemberPath="Name" />
             <ListBox Grid.Column="1"  ItemsSource="{Binding }"/>
-            <ListBox Margin="7"  Grid.Column="2" x:Name="entry" SelectionChanged="attname_SelectionChanged">
+            <ListBox Margin="7"  Grid.Column="2" x:Name="User_Entry" SelectionChanged="attname_SelectionChanged">
                 <ListBoxItem>Dynamic content</ListBoxItem>
             </ListBox>
         </Grid>

@@ -33,5 +33,10 @@ namespace MiniDatabase.Content.ResultsTab
     {
 
     }
+
+    private void ToggleButton_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
   }
 }

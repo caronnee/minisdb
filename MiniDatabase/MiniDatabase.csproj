@@ -66,14 +66,14 @@
     <Compile Include="Content\ChooseDatabase.xaml.cs">
       <DependentUpon>ChooseDatabase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Banks\ResultsTab\RecordableTab.cs" />
-    <Compile Include="Banks\ResultsTab\ResultDetail.xaml.cs">
+    <Compile Include="Content\ResultsTab\RecordableTab.cs" />
+    <Compile Include="Content\ResultsTab\ResultDetail.xaml.cs">
       <DependentUpon>ResultDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Banks\ResultsTab\ResultList.xaml.cs">
+    <Compile Include="Content\ResultsTab\ResultList.xaml.cs">
       <DependentUpon>ResultList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Banks\ResultsTab\ResultSelect.xaml.cs">
+    <Compile Include="Content\ResultsTab\ResultSelect.xaml.cs">
       <DependentUpon>ResultSelect.xaml</DependentUpon>
     </Compile>
     <Compile Include="CreateFields\CreateFieldBase.cs" />
@@ -131,15 +131,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Banks\ResultsTab\ResultDetail.xaml">
+    <Page Include="Content\ResultsTab\ResultDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Banks\ResultsTab\ResultList.xaml">
+    <Page Include="Content\ResultsTab\ResultList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Banks\ResultsTab\ResultSelect.xaml">
+    <Page Include="Content\ResultsTab\ResultSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
