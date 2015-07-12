@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -36,7 +37,11 @@ namespace MiniDatabase.Content.ResultsTab
 
     private void ToggleButton_Click(object sender, RoutedEventArgs e)
     {
-
+      ToggleButton b = sender as ToggleButton;
+      ListBox box = FindName("Operations") as ListBox;
+      // change to the othername        
+      box.DisplayMemberPath = (b.IsChecked == true)? "InvertedOperationName" : "OperationName";
+      
     }
   }
 }

@@ -4,12 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:content="clr-namespace:MiniDatabase.Content"
+             xmlns:misc="clr-namespace:MiniDatabase.Misc"
              xmlns:parentTab="clr-namespace:MiniDatabase.Content.ResultsTab"
              mc:Ignorable="d" 
              d:DesignHeight="225" d:DesignWidth="300">
-    <DockPanel LastChildFill="True">
+
+  <DockPanel LastChildFill="True">
         <TextBox Margin="3" HorizontalAlignment="Center" x:Name="Filter_name" DockPanel.Dock="Top" Text="{Binding Path=FilterName}" MinWidth="20"/>
-        <TextBlock Margin="3" HorizontalAlignment="Center" x:Name="Conditions" DockPanel.Dock="Top">Current search options</TextBlock>
+        <TextBlock Margin="3" HorizontalAlignment="Center" x:Name="ConditionsInString" DockPanel.Dock="Top">Current search options</TextBlock>
         <UniformGrid DockPanel.Dock="Bottom" Rows="1">
             <ToggleButton Margin="5,5,5,5" Click="ToggleButton_Click">Negative</ToggleButton>
             <Button Margin="5,5,5,5">And</Button>
@@ -23,7 +25,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <ListBox Margin="7"  Grid.Column="0" x:Name="AttributeName" ItemsSource="{Binding Description}" DisplayMemberPath="Name" />
-            <ListBox Grid.Column="1"  ItemsSource="{Binding }"/>
+      <ListBox Grid.Column="1" x:Name="Operations" ItemsSource="{x:Static misc:Common.SimpleExpressions}" DisplayMemberPath="OperationName"/>
             <ListBox Margin="7"  Grid.Column="2" x:Name="User_Entry" SelectionChanged="attname_SelectionChanged">
                 <ListBoxItem>Dynamic content</ListBoxItem>
             </ListBox>

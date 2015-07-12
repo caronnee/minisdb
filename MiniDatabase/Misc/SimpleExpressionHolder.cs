@@ -16,10 +16,22 @@ namespace MiniDatabase.Misc
   }
   public class SimpleExpressionHolder
   {
-    public String OperationName;
-    public String InvertedOperationName;
-    public ConditionType CType;
-    public Condition Create(bool negative,int index, Value val)
+    public String OperationName
+    {
+      get;
+      set;
+    }
+    public String InvertedOperationName
+    {
+      get;
+      set;
+    }
+    public ConditionType CType
+    {
+      get;
+      set;
+    }
+    public Condition Create(bool negative, int index, Value val)
     {
       Condition c = null;
       switch (CType)
