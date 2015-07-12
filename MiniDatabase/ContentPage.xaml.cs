@@ -33,8 +33,13 @@ namespace MiniDatabase
       try
       {
         InitializeComponent();
-        ContentGeneric page = new ChooseDatabase();
+        ChooseDatabase page = new ChooseDatabase();
         CurrentContent_Result(page);
+        if (page.Filenames.Count == 0)
+        {
+          page.OnInfo("No databse found. Please create one first");
+          CurrentContent_Result(new CreateDatabase());          
+        }
       }
 
       catch (Exception e)
