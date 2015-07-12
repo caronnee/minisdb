@@ -40,8 +40,7 @@ namespace MiniDatabase.Content.ResultsTab
       ToggleButton b = sender as ToggleButton;
       ListBox box = FindName("Operations") as ListBox;
       // change to the othername        
-      box.DisplayMemberPath = (b.IsChecked == true)? "InvertedOperationName" : "OperationName";
-      
+      box.DisplayMemberPath = (b.IsChecked == true)? "InvertedOperationName" : "OperationName";      
     }
   }
 }
