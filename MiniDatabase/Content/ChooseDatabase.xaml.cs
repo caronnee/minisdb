@@ -57,9 +57,11 @@ namespace MiniDatabase.Content
 
     private void DeleteDatabase(object sender, RoutedEventArgs e)
     {
+      // because filename is binded
+      String str = Filename.Name;
       File.Delete(Filename.ToString());
       Filenames.Remove(Filename);
-      OnInfo(string.Format("Database {0} deleted",Filename.ToString()));
+      OnInfo(string.Format("Database {0} deleted", str.ToString()));
     }
 
     private void LoadDatabase(object sender, RoutedEventArgs e)

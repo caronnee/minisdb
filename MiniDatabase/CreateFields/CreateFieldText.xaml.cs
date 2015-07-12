@@ -15,30 +15,30 @@ using MiniDatabase.Records;
 
 namespace MiniDatabase.CreateFields
 {
-    /// <summary>
-    /// Interaction logic for CreateFieldText.xaml
-    /// </summary>
-    public partial class CreateFieldText : UserControl, CreateFieldInterface
+  /// <summary>
+  /// Interaction logic for CreateFieldText.xaml
+  /// </summary>
+  public partial class CreateFieldText : UserControl, CreateFieldInterface
+  {
+    public static DependencyProperty CRecord = DependencyProperty.Register("CreatedRecord", typeof(RecordDescriptionText), typeof(CreateFieldText), new PropertyMetadata(null));
+
+    public CreateFieldText()
     {
-        public static DependencyProperty CRecord = DependencyProperty.Register("CreatedRecord", typeof(RecordDescriptionText), typeof(CreateFieldText), new PropertyMetadata(null));
-
-        public CreateFieldText()
-        {
-            CreatedRecord = new RecordDescriptionText(); 
-            InitializeComponent();
-        }
-
-        public RecordDescriptionText CreatedRecord
-        {
-            get { return GetValue(CRecord) as RecordDescriptionText; }
-            set { SetValue(CRecord,value); }
-        }
-     
-        public bool Valid() { return true; }
-
-        public RecordDescription GetRecordDescription()
-        {
-            return CreatedRecord;
-        }
+      CreatedRecord = new RecordDescriptionText();
+      InitializeComponent();
     }
+
+    public RecordDescriptionText CreatedRecord
+    {
+      get { return GetValue(CRecord) as RecordDescriptionText; }
+      set { SetValue(CRecord, value); }
+    }
+
+    public bool Valid() { return true; }
+
+    public RecordDescription GetRecordDescription()
+    {
+      return CreatedRecord;
+    }
+  }
 }

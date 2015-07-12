@@ -30,10 +30,6 @@ namespace MiniDatabase.Content.ResultsTab
       get;
       set;
     }
-    private void attname_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-
-    }
 
     private void ToggleButton_Click(object sender, RoutedEventArgs e)
     {

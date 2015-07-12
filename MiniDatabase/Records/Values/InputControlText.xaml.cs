@@ -14,30 +14,36 @@ using System.Windows.Shapes;
 
 namespace MiniDatabase.Records.Text
 {
-    /// <summary>
-    /// Interaction logic for InputControlText.xaml
-    /// </summary>
-    public partial class InputControlText : TextBox, ControlValue
+  /// <summary>
+  /// Interaction logic for InputControlText.xaml
+  /// </summary>
+  public partial class InputControlText : TextBox, ControlValue
+  {
+    private void Init(String val)
     {
-        private void Init(String val)
-        {
-            InitializeComponent();
-            Text = val;
-        }
-
-        public Value ConvertToValue()
-        {
-            return new ValueText(Text);
-        }
-         
-        public InputControlText(String val)
-        {
-            Init(val);
-        }
-
-        public InputControlText()
-        {
-            Init("");
-        }
+      InitializeComponent();
+      Text = val;
     }
+
+    public void SetValue( Value val)
+    {
+      if ( val!= null)
+        Text = val.ToString();
+    }
+
+    public Value ConvertToValue()
+    {
+      return new ValueText(Text);
+    }
+
+    public InputControlText(String val)
+    {
+      Init(val);
+    }
+
+    public InputControlText()
+    {
+      Init("");
+    }
+  }
 }

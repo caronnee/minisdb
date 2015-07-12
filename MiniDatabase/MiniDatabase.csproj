@@ -81,7 +81,6 @@
     <Compile Include="Exceptions\ExceptionNoData.cs" />
     <Compile Include="Misc\BindableDynamicDictionary.cs" />
     <Compile Include="Misc\SimpleExpressionHolder.cs" />
-    <Compile Include="Records\ControlValue.cs" />
     <Compile Include="Records\Record.cs" />
     <Compile Include="Records\RecordDescription.cs" />
     <Compile Include="Records\RecordsManager.cs" />

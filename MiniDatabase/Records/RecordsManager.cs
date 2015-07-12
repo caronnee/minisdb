@@ -196,11 +196,8 @@ namespace MiniDatabase.Records
 
       while (reader.BaseStream.Length != reader.BaseStream.Position)
       {
-        int type = reader.ReadInt32();
-        if (type < 0)
-          break; // database starts
-        Types t = (Types)type;
-        RecordDescription description = RecordDescription.GetRecordFromType(t);
+        RecordDescription description = RecordDescription.LoadRecordFromType(reader);
+        System.Diagnostics.Debug.Assert(description != null);
         description.Load(reader);
         AddDescription(description);
       }

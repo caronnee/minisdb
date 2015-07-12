@@ -68,6 +68,7 @@ namespace MiniDatabase
     void CurrentContent_Info(string message)
     {
       infoBlock.Text += message;
+      infoBlock.Text += "\n";
     }
 
     private void RequestSwitchDatabase(object sender, RoutedEventArgs e)

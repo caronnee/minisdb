@@ -13,12 +13,13 @@ namespace MiniDatabase.Records
   {
     public RecordDescriptionText()
     {
-      Val = new ValueText();
+      PresetValue = new ValueText();
+      VControl = new InputControlText("");
     }
     public override void Save(BinaryWriter writer)
     {
       base.Save(writer);
-      Val.Save(writer);
+      PresetValue.Save(writer);
     }
     public override Value CreateValueFromString(String str)
     {
@@ -28,18 +29,8 @@ namespace MiniDatabase.Records
     public override void Load(BinaryReader reader)
     {
       base.Load(reader);
-      Val = new ValueText();
-      Val.Load(reader);
-    }
-    public override Control CreateControl()
-    {
-      return new InputControlText(Val.ToString());
-    }
-
-    public ValueText Val
-    {
-      get;
-      set;
+      PresetValue = new ValueText();
+      PresetValue.Load(reader);
     }
 
     public override Types GetRecordType()
