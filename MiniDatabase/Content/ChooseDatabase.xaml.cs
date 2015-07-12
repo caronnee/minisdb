@@ -37,7 +37,7 @@ namespace MiniDatabase.Content
     }
     override public void Init()
     {
-      DirectoryInfo d = new DirectoryInfo(@"..\\Docs"); // TODO specified directory
+      DirectoryInfo d = new DirectoryInfo( Misc.Common.SaveFolder); // TODO specified directory
       if (d.Exists == false)
         return;
       ListBox box = FindName("Databases") as ListBox;

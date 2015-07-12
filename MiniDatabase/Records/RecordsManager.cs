@@ -170,7 +170,7 @@ namespace MiniDatabase.Records
     /* save whole database */
     public void Save()
     {
-      String tempName = Name + Misc.Common.saveInProgressAppendix;
+      String tempName = Misc.Common.SaveFolder + Name + Misc.Common.saveInProgressAppendix;
       BinaryWriter writer = new BinaryWriter(File.Open(tempName, FileMode.Create));
       // patterns are delimited by blank line
       foreach (RecordDescription a in Description)
