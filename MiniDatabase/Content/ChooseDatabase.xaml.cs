@@ -57,6 +57,11 @@ namespace MiniDatabase.Content
       set;
     }
 
+    private void ChangeDatabase(object sender, RoutedEventArgs e)
+    {
+      //TODO change choosedabase
+    }
+
     private void DeleteDatabase(object sender, RoutedEventArgs e)
     {
       // because filename is binded
