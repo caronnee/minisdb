@@ -175,6 +175,7 @@ namespace MiniDatabase.Records
       // patterns are delimited by blank line
       foreach (RecordDescription a in Description)
       {
+        RecordDescription.SaveRecordType(writer,a);
         a.Save(writer);
       }
       writer.Write(-1); //deliminer
@@ -197,7 +198,8 @@ namespace MiniDatabase.Records
       while (reader.BaseStream.Length != reader.BaseStream.Position)
       {
         RecordDescription description = RecordDescription.LoadRecordFromType(reader);
-        System.Diagnostics.Debug.Assert(description != null);
+        if (description == null)
+          break;
         description.Load(reader);
         AddDescription(description);
       }

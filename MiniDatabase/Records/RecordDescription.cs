@@ -76,7 +76,10 @@ namespace MiniDatabase.Records
 
     public static RecordDescription LoadRecordFromType(BinaryReader reader)
     {
-      Types type = (Types)reader.ReadInt32();
+      int t = reader.ReadInt32();
+      if (t < 0)
+        return null;
+      Types type = (Types) t ;
       switch (type)
       {
         case Types.TypeText:

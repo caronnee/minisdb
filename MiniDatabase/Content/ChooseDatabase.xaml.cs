@@ -61,7 +61,7 @@ namespace MiniDatabase.Content
     {
       // because filename is binded
       String str = Filename.Name;
-      File.Delete(Filename.ToString());
+      File.Delete(Filename.FullName);
       Filenames.Remove(Filename);
       OnInfo(string.Format("Database {0} deleted", str.ToString()));
     }
@@ -70,7 +70,7 @@ namespace MiniDatabase.Content
     {
       try
       {
-        Records.RecordsManager manager = new Records.RecordsManager(Filename.ToString());
+        Records.RecordsManager manager = new Records.RecordsManager(Filename.FullName);
         Results r = new Results(manager);
         OnResult(r);
       }
@@ -82,7 +82,7 @@ namespace MiniDatabase.Content
       catch (System.Exception)
       {
         MessageBox.Show("Corrupted database!", "Corruption detected");
-        OnInfo(string.Format("Unable to load database {0}", Filename.ToString()));
+        OnInfo(string.Format("Unable to load database {0}", Filename.Name));
       }
     }
 
