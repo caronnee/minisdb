@@ -37,7 +37,7 @@ namespace MiniDatabase
         CurrentContent_Result(page);
         if (page.Filenames.Count == 0)
         {
-          page.OnInfo("No databse found. Please create one first");
+          page.OnInfo("No database found. Please create one first");
           CurrentContent_Result(new CreateDatabase());          
         }
       }
