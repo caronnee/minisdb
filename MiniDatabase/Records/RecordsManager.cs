@@ -229,6 +229,7 @@ namespace MiniDatabase.Records
       record.ID = maxRecordId;
       maxRecordId++;
       _records.Add(record);
+      onUpdate();
     }
     /** calls information about operation on database */
     public delegate void UpdateHandler();
