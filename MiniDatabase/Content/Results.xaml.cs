@@ -16,30 +16,35 @@ using MiniDatabase.Content.ResultsTab;
 
 namespace MiniDatabase.Content
 {
-    /// <summary>
-    /// Interaction logic for Results.xaml
-    /// </summary>
-    public partial class Results : ContentGeneric
+  /// <summary>
+  /// Interaction logic for Results.xaml
+  /// </summary>
+  public partial class Results : ContentGeneric
+  {
+    public RecordsManager Database
     {
-        public RecordsManager Database
-        {
-            get;
-            set;
-        }
-
-        public Results(RecordsManager database)
-        {
-            Database = database;
-            DataContext = Database;
-            InitializeComponent();
-        }
-
-        private void ResultControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-          ResultDetail current = (sender as TabControl).SelectedItem as ResultDetail;
-          if (current == null || !current.CanBeEdited ) // can be edited for show only
-            return;
-          current.CreateNewForm();
-        }
+      get;
+      set;
     }
+
+    public Results(RecordsManager database)
+    {
+      Database = database;
+      DataContext = Database;
+      InitializeComponent();
+    }
+
+    private void ResultControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+      ResultDetail current = (sender as TabControl).SelectedItem as ResultDetail;
+      if (current == null || !current.CanBeEdited) // can be edited for show only
+        return;
+      current.CreateNewForm();
+    }
+
+    override void Finish()
+    {
+      Database.Save();
+    }
+  }
 }

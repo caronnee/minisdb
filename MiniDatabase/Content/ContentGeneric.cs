@@ -30,5 +30,10 @@ namespace MiniDatabase.Content
     {
 
     }
+
+    public virtual void Finish()
+    {
+
+    }
   }
 }
