@@ -56,13 +56,15 @@ namespace MiniDatabase.Content.ResultsTab
       StackPanel c = FindName("Entries") as StackPanel;
       int count = manager.Description.Count;
       Record rec = new Record(count);
-      for (int index = 0; index < count; index++ )
+      for (int index=0,i = 0; i < c.Children.Count; i++ )
       {
-        ControlValue val = c.Children[index] as ControlValue;
+        ControlValue val = c.Children[i] as ControlValue;
         if (val == null)
           continue;
         rec.SetValue(val.ConvertToValue(), index);
+        index++;
       }
+      ParentContent.OnInfo("Added record");
       manager.AddRecord(rec);
       CreateNewForm();
     }

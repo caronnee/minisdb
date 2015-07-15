@@ -77,6 +77,7 @@ namespace MiniDatabase.Content.ResultsTab
 
     public void ReloadEntries()
     {
+      Results.Clear();
       RecordsManager manager = DataContext as RecordsManager;
       if (DataContext == null)
         return;

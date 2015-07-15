@@ -42,7 +42,7 @@ namespace MiniDatabase.Content
       current.CreateNewForm();
     }
 
-    override void Finish()
+    override public void Finish()
     {
       Database.Save();
     }

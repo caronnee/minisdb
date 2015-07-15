@@ -85,5 +85,10 @@ namespace MiniDatabase
     {
       CurrentContent_Result(new Content.CreateEnums());
     }
+
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+      CurrentContent.Finish();
+    }
   }
 }
