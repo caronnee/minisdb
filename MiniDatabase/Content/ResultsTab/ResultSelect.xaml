@@ -8,9 +8,8 @@
              xmlns:parentTab="clr-namespace:MiniDatabase.Content.ResultsTab"
              mc:Ignorable="d" 
              d:DesignHeight="225" d:DesignWidth="300">
-
-  <DockPanel LastChildFill="True">
-        <TextBox Margin="3" HorizontalAlignment="Center" x:Name="Filter_name" DockPanel.Dock="Top" Text="{Binding Path=FilterName}" MinWidth="20"/>
+    <DockPanel LastChildFill="True">
+        <TextBox Margin="3" HorizontalAlignment="Center" x:Name="Filter_name" DockPanel.Dock="Top" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=parentTab:RecordableTab, AncestorLevel=1}, Path=FilterName}"/>
         <TextBlock Margin="3" HorizontalAlignment="Center" x:Name="ConditionsInString" DockPanel.Dock="Top">Current search options</TextBlock>
         <UniformGrid DockPanel.Dock="Bottom" Rows="1">
             <ToggleButton Margin="5,5,5,5" Click="ToggleButton_Click">Negative</ToggleButton>
@@ -24,10 +23,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-      <ListBox Margin="7"  Grid.Column="0" x:Name="AttributeName" ItemsSource="{Binding Description}" DisplayMemberPath="Name"/>
+            <ListBox Margin="7"  Grid.Column="0" x:Name="AttributeName" ItemsSource="{Binding Description}" DisplayMemberPath="Name" SelectionChanged="AttributeName_SelectionChanged"/>
             <ListBox Margin="7" Grid.Column="1" x:Name="Operations" ItemsSource="{x:Static misc:Common.SimpleExpressions}" DisplayMemberPath="OperationName"/>
-      <ContentControl Margin="7"  Grid.Column="2" x:Name="User_Entry" Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=parentTab:ResultSelect, AncestorLevel=1}, Path=SelectedContent }">
-      </ContentControl>
+            <ContentControl Margin="7"  Grid.Column="2" x:Name="User_Entry" Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=parentTab:ResultSelect, AncestorLevel=1}, Path=SelectedContent}">
+            </ContentControl>
         </Grid>
     </DockPanel>
 </parentTab:RecordableTab>

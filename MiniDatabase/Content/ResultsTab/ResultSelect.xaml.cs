@@ -25,6 +25,12 @@ namespace MiniDatabase.Content.ResultsTab
       InitializeComponent();
     }
 
+    public Control SelectedContent
+    {
+      get;
+      set;
+    }
+
     public string FilterName
     {
       get;
@@ -37,6 +43,11 @@ namespace MiniDatabase.Content.ResultsTab
       ListBox box = FindName("Operations") as ListBox;
       // change to the othername        
       box.DisplayMemberPath = (b.IsChecked == true)? "InvertedOperationName" : "OperationName";      
+    }
+
+    private void AttributeName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+      SelectedContent = new TextBox();
     }
   }
 }
