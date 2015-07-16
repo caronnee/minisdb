@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ListBox Margin="7"  Grid.Column="0" x:Name="AttributeName" ItemsSource="{Binding Description}" DisplayMemberPath="Name" SelectionChanged="AttributeName_SelectionChanged"/>
+            <ListBox Margin="7"  Grid.Column="0" x:Name="AttributeName" ItemsSource="{Binding Description}" DisplayMemberPath="Name" SelectionChanged="AttributeName_SelectionChanged" SelectedIndex="0"/>
             <ListBox Margin="7" Grid.Column="1" x:Name="Operations" ItemsSource="{x:Static misc:Common.SimpleExpressions}" DisplayMemberPath="OperationName"/>
             <ContentControl Margin="7"  Grid.Column="2" x:Name="User_Entry" Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=parentTab:ResultSelect, AncestorLevel=1}, Path=SelectedContent}">
             </ContentControl>

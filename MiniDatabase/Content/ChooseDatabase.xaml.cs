@@ -48,6 +48,7 @@ namespace MiniDatabase.Content
           Filenames.Add(fi);
         }
       }
+      box.SelectedIndex = 0;
       OnInfo(string.Format("Found {0} records", Filenames.Count));
     }
 
