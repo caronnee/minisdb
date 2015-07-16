@@ -25,10 +25,18 @@ namespace MiniDatabase.Content.ResultsTab
       InitializeComponent();
     }
 
+    public static readonly DependencyProperty SelectedProp = DependencyProperty.Register("SelectedContent", typeof(Control), typeof(ResultSelect), new PropertyMetadata(null));
+
     public Control SelectedContent
     {
-      get;
-      set;
+      get
+      {
+        return (Control)GetValue(SelectedProp);
+      }
+      set
+      {
+        SetValue(SelectedProp, value);
+      }
     }
 
     public string FilterName

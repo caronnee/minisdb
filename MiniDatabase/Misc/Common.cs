@@ -24,7 +24,7 @@ namespace MiniDatabase.Misc
 
       public static char[] Whitespaces = { ' ',  '\a', '\b', '\n', '\r', '\f', '\t', '\v' };
       public const String saveInProgressAppendix = ".part";
-      public const String SaveFolder = "..\\Docs";
+      public const String SaveFolder = "..\\Docs\\";
       public const string help = "Syntax is: \r\n " +
                    " 'attribute_name <operation> value'\r\n As operation can e currently used words:\r\n" +
                    " contains, misses, <, <=, >, >=, =, != \r\n" +

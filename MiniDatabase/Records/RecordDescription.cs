@@ -66,7 +66,12 @@ namespace MiniDatabase.Records
     {
       // name consists of string and deliminer
       writer.Write(Name);
-      writer.Write(Misc.Common.Deliminer);
+    }
+
+    /** basic load */
+    public virtual void Load(BinaryReader reader)
+    {
+      Name = reader.ReadString();
     }
 
     public static void SaveRecordType(BinaryWriter writer, RecordDescription desc )
@@ -89,19 +94,6 @@ namespace MiniDatabase.Records
         default:
           throw new ExceptionBadData("Something bad had happened, Harry");
       }
-    }
-
-    /** basic load */
-    public virtual void Load(BinaryReader reader)
-    {
-      char c = reader.ReadChar();
-      StringBuilder builder = new StringBuilder();
-      while (c != Misc.Common.Deliminer)
-      {
-        builder.Append(c);
-        c = reader.ReadChar();
-      }
-      Name = builder.ToString().Trim(Common.Whitespaces);
     }
 
     public String Name

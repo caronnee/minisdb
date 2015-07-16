@@ -170,7 +170,7 @@ namespace MiniDatabase.Records
     /* save whole database */
     public void Save()
     {
-      String tempName = Name + Misc.Common.saveInProgressAppendix;
+      String tempName = Misc.Common.SaveFolder + Name + Misc.Common.saveInProgressAppendix;
       BinaryWriter writer = new BinaryWriter(File.Open(tempName, FileMode.Create));
       // patterns are delimited by blank line
       foreach (RecordDescription a in Description)
@@ -186,14 +186,14 @@ namespace MiniDatabase.Records
           a.GetValue(i).Save(writer);
       }
       writer.Close();
-      File.Delete(Name);
-      File.Move(tempName, Name);
+      File.Delete(Misc.Common.SaveFolder + Name);
+      File.Move(tempName, Misc.Common.SaveFolder + Name);
       onUpdate();
     }
 
     public void Load()
     {
-      BinaryReader reader = new BinaryReader(File.Open(Name, FileMode.Open));
+      BinaryReader reader = new BinaryReader(File.Open(Misc.Common.SaveFolder + Name, FileMode.Open));
 
       while (reader.BaseStream.Length != reader.BaseStream.Position)
       {
