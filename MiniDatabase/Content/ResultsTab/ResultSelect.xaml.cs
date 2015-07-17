@@ -55,7 +55,9 @@ namespace MiniDatabase.Content.ResultsTab
 
     private void AttributeName_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-      SelectedContent = new TextBox();
+      ListBox box = sender as ListBox;
+      Records.RecordDescription des = box.SelectedItem as Records.RecordDescription;
+      SelectedContent = des.VControl as Control;
     }
   }
 }
