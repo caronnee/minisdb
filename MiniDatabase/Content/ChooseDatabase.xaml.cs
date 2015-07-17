@@ -76,7 +76,7 @@ namespace MiniDatabase.Content
     {
       try
       {
-        Records.RecordsManager manager = new Records.RecordsManager(Filename.Name);
+        Records.RecordsManager manager = new Records.RecordsManager(Filename.FullName);
         Results r = new Results(manager);
         OnResult(r);
       }
