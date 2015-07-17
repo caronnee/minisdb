@@ -25,20 +25,6 @@ namespace MiniDatabase.Content.ResultsTab
       InitializeComponent();
     }
 
-    public static readonly DependencyProperty SelectedProp = DependencyProperty.Register("SelectedContent", typeof(Control), typeof(ResultSelect), new PropertyMetadata(null));
-
-    public Control SelectedContent
-    {
-      get
-      {
-        return (Control)GetValue(SelectedProp);
-      }
-      set
-      {
-        SetValue(SelectedProp, value);
-      }
-    }
-
     public string FilterName
     {
       get;
@@ -51,13 +37,6 @@ namespace MiniDatabase.Content.ResultsTab
       ListBox box = FindName("Operations") as ListBox;
       // change to the othername        
       box.DisplayMemberPath = (b.IsChecked == true)? "InvertedOperationName" : "OperationName";      
-    }
-
-    private void AttributeName_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-      ListBox box = sender as ListBox;
-      Records.RecordDescription des = box.SelectedItem as Records.RecordDescription;
-      SelectedContent = des.VControl as Control;
     }
   }
 }
