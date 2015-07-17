@@ -46,13 +46,26 @@ namespace MiniDatabase.Content.ResultsTab
       box.DisplayMemberPath = (b.IsChecked == true)? "InvertedOperationName" : "OperationName";      
     }
 
+    String TruncatedName(String name)
+    {
+      // maximum 5 letters +3x .
+      if (name.Length > 5)
+      {
+        String n = name.Substring(0, 5) + "...";
+        return n;
+      }
+      return name;
+    }
     private void Select_Click(object sender, RoutedEventArgs e)
     {
       // create conditions
       TabControl c = Parent as TabControl;
       ResultList list = new ResultList();
       list.Conditions = Conditions;
-      list.Question ="Customer";
+      if (FilterName == "")
+        FilterName = "Default Customer";
+      list.Question = FilterName;
+      list.Header = TruncatedName(FilterName);
       c.Items.Insert(c.SelectedIndex +1,list);
       c.SelectedIndex = c.SelectedIndex+1;
     }
