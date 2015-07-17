@@ -43,12 +43,12 @@ namespace MiniDatabase.Records
       Clear();
     }
 
-    public List<Record> Select(object condition, int offset, int count)
+    public List<Record> Select( List<ConditionRule> conditions, int offset, int count)
     {
       List<Record> rec = new List<Record>();
       if (count < 0)
         count = _records.Count;
-      if (condition == null)
+      if (conditions == null || conditions.Count == 0 )
       {
         for (int i = 0; i < count; i++)
         {
@@ -57,7 +57,24 @@ namespace MiniDatabase.Records
         }
       }
       else
-        throw new NotImplementedException("Selection of the records");
+      {
+        foreach (Record record in _records)
+        {
+          bool accepted = true;
+          foreach (ConditionRule c in conditions)
+          {
+            if (c.Accept(record) == false)
+            {
+              accepted = false;
+              break;
+            }
+          }
+          if (accepted == true)
+            rec.Add(record);
+          if (rec.Count == count)
+            break;
+        }
+      }
       return rec;
     }
 
@@ -86,7 +103,7 @@ namespace MiniDatabase.Records
         onInfoHandler("Refreshing database...");
       else
         onInfoHandler("Selecting records by query " + query + "\r\n..");
-      List<Condition> conditions = this.ParseQuery(query);
+      List<ConditionRule> conditions = this.ParseQuery(query);
 
       if (conditions == null)
       {
@@ -99,9 +116,9 @@ namespace MiniDatabase.Records
       foreach (Record candidate in _records)
       {
         bool isMatch = true;
-        foreach (Condition c in conditions)
+        foreach (ConditionRule c in conditions)
         {
-          if (!c.Compare(candidate))
+          if (!c.Accept(candidate))
           {
             isMatch = false;
             break;
@@ -116,7 +133,7 @@ namespace MiniDatabase.Records
       return results;
     }
 
-    private Condition ConvertToCondition(String s)
+    private ConditionRule ConvertToCondition(String s)
     {
       try
       {
@@ -138,13 +155,13 @@ namespace MiniDatabase.Records
       return null;
     }
 
-    private List<Condition> ParseQuery(string s)
+    private List<ConditionRule> ParseQuery(string s)
     {
-      List<Condition> result = new List<Condition>();
+      List<ConditionRule> result = new List<ConditionRule>();
       string[] lines = s.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
       foreach (string line in lines)
       {
-        Condition c = ConvertToCondition(line);
+        ConditionRule c = ConvertToCondition(line);
         if (c == null)
           return null;
         result.Add(c);

@@ -6,14 +6,14 @@ using MiniDatabase.Records;
 
 namespace MiniDatabase.SearchEngine.Conditions
 {
-  public class ConditionContains : Condition
+  public class ConditionContains : ConditionRule
   {
     public ConditionContains()
     {
       //nothing there so far, just initialization
     }
 
-    override public void Compare(ValueText v, ref bool result)
+    override public void Accept(ValueText v, ref bool result)
     {
       ValueText r = Reference as ValueText;
       result = v.Text.Contains(v.Text);

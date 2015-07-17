@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniDatabase.SearchEngine.Conditions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,12 +32,29 @@ namespace MiniDatabase.Content.ResultsTab
       set;
     }
 
+    List<ConditionRule> Conditions
+    {
+      get;
+      set;
+    }
+
     private void ToggleButton_Click(object sender, RoutedEventArgs e)
     {
       ToggleButton b = sender as ToggleButton;
       ListBox box = FindName("Operations") as ListBox;
       // change to the othername        
       box.DisplayMemberPath = (b.IsChecked == true)? "InvertedOperationName" : "OperationName";      
+    }
+
+    private void Select_Click(object sender, RoutedEventArgs e)
+    {
+      // create conditions
+      TabControl c = Parent as TabControl;
+      ResultList list = new ResultList();
+      list.Conditions = Conditions;
+      list.Question ="Customer";
+      c.Items.Insert(c.SelectedIndex +1,list);
+      c.SelectedIndex = c.SelectedIndex+1;
     }
   }
 }

@@ -18,7 +18,7 @@
       <ToggleButton Margin="5,5,5,5" Click="ToggleButton_Click">Invert</ToggleButton>
       <Button Margin="5,5,5,5">And</Button>
       <Button Margin="5,5,5,5">Clear</Button>
-      <Button Margin="5,5,5,5">Select!</Button>
+      <Button Margin="5,5,5,5" Click="Select_Click">Select!</Button>
     </UniformGrid>
     <Grid>
       <Grid.ColumnDefinitions>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MiniDatabase.SearchEngine.Conditions
 {
-  public class ConditionLess : Condition
+  public class ConditionLess : ConditionRule
   {
 
   }

@@ -8,9 +8,9 @@ namespace MiniDatabase.Records
 {
   public abstract class Value
   {
-    public void Eval(Condition con, ref bool result)
+    public void Eval(ConditionRule con, ref bool result)
     {
-      con.Compare(this, ref result);
+      con.Accept(this, ref result);
     }
 
     public virtual void Save(System.IO.BinaryWriter writer)

@@ -31,9 +31,9 @@ namespace MiniDatabase.Misc
       get;
       set;
     }
-    public Condition Create(bool negative, int index, Value val)
+    public ConditionRule Create(bool negative, int index, Value val)
     {
-      Condition c = null;
+      ConditionRule c = null;
       switch (CType)
       {
         case ConditionType.CContain:

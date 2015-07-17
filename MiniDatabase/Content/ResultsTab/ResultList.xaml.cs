@@ -15,6 +15,7 @@ using MiniDatabase.Records;
 using System.Collections.ObjectModel;
 using MiniDatabase.Misc;
 using System.Dynamic;
+using MiniDatabase.SearchEngine.Conditions;
 
 namespace MiniDatabase.Content.ResultsTab
 {
@@ -23,7 +24,7 @@ namespace MiniDatabase.Content.ResultsTab
   /// </summary>
   public partial class ResultList : RecordableTab
   {
-    ObservableCollection<object> Results
+    public ObservableCollection<object> Results
     {
       get;
       set;
@@ -35,7 +36,7 @@ namespace MiniDatabase.Content.ResultsTab
       set;
     }
 
-    public object Condition
+    public List<ConditionRule> Conditions
     {
       get;
       set;
@@ -77,17 +78,16 @@ namespace MiniDatabase.Content.ResultsTab
 
     public void ReloadEntries()
     {
-      Results.Clear();
       RecordsManager manager = DataContext as RecordsManager;
       if (DataContext == null)
         return;
-      List<Record> l = manager.Select(Condition, StartOffset, MaxPerPage);
+      List<Record> l = manager.Select(Conditions, StartOffset, MaxPerPage);
       if (l.Count == 0)
       {
         ParentContent.OnInfo("No more entries");
         return;
       }
-
+      Results.Clear();
       List<RecordDescription> d = manager.Description;
       foreach (Record r in l)
       {

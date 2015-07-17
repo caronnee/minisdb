@@ -6,16 +6,16 @@ using MiniDatabase.Records;
 
 namespace MiniDatabase.SearchEngine.Conditions
 {
-  public class ConditionNot : Condition //value bude Null/..co uz
+  public class ConditionNot : ConditionRule //value bude Null/..co uz
   {
-    public Condition ToNegate
+    public ConditionRule ToNegate
     {
       get;
       set;
     }
-    override public bool Compare(Record r)
+    override public bool Accept(Record r)
     {
-      return !ToNegate.Compare(r);
+      return !ToNegate.Accept(r);
     }
 
   }
