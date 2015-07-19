@@ -62,7 +62,7 @@ namespace MiniDatabase.Content.ResultsTab
       TabControl c = Parent as TabControl;
       ResultList list = new ResultList();
       list.Conditions = Conditions;
-      if (FilterName == "")
+      if (FilterName==null || FilterName == "")
         FilterName = "Default Customer";
       list.Question = FilterName;
       list.Header = TruncatedName(FilterName);
