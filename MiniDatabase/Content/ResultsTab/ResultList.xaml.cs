@@ -36,7 +36,7 @@ namespace MiniDatabase.Content.ResultsTab
       set;
     }
 
-    public List<ConditionRule> Conditions
+    public ConditionHolder Conditions
     {
       get;
       set;
@@ -103,6 +103,7 @@ namespace MiniDatabase.Content.ResultsTab
 
     private void InitEntries(object sender, RoutedEventArgs e)
     {
+      Conditions = new ConditionHolder();
       StartOffset = 0;
       RecordsManager manager = DataContext as RecordsManager;
       if (manager == null)

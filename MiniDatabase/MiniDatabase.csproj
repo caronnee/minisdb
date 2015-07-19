@@ -92,6 +92,7 @@
     <Compile Include="Records\Values\ValueDate.cs" />
     <Compile Include="Records\Values\ValueInteger.cs" />
     <Compile Include="Records\Values\ValueText.cs" />
+    <Compile Include="SearchEngine\Conditions\ConditionHolder.cs" />
     <Compile Include="SearchEngine\Conditions\ConditionRule.cs" />
     <Compile Include="SearchEngine\Conditions\ConditionContains.cs" />
     <Compile Include="SearchEngine\Conditions\ConditionEqual.cs" />

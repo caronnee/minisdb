@@ -15,9 +15,9 @@
     </StackPanel>
     <TextBlock Margin="3" HorizontalAlignment="Center" x:Name="ConditionsInString" DockPanel.Dock="Top">Current search options</TextBlock>
     <UniformGrid DockPanel.Dock="Bottom" Rows="1">
-      <ToggleButton Margin="5,5,5,5" Click="ToggleButton_Click">Invert</ToggleButton>
-      <Button Margin="5,5,5,5">And</Button>
-      <Button Margin="5,5,5,5">Clear</Button>
+      <ToggleButton x:Name="InvertCheck"  Margin="5,5,5,5" Click="ToggleButton_Click">Invert</ToggleButton>
+      <Button Margin="5,5,5,5" Click="Add_C_Click">And</Button>
+      <Button Margin="5,5,5,5" Click="Clear_Click">Clear</Button>
       <Button Margin="5,5,5,5" Click="Select_Click">Select!</Button>
     </UniformGrid>
     <Grid>

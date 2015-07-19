@@ -43,37 +43,18 @@ namespace MiniDatabase.Records
       Clear();
     }
 
-    public List<Record> Select( List<ConditionRule> conditions, int offset, int count)
+    public List<Record> Select(ConditionHolder conditions, int offset, int count)
     {
       List<Record> rec = new List<Record>();
       if (count < 0)
         count = _records.Count;
-      if (conditions == null || conditions.Count == 0 )
+
+      foreach (Record record in _records)
       {
-        for (int i = 0; i < count; i++)
-        {
-          if (i + offset < _records.Count)
-            rec.Add(_records[i + offset]);
-        }
-      }
-      else
-      {
-        foreach (Record record in _records)
-        {
-          bool accepted = true;
-          foreach (ConditionRule c in conditions)
-          {
-            if (c.Accept(record) == false)
-            {
-              accepted = false;
-              break;
-            }
-          }
-          if (accepted == true)
-            rec.Add(record);
-          if (rec.Count == count)
-            break;
-        }
+        if ( conditions.Accept(record))
+          rec.Add(record);
+        if (rec.Count == count)
+          break;
       }
       return rec;
     }
