@@ -48,6 +48,7 @@ namespace MiniDatabase.Content.ResultsTab
       MaxPerPage = 100;
       InitializeComponent();
       Question = "Default view";
+      Conditions = new ConditionHolder();
     }
 
     public int MaxPerPage
@@ -103,7 +104,6 @@ namespace MiniDatabase.Content.ResultsTab
 
     private void InitEntries(object sender, RoutedEventArgs e)
     {
-      Conditions = new ConditionHolder();
       StartOffset = 0;
       RecordsManager manager = DataContext as RecordsManager;
       if (manager == null)
