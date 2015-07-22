@@ -20,31 +20,16 @@ namespace MiniDatabase.Records
 
   public class RecordDescription : DependencyObject
   {
-    private ControlValue _vControl;
-    Value _presetValue;
     public Value PresetValue
     {
-      get
-      {
-        return _presetValue;
-      }
-      set
-      {
-        VControl.SetValue(value);
-        _presetValue = value;
-      }
+      get;
+      set;
     }
 
     public ControlValue VControl
     {
-      get
-      {
-        return _vControl;
-      }
-      set
-      {
-        _vControl = value;
-      }
+      get;
+      set;
     }
     public virtual Value CreateValueFromString(String str)
     {

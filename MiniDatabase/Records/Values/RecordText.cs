@@ -31,6 +31,7 @@ namespace MiniDatabase.Records
       base.Load(reader);
       PresetValue = new ValueText();
       PresetValue.Load(reader);
+      VControl.SetValue(PresetValue);
     }
 
     public override Types GetRecordType()
