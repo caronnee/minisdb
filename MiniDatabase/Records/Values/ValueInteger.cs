@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MiniDatabase.SearchEngine.Conditions;
 
 namespace MiniDatabase.Records
 {
@@ -11,6 +12,10 @@ namespace MiniDatabase.Records
     {
       get;
       set;
+    }
+    public override void Eval(ConditionRule con, ref bool result)
+    {
+      con.Accept(this, ref result);
     }
     public ValueInteger(int i)
     {

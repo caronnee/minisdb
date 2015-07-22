@@ -8,7 +8,7 @@ namespace MiniDatabase.Records
 {
   public abstract class Value
   {
-    public void Eval(ConditionRule con, ref bool result)
+    public virtual void Eval(ConditionRule con, ref bool result)
     {
       con.Accept(this, ref result);
     }
