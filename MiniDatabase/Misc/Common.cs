@@ -17,9 +17,9 @@ namespace MiniDatabase.Misc
     static class Common
     {
       public static List<SimpleExpressionHolder> SimpleExpressions = new List<SimpleExpressionHolder>() { 
-        new SimpleExpressionHolder(){ OperationNames=new String[]{ "More than","Less than"}, CType=ConditionType.CLess }, 
-        new SimpleExpressionHolder(){ OperationNames=new String[]{ "Misses", "Contains" }, CType=ConditionType.CContain } ,
-        new SimpleExpressionHolder(){ OperationNames=new String[]{"Differs from", "Equals to"}, CType=ConditionType.CEqual } 
+        new SimpleExpressionHolder(){ OperationNames=new String[]{ "Less than" ,"More or equal than"}, CType=ConditionType.CLess }, 
+        new SimpleExpressionHolder(){ OperationNames=new String[]{ "Contains","Misses"}, CType=ConditionType.CContain } ,
+        new SimpleExpressionHolder(){ OperationNames=new String[]{"Equals to","Differs from"}, CType=ConditionType.CEqual } 
       };
 
       public static char[] Whitespaces = { ' ',  '\a', '\b', '\n', '\r', '\f', '\t', '\v' };

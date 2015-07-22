@@ -16,7 +16,7 @@ namespace MiniDatabase.SearchEngine.Conditions
     override public void Accept(ValueText v, ref bool result)
     {
       ValueText r = Reference as ValueText;
-      result = v.Text.Contains(v.Text);
+      result = r.Text.Contains(v.Text);
     }
   }
 }
