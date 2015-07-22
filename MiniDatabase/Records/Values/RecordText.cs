@@ -13,8 +13,8 @@ namespace MiniDatabase.Records
   {
     public RecordDescriptionText()
     {
-      PresetValue = new ValueText();
       VControl = new InputControlText("");
+      PresetValue = new ValueText();
     }
     public override void Save(BinaryWriter writer)
     {

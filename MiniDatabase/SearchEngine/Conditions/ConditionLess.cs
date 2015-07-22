@@ -7,6 +7,5 @@ namespace MiniDatabase.SearchEngine.Conditions
 {
   public class ConditionLess : ConditionRule
   {
-
   }
 }

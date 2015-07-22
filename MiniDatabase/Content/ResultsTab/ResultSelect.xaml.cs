@@ -23,6 +23,7 @@ namespace MiniDatabase.Content.ResultsTab
   /// </summary>
   public partial class ResultSelect : RecordableTab
   {
+    public static readonly DependencyProperty ConditionProperty = DependencyProperty.Register("Conditions", typeof(ConditionHolder), typeof(RecordableTab), new PropertyMetadata(null));
     public ResultSelect()
     {
       InitializeComponent();
@@ -35,18 +36,24 @@ namespace MiniDatabase.Content.ResultsTab
       set;
     }
 
-    ConditionHolder Conditions
+    public ConditionHolder Conditions
     {
-      get;
-      set;
+      get
+      {
+        return (ConditionHolder)GetValue(ConditionProperty);
+      }
+      set
+      {
+        SetValue(ConditionProperty, value);
+      }
     }
 
     private void ToggleButton_Click(object sender, RoutedEventArgs e)
     {
-      ToggleButton b = sender as ToggleButton;
-      ListBox box = FindName("Operations") as ListBox;
-      // change to the othername        
-      box.DisplayMemberPath = (b.IsChecked == true) ? "InvertedOperationName" : "OperationName";
+      foreach (SimpleExpressionHolder s in Misc.Common.SimpleExpressions)
+      {
+        s.MakeSwitch();
+      }
     }
 
     String TruncatedName(String name)
@@ -81,15 +88,16 @@ namespace MiniDatabase.Content.ResultsTab
       ListBox names = FindName("AttributeName") as ListBox;
       int desindex = names.SelectedIndex;
       RecordDescription des = names.SelectedItem as RecordDescription;
-      ToggleButton b = FindName("InvertCheck") as ToggleButton;
 
-      ConditionRule rule = h.Create(b.IsChecked == true, desindex, des.VControl.ConvertToValue());
-      Conditions.Conditions.Add(rule);
+      string sDes =  string.Format( "{0} {1} {2}", des.Name, h.Operation, des.VControl.GetStringValue());
+      ConditionRule rule = h.Create(desindex, des.VControl.ConvertToValue() );
+      des.VControl.SetValue(des.PresetValue);
+      Conditions.Add( rule, sDes);
     }
 
     private void Clear_Click(object sender, RoutedEventArgs e)
     {
-      Conditions.Conditions.Clear();
+      Conditions.Clear();
     }
   }
 }

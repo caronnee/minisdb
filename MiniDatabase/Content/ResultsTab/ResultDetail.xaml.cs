@@ -44,7 +44,7 @@ namespace MiniDatabase.Content.ResultsTab
         Label l = new Label();
         l.Content = r.Name;
         c.Children.Add(l);
-        c.Children.Add(r.VControl as Control);
+        c.Children.Add(r.VControl.Clone());
       }
       Separator s = new Separator();
       c.Children.Add(s);

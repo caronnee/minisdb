@@ -27,5 +27,6 @@ namespace MiniDatabase.SearchEngine.Conditions
       ValueInteger r = Reference as ValueInteger;
       result = r.NNumber == v.NNumber;
     }
+    
   }
 }

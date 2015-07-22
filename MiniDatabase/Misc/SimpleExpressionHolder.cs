@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MiniDatabase.SearchEngine.Conditions;
 using MiniDatabase.Records;
+using System.Windows;
 
 namespace MiniDatabase.Misc
 {
@@ -14,24 +15,55 @@ namespace MiniDatabase.Misc
     CLess,
     CNull
   }
-  public class SimpleExpressionHolder
+  public class SimpleExpressionHolder : DependencyObject
   {
-    public String OperationName
+    public static DependencyProperty OperationProperty = DependencyProperty.Register("Operation", typeof(String), typeof(SimpleExpressionHolder), new PropertyMetadata(null));
+
+    public void MakeSwitch()
+    {
+      OIndex = OIndex == 0?1:0;
+      Operation = OperationNames[OIndex];
+    }
+    public String Operation
+    {
+      get
+      {
+        return (String)GetValue(OperationProperty);
+      }
+      set
+      {
+        SetValue(OperationProperty, value);
+      }
+    }
+
+    int OIndex
     {
       get;
       set;
     }
-    public String InvertedOperationName
+
+    String[] operations;
+    public String[] OperationNames
     {
-      get;
-      set;
+      get
+      {
+        return operations;
+      }
+      set
+      {
+        operations = value;
+        OIndex = 0;
+        Operation = OperationNames[OIndex];
+      }
     }
+
     public ConditionType CType
     {
       get;
       set;
     }
-    public ConditionRule Create(bool negative, int index, Value val)
+
+    public ConditionRule Create( int index, Value val)
     {
       ConditionRule c = null;
       switch (CType)
@@ -59,9 +91,9 @@ namespace MiniDatabase.Misc
       }
       c.Index = index;
       c.Reference = val;
-      if (negative)
-        return new ConditionNot() { ToNegate = c };
-      return c;
+      if (OIndex == 0) // TODO copy for safety
+        return c;
+      return new ConditionNot() { ToNegate = c, Index = c.Index, Reference = c.Reference };
     }
   }
 }

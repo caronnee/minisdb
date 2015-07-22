@@ -25,6 +25,11 @@ namespace MiniDatabase.Records.Text
       Text = val;
     }
 
+    public String GetStringValue()
+    {
+      return Text;
+    }
+
     public void SetValue( Value val)
     {
       if ( val!= null)
@@ -34,6 +39,11 @@ namespace MiniDatabase.Records.Text
     public Value ConvertToValue()
     {
       return new ValueText(Text);
+    }
+
+    public Control Clone()
+    {
+      return new InputControlText(Text);
     }
 
     public InputControlText(String val)

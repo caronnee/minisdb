@@ -14,22 +14,31 @@ namespace MiniDatabase.Records
   {
     Value ConvertToValue();
     void SetValue( Value value );
+    String GetStringValue();
+    Control Clone();
   }
 
   public class RecordDescription : DependencyObject
   {
     private ControlValue _vControl;
+    Value _presetValue;
     public Value PresetValue
     {
-      get;
-      set;
+      get
+      {
+        return _presetValue;
+      }
+      set
+      {
+        VControl.SetValue(value);
+        _presetValue = value;
+      }
     }
 
     public ControlValue VControl
     {
       get
       {
-        _vControl.SetValue(PresetValue);
         return _vControl;
       }
       set

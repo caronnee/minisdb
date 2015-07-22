@@ -13,7 +13,7 @@
       <Label>Name:</Label>
       <TextBox Margin="3" HorizontalAlignment="Center" x:Name="Filter_name"  Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=parentTab:RecordableTab, AncestorLevel=1}, Path=FilterName}"/>
     </StackPanel>
-    <TextBlock Margin="3" HorizontalAlignment="Center" x:Name="ConditionsInString" DockPanel.Dock="Top">Current search options</TextBlock>
+        <TextBlock Margin="3" HorizontalAlignment="Center" x:Name="ConditionsInString" DockPanel.Dock="Top" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=parentTab:RecordableTab, AncestorLevel=1}, Path=Conditions.Name}"  />
     <UniformGrid DockPanel.Dock="Bottom" Rows="1">
       <ToggleButton x:Name="InvertCheck"  Margin="5,5,5,5" Click="ToggleButton_Click">Invert</ToggleButton>
       <Button Margin="5,5,5,5" Click="Add_C_Click">And</Button>
@@ -27,7 +27,7 @@
         <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
       <ListBox Margin="7"  Grid.Column="0" x:Name="AttributeName" ItemsSource="{Binding Description}" DisplayMemberPath="Name" SelectedIndex="0"/>
-      <ListBox Margin="7" Grid.Column="1" x:Name="Operations" ItemsSource="{x:Static misc:Common.SimpleExpressions}" DisplayMemberPath="OperationName" SelectedIndex="0"/>
+      <ListBox Margin="7" Grid.Column="1" x:Name="Operations" ItemsSource="{x:Static misc:Common.SimpleExpressions}" DisplayMemberPath="Operation" SelectedIndex="0"/>
       <ContentControl Margin="7"  Grid.Column="2" x:Name="User_Entry" Content="{Binding ElementName=AttributeName, Path=SelectedItem.VControl}" >
       </ContentControl>
     </Grid>
