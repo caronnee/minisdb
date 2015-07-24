@@ -20,28 +20,26 @@ namespace MiniDatabase.SearchEngine.Conditions
       set;
     }
 
-    virtual public bool Accept(Record record)
+    public bool Accept(Record record)
     {
-      bool result = false;
-      record.GetValue(Index).Eval(this, ref result);
-      return result;
+      return record.GetValue(Index).Eval(this);
     }
 
-    virtual public void Accept(Value v, ref bool result)
+    virtual public bool Accept(Value v)
     {
-      result = false;
+      return false;
     }
-    virtual public void Accept(ValueText v, ref bool result)
+    virtual public bool Accept(ValueText v)
     {
-      result = false;
+      return false;
     }
-    virtual public void Accept(ValueDate v, ref bool result)
+    virtual public bool Accept(ValueDate v)
     {
-      result = false;
+      return false;
     }
-    virtual public void Accept(ValueInteger v, ref bool result)
+    virtual public bool Accept(ValueInteger v)
     {
-      result = false;
+      return false;
     }
   }
 }

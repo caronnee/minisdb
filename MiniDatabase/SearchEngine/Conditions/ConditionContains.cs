@@ -12,11 +12,21 @@ namespace MiniDatabase.SearchEngine.Conditions
     {
       //nothing there so far, just initialization
     }
-
-    override public void Accept(ValueText v, ref bool result)
+    override public bool Accept(ValueText v)
     {
       ValueText r = Reference as ValueText;
-      result = r.Text.Contains(v.Text);
+      return r.Text.Contains(v.Text);
+    }
+
+    override public bool Accept(ValueDate v)
+    {
+      ValueDate r = Reference as ValueDate;
+      return r.ToString().Contains(v.ToString());
+    }
+
+    override public bool Accept(ValueInteger v)
+    {
+      return Reference.ToString().Contains(v.ToString());
     }
   }
 }

@@ -8,25 +8,20 @@ namespace MiniDatabase.SearchEngine.Conditions
 {
   public class ConditionEqual : ConditionRule
   {
-    override public void Accept(Value v, ref bool result)
-    {
-      result = false;
-    }
-    override public void Accept(ValueText v, ref bool result)
+    override public bool Accept(ValueText v)
     {
       ValueText t = Reference as ValueText;
-      result = v.Text.Equals(t);
+      return v.Text.Equals(t);
     }
-    override public void Accept(ValueDate v, ref bool result)
+    override public bool Accept(ValueDate v)
     {
       ValueDate r = Reference as ValueDate;
-      result = r.DTime == v.DTime;
+      return r.DTime == v.DTime;
     }
-    override public void Accept(ValueInteger v, ref bool result)
+    override public bool Accept(ValueInteger v)
     {
       ValueInteger r = Reference as ValueInteger;
-      result = r.NNumber == v.NNumber;
-    }
-    
+      return r.NNumber == v.NNumber;
+    }    
   }
 }

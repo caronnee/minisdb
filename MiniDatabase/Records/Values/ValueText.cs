@@ -14,9 +14,9 @@ namespace MiniDatabase.Records
       set;
     }
 
-    public override void Eval(ConditionRule con, ref bool result)
+    public override bool Eval(ConditionRule con)
     {
-      con.Accept(this, ref result);
+      return con.Accept(this);
     }
 
     public ValueText(string txt = "")

@@ -98,7 +98,6 @@
     <Compile Include="SearchEngine\Conditions\ConditionEqual.cs" />
     <Compile Include="SearchEngine\Conditions\ConditionLess.cs" />
     <Compile Include="SearchEngine\Conditions\ConditionNot.cs" />
-    <Compile Include="SearchEngine\Conditions\ConditionNull.cs" />
     <Page Include="ContentPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
