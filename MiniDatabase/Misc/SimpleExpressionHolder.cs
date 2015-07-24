@@ -63,7 +63,7 @@ namespace MiniDatabase.Misc
       set;
     }
 
-    public ConditionRule Create( int index, Value val)
+    public IConditionRule Create( int index, Value val)
     {
       ConditionRule c = null;
       switch (CType)
@@ -93,7 +93,7 @@ namespace MiniDatabase.Misc
       c.Reference = val;
       if (OIndex == 0) // TODO copy for safety
         return c;
-      return new ConditionNot() { ToNegate = c, Index = c.Index, Reference = c.Reference };
+      return new ConditionNot() { ToNegate = c };
     }
   }
 }

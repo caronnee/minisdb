@@ -90,7 +90,7 @@ namespace MiniDatabase.Content.ResultsTab
       RecordDescription des = names.SelectedItem as RecordDescription;
 
       string sDes =  string.Format( "{0} {1} {2}", des.Name, h.Operation, des.VControl.GetStringValue());
-      ConditionRule rule = h.Create(desindex, des.VControl.ConvertToValue() );
+      IConditionRule rule = h.Create(desindex, des.VControl.ConvertToValue() );
       des.VControl.SetValue(des.PresetValue);
       Conditions.Add( rule, sDes);
     }

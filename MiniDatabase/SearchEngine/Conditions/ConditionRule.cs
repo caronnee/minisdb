@@ -5,8 +5,15 @@ using MiniDatabase.Records;
 
 namespace MiniDatabase.SearchEngine.Conditions
 {
+  public interface IConditionRule
+  {
+    bool Accept(ValueText v);
+    bool Accept(ValueDate v);
+    bool Accept(ValueInteger v);
+  }
+
   //for all select that can be writable
-  abstract public class ConditionRule
+  public class ConditionRule : IConditionRule
   {
     public int Index
     {
@@ -20,15 +27,6 @@ namespace MiniDatabase.SearchEngine.Conditions
       set;
     }
 
-    public bool Accept(Record record)
-    {
-      return record.GetValue(Index).Eval(this);
-    }
-
-    virtual public bool Accept(Value v)
-    {
-      return false;
-    }
     virtual public bool Accept(ValueText v)
     {
       return false;
@@ -40,6 +38,11 @@ namespace MiniDatabase.SearchEngine.Conditions
     virtual public bool Accept(ValueInteger v)
     {
       return false;
+    }
+
+    public bool Accept(Record record)
+    {
+      return record.GetValue(Index).Eval(this);
     }
   }
 }

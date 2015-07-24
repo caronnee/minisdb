@@ -6,22 +6,25 @@ using MiniDatabase.Records;
 
 namespace MiniDatabase.SearchEngine.Conditions
 {
-  public class ConditionNot : ConditionRule
+  public class ConditionNot : IConditionRule
   {
     public ConditionRule ToNegate
     {
       get;
       set;
     }
-    override public bool Accept(ValueText v)
+
+    public bool Accept(ValueText v)
     {
       return !ToNegate.Accept(v);
     }
-    override public bool Accept(ValueDate v)
+    
+    public bool Accept(ValueDate v)
     {
       return !ToNegate.Accept(v);
     }
-    override public bool Accept(ValueInteger v)
+    
+    public bool Accept(ValueInteger v)
     {
       return !ToNegate.Accept(v);
     }

@@ -13,7 +13,7 @@ namespace MiniDatabase.SearchEngine.Conditions
 
     public ConditionHolder()
     {
-      Conditions = new List<ConditionRule>();
+      Conditions = new List<IConditionRule>();
       Clear();
     }
 
@@ -22,7 +22,7 @@ namespace MiniDatabase.SearchEngine.Conditions
       Conditions.Clear();
       Name = "Empty";
     }
-    public void Add(ConditionRule rule, String des)
+    public void Add(IConditionRule rule, String des)
     {
       Conditions.Add(rule);
       if (Conditions.Count == 1)
@@ -32,7 +32,7 @@ namespace MiniDatabase.SearchEngine.Conditions
         Name = Name + " And " + des;
       }
     }
-    List<ConditionRule> Conditions
+    List<IConditionRule> Conditions
     {
       get;
       set;
