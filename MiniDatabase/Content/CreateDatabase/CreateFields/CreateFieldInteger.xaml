@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="MiniDatabase.CreateFields.CreateFieldInteger"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:misc="clr-namespace:MiniDatabase.Misc"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="300">
+    <StackPanel>
+        <DockPanel>
+            <TextBox>Value</TextBox>
+            <misc:NumericUpDown Minimum="{Binding NumericValue, ElementName=Minimum}" Maximum="{Binding NumericValue, ElementName=Maximum}" />
+        </DockPanel>
+        <DockPanel>
+            <TextBox>Maximum</TextBox>
+            <misc:NumericUpDown x:Name="Maximum" Minimum="-1000" Maximum="1000" NumericValue="10"/>
+        </DockPanel>
+        <DockPanel>
+            <TextBox>Minimum</TextBox>
+            <misc:NumericUpDown x:Name="Minimum" Minimum="-1000" Maximum="1000" NumericValue="-1"/>
+    </DockPanel>       
+    </StackPanel>
+</UserControl>

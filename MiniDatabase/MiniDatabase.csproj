@@ -66,17 +66,17 @@
     <Compile Include="Content\ChooseDatabase.xaml.cs">
       <DependentUpon>ChooseDatabase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\ResultsTab\RecordableTab.cs" />
-    <Compile Include="Content\ResultsTab\ResultDetail.xaml.cs">
+    <Compile Include="Content\Results\ResultsTab\RecordableTab.cs" />
+    <Compile Include="Content\Results\ResultsTab\ResultDetail.xaml.cs">
       <DependentUpon>ResultDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\ResultsTab\ResultList.xaml.cs">
+    <Compile Include="Content\Results\ResultsTab\ResultList.xaml.cs">
       <DependentUpon>ResultList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\ResultsTab\ResultSelect.xaml.cs">
+    <Compile Include="Content\Results\ResultsTab\ResultSelect.xaml.cs">
       <DependentUpon>ResultSelect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateFields\CreateFieldBase.cs" />
+    <Compile Include="Content\CreateDatabase\CreateFields\CreateFieldBase.cs" />
     <Compile Include="Exceptions\ExceptionBadData.cs" />
     <Compile Include="Exceptions\ExceptionNoData.cs" />
     <Compile Include="Misc\BindableDynamicDictionary.cs" />
@@ -114,11 +114,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\CreateDatabase.xaml">
+    <Page Include="Content\CreateDatabase\CreateDatabase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\CreateEnums.xaml">
+    <Page Include="Content\CreateDatabase\CreateEnums.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,39 +126,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Results.xaml">
+    <Page Include="Content\Results\Results.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\ResultsTab\ResultDetail.xaml">
+    <Page Include="Content\Results\ResultsTab\ResultDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\ResultsTab\ResultList.xaml">
+    <Page Include="Content\Results\ResultsTab\ResultList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\ResultsTab\ResultSelect.xaml">
+    <Page Include="Content\Results\ResultsTab\ResultSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateFields\CreateFieldEnum.xaml">
+    <Page Include="Content\CreateDatabase\CreateFields\CreateFieldEnum.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateFields\CreateFieldGeneric.xaml">
+    <Page Include="Content\CreateDatabase\CreateFields\CreateFieldGeneric.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateFields\CreateFieldInteger.xaml">
+    <Page Include="Content\CreateDatabase\CreateFields\CreateFieldInteger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateFields\CreateFieldText.xaml">
+    <Page Include="Content\CreateDatabase\CreateFields\CreateFieldText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateFields\DatabaseProperties.xaml">
+    <Page Include="Content\CreateDatabase\CreateFields\DatabaseProperties.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,28 +173,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Content\ContentGeneric.cs" />
-    <Compile Include="Content\CreateDatabase.xaml.cs">
+    <Compile Include="Content\CreateDatabase\CreateDatabase.xaml.cs">
       <DependentUpon>CreateDatabase.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\CreateEnums.xaml.cs">
+    <Compile Include="Content\CreateDatabase\CreateEnums.xaml.cs">
       <DependentUpon>CreateEnums.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Results.xaml.cs">
+    <Compile Include="Content\Results\Results.xaml.cs">
       <DependentUpon>Results.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateFields\CreateFieldEnum.xaml.cs">
+    <Compile Include="Content\CreateDatabase\CreateFields\CreateFieldEnum.xaml.cs">
       <DependentUpon>CreateFieldEnum.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateFields\CreateFieldGeneric.xaml.cs">
+    <Compile Include="Content\CreateDatabase\CreateFields\CreateFieldGeneric.xaml.cs">
       <DependentUpon>CreateFieldGeneric.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateFields\CreateFieldInteger.xaml.cs">
+    <Compile Include="Content\CreateDatabase\CreateFields\CreateFieldInteger.xaml.cs">
       <DependentUpon>CreateFieldInteger.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateFields\CreateFieldText.xaml.cs">
+    <Compile Include="Content\CreateDatabase\CreateFields\CreateFieldText.xaml.cs">
       <DependentUpon>CreateFieldText.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateFields\DatabaseProperties.xaml.cs">
+    <Compile Include="Content\CreateDatabase\CreateFields\DatabaseProperties.xaml.cs">
       <DependentUpon>DatabaseProperties.xaml</DependentUpon>
     </Compile>
     <Compile Include="Banks\EnumBank.cs" />
