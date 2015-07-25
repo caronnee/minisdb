@@ -12,8 +12,7 @@ namespace MiniDatabase.Misc
   {
     CContain,
     CEqual,
-    CLess,
-    CNull
+    CLess
   }
   public class SimpleExpressionHolder : DependencyObject
   {
@@ -75,17 +74,12 @@ namespace MiniDatabase.Misc
           }
         case ConditionType.CEqual:
           {
-            c = new ConditionContains();
+            c = new ConditionEqual();
             break;
           }
         case ConditionType.CLess:
           {
-            c = new ConditionContains();
-            break;
-          }
-        case ConditionType.CNull:
-          {
-            c = new ConditionContains();
+            c = new ConditionLess();
             break;
           }
       }
