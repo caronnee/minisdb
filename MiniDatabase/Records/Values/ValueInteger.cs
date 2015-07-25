@@ -26,5 +26,13 @@ namespace MiniDatabase.Records.Values
     {
       return NNumber.ToString();
     }
+    public override void Load(System.IO.BinaryReader reader)
+    {
+      NNumber = reader.ReadInt32();
+    }
+    public override void Save(System.IO.BinaryWriter writer)
+    {
+      writer.Write(NNumber);
+    }
   }
 }

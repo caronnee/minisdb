@@ -24,7 +24,7 @@ namespace MiniDatabase.Records.Values
     {
       Text = txt;
     }
-  
+
     public override string ToString()
     {
       return Text;
@@ -32,8 +32,7 @@ namespace MiniDatabase.Records.Values
 
     public override void Save(System.IO.BinaryWriter writer)
     {
-      if (Text.Length > 0)
-        writer.Write(Text);
+      writer.Write(Text);
     }
 
     public override void Load(System.IO.BinaryReader reader)

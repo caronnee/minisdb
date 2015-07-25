@@ -24,5 +24,15 @@ namespace MiniDatabase.Records.Values
     {
       return DTime.ToString(Misc.Common.dateFormat);
     }
+
+    public override void Save(System.IO.BinaryWriter writer)
+    {
+      writer.Write( (Int32)DTime.Ticks );
+    }
+
+    public override void Load(System.IO.BinaryReader reader)
+    {
+      DTime = new DateTime( reader.ReadInt32() );
+    }
   }
 }

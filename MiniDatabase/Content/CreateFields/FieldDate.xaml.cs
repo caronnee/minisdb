@@ -22,6 +22,7 @@ namespace MiniDatabase.Content.CreateFields
   {
     public FieldDate()
     {
+      CreatedRecord = new RecordDescriptionDate();
       InitializeComponent();
     }
     /** Checks if this record is fully set up */
@@ -33,7 +34,7 @@ namespace MiniDatabase.Content.CreateFields
     public static DependencyProperty CRecord = DependencyProperty.Register("CreatedRecord", typeof(RecordDescriptionDate), typeof(FieldDate), new PropertyMetadata(null));
 
     public RecordDescriptionDate CreatedRecord
-    {
+    { 
       get { return GetValue(CRecord) as RecordDescriptionDate; }
       set { SetValue(CRecord, value); }
     }
