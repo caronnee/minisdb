@@ -21,15 +21,25 @@ namespace MiniDatabase.SearchEngine.Conditions
     {
       Conditions.Clear();
       Name = "Empty";
+      nodeDescriptions = new List<String>();
     }
+    public List<String> nodeDescriptions;
+
     public void Add(IConditionRule rule, String des)
     {
+      if (Conditions.Count > 0)
+      {
+        Conditions.RemoveAt(Conditions.Count - 1);
+        nodeDescriptions.RemoveAt(nodeDescriptions.Count - 1);        
+      }
       Conditions.Add(rule);
+      nodeDescriptions.Add(des);
       if (Conditions.Count == 1)
         Name = des;
       else
       {
-        Name = Name + " And " + des;
+        foreach( String s in nodeDescriptions )
+          Name = Name + " And " + s;
       }
     }
     List<IConditionRule> Conditions
@@ -58,6 +68,11 @@ namespace MiniDatabase.SearchEngine.Conditions
           return false;
       }
       return true;
+    }
+
+    public void MakeLastPermanent()
+    {
+      Conditions.Add(null);
     }
   }
 }

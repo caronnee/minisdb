@@ -54,6 +54,7 @@ namespace MiniDatabase.Content.ResultsTab
       {
         s.MakeSwitch();
       }
+      UpdateLastCondition();
     }
 
     String TruncatedName(String name)
@@ -81,23 +82,52 @@ namespace MiniDatabase.Content.ResultsTab
       c.SelectedIndex = c.SelectedIndex + 1;
     }
 
-    private void Add_C_Click(object sender, RoutedEventArgs e)
+    private void UpdateLastCondition()
     {
+      // add permanently and create new
       ListBox listbox = FindName("Operations") as ListBox;
       SimpleExpressionHolder h = listbox.SelectedItem as SimpleExpressionHolder;
       ListBox names = FindName("AttributeName") as ListBox;
       int desindex = names.SelectedIndex;
       RecordDescription des = names.SelectedItem as RecordDescription;
+      if (des == null)
+        return;
+      string sDes = string.Format("{0} {1} {2}", des.Name, h.Operation, des.VControl.GetStringValue());
+      IConditionRule rule = h.Create(desindex, des.VControl.ConvertToValue());
+      Conditions.Add(rule, sDes);
+    }
 
-      string sDes =  string.Format( "{0} {1} {2}", des.Name, h.Operation, des.VControl.GetStringValue());
-      IConditionRule rule = h.Create(desindex, des.VControl.ConvertToValue() );
-      des.VControl.SetValue(des.PresetValue);
-      Conditions.Add( rule, sDes);
+    private void Add_C_Click(object sender, RoutedEventArgs e)
+    {
+      Conditions.MakeLastPermanent();
+      ListBox names = FindName("AttributeName") as ListBox;
+      RecordDescription des = names.SelectedItem as RecordDescription;
+      des.VControl.SetValue(des.PresetValue); 
+      UpdateLastCondition();
     }
 
     private void Clear_Click(object sender, RoutedEventArgs e)
     {
       Conditions.Clear();
+      ListBox names = FindName("AttributeName") as ListBox;
+      RecordDescription des = names.SelectedItem as RecordDescription;
+      des.VControl.SetValue(des.PresetValue); 
+      UpdateLastCondition();
+    }
+
+    private void AttributeName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+      UpdateLastCondition();
+    }
+
+    private void User_Entry_KeyUp(object sender, KeyEventArgs e)
+    {
+      UpdateLastCondition();
+    }
+
+    private void User_Entry_MouseUp(object sender, MouseButtonEventArgs e)
+    {
+      UpdateLastCondition();
     }
   }
 }
