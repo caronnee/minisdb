@@ -7,9 +7,7 @@ namespace MiniDatabase.SearchEngine.Conditions
 {
   public interface IConditionRule
   {
-    bool Accept(ValueText v);
-    bool Accept(ValueDate v);
-    bool Accept(ValueInteger v);
+    bool Accept(Record record);
   }
 
   //for all select that can be writable

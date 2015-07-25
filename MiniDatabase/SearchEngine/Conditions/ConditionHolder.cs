@@ -62,7 +62,7 @@ namespace MiniDatabase.SearchEngine.Conditions
 
     public bool Accept( Record record )
     {
-      foreach (ConditionRule rule in Conditions)
+      foreach (IConditionRule rule in Conditions)
       {
         if (!rule.Accept(record))
           return false;

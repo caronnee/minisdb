@@ -14,19 +14,9 @@ namespace MiniDatabase.SearchEngine.Conditions
       set;
     }
 
-    public bool Accept(ValueText v)
+    public bool Accept(Record record)
     {
-      return !ToNegate.Accept(v);
-    }
-    
-    public bool Accept(ValueDate v)
-    {
-      return !ToNegate.Accept(v);
-    }
-    
-    public bool Accept(ValueInteger v)
-    {
-      return !ToNegate.Accept(v);
+      return !record.GetValue(ToNegate.Index).Eval(ToNegate);
     }
   }
 }
