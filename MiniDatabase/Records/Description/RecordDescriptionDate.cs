@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MiniDatabase.Misc;
-using MiniDatabase.Records.Text;
-using System.Windows.Controls;
 using System.IO;
+using MiniDatabase.Records.Values;
+using MiniDatabase.Misc;
+using MiniDatabase.Records.InputControl;
 
-namespace MiniDatabase.Records
+namespace MiniDatabase.Records.Description
 {
-  public class RecordDescriptionText : RecordDescription
+  public class RecordDescriptionDate: RecordDescription
   {
-    public RecordDescriptionText()
+    public RecordDescriptionDate()
     {
-      VControl = new InputControlText("");
+      VControl = new InputControlDate();
       PresetValue = new ValueText();
     }
     public override void Save(BinaryWriter writer)
@@ -36,7 +36,7 @@ namespace MiniDatabase.Records
 
     public override Types GetRecordType()
     {
-      return Types.TypeText;
+      return Types.TypeDate;
     }
   }
 }

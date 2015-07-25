@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows;
+using MiniDatabase.Content.CreateFields;
 
 namespace MiniDatabase.Misc
 {
@@ -13,8 +14,8 @@ namespace MiniDatabase.Misc
 
         public TreeAttribute()
         {
-            CreateFields.CreateFieldGeneric c = new CreateFields.CreateFieldGeneric();
-            c.controlCreated += new CreateFields.CreateFieldGeneric.ControlCreated(changeControl);
+            FieldGeneric c = new FieldGeneric();
+            c.controlCreated += new FieldGeneric.ControlCreated(changeControl);
             AttributeContent = c;
         }
 

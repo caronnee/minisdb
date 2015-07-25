@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MiniDatabase.Records;
+using MiniDatabase.Records.Description;
+
 
 namespace MiniDatabase.Content.ResultsTab
 {

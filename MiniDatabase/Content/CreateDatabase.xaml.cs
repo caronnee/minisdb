@@ -13,7 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MiniDatabase.Records;
 using MiniDatabase.Misc;
-using MiniDatabase.CreateFields;
+using MiniDatabase.Content.CreateFields;
+using MiniDatabase.Records.Description;
 
 namespace MiniDatabase.Content
 {
@@ -94,7 +95,7 @@ namespace MiniDatabase.Content
       TreeViewItem attributes = FindName("databaseName") as TreeViewItem;
       foreach (TreeAttribute att in attributes.Items)
       {
-        CreateFieldInterface attInterface = att.AttributeContent as CreateFieldInterface;
+        FieldInterface attInterface = att.AttributeContent as FieldInterface;
         if (!attInterface.Valid())
         {
           //TODO say all invalid nodes that his has

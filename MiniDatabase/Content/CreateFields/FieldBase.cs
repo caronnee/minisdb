@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MiniDatabase.Records;
+using MiniDatabase.Records.Description;
 
-namespace MiniDatabase.CreateFields
+namespace MiniDatabase.Content.CreateFields
 {
-    interface CreateFieldInterface
+    interface FieldInterface
     {
         /** Checks if this record is fully set up */
         bool Valid();

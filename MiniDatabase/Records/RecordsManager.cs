@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MiniDatabase.Misc;
+
 using System.IO;
 using System.Collections.ObjectModel;
+using MiniDatabase.Records.Description;
 using MiniDatabase.SearchEngine.Conditions;
+using MiniDatabase.Misc;
+using MiniDatabase.Records.Values;
+
 
 namespace MiniDatabase.Records
 {

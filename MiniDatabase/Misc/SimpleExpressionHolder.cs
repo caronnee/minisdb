@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MiniDatabase.SearchEngine.Conditions;
-using MiniDatabase.Records;
+
+
 using System.Windows;
+using MiniDatabase.SearchEngine.Conditions;
+using MiniDatabase.Records.Values;
 
 namespace MiniDatabase.Misc
 {

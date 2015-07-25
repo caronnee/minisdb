@@ -11,14 +11,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MiniDatabase.Records;
+using MiniDatabase.Records.Description;
 
-namespace MiniDatabase.CreateFields
+
+namespace MiniDatabase.Content.CreateFields
 {
     /// <summary>
     /// Interaction logic for CreateFieldEnum.xaml
     /// </summary>
-    public partial class CreateFieldEnum : UserControl, CreateFieldInterface
+    public partial class FieldEnum : UserControl, FieldInterface
     {
         //public static readonly DependencyProperty EnumValue = DependencyProperty.Register("EnumSource", typeof(ICollection<Control>), typeof(CreateFieldEnum), new PropertyMetadata(null));
         
@@ -29,7 +30,7 @@ namespace MiniDatabase.CreateFields
                 return Banks.EnumBank.Bank;
             }
         }
-        public CreateFieldEnum()
+        public FieldEnum()
         {
             try
             {

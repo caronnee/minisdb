@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using MiniDatabase.Banks;
 
+
 namespace MiniDatabase.Content
 {
     /// <summary>

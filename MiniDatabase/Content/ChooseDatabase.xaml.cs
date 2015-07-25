@@ -12,8 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
-using MiniDatabase.Misc;
+
 using System.Collections.ObjectModel;
+using MiniDatabase.Misc;
 
 namespace MiniDatabase.Content
 {

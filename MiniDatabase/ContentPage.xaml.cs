@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MiniDatabase.Content;
 
+
+
 namespace MiniDatabase
 {
   /// <summary>
@@ -56,7 +58,7 @@ namespace MiniDatabase
 
     private void RequestNewDatabase(object sender, RoutedEventArgs e)
     {
-      CurrentContent_Result(new Content.CreateDatabase());
+      CurrentContent_Result(new CreateDatabase());
     }
 
     void CurrentContent_Result(Content.ContentGeneric nextPage)

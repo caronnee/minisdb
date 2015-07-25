@@ -11,8 +11,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MiniDatabase.Records.Description;
+using MiniDatabase.Records.Values;
 
-namespace MiniDatabase.Records.Text
+namespace MiniDatabase.Records.InputControl
 {
   /// <summary>
   /// Interaction logic for InputControlText.xaml

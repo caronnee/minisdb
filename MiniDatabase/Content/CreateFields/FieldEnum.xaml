@@ -1,14 +1,14 @@
-﻿<UserControl x:Class="MiniDatabase.CreateFields.CreateFieldEnum"
+﻿<UserControl x:Class="MiniDatabase.Content.CreateFields.FieldEnum"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="300" xmlns:my="clr-namespace:MiniDatabase.CreateFields">
+             d:DesignHeight="150" d:DesignWidth="300" xmlns:my="clr-namespace:MiniDatabase.Content.CreateFields">
     <StackPanel>
         <DockPanel Margin="10,10">
             <Label>Enum set</Label>
-            <ComboBox Name="EnumName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CreateFieldEnum, AncestorLevel=1}, Path=EnumSource.Collections}" DisplayMemberPath="Name" SelectedIndex="0">
+            <ComboBox Name="EnumName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FieldEnum, AncestorLevel=1}, Path=EnumSource.Collections}" DisplayMemberPath="Name" SelectedIndex="0">
             </ComboBox>
         </DockPanel>
         <DockPanel Margin="10,10">

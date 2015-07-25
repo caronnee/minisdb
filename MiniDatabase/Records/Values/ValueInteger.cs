@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using MiniDatabase.SearchEngine.Conditions;
 
-namespace MiniDatabase.Records
+
+namespace MiniDatabase.Records.Values
 {
   public class ValueInteger : Value
   {

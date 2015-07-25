@@ -11,11 +11,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MiniDatabase.Records;
+
 using System.Collections.ObjectModel;
-using MiniDatabase.Misc;
+
 using System.Dynamic;
 using MiniDatabase.SearchEngine.Conditions;
+using MiniDatabase.Records;
+using MiniDatabase.Records.Description;
+using MiniDatabase.Misc;
+
 
 namespace MiniDatabase.Content.ResultsTab
 {

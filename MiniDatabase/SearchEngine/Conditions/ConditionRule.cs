@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using MiniDatabase.Records;
+using MiniDatabase.Records.Values;
+
 
 namespace MiniDatabase.SearchEngine.Conditions
 {

@@ -12,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MiniDatabase.CreateFields
+namespace MiniDatabase.Content.CreateFields
 {
     /// <summary>
-    /// Interaction logic for DatabaseProperties.xaml
+    /// Interaction logic for FieldProperties.xaml
     /// </summary>
-    public partial class DatabaseProperties : UserControl
+    public partial class FieldProperties : UserControl
     {
-        public DatabaseProperties()
+        public FieldProperties()
         {
             InitializeComponent();
         }

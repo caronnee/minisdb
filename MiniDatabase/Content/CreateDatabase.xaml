@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:misc="clr-namespace:MiniDatabase.Misc"
-             xmlns:createFields="clr-namespace:MiniDatabase.CreateFields"
+             xmlns:createFields="clr-namespace:MiniDatabase.Content.CreateFields"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="430">
   <my:ContentGeneric.Resources>
@@ -23,7 +23,7 @@
       <TreeView BorderThickness="0" Name="Attributes" AlternationCount="1">
         <misc:TreeAttribute x:Name="databaseName" Header="DatabaseName" ContextMenu="{StaticResource TreeItemContextMenu}"  CanBeRemoved="False" IsSelected="True" IsExpanded="True">
           <misc:TreeAttribute.AttributeContent >
-            <createFields:DatabaseProperties />
+            <createFields:FieldProperties />
           </misc:TreeAttribute.AttributeContent>
           <misc:TreeAttribute Header="Empty" ContextMenu="{StaticResource TreeItemContextMenu}" CanBeRemoved="False"/>
         </misc:TreeAttribute>

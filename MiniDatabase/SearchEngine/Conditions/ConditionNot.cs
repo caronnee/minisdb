@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MiniDatabase.Records;
 
+
 namespace MiniDatabase.SearchEngine.Conditions
 {
   public class ConditionNot : IConditionRule

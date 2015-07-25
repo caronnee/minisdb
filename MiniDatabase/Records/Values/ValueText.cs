@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using MiniDatabase.SearchEngine.Conditions;
 
-namespace MiniDatabase.Records
+
+namespace MiniDatabase.Records.Values
 {
   public class ValueText : Value
   {

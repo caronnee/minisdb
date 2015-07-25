@@ -11,25 +11,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MiniDatabase.Records;
+using MiniDatabase.Records.Description;
 
-namespace MiniDatabase.CreateFields
+
+namespace MiniDatabase.Content.CreateFields
 {
   /// <summary>
   /// Interaction logic for CreateFieldText.xaml
   /// </summary>
-  public partial class CreateFieldText : UserControl, CreateFieldInterface
+  public partial class FieldText : UserControl, FieldInterface
   {
-    public static DependencyProperty CRecord = DependencyProperty.Register("CreatedRecord", typeof(RecordDescriptionText), typeof(CreateFieldText), new PropertyMetadata(null));
-
-    public CreateFieldText()
-    {
-      CreatedRecord = new RecordDescriptionText();
-      InitializeComponent();
-    }
+    public static DependencyProperty CRecord = DependencyProperty.Register("CreatedRecord", typeof(RecordDescriptionText), typeof(FieldText), new PropertyMetadata(null));
 
     public RecordDescriptionText CreatedRecord
-    {
+     {
       get { return GetValue(CRecord) as RecordDescriptionText; }
       set { SetValue(CRecord, value); }
     }
@@ -40,5 +35,13 @@ namespace MiniDatabase.CreateFields
     {
       return CreatedRecord;
     }
+
+    public FieldText()
+    {
+      CreatedRecord = new RecordDescriptionText();
+      InitializeComponent();
+    }
+
+   
   }
 }
