@@ -16,9 +16,24 @@ namespace MiniDatabase.Records.Description
       VControl = new InputControlInt();
       PresetValue = new ValueInteger(0);
     }
+
+    public int MinValue
+    {
+      get;
+      set;
+    }
+
+    public int MaxValue
+    {
+      get;
+      set;
+    }
+
     public override void Save(BinaryWriter writer)
     {
       base.Save(writer);
+      writer.Write(MinValue);
+      writer.Write(MaxValue);         
       PresetValue.Save(writer);
     }
     public override Value CreateValueFromString(String str)

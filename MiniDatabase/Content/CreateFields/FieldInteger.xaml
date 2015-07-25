@@ -6,18 +6,12 @@
              xmlns:misc="clr-namespace:MiniDatabase.Misc"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="300">
-    <StackPanel>
-        <DockPanel>
-            <TextBox>Value</TextBox>
-            <misc:NumericUpDown Minimum="{Binding NumericValue, ElementName=Minimum}" Maximum="{Binding NumericValue, ElementName=Maximum}" />
-        </DockPanel>
-        <DockPanel>
-            <TextBox>Maximum</TextBox>
-            <misc:NumericUpDown x:Name="Maximum" Minimum="-1000" Maximum="1000" NumericValue="10"/>
-        </DockPanel>
-        <DockPanel>
-            <TextBox>Minimum</TextBox>
-            <misc:NumericUpDown x:Name="Minimum" Minimum="-1000" Maximum="1000" NumericValue="-1"/>
-    </DockPanel>       
-    </StackPanel>
+    <UniformGrid Rows="3" Columns="2">
+        <TextBox>Value</TextBox>
+        <misc:NumericUpDown Minimum="{Binding NumericValue, ElementName=Min, Mode=TwoWay}" Maximum="{Binding NumericValue, ElementName=Max, Mode=TwoWay}"/>
+        <TextBox>Maximum</TextBox>
+        <misc:NumericUpDown x:Name="Max" Minimum="-1000" Maximum="1000" NumericValue="10"/>
+        <TextBox>Minimum</TextBox>
+        <misc:NumericUpDown x:Name="Min" Minimum="-1000" Maximum="1000" NumericValue="-1"/>
+    </UniformGrid>
 </UserControl>
