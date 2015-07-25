@@ -16,19 +16,27 @@ using MiniDatabase.Records.Description;
 namespace MiniDatabase.Content.CreateFields
 {
     /// <summary>
-    /// Interaction logic for CreateFieldInteger.xaml
+    /// Interaction logic for FieldInteger.xaml
     /// </summary>
     public partial class FieldInteger : UserControl, FieldInterface
     {
+      public static DependencyProperty CRecord = DependencyProperty.Register("CreatedRecord", typeof(RecordDescriptionInt), typeof(FieldInteger), new PropertyMetadata(null));
+
+      public RecordDescriptionInt CreatedRecord
+      {
+        get { return GetValue(CRecord) as RecordDescriptionInt; }
+        set { SetValue(CRecord, value); }
+      }
         public FieldInteger()
         {
-            InitializeComponent();
+          CreatedRecord = new RecordDescriptionInt();
+          InitializeComponent();
         }
         public bool Valid() { return true; }
 
         public RecordDescription GetRecordDescription()
         {
-            throw new Exception("not implemented yet");
+          return CreatedRecord;
         }
     }
 }

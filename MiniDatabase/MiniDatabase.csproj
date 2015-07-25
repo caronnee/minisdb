@@ -85,8 +85,12 @@
     <Compile Include="Misc\BindableDynamicDictionary.cs" />
     <Compile Include="Misc\SimpleExpressionHolder.cs" />
     <Compile Include="Records\Description\RecordDescriptionDate.cs" />
+    <Compile Include="Records\Description\RecordDescriptionInt.cs" />
     <Compile Include="Records\InputControl\InputControlDate.xaml.cs">
       <DependentUpon>InputControlDate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Records\InputControl\InputControlInt.xaml.cs">
+      <DependentUpon>InputControlInt.xaml</DependentUpon>
     </Compile>
     <Compile Include="Records\Record.cs" />
     <Compile Include="Records\Description\RecordDescription.cs" />
@@ -174,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Records\InputControl\InputControlDate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Records\InputControl\InputControlInt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

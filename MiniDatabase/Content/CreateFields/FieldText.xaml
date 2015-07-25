@@ -8,6 +8,6 @@
              d:DesignHeight="50" d:DesignWidth="300" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" xmlns:my="clr-namespace:MiniDatabase.Content.CreateFields">
     <DockPanel LastChildFill="True" Margin="10,5" >
         <Label>Default value</Label>
-        <input:InputControlText x:Name="TextField" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:CreateFieldText, AncestorLevel=1}, Path=CreatedRecord.PresetValue.Text}" />
+        <input:InputControlText x:Name="TextField" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FieldText, AncestorLevel=1}, Path=CreatedRecord.PresetValue.Text}" />
     </DockPanel>
 </UserControl>

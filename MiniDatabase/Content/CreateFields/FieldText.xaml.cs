@@ -40,8 +40,6 @@ namespace MiniDatabase.Content.CreateFields
     {
       CreatedRecord = new RecordDescriptionText();
       InitializeComponent();
-    }
-
-   
+    }   
   }
 }
