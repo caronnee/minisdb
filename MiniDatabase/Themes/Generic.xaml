@@ -16,7 +16,7 @@
                                 <ColumnDefinition Width="7*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=misc:NumericUpDown, AncestorLevel=1}, Path=NumericValue}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBox Grid.Column="0" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=misc:NumericUpDown, AncestorLevel=1}, Path=NumericValue}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <StackPanel Orientation="Vertical" Grid.Column="1">
                                 <Button Name="BPlus">+</Button>
                                 <Button Name="BMinus">-</Button>
