@@ -6,27 +6,45 @@ using System.IO;
 using MiniDatabase.Records.Values;
 using MiniDatabase.Misc;
 using MiniDatabase.Records.InputControl;
+using System.Windows;
 
 namespace MiniDatabase.Records.Description
 {
   public class RecordDescriptionInt : RecordDescription
   {
+    public static DependencyProperty MaxValueProp = DependencyProperty.Register("MaxValue", typeof(int), typeof(RecordDescriptionInt), new PropertyMetadata(null));
+    public static DependencyProperty MinValueProp = DependencyProperty.Register("MinValue", typeof(int), typeof(RecordDescriptionInt), new PropertyMetadata(null));
+
     public RecordDescriptionInt()
     {
       VControl = new InputControlInt();
+      MinValue = -1;
+      MaxValue = 10;
       PresetValue = new ValueInteger(0);
     }
 
     public int MinValue
     {
-      get;
-      set;
+      get
+      {
+        return (int)GetValue(MinValueProp);
+      }
+      set
+        {
+          SetValue(MinValueProp, value);
+        }
     }
 
     public int MaxValue
     {
-      get;
-      set;
+      get
+      {
+        return (int)GetValue(MaxValueProp);
+      }
+      set
+      {
+        SetValue(MaxValueProp, value);
+      }
     }
 
     public override void Save(BinaryWriter writer)

@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:input="clr-namespace:MiniDatabase.Records.InputControl"
+             xmlns:my="clr-namespace:MiniDatabase.Content.CreateFields"
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="300" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" xmlns:my="clr-namespace:MiniDatabase.Content.CreateFields">
+             d:DesignHeight="50" d:DesignWidth="300" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
     <DockPanel LastChildFill="True" Margin="10,5" >
         <Label>Default value</Label>
         <input:InputControlText x:Name="TextField" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FieldText, AncestorLevel=1}, Path=CreatedRecord.PresetValue.Text}" />
