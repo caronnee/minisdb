@@ -8,7 +8,7 @@
              d:DesignHeight="150" d:DesignWidth="300">
     <UniformGrid Rows="3" Columns="2">
         <TextBox>Value</TextBox>
-        <misc:NumericUpDown Minimum="{Binding NumericValue, ElementName=Min, Mode=TwoWay}" Maximum="{Binding NumericValue, ElementName=Max, Mode=TwoWay}"/>
+        <misc:NumericUpDown Minimum="{Binding NumericValue, ElementName=Min}" Maximum="{Binding NumericValue, ElementName=Max, Mode=TwoWay}"/>
         <TextBox>Maximum</TextBox>
         <misc:NumericUpDown x:Name="Max" Minimum="-1000" Maximum="1000" NumericValue="10"/>
         <TextBox>Minimum</TextBox>

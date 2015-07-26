@@ -39,20 +39,6 @@ namespace MiniDatabase.Records.Description
       return null;
     }
 
-    public virtual Value ReadValueFromDescription(BinaryReader reader)
-    {
-      Value ret;
-      switch (GetRecordType())
-      {
-        case Types.TypeText:
-          ret = new ValueText();
-          break;
-        default:
-          return null; // unrecognized
-      }
-      return ret;
-    }
-
     public virtual Types GetRecordType()
     {
       throw new MiniDatabase.Exceptions.ExceptionBadData("Bad record type");
@@ -87,6 +73,14 @@ namespace MiniDatabase.Records.Description
         case Types.TypeText:
           {
             return new RecordDescriptionText();
+          }
+        case Types.TypeInteger:
+          {
+            return new RecordDescriptionInt();
+          }
+        case Types.TypeDate:
+          {
+            return new RecordDescriptionDate();
           }
         default:
           throw new ExceptionBadData("Something bad had happened, Harry");

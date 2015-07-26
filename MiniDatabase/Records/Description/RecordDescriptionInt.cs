@@ -43,15 +43,18 @@ namespace MiniDatabase.Records.Description
 
     public override void Load(BinaryReader reader)
     {
+      PresetValue = new ValueInteger(0);
+
       base.Load(reader);
-      PresetValue = new ValueText();
+      MinValue = reader.ReadInt32();
+      MaxValue = reader.ReadInt32();
       PresetValue.Load(reader);
       VControl.SetValue(PresetValue);
     }
 
     public override Types GetRecordType()
     {
-      return Types.TypeText;
+      return Types.TypeInteger;
     }
   }
 }

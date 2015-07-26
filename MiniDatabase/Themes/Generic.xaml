@@ -11,17 +11,13 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=misc:NumericUpDown, AncestorLevel=1}, Path=NumericValue}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <UniformGrid Rows="1" Columns="2">
+                            <TextBox Grid.Column="0" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=misc:NumericUpDown, AncestorLevel=1}, Path=NumericValue}"/>
                             <StackPanel Orientation="Vertical" Grid.Column="1">
                                 <Button Name="BPlus">+</Button>
                                 <Button Name="BMinus">-</Button>
                             </StackPanel>
-                        </Grid>
+                        </UniformGrid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

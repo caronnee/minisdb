@@ -163,7 +163,7 @@ namespace MiniDatabase.Records
     public void ChangeName(string s)
     {
       onInfoHandler("Renaming " + Name + " to " + s);
-      Name = s + Common.DbExt;
+      Name = Common.SaveFolder + s + Common.DbExt;
       // TODO delete the old file, or rename, mark the change
       onInfoHandler("Database renamed");
     }
@@ -217,9 +217,8 @@ namespace MiniDatabase.Records
         Record record = new Record(count);
         for (int i = 0; i < Description.Count; i++)
         {
-          Value val = new ValueText();    // Description[i].ReadValueFromDescription(reader);
-          val.Load(reader);
-          record.SetValue(val, i);
+          Description[i].Load(reader);
+          record.SetValue(Description[i].PresetValue, i);
         }
         AddRecord(record);
       }
