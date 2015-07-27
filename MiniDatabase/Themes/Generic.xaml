@@ -12,7 +12,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <UniformGrid Rows="1" Columns="2">
-                            <TextBox Grid.Column="0" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=misc:NumericUpDown, AncestorLevel=1}, Path=NumericValue}"/>
+                            <TextBox Grid.Column="0" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=misc:NumericUpDown, AncestorLevel=1}, Mode=TwoWay, Path=NumericValue}"/>
                             <StackPanel Orientation="Vertical" Grid.Column="1">
                                 <Button Name="BPlus">+</Button>
                                 <Button Name="BMinus">-</Button>

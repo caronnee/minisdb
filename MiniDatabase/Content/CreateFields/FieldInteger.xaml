@@ -9,7 +9,7 @@
              d:DesignHeight="150" d:DesignWidth="300">
     <UniformGrid Rows="3" Columns="2">
         <TextBox>Value</TextBox>
-    <misc:NumericUpDown Minimum="{Binding NumericValue, ElementName=Min}" Maximum="{Binding NumericValue, ElementName=Max}" NumericValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FieldInteger, AncestorLevel=1}, Path=CreatedRecord.PresetValue.NNumber}"/>
+    <misc:NumericUpDown Minimum="{Binding NumericValue, ElementName=Min}" Maximum="{Binding NumericValue, ElementName=Max}" NumericValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FieldInteger, AncestorLevel=1}, Path=CreatedRecord.PresetValue.NNumber, Mode=TwoWay}"/>
         <TextBox>Maximum</TextBox>
     <misc:NumericUpDown x:Name="Max" Minimum="-1000" Maximum="1000" NumericValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FieldInteger, AncestorLevel=1}, Path=CreatedRecord.MaxValue, Mode=TwoWay}"/>
         <TextBox>Minimum</TextBox>
