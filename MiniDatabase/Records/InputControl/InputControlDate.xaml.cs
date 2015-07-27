@@ -24,16 +24,19 @@ namespace MiniDatabase.Records.InputControl
     public InputControlDate()
     {
       InitializeComponent();
+      SelectedDate = DateTime.Today;
     }
 
     public Control Clone()
     {
-      return new InputControlDate();
+      InputControlDate d = new InputControlDate();
+      d.SelectedDate = SelectedDate;
+      return d;
     }
     public void SetValue(Value value)
     {
       ValueDate d = value as ValueDate;
-      this.SelectedDate = d.DTime;                                   
+      this.SelectedDate = d.DTime;
     }
     public String GetStringValue()
     {

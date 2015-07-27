@@ -15,7 +15,7 @@ namespace MiniDatabase.Records.Values
       set;
     }
 
-    public override bool Eval(ConditionRule con)
+    public bool Eval(ConditionRule con)
     {
       return con.Accept(this);
     }
@@ -30,12 +30,12 @@ namespace MiniDatabase.Records.Values
       return Text;
     }
 
-    public override void Save(System.IO.BinaryWriter writer)
+    public void Save(System.IO.BinaryWriter writer)
     {
       writer.Write(Text);
     }
 
-    public override void Load(System.IO.BinaryReader reader)
+    public void Load(System.IO.BinaryReader reader)
     {
       Text = reader.ReadString();
     }

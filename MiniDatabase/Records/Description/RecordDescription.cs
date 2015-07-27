@@ -92,5 +92,10 @@ namespace MiniDatabase.Records.Description
       get;
       set;
     }
+
+    public virtual Value LoadValueFromStream(BinaryReader reader)
+    {
+      throw new NotImplementedException();
+    }
   }
 }

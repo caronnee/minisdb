@@ -9,13 +9,17 @@ namespace MiniDatabase.Records.Values
 {
   public class ValueDate : Value
   {
-    public DateTime DTime;
+    public DateTime DTime
+    {
+      get;
+      set;
+    }
     public ValueDate(DateTime d)
     {
       DTime = d;
     }
 
-    public override bool Eval(ConditionRule con)
+    public bool Eval(ConditionRule con)
     {
       return con.Accept(this);
     }
@@ -25,14 +29,16 @@ namespace MiniDatabase.Records.Values
       return DTime.ToString(Misc.Common.dateFormat);
     }
 
-    public override void Save(System.IO.BinaryWriter writer)
+    public void Save(System.IO.BinaryWriter writer)
     {
-      writer.Write( (Int32)DTime.Ticks );
+      Int64 toWrite = DTime.Ticks; 
+      writer.Write( toWrite );
     }
 
-    public override void Load(System.IO.BinaryReader reader)
+    public void Load(System.IO.BinaryReader reader)
     {
-      DTime = new DateTime( reader.ReadInt32() );
+      long ticks = reader.ReadInt64();
+      DTime = new DateTime( ticks );
     }
   }
 }

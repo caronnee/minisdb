@@ -47,6 +47,12 @@ namespace MiniDatabase.Records.Description
       }
     }
 
+    public override Value LoadValueFromStream(BinaryReader reader)
+    {
+      Value v = new ValueInteger(0);
+      v.Load(reader);
+      return v;
+    }
     public override void Save(BinaryWriter writer)
     {
       base.Save(writer);
