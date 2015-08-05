@@ -22,16 +22,24 @@ namespace MiniDatabase.Records.InputControl
   /// </summary>
   public partial class InputControlEnum : ComboBox, ControlValue
   {
-    public static DependencyProperty EnumContainerProp = DependencyProperty.Register("EnumContainer", typeof(int), typeof(RecordDescriptionEnum), new PropertyMetadata(null));
+    public static DependencyProperty EnumContainerProp = DependencyProperty.Register("EnumContainer", typeof(EnumCollection), typeof(InputControlEnum), new PropertyMetadata(null));
 
     public EnumCollection EnumContainer
     {
       get { return GetValue(EnumContainerProp) as EnumCollection; }
-      set { SetValue(EnumContainerProp, value); }
+      set { 
+        SetValue(EnumContainerProp, value); 
+      }
+    }
+
+    public void testClick(object sender, MouseButtonEventArgs e)
+    {
+      int index = 0;
     }
 
     public InputControlEnum()
     {
+      EnumContainer = new EnumCollection("Nothing");
       InitializeComponent();
     }
 

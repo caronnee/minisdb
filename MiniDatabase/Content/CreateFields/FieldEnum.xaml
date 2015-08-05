@@ -3,18 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:input="clr-namespace:MiniDatabase.Records.InputControl"
+             xmlns:my="clr-namespace:MiniDatabase.Content.CreateFields"  
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="300" xmlns:my="clr-namespace:MiniDatabase.Content.CreateFields">
+             d:DesignHeight="150" d:DesignWidth="300">
     <StackPanel>
         <DockPanel Margin="10,10">
             <Label>Enum set</Label>
-            <ComboBox Name="EnumName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FieldEnum, AncestorLevel=1}, Path=EnumSource.Collections}" DisplayMemberPath="Name" SelectedIndex="0">
-            </ComboBox>
+            <ComboBox x:Name="EnumName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FieldEnum, AncestorLevel=1}, Path=EnumSource.Collections}" DisplayMemberPath="Name" />
         </DockPanel>
         <DockPanel Margin="10,10">
             <Label>Default value</Label>
-            <ComboBox Name="EnumValues" ItemsSource="{Binding ElementName=EnumName, Path=SelectedItem.Values}" IsReadOnly="True" IsSynchronizedWithCurrentItem="True">
-            </ComboBox>
+            <input:InputControlEnum x:Name="EnumValues" EnumContainer="{Binding ElementName=EnumName, Path=SelectedItem, Mode=TwoWay}"/>
         </DockPanel>
     </StackPanel>
 </UserControl>
