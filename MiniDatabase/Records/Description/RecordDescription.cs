@@ -34,6 +34,7 @@ namespace MiniDatabase.Records.Description
       get;
       set;
     }
+
     public virtual Value CreateValueFromString(String str)
     {
       return null;
