@@ -78,18 +78,15 @@ namespace MiniDatabase.Banks
             Collections = new ObservableCollection<EnumCollection>();
         }
 
-        private static char[] separators = new char[] { '.', ' ' };
-        private string EnumConfigFile = "enums.config";
-
         private void Load()
         {
           try
           {
-            StreamReader reader = new StreamReader(EnumConfigFile);
+            StreamReader reader = new StreamReader(Misc.Common.SaveFolder + Misc.Common.EnumConfigFile);
             while (reader.EndOfStream == false)
             {
               String s = reader.ReadLine();
-              String[] val = s.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+              String[] val = s.Split(Misc.Common.Whitespaces, StringSplitOptions.RemoveEmptyEntries);
               int index = CreateEnum(val[0]);
               EnumCollection c = Collections.ElementAt(index);
               for (int i = 1; i < val.GetLength(0); i++)
@@ -105,7 +102,7 @@ namespace MiniDatabase.Banks
         }
         public void Save()
         {
-          StreamWriter writer = new StreamWriter(EnumConfigFile);
+          StreamWriter writer = new StreamWriter(Misc.Common.SaveFolder + Misc.Common.EnumConfigFile);
           foreach (EnumCollection c in Collections)
           {
             if (c.Values.Count == 0)
@@ -113,7 +110,7 @@ namespace MiniDatabase.Banks
             writer.Write(c.Name);
             foreach (String s in c.Values)
             {
-              writer.Write(separators[0]);
+              writer.Write(Misc.Common.Whitespaces[0]);
               writer.Write(s);
             }
             writer.WriteLine();
