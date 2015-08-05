@@ -17,7 +17,7 @@ using System.ComponentModel;
 
 namespace MiniDatabase.Banks
 {
-  public class EnumCollection : INotifyPropertyChanged
+  public class EnumCollection : DependencyObject
   {
     public ObservableCollection<String> Values
     {
