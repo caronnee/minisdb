@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:input="clr-namespace:MiniDatabase.Records.InputControl"
+             xmlns:my="clr-namespace:MiniDatabase.Content.CreateFields"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="300" ItemsSource="{Binding Path=EnumContainer.Values}" MouseDoubleClick="testClick">
+             d:DesignHeight="30" d:DesignWidth="300" ItemsSource="{Binding RelativeSource={RelativeSource Self}, Path=EnumContainer.Values}" >
 </ComboBox>

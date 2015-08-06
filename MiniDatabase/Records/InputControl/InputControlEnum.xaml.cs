@@ -3,6 +3,7 @@ using MiniDatabase.Records.Description;
 using MiniDatabase.Records.Values;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -30,11 +31,6 @@ namespace MiniDatabase.Records.InputControl
       set { 
         SetValue(EnumContainerProp, value); 
       }
-    }
-
-    public void testClick(object sender, MouseButtonEventArgs e)
-    {
-      int index = 0;
     }
 
     public InputControlEnum()
