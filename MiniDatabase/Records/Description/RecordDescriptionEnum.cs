@@ -11,18 +11,12 @@ using System.Windows;
 
 namespace MiniDatabase.Records.Description
 {
-  class RecordDescriptionEnum: RecordDescription
+  public class RecordDescriptionEnum: RecordDescription
   {
     public RecordDescriptionEnum() {
+      // -1 - not selected
       PresetValue = new ValueInteger(-1);
       VControl = new InputControlEnum();
-    }
-
-    public override Value CreateValueFromString(String str)
-    {
-      return null;
-      //int index = EnumContainer.Values.IndexOf(str);
-      //return new ValueInteger(index);
     }
 
     public override Types GetRecordType()

@@ -16,36 +16,36 @@ using MiniDatabase.Records.Description;
 
 namespace MiniDatabase.Content.CreateFields
 {
-    /// <summary>
-    /// Interaction logic for CreateFieldEnum.xaml
-    /// </summary>
-    public partial class FieldEnum : UserControl, FieldInterface
-    {
-        //public static readonly DependencyProperty EnumValue = DependencyProperty.Register("EnumSource", typeof(ICollection<Control>), typeof(CreateFieldEnum), new PropertyMetadata(null));
-        
-        public Banks.EnumBank EnumSource
-        {
-            get
-            {
-                return Banks.EnumBank.Bank;
-            }
-        }
-        public FieldEnum()
-        {
-            try
-            {
-                InitializeComponent();
-            }
-            catch (Exception e)
-            {
-                Console.Write("Exception occured {0}",e.ToString());
-            }
-        }
-        public bool Valid() { return true; }
+  /// <summary>
+  /// Interaction logic for CreateFieldEnum.xaml
+  /// </summary>
+  public partial class FieldEnum : UserControl, FieldInterface
+  {
+    //public static readonly DependencyProperty EnumValue = DependencyProperty.Register("EnumSource", typeof(ICollection<Control>), typeof(CreateFieldEnum), new PropertyMetadata(null));
 
-        public RecordDescription GetRecordDescription()
-        {
-            throw new Exception("Not implemented yet");
-        }
+    public Banks.EnumBank EnumSource
+    {
+      get
+      {
+        return Banks.EnumBank.Bank;
+      }
     }
+    public static DependencyProperty CRecord = DependencyProperty.Register("CreatedRecord", typeof(RecordDescriptionEnum), typeof(FieldEnum), new PropertyMetadata(null));
+
+    public RecordDescriptionEnum CreatedRecord
+    {
+      get { return GetValue(CRecord) as RecordDescriptionEnum; }
+      set { SetValue(CRecord, value); }
+    }
+    public FieldEnum()
+    {
+      InitializeComponent();
+    }
+    public bool Valid() { return true; }
+
+    public RecordDescription GetRecordDescription()
+    {
+      return CreatedRecord;
+    }
+  }
 }

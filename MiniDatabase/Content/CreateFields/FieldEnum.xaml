@@ -14,7 +14,7 @@
         </DockPanel>
         <DockPanel Margin="10,10">
             <Label>Default value</Label>
-            <input:InputControlEnum x:Name="EnumValues" EnumContainer="{Binding ElementName=EnumName, Path=SelectedItem, Mode=TwoWay}"/>
+            <input:InputControlEnum x:Name="EnumValues" EnumContainer="{Binding ElementName=EnumName, Path=SelectedItem, Mode=TwoWay}" />
         </DockPanel>
     </StackPanel>
 </UserControl>

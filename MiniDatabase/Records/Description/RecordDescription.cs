@@ -35,11 +35,6 @@ namespace MiniDatabase.Records.Description
       set;
     }
 
-    public virtual Value CreateValueFromString(String str)
-    {
-      return null;
-    }
-
     public virtual Types GetRecordType()
     {
       throw new MiniDatabase.Exceptions.ExceptionBadData("Bad record type");

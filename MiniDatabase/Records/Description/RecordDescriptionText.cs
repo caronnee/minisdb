@@ -22,10 +22,6 @@ namespace MiniDatabase.Records.Description
       base.Save(writer);
       PresetValue.Save(writer);
     }
-    public override Value CreateValueFromString(String str)
-    {
-      return new ValueText(str);
-    }
 
     public override void Load(BinaryReader reader)
     {

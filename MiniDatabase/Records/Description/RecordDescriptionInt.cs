@@ -60,10 +60,6 @@ namespace MiniDatabase.Records.Description
       writer.Write(MaxValue);         
       PresetValue.Save(writer);
     }
-    public override Value CreateValueFromString(String str)
-    {
-      return new ValueInteger( Int32.Parse(str));
-    }
 
     public override void Load(BinaryReader reader)
     {
