@@ -11,6 +11,7 @@ namespace MiniDatabase.Records.Values
   {
     bool Eval(ConditionRule con);
     void Save(System.IO.BinaryWriter writer);
-    void Load(System.IO.BinaryReader writer);
+    void Load(System.IO.BinaryReader reader);
+    Value Clone();
   }
 }

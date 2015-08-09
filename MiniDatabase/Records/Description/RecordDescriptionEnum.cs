@@ -15,7 +15,7 @@ namespace MiniDatabase.Records.Description
   {
     public RecordDescriptionEnum() {
       // -1 - not selected
-      PresetValue = new ValueInteger(-1);
+      PresetValue = new ValueInteger();
       VControl = new InputControlEnum();
     }
 
@@ -40,7 +40,7 @@ namespace MiniDatabase.Records.Description
       InputControlEnum c = new InputControlEnum();
       c.EnumContainer = EnumBank.Bank.Find(Name);
       VControl = c;
-      PresetValue = new ValueInteger(-1);
+      PresetValue = new ValueInteger();
       PresetValue.Load(reader);
     }
   }

@@ -14,13 +14,21 @@ namespace MiniDatabase.Records.Values
       get;
       set;
     }
+
+    public Value Clone()
+    {
+      ValueInteger i = new ValueInteger();
+      i.NNumber = NNumber;
+      return i;
+    }
+
     public bool Eval(ConditionRule con)
     {
       return con.Accept(this);
     }
-    public ValueInteger(int i)
+    public ValueInteger()
     {
-      NNumber = i;
+      NNumber = -1;
     }
     public override string ToString()
     {

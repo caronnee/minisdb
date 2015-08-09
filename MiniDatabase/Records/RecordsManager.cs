@@ -217,7 +217,9 @@ namespace MiniDatabase.Records
         Record record = new Record(count);
         for (int i = 0; i < Description.Count; i++)
         {
-          record.SetValue(Description[i].LoadValueFromStream(reader), i);
+          Value val = Description[i].PresetValue.Clone();
+          val.Load(reader);
+          record.SetValue(val, i);
         }
         AddRecord(record);
       }

@@ -14,9 +14,17 @@ namespace MiniDatabase.Records.Values
       get;
       set;
     }
-    public ValueDate(DateTime d)
+
+    public Value Clone()
     {
-      DTime = d;
+      ValueDate d = new ValueDate();
+      d.DTime = DTime;
+      return d;
+    }
+
+    public ValueDate()
+    {
+      DTime = DateTime.Today;
     }
 
     public bool Eval(ConditionRule con)

@@ -41,8 +41,9 @@ namespace MiniDatabase.Records.InputControl
 
     public Value ConvertToValue()
     {
-      int index = SelectedIndex;
-      return new ValueInteger(index);
+      ValueInteger ret = new ValueInteger();
+      ret.NNumber = SelectedIndex;
+      return ret;
     }
     
     public void SetValue(Value value)

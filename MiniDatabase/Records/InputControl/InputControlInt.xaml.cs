@@ -29,7 +29,9 @@ namespace MiniDatabase.Records.InputControl
 
     public Value ConvertToValue()
     {
-      return new ValueInteger(NumericValue);
+      ValueInteger i = new ValueInteger();
+      i.NNumber = NumericValue;
+      return i;
     }
     public void SetValue(Value value)
     {

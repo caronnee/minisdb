@@ -44,9 +44,10 @@ namespace MiniDatabase.Records.InputControl
     }
     public Value ConvertToValue()
     {
+      ValueDate date = new ValueDate();
       if ( SelectedDate!=null)
-        return new ValueDate((DateTime)SelectedDate);
-      return new ValueDate( new DateTime());
+       date.DTime = (DateTime)SelectedDate;
+      return date;
     }
 
   }

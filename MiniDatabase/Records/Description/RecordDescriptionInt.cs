@@ -20,7 +20,7 @@ namespace MiniDatabase.Records.Description
       VControl = new InputControlInt();
       MinValue = -1;
       MaxValue = 10;
-      PresetValue = new ValueInteger(0);
+      PresetValue = new ValueInteger();
     }
 
     public int MinValue
@@ -47,12 +47,6 @@ namespace MiniDatabase.Records.Description
       }
     }
 
-    public override Value LoadValueFromStream(BinaryReader reader)
-    {
-      Value v = new ValueInteger(0);
-      v.Load(reader);
-      return v;
-    }
     public override void Save(BinaryWriter writer)
     {
       base.Save(writer);
@@ -63,7 +57,7 @@ namespace MiniDatabase.Records.Description
 
     public override void Load(BinaryReader reader)
     {
-      PresetValue = new ValueInteger(0);
+      PresetValue = new ValueInteger();
 
       base.Load(reader);
       MinValue = reader.ReadInt32();

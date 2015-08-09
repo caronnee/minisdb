@@ -14,14 +14,7 @@ namespace MiniDatabase.Records.Description
     public RecordDescriptionDate()
     {
       VControl = new InputControlDate();
-      PresetValue = new ValueDate(new DateTime(0));
-    }
-
-    public override Value LoadValueFromStream(BinaryReader reader)
-    {
-      Value v = new ValueDate( DateTime.Today );
-      v.Load(reader);
-      return v;
+      PresetValue = new ValueDate();
     }
 
     public override void Save(BinaryWriter writer)
@@ -33,7 +26,7 @@ namespace MiniDatabase.Records.Description
     public override void Load(BinaryReader reader)
     {
       base.Load(reader);
-      PresetValue = new ValueDate(DateTime.Today);
+      PresetValue = new ValueDate();
       PresetValue.Load(reader);
       VControl.SetValue(PresetValue);
     }

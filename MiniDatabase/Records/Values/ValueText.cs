@@ -14,6 +14,12 @@ namespace MiniDatabase.Records.Values
       get;
       set;
     }
+    public Value Clone()
+    {
+      ValueText text = new ValueText();
+      text.Text = Text;
+      return text;
+    }
 
     public bool Eval(ConditionRule con)
     {
