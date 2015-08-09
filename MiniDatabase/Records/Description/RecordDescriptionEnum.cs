@@ -38,10 +38,12 @@ namespace MiniDatabase.Records.Description
     {
       base.Load(reader);
       InputControlEnum c = new InputControlEnum();
-      c.EnumContainer = EnumBank.Bank.Find(Name);
+      String eName = reader.ReadString();
+      c.EnumContainer = EnumBank.Bank.Find(eName);
       VControl = c;
       PresetValue = new ValueInteger();
       PresetValue.Load(reader);
+      VControl.SetValue(PresetValue);
     }
   }
 }

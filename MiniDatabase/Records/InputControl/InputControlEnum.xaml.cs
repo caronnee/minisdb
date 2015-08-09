@@ -63,6 +63,7 @@ namespace MiniDatabase.Records.InputControl
     {
       InputControlEnum i = new InputControlEnum();
       i.EnumContainer = EnumContainer;
+      i.SelectedIndex = SelectedIndex;
       return i;
     }
   }

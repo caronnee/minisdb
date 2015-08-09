@@ -78,6 +78,10 @@ namespace MiniDatabase.Records.Description
           {
             return new RecordDescriptionDate();
           }
+        case Types.TypeEnum:
+          {
+            return new RecordDescriptionEnum();
+          }
         default:
           throw new ExceptionBadData("Something bad had happened, Harry");
       }

@@ -58,7 +58,6 @@ namespace MiniDatabase.Records.Description
     public override void Load(BinaryReader reader)
     {
       PresetValue = new ValueInteger();
-
       base.Load(reader);
       MinValue = reader.ReadInt32();
       MaxValue = reader.ReadInt32();
