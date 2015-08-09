@@ -39,9 +39,9 @@ namespace MiniDatabase.Content.CreateFields
     }
     public FieldEnum()
     {
+      CreatedRecord = new RecordDescriptionEnum();
       InitializeComponent();
     }
-    public bool Valid() { return true; }
 
     public RecordDescription GetRecordDescription()
     {

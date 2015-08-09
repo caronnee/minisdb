@@ -29,8 +29,6 @@ namespace MiniDatabase.Content.CreateFields
       set { SetValue(CRecord, value); }
     }
 
-    public bool Valid() { return true; }
-
     public RecordDescription GetRecordDescription()
     {
       return CreatedRecord;

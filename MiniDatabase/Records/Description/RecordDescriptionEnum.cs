@@ -28,8 +28,8 @@ namespace MiniDatabase.Records.Description
     public override void Save(BinaryWriter writer)
     {
       base.Save(writer);
-      InputControlEnum en = VControl as InputControlEnum;
-      writer.Write(en.EnumContainer.Name);
+      InputControlEnum e = VControl as InputControlEnum;
+      writer.Write(e.EnumContainer.Name);
       PresetValue.Save(writer);
     }
 

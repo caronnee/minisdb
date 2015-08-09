@@ -25,11 +25,6 @@ namespace MiniDatabase.Content.CreateFields
       CreatedRecord = new RecordDescriptionDate();
       InitializeComponent();
     }
-    /** Checks if this record is fully set up */
-    public bool Valid()
-    {
-      return true;
-    }
 
     public static DependencyProperty CRecord = DependencyProperty.Register("CreatedRecord", typeof(RecordDescriptionDate), typeof(FieldDate), new PropertyMetadata(null));
 

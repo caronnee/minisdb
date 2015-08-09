@@ -73,7 +73,6 @@ namespace MiniDatabase.Content.CreateFields
     {
       throw new Exception("Not implemented yet");
     }
-    public bool Valid() { return false; }
 
     public RecordDescription GetRecordDescription()
     {

@@ -10,11 +10,11 @@
     <StackPanel>
         <DockPanel Margin="10,10">
             <Label>Enum set</Label>
-            <ComboBox x:Name="EnumName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FieldEnum, AncestorLevel=1}, Path=EnumSource.Collections}" DisplayMemberPath="Name" />
+            <ComboBox x:Name="EnumName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FieldEnum, AncestorLevel=1}, Path=EnumSource.Collections}" DisplayMemberPath="Name" SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FieldEnum, AncestorLevel=1}, Path=CreatedRecord.VControl.EnumContainer}" />
         </DockPanel>
         <DockPanel Margin="10,10">
             <Label>Default value</Label>
-            <input:InputControlEnum x:Name="EnumValues" EnumContainer="{Binding ElementName=EnumName, Path=SelectedItem, Mode=TwoWay}" />
+            <input:InputControlEnum x:Name="EnumValues" EnumContainer="{Binding ElementName=EnumName, Path=SelectedItem}" SelectedIndex ="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:FieldEnum, AncestorLevel=1}, Path=CreatedRecord.PresetValue.NNumber}"/>
         </DockPanel>
     </StackPanel>
 </UserControl>

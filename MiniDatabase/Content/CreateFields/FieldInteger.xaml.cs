@@ -32,7 +32,6 @@ namespace MiniDatabase.Content.CreateFields
       CreatedRecord = new RecordDescriptionInt();
       InitializeComponent();
     }
-    public bool Valid() { return true; }
 
     public RecordDescription GetRecordDescription()
     {

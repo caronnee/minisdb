@@ -96,7 +96,7 @@ namespace MiniDatabase.Content
       foreach (TreeAttribute att in attributes.Items)
       {
         FieldInterface attInterface = att.AttributeContent as FieldInterface;
-        if (!attInterface.Valid())
+        if ((attInterface as FieldGeneric) != null )
         {
           //TODO say all invalid nodes that his has
           MessageBox.Show("Some input is invalid. Node ( " + att.Header + " )", "Invalid Entry", MessageBoxButton.OK);
