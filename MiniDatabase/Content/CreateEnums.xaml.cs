@@ -105,7 +105,7 @@ namespace MiniDatabase.Content
             // add value to the currently selected item
             object o = FindName("enumNamesHolder");
             ListBox l = o as ListBox;
-            Banks.EnumCollection collection = l.SelectedItem as Banks.EnumCollection;
+            Banks.EnumBank.EnumCollection collection = l.SelectedItem as Banks.EnumBank.EnumCollection;
             if (renaming != null)
             {
                 for (int i = 0; i < collection.Values.Count; i++)
@@ -126,7 +126,7 @@ namespace MiniDatabase.Content
             MenuItem m = sender as MenuItem;
             ContextMenu t = m.Parent as ContextMenu;
             ListBox l = t.PlacementTarget as ListBox;
-            EnumCollection ec = l.SelectedItem as EnumCollection;
+            EnumBank.EnumCollection ec = l.SelectedItem as EnumBank.EnumCollection;
             renaming = ec.Name;
             TextBox b = FindName("enumNames") as TextBox;
             b.Focus();
@@ -152,7 +152,7 @@ namespace MiniDatabase.Content
             MenuItem m = sender as MenuItem;
             ContextMenu t = m.Parent as ContextMenu;
             ListBox l2 = t.PlacementTarget as ListBox;
-            Banks.EnumCollection s = Enums.Collections.ElementAt(l.SelectedIndex);
+            Banks.EnumBank.EnumCollection s = Enums.Collections.ElementAt(l.SelectedIndex);
             Array values = Array.CreateInstance(typeof(String), l2.SelectedItems.Count);
             l2.SelectedItems.CopyTo(values, 0);
             foreach (String st in values)
@@ -167,7 +167,7 @@ namespace MiniDatabase.Content
             ContextMenu t = m.Parent as ContextMenu;
             ListBox b = t.PlacementTarget as ListBox;
             // remove all selected
-            Enums.Collections.Remove(b.SelectedItem as Banks.EnumCollection);
+            Enums.Collections.Remove(b.SelectedItem as Banks.EnumBank.EnumCollection);
         }
 
         private void enumsChanged(object sender, RoutedEventArgs e)

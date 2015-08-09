@@ -85,13 +85,9 @@
     <Compile Include="Misc\BindableDynamicDictionary.cs" />
     <Compile Include="Misc\SimpleExpressionHolder.cs" />
     <Compile Include="Records\Description\RecordDescriptionDate.cs" />
-    <Compile Include="Records\Description\RecordDescriptionEnum.cs" />
     <Compile Include="Records\Description\RecordDescriptionInt.cs" />
     <Compile Include="Records\InputControl\InputControlDate.xaml.cs">
       <DependentUpon>InputControlDate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Records\InputControl\InputControlEnum.xaml.cs">
-      <DependentUpon>InputControlEnum.xaml</DependentUpon>
     </Compile>
     <Compile Include="Records\InputControl\InputControlInt.xaml.cs">
       <DependentUpon>InputControlInt.xaml</DependentUpon>
@@ -185,10 +181,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Records\InputControl\InputControlEnum.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Records\InputControl\InputControlInt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -249,7 +241,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Docs\enums.config" />
+    <None Include="Docs\Miniatures.Minis" />
     <None Include="Docs\TestData.Minis" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

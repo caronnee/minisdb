@@ -38,7 +38,6 @@ namespace MiniDatabase.Records.Description
       get;
       set;
     }
-
     public virtual Types GetRecordType()
     {
       throw new MiniDatabase.Exceptions.ExceptionBadData("Bad record type");

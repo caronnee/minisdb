@@ -23,7 +23,6 @@ namespace MiniDatabase.Misc
         new SimpleExpressionHolder(){ OperationNames=new String[]{"Equals to","Differs from"}, CType=ConditionType.CEqual } 
       };
 
-    public static string EnumConfigFile = "enums.config";
     public static char[] Whitespaces = { ' ', '\a', '\b', '\n', '\r', '\f', '\t', '\v' };
     public const String saveInProgressAppendix = ".part";
     public const String SaveFolder = "..\\Docs\\";
