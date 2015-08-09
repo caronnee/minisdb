@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="300" xmlns:my="clr-namespace:MiniDatabase.Content.CreateFields">
+             xmlns:my="clr-namespace:MiniDatabase.Content.CreateFields"
+             xmlns:input="clr-namespace:MiniDatabase.Records.InputControl"
+             d:DesignHeight="150" d:DesignWidth="300" >
     <StackPanel>
         <DockPanel Margin="10,10">
             <Label>Enum set</Label>

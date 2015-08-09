@@ -17,6 +17,7 @@ namespace MiniDatabase.Misc
 
   static class Common
   {
+    public static String EnumConfigFile = "enums.config";
     public static List<SimpleExpressionHolder> SimpleExpressions = new List<SimpleExpressionHolder>() { 
         new SimpleExpressionHolder(){ OperationNames=new String[]{ "Less than" ,"More or equal than"}, CType=ConditionType.CLess }, 
         new SimpleExpressionHolder(){ OperationNames=new String[]{ "Contains","Misses"}, CType=ConditionType.CContain } ,
