@@ -23,6 +23,10 @@ namespace MiniDatabase.Records.Description
 
   public class RecordDescription : DependencyObject
   {
+    virtual public String ShowText(Value val)
+    {
+      return val.ToString();
+    }
     public Value PresetValue
     {
       get;

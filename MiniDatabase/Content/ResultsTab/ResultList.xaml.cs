@@ -100,7 +100,7 @@ namespace MiniDatabase.Content.ResultsTab
         o["ID"] = r.ID;
         for (int i = 0; i < d.Count; i++)
         {
-          o[d[i].Name] = r.GetValue(i);
+          o[d[i].Name] = d[i].ShowText( r.GetValue(i) );
         }
         Results.Add(o);
       }

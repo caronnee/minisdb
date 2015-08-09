@@ -19,6 +19,13 @@ namespace MiniDatabase.Records.Description
       VControl = new InputControlEnum();
     }
 
+    override public String ShowText(Value val)
+    {
+      ValueInteger i = val as ValueInteger;
+      InputControlEnum en = VControl as InputControlEnum;
+      return en.EnumContainer.Values[i.NNumber];
+    }
+
     public override Types GetRecordType()
     {
       return Types.TypeEnum;
