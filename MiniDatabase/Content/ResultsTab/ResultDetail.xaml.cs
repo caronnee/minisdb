@@ -38,18 +38,23 @@ namespace MiniDatabase.Content.ResultsTab
     public void CreateNewForm()
     {
       RecordsManager manager = DataContext as RecordsManager;
-      StackPanel c = FindName("Entries") as StackPanel;
-      c.Children.Clear();
+      Entries.Children.Clear();
       foreach (RecordDescription r in manager.Description)
       {
         // todo improve, give to the proper position
+        Grid panel = new Grid();
+        ColumnDefinition def = new ColumnDefinition();
+        def.Width = new GridLength(1.0, GridUnitType.Star);
+        panel.ColumnDefinitions.Add(def);
+        panel.Name = r.Name;
         Label l = new Label();
-        l.Content = r.Name;
-        c.Children.Add(l);
-        c.Children.Add(r.VControl.Clone());
+        l.Content = r.Name;        
+        panel.Children.Add(l);
+        panel.Children.Add(r.VControl.Clone());
+        Entries.Children.Add(panel);
       }
       Separator s = new Separator();
-      c.Children.Add(s);
+      Entries.Children.Add(s);
     }
 
     private void AddRecord(object sender, RoutedEventArgs e)
